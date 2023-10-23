@@ -1,3 +1,7 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100&family=Style+Script&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -5,21 +9,47 @@
   
   
 }
-html{
-  background-image: url("./assets/Background img.png");
+
+html,body{
+  height: 100vh;
   width: 100vw;
-  height: 100%;
+  background-color: black;
 }
 
-.navBar{
-  display:flex;
-  width: 70rem;
-  height: 2.5rem;
-  margin: 1.25rem 10rem 47.625rem 10rem;
+.loginContainer{
+  position: relative;
+  left: 13.7vw;
+  background-image: url('./assets/Background img.png');
+  width: 86.59vw;
+  height: 100vh;
+ 
+  
+  background-size:86.59vw 100vh;
 }
+
+.tryi{
+  position:absolute;
+  left: -13.7vw;
+}
+
+
+.navBar {
+  
+  display: flex;
+   /* gap: 18.83%; */
+   gap: 14.6vw;
+  width: 77.78vw;
+  height: 4.8vh;
+  margin-top: 2.4vh; 
+  margin-left: 11.11vw;
+  justify-content: baseline;
+  align-items: center;
+  
+}
+
 .logoHeading{
   color: var(--web-secondary, #fff);
-font-family: Style Script;
+  font-family: 'Style Script', cursive;
 font-size: 40px;
 font-style: normal;
 font-weight: 400;
@@ -31,7 +61,7 @@ width: 103px;
 }
 .logoHeadingEnd{
   color: var(--web-tertiary, #C76B98);
-font-family: Style Script;
+  font-family: 'Style Script', cursive;
 font-size: 40px;
 font-style: normal;
 font-weight: 400;
@@ -43,41 +73,99 @@ width: 103px;
 .navItems{
   color: var(--web-secondary, #fff);
 display: flex;
-gap:3rem ;
-font-family: Prompt;
+/* gap:4.25% ; */
+gap:3.33vw ;
+font-family: 'Prompt', sans-serif;
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
-line-height: 100%;                                       
-margin-left: 18%;
-margin-right: 18%;
-margin-top: 10px;
+line-height: 100%;   
+/* width:44.3%; 
+height:50% ;   
+                                */
+  width:34.5vw ;
+  height:2.43vh;                              
+/* margin-top:3.64vh; */
 
 
 }
 .search{
   display: flex;
-  gap: 4px;
+  /* width: 8.75%; */
+  /* width: 6.8vw;
+  height: 2.9vh; */
+  /* margin-top: 3.44vh; */
+  width:82px;
+  height:24px ;
   
+ 
+  
+
 }
 .searchIconImage{
 width: 24px;
 height: 24px;
 flex-shrink: 0;
-margin-top: 8px;
+
+
 
 }
 .searchText{
   color: var(--web-secondary, #FFF);
 
   
-  font-family: Prompt;
+  font-family: 'Prompt', sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%;                           
-  width: 66px;
-  height: 20px; 
-  margin-top: 10px;
-
+  line-height: 100%;
+   margin-right:0px; 
+   width: 50px;      
+   height: 20px;                  
+}
+.loginCard{
+  width: 439px;
+height: 500px;
+display: flex;
+flex-direction: column;
+flex-shrink: 0;
+border-radius: 20px;
+border: 1px solid #656565;
+background: var(--web-2-prim, #141416);
+/* top: 21.4vh;
+left: 11.11vw; */
+position: relative;
+top: 14.11vh;
+left: 11.11vw;
+}
+.loginFrame{
+  height: 47vh;
+  width:22.7vw ;
+  position: relative;
+  top: 6.8vh;
+  left: 3.8vw;
+  /* posit
+  margin: 6.8vh 3.8vw 6.8vh 3.8vw; */
+  display: flex;
+  flex-direction: column;
+}
+.welcome{
+display: flex;
+gap: 10px;
+height:4.8vh;
+width:20.9vw ;
+margin-bottom: 28px;
+}
+.welcomeText{
+  color: #FFF;
+flex-shrink: 1;
+/* web/Heading/bold/03 */
+font-family: 'Prompt', sans-serif;
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; /* 32px */
+}
+.try{
+  flex-shrink: 1;
 }

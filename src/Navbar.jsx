@@ -1,10 +1,8 @@
-
+import Logo from "./LogoIcon"
 
 export default function Navbar(){
     return( <div className="navBar">
-      <div className="logoHeading">
-        Sound<span className="logoHeadingEnd">ly</span>
-      </div>
+          <Logo />
       <div className="navItems">
         <div>Home</div>
         <div>Library</div>
@@ -15,6 +13,7 @@ export default function Navbar(){
         <div className="searchIcon"><img className="searchIconImage" src="./assets/Vector.png" alt="img"></img></div>
         <div className="searchText">Search</div>
       </div>
+     
 
      </div>);
 }

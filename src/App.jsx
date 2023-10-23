@@ -1,11 +1,12 @@
-import Navbar from "./Navbar"
+
 import React from 'react'
 import './index.css'
+import Login from "./Login"
 
 function App() {
   return(
-    <div >
-    <Navbar />
+    <div className="main" >
+    <Login />
     </div>
 
   );
