@@ -1,7 +1,5 @@
 
-
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100&family=Style+Script&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Style+Script&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -14,6 +12,10 @@ html,body{
   height: 100vh;
   width: 100vw;
   background-color: black;
+}
+#root{
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .loginContainer{
@@ -76,10 +78,11 @@ display: flex;
 /* gap:4.25% ; */
 gap:3.33vw ;
 font-family: 'Prompt', sans-serif;
-font-size: 20px;
+font-size: 1.38vw;
 font-style: normal;
 font-weight: 400;
-line-height: 100%;   
+line-height: 100%; 
+white-space: nowrap;  
 /* width:44.3%; 
 height:50% ;   
                                 */
@@ -95,8 +98,8 @@ height:50% ;
   /* width: 6.8vw;
   height: 2.9vh; */
   /* margin-top: 3.44vh; */
-  width:82px;
-  height:24px ;
+  width:5.69vw;
+  height:2.9vh ;
   
  
   
@@ -115,7 +118,7 @@ flex-shrink: 0;
 
   
   font-family: 'Prompt', sans-serif;
-  font-size: 20px;
+  font-size: 1.38vw;
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
@@ -124,8 +127,8 @@ flex-shrink: 0;
    height: 20px;                  
 }
 .loginCard{
-  width: 439px;
-height: 500px;
+  width: 30.46vw;
+height: 60vh;
 display: flex;
 flex-direction: column;
 flex-shrink: 0;
@@ -139,8 +142,10 @@ top: 14.11vh;
 left: 11.11vw;
 }
 .loginFrame{
-  height: 47vh;
-  width:22.7vw ;
+  /* height:auto 47vh;
+  width:auto 22.7vw ; */
+  height:77%;
+  width:22.22vw ;
   position: relative;
   top: 6.8vh;
   left: 3.8vw;
@@ -151,21 +156,121 @@ left: 11.11vw;
 }
 .welcome{
 display: flex;
-gap: 10px;
+align-items: baseline;
 height:4.8vh;
 width:20.9vw ;
-margin-bottom: 28px;
+gap: 0.8vw;
+white-space: nowrap;
+
 }
 .welcomeText{
   color: #FFF;
-flex-shrink: 1;
-/* web/Heading/bold/03 */
 font-family: 'Prompt', sans-serif;
-font-size: 32px;
+font-size: 2.08vw;
 font-style: normal;
 font-weight: 700;
 line-height: 100%; /* 32px */
 }
-.try{
-  flex-shrink: 1;
+.loginText{
+  color: #FFF;
+text-align: center;
+font-family:'Prompt', sans-serif;
+font-size: 1.38vw;
+/* max-font-size: 20px; */
+font-style: normal;
+font-weight: 500;
+line-height: 150%; /* 30px */
+width: 19.7vw;
+height: 7.2vh;
+margin-top:3.4vh;
+
+}
+.label{
+  height:8vh ;
+  width:22vw ;
+  position: relative;
+  margin-top:3.4vh;
+}
+.loginField{
+  width:22vw ;
+  height:6.8vh;
+  border-radius: 11vw;
+border: 1px solid #FFF;   
+background: none;
+color: #656565;
+}
+.emailText{
+  position:absolute;
+  color: #FFF;
+  left: 1.8vw;
+  bottom: 7vh;
+  background-color: #141416;
+width:10.2vw ;
+height:1.94vh ;
+white-space: nowrap;
+display: inline-flex;
+padding: 8px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+font-family: 'Prompt', sans-serif; 
+font-size: 1.04vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%
+
+
+
+}
+.rememberMe{
+  height: 5.8vh;
+  width: 22.7vw;
+  margin-top:3.4vh;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.checkBox{
+  width: 18px;
+height: 18px;
+}
+.rememberText{
+  width: 20.6vw;
+  height: 5.8vh;
+  color: #FFF;
+
+font-family:'Prompt', sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+}
+.submitLogin{
+  height:6.51vh ;
+  width:22.2vw ;
+  border-radius: 11vw;
+background: var(--web-tertiary, #C76B98);
+margin-top:3.4vh;
+position: relative;
+}
+.submitLogin,.continueButton,.checkBox:hover{
+cursor: pointer;
+}
+.continueButton{
+  height: 20px;
+  width: 80px;
+  color: #FFF;
+  position:absolute;
+  left:7.36vw ;
+  top: 1.94vh;
+  left: 7.64vw;
+  border: none;
+
+/* web/Para/reg/02 */
+font-family:'Prompt', sans-serif;
+font-size: 1.3vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 20px */
+background: none;
 }

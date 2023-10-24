@@ -9,19 +9,19 @@ return(
        <div className="welcomeText">Welcome to</div>
        <div className="try"><Logo/></div>
         </div>
-        <div className="logintext">
+        <div className="loginText">
         Login to have an access to millions of songs 
         </div>
         <div className="label">
             <input type="text" className="loginField" placeholder="Email or Phone No." />
-            <span className="emailText">Email or Phone No.</span>
+            <div className="emailText">Email or Phone No.</div>
         </div>
         <div className="rememberMe">
-          <input type="checkbox" />
-          <span>By creating an account, you agree to accept our Privacy Policy.</span>
+          <input type="checkbox" className="checkBox" />
+          <span className="rememberText">By creating an account, you agree to accept our Privacy Policy.</span>
        </div>
        <div className="submitLogin">
-        <input type="button" value="Continue" />
+        <input type="button" value="Continue" className="continueButton" />
       </div>
     </div>
  </div>
