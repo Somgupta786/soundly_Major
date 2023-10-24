@@ -13,7 +13,7 @@ return(
     <div className="signUpFrame">
        <div className="welcome">
        <div className="welcomeText">Welcome to</div>
-       <div className="try"><Logo/></div>
+       <div className="try"> <Logo /></div>
         </div>
         <div className="loginText">
         Sign Up to have an access to millions of songs 

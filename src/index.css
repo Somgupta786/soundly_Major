@@ -14,7 +14,6 @@ html,body{
   background-color: black;
 }
 #root{
-  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -24,7 +23,8 @@ html,body{
   background-image: url('./assets/Background img.png');
   width: 86.59vw;
   height: 100vh;
- 
+  
+  
   
   background-size:86.59vw 100vh;
 }
@@ -72,6 +72,7 @@ height: 40px;
 width: 103px;
 
 }
+
 .navItems{
   color: var(--web-secondary, #fff);
 display: flex;
@@ -128,7 +129,7 @@ flex-shrink: 0;
 }
 .loginCard{
   width: 30.46vw;
-height: 60vh;
+height: 66vh;
 display: flex;
 flex-direction: column;
 flex-shrink: 0;
@@ -322,19 +323,159 @@ font-weight: 700;
 line-height: 100%; /* 24px */
 
 }
- @media (max-width:500px){
+ @media (max-width:600px){
 .navItems,.search{
   display: none;
 }
-.navBar{
-  justify-content: center;
-  align-items: center;
+.logoHeading{
+ width: 28.611vw;
+ height: 5vh;
+ position: fixed;
+ left:7.222vw ;
+ top: 5.75vh;
+ font-size: 11.11vw;
 }
-.signUpCard,.loginCard{
-  width: 100vw;
+.logoHeadingEnd{
+  font-size: 11.11vw;
 }
+
 .loginContainer{
   background-image: url();
+}
+.loginCard{
+  background: none;
+  border: none;
+}
+.loginFrame{
+  height:67vh ;
+  width:88.889vw ;
+  position: fixed;
+  left:5.556vw ;
+  top:16.5vh ;
+}
+.signUpCard{
+  background: none;
+  border: none;
+}
+.signUpFrame{
+  height:67vh ;
+  width:88.889vw ;
+  position: fixed;
+  left:5.556vw ;
+  top:16.5vh ;
+}
+.welcome{
+  width:51.667vw ;
+  height:11vh ;
+  position: fixed;
+  top:16.5vh;
+  left:24.167vw ; 
+   /* display: flex;
+ flex-direction: column;
+ gap: 2vh; */
+ 
+
+/* web/Heading/bold/03 */
+ 
+
+}
+.welcomeText{
+  font-size: 8.88vw;
+ color: #FFF;
+  font-family: 'Prompt', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+   
+}
+.loginText{
+  width:78.889vw ;
+  height:7.5vh ;
+  font-size: 5.55vw;
+  position: relative;
+  top:9vh ;
+  left:1vw ;
+  margin-top: 16px;
+}
+.label{
+  width: 88.889vw;
+  height:9vh ;
+  position: relative;
+  top: 11.5vh;
+  margin-top: 32px;
+  
+
+}
+.loginField{
+  width: 88.889vw;
+  height: 7vh;
+  border-radius: 11vw;
+border: 1px solid #FFF;
+}
+.emailText{
+  height: 4vh;
+  width: 37.833vw;
+  color: #FFF;
+  background-color: black;
+  
+
+/* web/Para/reg/03 */
+font-family: 'Prompt', sans-serif;
+font-size: 4.44vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+left: 12.67vw;
+bottom: 80%;
+}
+.rememberMe{
+  height:6vh ;
+  width:88.611vw ;
+  position: relative;
+  top: 8vh;
+  margin-top:32px;
+  
+}
+.checkBox{
+  height: 18px;
+  width: 18px;
+}
+.rememberText{
+  height:6vh ;
+  width:85.611vw ;
+  color: #FFF;
+
+text-align: center;
+font-family: 'Prompt', sans-serif;
+font-size: 4.44vw;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+}
+.submitLogin{
+  width:88.889vw ;
+  height:7.0000vh ;
+  margin-top: 9vh;
+  position: relative;
+  top: 4vh;
+}
+.continueButton{
+  width:24.4vw ;
+  height:4.5vh ;
+  position: relative;
+  left: 25vw;
+  top: 1vh;
+  font-size: 5.5vw;
+
+}
+.referLogin{
+  width:18.333vw ;
+  height: 4vh;
+  font-size: 6.66vw;
+  position: relative;
+  top: 10vh;
+  left: 30vw;
+  margin-top:32px;
 }
 
 
