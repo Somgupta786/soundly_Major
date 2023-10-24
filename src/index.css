@@ -9,7 +9,7 @@
 }
 
 html,body{
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-color: black;
 }
@@ -203,7 +203,7 @@ color: #656565;
   position:absolute;
   color: #FFF;
   left: 1.8vw;
-  bottom: 7vh;
+  bottom: 82%;
   background-color: #141416;
 width:10.2vw ;
 height:1.94vh ;
@@ -253,7 +253,7 @@ background: var(--web-tertiary, #C76B98);
 margin-top:3.4vh;
 position: relative;
 }
-.submitLogin,.continueButton,.checkBox:hover{
+.submitLogin,.continueButton,.checkBox,.referLogin:hover{
 cursor: pointer;
 }
 .continueButton{
@@ -261,9 +261,9 @@ cursor: pointer;
   width: 80px;
   color: #FFF;
   position:absolute;
-  left:7.36vw ;
-  top: 1.94vh;
-  left: 7.64vw;
+  left:7.1vw ;
+  top: 1.4vh;
+ 
   border: none;
 
 /* web/Para/reg/02 */
@@ -274,3 +274,68 @@ font-weight: 400;
 line-height: 100%; /* 20px */
 background: none;
 }
+.signUpCard{
+  width: 30.46vw;
+  height: 78.68vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #656565;
+  background: var(--web-2-prim, #141416);
+  /* top: 21.4vh;
+  left: 11.11vw; */
+  position: relative;
+  top: 4.81vh;
+  left: 11.11vw;
+}
+.signUpFrame{
+/* height:auto 47vh;
+  width:auto 22.7vw ; */
+  height:77%;
+  width:22.22vw ;
+  position: relative;
+  top: 6.8vh;
+  left: 3.8vw;
+  /* posit
+  margin: 6.8vh 3.8vw 6.8vh 3.8vw; */
+  display: flex;
+  flex-direction: column;
+}
+
+.referLogin{
+padding: 0;
+color: var(--web-tertiary, #C76B98);
+width: 4.58vw;
+height: 2.9vh;
+margin-top: 3.4vh;
+display: flex;
+position: relative;
+left: 8.2vw;
+user-select: none;
+
+/* web/Para/bold/01 */
+font-family: 'Prompt', sans-serif;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; /* 24px */
+
+}
+ @media (max-width:500px){
+.navItems,.search{
+  display: none;
+}
+.navBar{
+  justify-content: center;
+  align-items: center;
+}
+.signUpCard,.loginCard{
+  width: 100vw;
+}
+.loginContainer{
+  background-image: url();
+}
+
+
+ }

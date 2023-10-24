@@ -1,12 +1,15 @@
 
 import React from 'react'
 import './index.css'
-import Login from "./Login"
 
+
+import AppRouter from './AppRouter';
 function App() {
   return(
     <div className="main" >
-    <Login />
+    <AppRouter />
+    {/* <SignUp /> */}
+    
     </div>
 
   );
