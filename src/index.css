@@ -128,8 +128,8 @@ flex-shrink: 0;
    height: 20px;                  
 }
 .loginCard{
-  width: 30.46vw;
-height: 66vh;
+height: 64vh;
+width: 30.46vw;
 display: flex;
 flex-direction: column;
 flex-shrink: 0;
@@ -141,27 +141,34 @@ left: 11.11vw; */
 position: relative;
 top: 14.11vh;
 left: 11.11vw;
+padding: 26px;
 }
 .loginFrame{
   /* height:auto 47vh;
   width:auto 22.7vw ; */
   height:77%;
-  width:22.22vw ;
-  position: relative;
+  /* width:22.22vw ; */
+ width: 90%;
+  /* position: relative;
   top: 6.8vh;
-  left: 3.8vw;
+  left: 3.8vw; */
   /* posit
   margin: 6.8vh 3.8vw 6.8vh 3.8vw; */
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .welcome{
 display: flex;
-align-items: baseline;
+align-items: baseline ;
+justify-content: center;
+align-self: center;
 height:4.8vh;
-width:20.9vw ;
+width:69%;
 gap: 0.8vw;
 white-space: nowrap;
+margin-left: auto;
+margin-right: auto;
 
 }
 .welcomeText{
@@ -181,19 +188,22 @@ font-size: 1.38vw;
 font-style: normal;
 font-weight: 500;
 line-height: 150%; /* 30px */
-width: 19.7vw;
+/* width: 19.7vw; */
 height: 7.2vh;
 margin-top:3.4vh;
 
 }
 .label{
   height:8vh ;
-  width:22vw ;
+  /* width:22vw ; */
   position: relative;
   margin-top:3.4vh;
+  width: 100%;
+
 }
 .loginField{
-  width:22vw ;
+  /* width:22vw ; */
+  width: 100%;
   height:6.8vh;
   border-radius: 11vw;
 border: 1px solid #FFF;   
@@ -206,7 +216,7 @@ color: #656565;
   left: 1.8vw;
   bottom: 82%;
   background-color: #141416;
-width:10.2vw ;
+/* width:10.2vw ; */
 height:1.94vh ;
 white-space: nowrap;
 display: inline-flex;
@@ -225,19 +235,19 @@ line-height: 100%
 }
 .rememberMe{
   height: 5.8vh;
-  width: 22.7vw;
+  /* width: 22.7vw; */
   margin-top:3.4vh;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 .checkBox{
-  width: 18px;
+  /* width: 18px; */
 height: 18px;
 }
 .rememberText{
-  width: 20.6vw;
-  height: 5.8vh;
+  /* width: 20.6vw; */
+  height: vh;
   color: #FFF;
 
 font-family:'Prompt', sans-serif;
@@ -247,24 +257,34 @@ font-weight: 400;
 line-height: 150%; 
 }
 .submitLogin{
-  height:6.51vh ;
-  width:22.2vw ;
+ 
+  height:5.1vh ;
+  /* width:22.2vw ; */
+ align-self: center;
+display: flex;
   border-radius: 11vw;
 background: var(--web-tertiary, #C76B98);
-margin-top:3.4vh;
-position: relative;
+margin-top:4.5vh;
+width: 80%;
+margin-left: auto;
+margin-right: auto;
+
 }
 .submitLogin,.continueButton,.checkBox,.referLogin:hover{
 cursor: pointer;
 }
 .continueButton{
-  height: 20px;
+  height: 52px;
+  margin-left: auto;
+  margin-right: auto;
+  /* height: 2vh; */
   width: 80px;
   color: #FFF;
-  position:absolute;
+  align-self: center;
+  /* position:absolute;
   left:7.1vw ;
-  top: 1.4vh;
- 
+  top: 1.4vh; */
+ text-align: center;
   border: none;
 
 /* web/Para/reg/02 */
@@ -286,6 +306,7 @@ background: none;
   background: var(--web-2-prim, #141416);
   /* top: 21.4vh;
   left: 11.11vw; */
+  padding: 26px;
   position: relative;
   top: 4.81vh;
   left: 11.11vw;
@@ -293,27 +314,34 @@ background: none;
 .signUpFrame{
 /* height:auto 47vh;
   width:auto 22.7vw ; */
+  width: 90%;
   height:77%;
-  width:22.22vw ;
-  position: relative;
+  /* width:22.22vw ; */
+  /* position: relative;
   top: 6.8vh;
-  left: 3.8vw;
+  left: 3.8vw; */
   /* posit
   margin: 6.8vh 3.8vw 6.8vh 3.8vw; */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  
+  
 }
 
 .referLogin{
 padding: 0;
 color: var(--web-tertiary, #C76B98);
-width: 4.58vw;
+/* width: 4.58vw; */
 height: 2.9vh;
 margin-top: 3.4vh;
-display: flex;
-position: relative;
-left: 8.2vw;
+margin-left: auto;
+margin-right: auto;
+/* position: relative;
+left: 8.2vw; */
 user-select: none;
+align-items: center;
+
 
 /* web/Para/bold/01 */
 font-family: 'Prompt', sans-serif;
@@ -322,6 +350,33 @@ font-style: normal;
 font-weight: 700;
 line-height: 100%; /* 24px */
 
+}
+@media (max-width:100px){
+  .signUpCard
+  {
+    width: 38vw;
+  }
+  .signUpFrame{
+    width: 30vw;
+  }
+  .welcomeText{
+    font-size: 2.4vw;
+    
+  }
+  .loginText,.rememberText{
+font-size: 1.6vw;
+width: 21vw;
+  }
+  .rememberText{
+    height: 60px;
+  }
+  .loginField,.label{
+    width: 24vw;
+  }
+  .emailText{
+    width: 12vw;
+    font-size: 1.3vw;
+  }
 }
  @media (max-width:600px){
 .navItems,.search{
@@ -480,3 +535,70 @@ line-height: 150%;
 
 
  }
+  /* OTP CSS */
+.verifyEmail{
+  width: 70%;
+  height: 2.43vh;
+  color: #FFF;
+  margin-top:4.4vh;
+  margin-left: auto;
+  margin-right: auto;
+/* justify-content: center; */
+text-align: center;
+font-family: 'Prompt', sans-serif;
+font-size: 1.4rem;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+
+}
+.otp-input{
+  width: 78.75%;
+  height: 8.08vh;
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top:3.4vh;
+background-color: #141416;
+gap: 4px;
+margin-top:6.4vh;
+margin-left: auto;
+  margin-right: auto;
+
+}
+.otpSet{
+  width: 100%;
+  height: 75%;
+  display: flex;
+  background: none;
+  gap: 20px;
+}
+.otp-input input{
+  height:100% ;
+  width:19%;
+  background: none;
+  border-radius: 15px;
+border: 1px solid #FFF;
+
+}
+.resendOtp {
+  color: #FFF;
+
+text-align: center;
+font-family: 'Prompt', sans-serif;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 16px */
+letter-spacing: 0.64px;
+}
+.resendOtp button{
+  background: none;
+  color: #FFF;
+}
+@media (max-Width:800px){
+  .signUpCard{
+    width: 70vw;
+  }
+}
