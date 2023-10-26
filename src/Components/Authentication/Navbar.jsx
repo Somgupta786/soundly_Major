@@ -10,7 +10,7 @@ export default function Navbar(){
         <div>About us</div>
       </div>
       <div className="search">
-        <div className="searchIcon"><img className="searchIconImage" src="./assets/Vector.png" alt="img"></img></div>
+        <div className="searchIcon"><img className="searchIconImage" src="./src/assets/Vector.png" alt="img"></img></div>
         <div className="searchText">Search</div>
       </div>
      

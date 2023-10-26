@@ -1,0 +1,64 @@
+.languageCard{
+    height: 69.3431vh;
+    width: 30.46vw;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #656565;
+    background: var(--web-2-prim, #141416);
+    /* top: 21.4vh;
+    left: 11.11vw; */
+    position: relative;
+    top: 10.11vh;
+    left: 11.11vw;
+    padding: 30px;
+}
+.languageFrame{
+width: 100%;
+height: 54vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.languageText{
+    color: #FFF;
+    height: 11vh;
+    width: 100%;
+    font-family: 'Prompt', sans-serif;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; 
+   
+   
+}
+.boxFrame{
+width: 100%;
+height: 40vh;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 1rem;
+margin-top: 19px;
+}
+.languageLable{
+    width: 100%;
+    height: 8.7vh;
+    flex-shrink: 0;
+    border-radius: 0.83vw;
+background: #FFF;
+padding-left: 7%;
+padding-top:3vh;
+color: #000;
+
+/* web/Para/reg/02 */
+font-family:'Prompt', sans-serif;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.languageLable:hover{
+    cursor: pointer;
+}

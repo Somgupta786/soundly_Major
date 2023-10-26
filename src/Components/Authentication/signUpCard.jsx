@@ -2,28 +2,51 @@ import Logo from "./LogoIcon";
 import { useState } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpCard() {
+  const Navigation = useNavigate();
+  const [isClicked, setClicker] = useState(false);
   const [inputs, setInputs] = useState({
-    userName: '',
-    details: '',
+    username: '',
+    email: '' 
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState();
 
-  const continueHandler = () => {
-    
-    axios
-      .post("http://127.0.0.1:8000/api/user/register/posts", {
-        inputs: inputs,
-      })
-      .then((response) => {
-        setError(response.data);
-      })
-      .catch((error) => {
-        setError(error.response.data); 
+  const continueHandler = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post("https://soundly-4pie.onrender.com/api/user/register/email", {
+        username: inputs.username,
+        email: inputs.email
       });
-      console.log(error);
+  
+      console.log(response);
+      console.log("ram");
+      console.log(response.data);
+  
+    
+      setError(response.data);
+  
+      
+      if (response.data.success) {
+        Navigation("/Otp");
+      } else {
+        setClicker(true);
+      }
+    } catch (error) {
+      
+      setError(error.response.data);
+      if (error.response.data.success) {
+        Navigation("/Otp");
+      } else {
+        console.log(error)
+        setClicker(true);
+      }
+    }
   };
+  
 
   
   const handleInputChange = (e) => {
@@ -32,6 +55,7 @@ export default function SignUpCard() {
       ...inputs,
       [name]: value,
     });
+    setClicker(false)
   };
 
   return (
@@ -49,29 +73,32 @@ export default function SignUpCard() {
               Sign Up to have an access to millions of songs
             </div>
             <div className="label">
-              <input
+              <input required
                 type="text"
-                name="details"
-                value={inputs.details}
+                name="email"
+                value={inputs.email}
                 onChange={handleInputChange}
                 className="loginField"
-                placeholder="  Email or Phone No."
+                placeholder="  Email "
               />
-              <div className="emailText">Email or Phone No.</div>
+              <div className="emailText">Email </div>
             </div>
             <div className="label">
-              <input
+              <input required
                 type="text"
-                name="userName"
-                value={inputs.userName}
+                name="username"
+                value={inputs.username}
                 onChange={handleInputChange}
                 className="loginField"
                 placeholder="  Username"
               />
               <div className="emailText"> Enter Username</div>
+              {isClicked && error ? <p >{error.message}</p> : null}
+
+
             </div>
             <div className="referLogin">
-              <NavLink to="/login">Login</NavLink>
+              <NavLink className="login" to="/login">Login</NavLink>
             </div>
             <div className="rememberMe">
               <input type="checkbox" className="checkBox" />

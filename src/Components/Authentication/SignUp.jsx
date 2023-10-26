@@ -1,6 +1,8 @@
 
 import Navbar from "./Navbar"
-import './index.css'
+// import '../../index.css';
+
+
 import SignUpCard from "./signUpCard"
 
 export default function SignUp(){

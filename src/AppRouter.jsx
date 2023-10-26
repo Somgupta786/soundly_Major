@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Login';
-import SignUp from './SignUp';
-import OtpPage from "./otpPage";
+import Login from './Components/Authentication/Login';
+import SignUp from './Components/Authentication/SignUp';
+import OtpPage from "./Components/Authentication/otpPage";
+import Language from "./Components/Authentication/language";
 
 function AppRouter() {
   return (
@@ -10,6 +11,7 @@ function AppRouter() {
       <Route path="/" element={<SignUp/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/Otp" element={<OtpPage />} />
+      <Route path="/language" element={<Language />} />
     </Routes>
   );
 }

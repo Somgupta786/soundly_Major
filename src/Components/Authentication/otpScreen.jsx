@@ -1,14 +1,19 @@
 
 
 import Navbar from "./Navbar"
-import './index.css'
-import Logo from "./LogoIcon";
+// import '../../index.css';
 import { useState,useEffect } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 export default function Otp() {
+  const Navigation = useNavigate();
+  const languageHandler=()=>{
+     Navigation("/language")
+  }
+  
     const [otp, setOTP] = useState(['', '', '', '']);
     const [countdown, setCountdown] = useState(60);
     useEffect(() => {
@@ -32,8 +37,8 @@ export default function Otp() {
 
   return (
     <div className="mainContent">
-      <div className="signUpCard">
-        <div className="signUpFrame">
+      <div className="loginCard">
+        <div className="loginFrame">
           {/* <form > */}
             <div className="welcome">
               <div className="welcomeText">Enter OTP</div>
@@ -73,11 +78,11 @@ export default function Otp() {
               </span>
             </div>
             <div className="submitLogin">
-            {otp.every((digit) => digit !== '') && countdown > 0 ? (
-        <button className="continueButton" onClick={() => console.log(`Verifying OTP: ${otp.join('')}`)}>Verify OTP</button>
-         ) : (
+            {/* {otp.every((digit) => digit !== '') && countdown > 0 ? ( */}
+        <button className="continueButton" onClick={languageHandler}>Verify OTP</button>
+         {/* ) : (
         <button className="continueButton"  disabled>Verify OTP</button>
-          )}
+          )} */}
             </div>
           {/* </form> */}
         </div>

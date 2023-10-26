@@ -20,7 +20,7 @@ html,body{
 .loginContainer{
   position: relative;
   left: 13.7vw;
-  background-image: url('./assets/Background img.png');
+  background-image: url('./src/assets/Background img.png');
   width: 86.59vw;
   height: 100vh;
   
@@ -146,9 +146,9 @@ padding: 26px;
 .loginFrame{
   /* height:auto 47vh;
   width:auto 22.7vw ; */
-  height:77%;
+  height:100%;
   /* width:22.22vw ; */
- width: 90%;
+ width: 100%;
   /* position: relative;
   top: 6.8vh;
   left: 3.8vw; */
@@ -205,16 +205,22 @@ margin-top:3.4vh;
   /* width:22vw ; */
   width: 100%;
   height:6.8vh;
-  border-radius: 11vw;
+  border-radius: 1.67vw;
 border: 1px solid #FFF;   
 background: none;
 color: #656565;
+padding-left:6.87% ;
+font-size: 1rem;
+color: #FFF;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
 }
 .emailText{
   position:absolute;
   color: #FFF;
   left: 1.8vw;
-  bottom: 82%;
+  bottom: 85%;
   background-color: #141416;
 /* width:10.2vw ; */
 height:1.94vh ;
@@ -232,6 +238,17 @@ line-height: 100%
 
 
 
+}
+.label p{
+  color: red;
+  color: #FF7579;
+
+/* web/Para/reg/03 */
+font-family: 'Prompt', sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 16px */
 }
 .rememberMe{
   height: 5.8vh;
@@ -265,7 +282,7 @@ display: flex;
   border-radius: 11vw;
 background: var(--web-tertiary, #C76B98);
 margin-top:4.5vh;
-width: 80%;
+width: 60%;
 margin-left: auto;
 margin-right: auto;
 
@@ -278,7 +295,7 @@ cursor: pointer;
   margin-left: auto;
   margin-right: auto;
   /* height: 2vh; */
-  width: 80px;
+  width:47.5%;
   color: #FFF;
   align-self: center;
   /* position:absolute;
@@ -314,7 +331,7 @@ background: none;
 .signUpFrame{
 /* height:auto 47vh;
   width:auto 22.7vw ; */
-  width: 90%;
+  width: 100%;
   height:77%;
   /* width:22.22vw ; */
   /* position: relative;
@@ -335,13 +352,12 @@ color: var(--web-tertiary, #C76B98);
 /* width: 4.58vw; */
 height: 2.9vh;
 margin-top: 3.4vh;
+
 margin-left: auto;
 margin-right: auto;
 /* position: relative;
 left: 8.2vw; */
 user-select: none;
-align-items: center;
-
 
 /* web/Para/bold/01 */
 font-family: 'Prompt', sans-serif;
@@ -349,7 +365,9 @@ font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: 100%; /* 24px */
-
+}
+.login{
+  padding-left: 20px;
 }
 @media (max-width:100px){
   .signUpCard
@@ -521,6 +539,7 @@ line-height: 150%;
   left: 25vw;
   top: 1vh;
   font-size: 5.5vw;
+  white-space: nowrap;
 
 }
 .referLogin{
@@ -537,7 +556,7 @@ line-height: 150%;
  }
   /* OTP CSS */
 .verifyEmail{
-  width: 70%;
+  width: 100%;
   height: 2.43vh;
   color: #FFF;
   margin-top:4.4vh;
@@ -561,8 +580,8 @@ justify-content: center;
 align-items: center;
 margin-top:3.4vh;
 background-color: #141416;
-gap: 4px;
-margin-top:6.4vh;
+gap: 1.4vh;
+margin-top:4.4vh;
 margin-left: auto;
   margin-right: auto;
 
@@ -580,6 +599,7 @@ margin-left: auto;
   background: none;
   border-radius: 15px;
 border: 1px solid #FFF;
+color: #FFF;
 
 }
 .resendOtp {
