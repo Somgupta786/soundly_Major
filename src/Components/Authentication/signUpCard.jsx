@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function SignUpCard() {
   const Navigation = useNavigate();
   const [isClicked, setClicker] = useState(false);
-  const [inputs, setInputs] = useState({
+ const [inputs, setInputs] = useState({
     username: '',
     email: '' 
   });
@@ -20,6 +20,7 @@ export default function SignUpCard() {
       const response = await axios.post("https://soundly-4pie.onrender.com/api/user/register/email", {
         username: inputs.username,
         email: inputs.email
+        // inputs
       });
   
       console.log(response);
@@ -31,7 +32,7 @@ export default function SignUpCard() {
   
       
       if (response.data.success) {
-        Navigation("/Otp");
+        Navigation("/Otp",{username:inputs.username,email:inputs.email});
       } else {
         setClicker(true);
       }
@@ -101,7 +102,7 @@ export default function SignUpCard() {
               <NavLink className="login" to="/login">Login</NavLink>
             </div>
             <div className="rememberMe">
-              <input type="checkbox" className="checkBox" />
+              <input type="checkbox" className="checkBox" required />
               <span className="rememberText">
                 By creating an account, you agree to accept our Privacy Policy.
               </span>

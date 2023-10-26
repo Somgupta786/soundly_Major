@@ -62,3 +62,113 @@ line-height: 100%;
 .languageLable:hover{
     cursor: pointer;
 }
+.skipButton{
+    width: 13%;
+    height: 4.3vh;
+    color: var(--web-tertiary, #C76B98);
+    background: none;
+/* web/Para/reg/02 */
+font-family: 'Prompt', sans-serif;
+font-size: 1.4rem;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+/* position: relative; */
+margin-left: 78%;
+margin-top: 2.1vh;
+user-select: none;
+}
+.skipButton:hover{
+    cursor: pointer;
+}
+.artistCard{
+    height: 71.3431vh;
+    width: 44.72vw;
+    border-radius: 1.3vw;
+    border: 1px solid #656565;
+    background: var(--web-2-prim, #141416);
+    /* top: 21.4vh;
+    left: 11.11vw; */
+    position: relative;
+    top: 10.11vh;
+    left: 11.11vw;
+    padding-left: 3.4vw;
+    padding-right:3.4vw ;
+    padding-top:6.1vh ;
+}
+.artistFrame{
+    width: 100%;
+    height: 54vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.artistText{
+    width: 89.7%;
+    height: 5.8vh;
+    color: #FFF;
+
+font-family: 'Prompt', sans-serif;
+font-size: 2.22vw;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+
+}
+.artistBoxFrame{
+    width: 100%;
+    height: 44.6vh;
+    display: flex;
+    flex-direction: column;
+    margin-top:3.3vh ;
+    gap: 3vh;
+
+    
+}
+.firstRow{
+    height: 19.9vh;
+    width: 100%;
+    display: flex;
+    gap: 15%;
+    
+}
+.secondRow{
+    height: 19.9vh;
+    width: 100%;
+    display: flex;
+    gap: 15%;
+   
+}
+.artistImageCard{
+    height: 100%;
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4vh;
+ 
+}
+.artistImage{
+    width: 100%;
+    height: 15.3;
+}
+.artistImage img{
+    height: 100%;
+    width: 100%;
+}
+.artistImageCard:hover{
+    cursor: pointer;
+}
+.artistName{
+    color: #FFF;
+    text-align: center;
+
+/* web/Para/reg/02 */
+font-family: 'Prompt', sans-serif;
+font-size: 1.3vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 20px */
+}
+

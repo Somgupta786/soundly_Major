@@ -542,7 +542,7 @@ line-height: 150%;
   white-space: nowrap;
 
 }
-.referLogin{
+.referLogin {
   width:18.333vw ;
   height: 4vh;
   font-size: 6.66vw;
@@ -550,6 +550,7 @@ line-height: 150%;
   top: 10vh;
   left: 30vw;
   margin-top:32px;
+  
 }
 
 
@@ -593,7 +594,7 @@ margin-left: auto;
   background: none;
   gap: 20px;
 }
-.otp-input input{
+.otpSet input{
   height:100% ;
   width:19%;
   background: none;
@@ -603,6 +604,8 @@ color: #FFF;
 
 }
 .resendOtp {
+  width: 100%;
+  height: 1.6vh;
   color: #FFF;
 
 text-align: center;

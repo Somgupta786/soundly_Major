@@ -28,7 +28,7 @@ return(
              <NavLink to="/">Signup</NavLink>
         </div>
         <div className="rememberMe">
-          <input type="checkbox" className="checkBox" />
+          <input type="checkbox" className="checkBox" required />
           <span className="rememberText">By creating an account, you agree to accept our Privacy Policy.</span>
        </div>
        <div className="submitLogin">

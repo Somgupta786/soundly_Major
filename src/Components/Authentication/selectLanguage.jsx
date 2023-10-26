@@ -3,9 +3,10 @@ import { useState } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import LanguageBox from "./languageBox";
+import { useNavigate } from "react-router-dom";
 
 export default function SelectLanguage() {
- 
+  const Navigation = useNavigate();
 
   return (
     <div className="mainContent">
@@ -20,7 +21,10 @@ export default function SelectLanguage() {
                  <LanguageBox title="Punjabi"/>
                  <LanguageBox title="Haryanvi"/>
             </div>
+            
         </div>
+        <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
+
       </div>
     </div>
   );
