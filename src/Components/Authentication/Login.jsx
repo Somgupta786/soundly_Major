@@ -5,7 +5,7 @@ import Navbar from "./Navbar"
 export default function Login(){
     console.log("raju");
 return(<div className="loginContainer"  >
-<div className="tryi"><Navbar />
+<div className="tryi"><Navbar title="SignUp" />
      <LoginCard /></div>
      
     </div>

@@ -6,16 +6,18 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import Resend from "./resendOtp";
 
 
 export default function Otp(props) {
-  console.log(props)
+  // console.log(props)
+  const [isLoad, setLoad] = useState(false);
   const [error, setError] = useState();
   const [isClicked, setClicker] = useState(false);
   const Navigation = useNavigate();
  
   
-    const [otp, setOTP] = useState(['', '', '', '']);
+    const [code, setOTP] = useState(['', '', '', '']);
     const [countdown, setCountdown] = useState(60);
     useEffect(() => {
         const timer = setInterval(() => {
@@ -29,20 +31,23 @@ export default function Otp(props) {
         };
       }, [countdown]);
       const handleOTPChange = (e, index) => {
+        setClicker(false);
         const value = e.target.value.replace(/\D/g, '').slice(0, 1);
-        const updatedOTP = [...otp];
+        const updatedOTP = [...code];
         updatedOTP[index] = value;
         setOTP(updatedOTP);
       };
       const verifyHandler = async (e) => {
-        console.log("raju");
-        Navigation('/language');
+        setLoad(true);
+        // Navigation('/language');
         e.preventDefault();
+       const otp=code.join("")
         try {
-          
-          const response = await axios.post('http://127.0.0.1:8000/api/user/verify/', { otp });
-        
+          const response = await axios.post('https://soundly-4pie.onrender.com/api/user/verify/', { 
+            otp,
+           username: props.username});
           setError(response.data);
+          setLoad(false);
           if (response.data.success) {
             Navigation('/language');
           } else {
@@ -50,13 +55,15 @@ export default function Otp(props) {
           }
         } 
         catch (error) {
-          setError(error.response.data);
-          if (error.response.data.success) {
-            Navigation('/language');
+          if (error.response) {
+            setError(error.response.data);
+            setLoad(false);
           } else {
-            console.log(error);
-            setClicker(true);
+            console.log(error.message); 
+            setLoad(false);
           }
+    
+          setClicker(true);
         }
       };
       
@@ -74,12 +81,12 @@ export default function Otp(props) {
             Please enter the 4-digit code sent to you at
             </div>
             <div className="verifyEmail">
-               Example123@gmail.com
+               {props.id==1?props.email:"Example@gmail.com"}
             </div>
             <div className="otp-input">
             <div className="otpSet">
-        {otp.map((digit, index) => (
-          <input
+        {code.map((digit, index) => (
+          <input required
             key={index}
             type="text"
             maxLength="1"
@@ -94,9 +101,10 @@ export default function Otp(props) {
     <p>{error.message}</p>
   ) : countdown > 0 ? (
     <p>Resend OTP in {countdown} seconds</p>
-  ) : (
-    <button onClick={() => setCountdown(60)}>Resend OTP</button>
-  )}
+  ) : (<>
+  <button onClick={() =>setCountdown(60)}>Resend OTP</button>
+  <Resend username={props.username}/>
+  </>)}
 </div>
 
 
@@ -108,12 +116,8 @@ export default function Otp(props) {
                 By creating an account, you agree to accept our Privacy Policy.
               </span>
             </div>
-            <div className="submitLogin">
-            {otp.every((digit) => digit !== '') && countdown > 0 ? (
-        <button className="continueButton" type="submit">Verify OTP</button>
-         ) : (
-        <button className="continueButton"  type="submit" disabled>Verify OTP</button>
-          )}
+            <div className="submitLogin">  
+        <button className="continueButton" type="submit">{isLoad ?<div className="loader"></div> :"Continue"}</button>
             </div>
           </form>
         </div>

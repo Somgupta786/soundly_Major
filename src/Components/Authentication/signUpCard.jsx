@@ -7,21 +7,28 @@ import { useNavigate } from "react-router-dom";
 export default function SignUpCard() {
   const Navigation = useNavigate();
   const [isClicked, setClicker] = useState(false);
+  const [isLoad, setLoad] = useState(false);
+  const [isEmail, setEmail] = useState(true);
  const [inputs, setInputs] = useState({
     username: '',
-    email: '' 
+    email: '' ,
+    phone_number:''
   });
   const [error, setError] = useState();
 
   const continueHandler = async (e) => {
+    setLoad(true)
     e.preventDefault();
-  
+
+  if(isEmail){
     try {
-      const response = await axios.post("https://soundly-4pie.onrender.com/api/user/register/email", {
+      const response = await axios.post("https://soundly-4pie.onrender.com/api/user/register/email/", {
         username: inputs.username,
         email: inputs.email
+        
         // inputs
       });
+      
   
       console.log(response);
       console.log("ram");
@@ -32,9 +39,11 @@ export default function SignUpCard() {
   
       
       if (response.data.success) {
-        Navigation("/Otp",{username:inputs.username,email:inputs.email});
+        Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1
+        }});
       } else {
         setClicker(true);
+        setLoad(false);
       }
     } catch (error) {
       
@@ -44,8 +53,38 @@ export default function SignUpCard() {
       } else {
         console.log(error)
         setClicker(true);
+        setLoad(false);
       }
     }
+  }
+  else{
+    try {
+      const response = await axios.post("https://soundly-4pie.onrender.com/api/user/register/phone/", {
+        username: inputs.username,
+      phone_number: inputs.phone_number
+      });
+     setError(response.data);
+  
+ if (response.data.success) {
+        Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1
+        }});
+      } else {
+        setClicker(true);
+        setLoad(false);
+      }
+    } catch (error) {
+      
+      setError(error.response.data);
+      if (error.response.data.success) {
+        Navigation("/Otp");
+      } else {
+        console.log(error)
+        setClicker(true);
+        setLoad(false);
+      }
+    }
+
+  }
   };
   
 
@@ -63,7 +102,7 @@ export default function SignUpCard() {
     <div className="mainContent">
       <div className="signUpCard">
         <div className="signUpFrame">
-          <form onSubmit={continueHandler}>
+          <form className="signUpFrame" onSubmit={continueHandler}>
             <div className="welcome">
               <div className="welcomeText">Welcome to</div>
               <div className="try">
@@ -75,14 +114,14 @@ export default function SignUpCard() {
             </div>
             <div className="label">
               <input required
-                type="text"
-                name="email"
-                value={inputs.email}
+                type={isEmail?"email":"number"}
+                name={isEmail?"email":"phone_number"}
+                value={isEmail?inputs.email:inputs.phone_number}
                 onChange={handleInputChange}
                 className="loginField"
-                placeholder="  Email "
+                placeholder={isEmail?"Email":"Phone Number"}
               />
-              <div className="emailText">Email </div>
+              <div className="emailText"> {isEmail?"Email":"Phone no."} </div>
             </div>
             <div className="label">
               <input required
@@ -98,17 +137,18 @@ export default function SignUpCard() {
 
 
             </div>
-            <div className="referLogin">
-              <NavLink className="login" to="/login">Login</NavLink>
-            </div>
+           
             <div className="rememberMe">
               <input type="checkbox" className="checkBox" required />
               <span className="rememberText">
                 By creating an account, you agree to accept our Privacy Policy.
               </span>
             </div>
+            <div className="phoneLogin" onClick={()=>setEmail(!isEmail)}>
+            {isEmail?"Sign Up with Phone number?":"Sign Up with Email."}  
+            </div>
             <div className="submitLogin">
-              <button type="submit" className="continueButton" >Continue</button>
+              <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
             </div>
           </form>
         </div>
