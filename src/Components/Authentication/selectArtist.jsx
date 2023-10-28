@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function SelectArtist(){
   
 return(
-    <div className="mainContent">
+   
     <div className="artistCard">
       <div className="artistFrame">
           <div className="artistText">
@@ -29,8 +29,10 @@ return(
                  <ArtistCard img={img6} name="Honey Singh"/> 
               </div>
           </div>
+          
       </div>
+      <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
     </div>
-  </div>
+  
 );
 }

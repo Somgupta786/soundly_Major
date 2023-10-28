@@ -39,7 +39,7 @@ html,body{
   
   display: flex;
    /* gap: 18.83%; */
-   gap: 68.6vw;
+   gap: 80%;
   width: 77.78vw;
   height: 4.8vh;
   margin-top: 2.4vh; 
@@ -343,192 +343,8 @@ background: none;
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-@media (max-width:100px){
-  .signUpCard
-  {
-    width: 38vw;
-  }
-  .signUpFrame{
-    width: 30vw;
-  }
-  .welcomeText{
-    font-size: 2.4vw;
-    
-  }
-  .loginText,.rememberText{
-font-size: 1.6vw;
-width: 21vw;
-  }
-  .rememberText{
-    height: 60px;
-  }
-  .loginField,.label{
-    width: 24vw;
-  }
-  .emailText{
-    width: 12vw;
-    font-size: 1.3vw;
-  }
-}
- @media (max-width:600px){
-.navItems,.search{
-  display: none;
-}
-.logoHeading{
- width: 28.611vw;
- height: 5vh;
- position: fixed;
- left:7.222vw ;
- top: 5.75vh;
- font-size: 11.11vw;
-}
-.logoHeadingEnd{
-  font-size: 11.11vw;
-}
-
-.loginContainer{
-  background-image: url();
-}
-.loginCard{
-  background: none;
-  border: none;
-}
-.loginFrame{
-  height:67vh ;
-  width:88.889vw ;
-  position: fixed;
-  left:5.556vw ;
-  top:16.5vh ;
-}
-.signUpCard{
-  background: none;
-  border: none;
-}
-.signUpFrame{
-  height:67vh ;
-  width:88.889vw ;
-  position: fixed;
-  left:5.556vw ;
-  top:16.5vh ;
-}
-.welcome{
-  width:51.667vw ;
-  height:11vh ;
-  position: fixed;
-  top:16.5vh;
-  left:24.167vw ; 
-   /* display: flex;
- flex-direction: column;
- gap: 2vh; */
- 
-
-/* web/Heading/bold/03 */
- 
-
-}
-.welcomeText{
-  font-size: 8.88vw;
- color: #FFF;
-  font-family: 'Prompt', sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%;
-   
-}
-.loginText{
-  width:78.889vw ;
-  height:7.5vh ;
-  font-size: 5.55vw;
-  position: relative;
-  top:9vh ;
-  left:1vw ;
-  margin-top: 16px;
-}
-.label{
-  width: 88.889vw;
-  height:9vh ;
-  position: relative;
-  top: 11.5vh;
-  margin-top: 32px;
-  
-
-}
-.loginField{
-  width: 88.889vw;
-  height: 7vh;
-  border-radius: 11vw;
-border: 1px solid #FFF;
-}
-.emailText{
-  height: 4vh;
-  width: 37.833vw;
-  color: #FFF;
-  background-color: black;
-  
-
-/* web/Para/reg/03 */
-font-family: 'Prompt', sans-serif;
-font-size: 4.44vw;
-font-style: normal;
-font-weight: 400;
-line-height: 100%;
-left: 12.67vw;
-bottom: 80%;
-}
-.rememberMe{
-  height:6vh ;
-  width:88.611vw ;
-  position: relative;
-  top: 8vh;
-  margin-top:32px;
-  
-}
-.checkBox{
-  height: 18px;
-  width: 18px;
-}
-.rememberText{
-  height:6vh ;
-  width:85.611vw ;
-  color: #FFF;
-
-text-align: center;
-font-family: 'Prompt', sans-serif;
-font-size: 4.44vw;
-font-style: normal;
-font-weight: 400;
-line-height: 150%;
-}
-.submitLogin{
-  width:88.889vw ;
-  height:7.0000vh ;
-  margin-top: 9vh;
-  position: relative;
-  top: 4vh;
-}
-.continueButton{
-  width:24.4vw ;
-  height:4.5vh ;
-  position: relative;
-  left: 25vw;
-  top: 1vh;
-  font-size: 5.5vw;
-  white-space: nowrap;
-
-}
-.referLogin {
-  width:18.333vw ;
-  height: 4vh;
-  font-size: 6.66vw;
-  position: relative;
-  top: 10vh;
-  left: 30vw;
-  margin-top:32px;
-  
-}
 
 
- }
   /* OTP CSS */
 .verifyEmail{
   width: 100%;
@@ -601,8 +417,7 @@ letter-spacing: 0.64px;
   height: 1.945vh;
   color: var(--web-tertiary, #C76B98);
   margin-top: 3.4vh;
- margin-left: auto;
- margin-right: auto;
+ text-align: center;
  user-select: none;
 /* web/Para/bold/03 */
 font-family:'Prompt', sans-serif;
@@ -627,8 +442,175 @@ line-height: 100%; /* 14px */
 
 }
 
-@media (max-Width:800px){
+@media (max-Width:1211px){
   .signUpCard{
-    width: 70vw;
+    width:35.46vw;
+  }
+  .signUpFrame{
+   gap: 1.4vh;
+  }
+  .loginCard{
+    width:35.46vw;
+  }
+  .loginFrame{
+   gap: 1.4vh;
   }
 }
+@media (max-Width:1000px){
+  .signUpCard{
+    width:40.46vw;
+  }
+  .loginCard{
+    width:40.46vw;
+    height:70vh;
+  }
+ .welcomeText{
+   font-size: 2rem;
+ }
+ .logoHeading{
+  font-size: 2.7rem;
+ }
+ .loginText{
+  font-size:1.2rem;
+ }
+ .emailText{
+  font-size: 0.9rem;
+ }
+ .rememberText{
+  font-size:1rem;
+ }
+ .phoneLogin{
+  font-size: 1rem;
+ }
+ .continueButton{
+  font-size:1rem;
+ }
+ 
+  
+}
+@media (max-Width:900px){
+  .signUpCard{
+    width:45.46vw;
+    left: 8vw;
+  }
+  .signUpFrame{
+   gap: 1.4vh;
+  }
+  .loginCard{
+    width:45.46vw;
+    left: 8vw;
+  }
+  .loginFrame{
+   gap: 1.4vh;
+  }
+ 
+ 
+  
+}
+@media (max-Width:800px){
+  .signUpCard{
+    width:60.46vw;
+    left: 20vw;
+    right: 20vw;
+
+  }
+  .signUpFrame{
+   gap: 1.4vh;
+  }
+  .loginCard{
+    width:60.46vw;
+    left: 20vw;
+    right: 20vw;
+
+  }
+  .loginFrame{
+   gap: 1.4vh;
+  }
+  .loginContainer{
+    background-image: url();
+  }
+}
+@media (max-Width:640px){
+  .signUpCard{
+    width:380px;
+    left: 15vw;
+    
+  }
+  .loginCard{
+    width:380px;
+    left: 15vw;
+    
+  }
+   .navBar{
+    margin-left:4.3vw;
+   }
+
+  
+  
+}
+@media (max-Width:521px){
+  .signUpCard{
+    width:380px;
+    left: 10vw;
+    
+  }
+  .loginCard{
+    width:380px;
+    left: 10vw;
+    
+  }
+  
+   .navBar{
+   gap:50vw;
+   } 
+}
+@media (max-Width:475px){
+  .signUpCard{
+    width:100vw;
+    background-color: black;
+    left: 0;
+    right: 0;
+    top: 8vh;
+    padding: 5.55vw;
+    border: 0px;
+    
+  }
+  .loginCard{
+    width:100vw;
+    background-color: black;
+    left: 0;
+    right: 0;
+    top: 8vh;
+    padding: 5.55vw;
+    border: 0px;
+    
+  }
+  .welcome
+  {
+    gap:2vw;
+    /* margin-left:10vw; */
+    text-align: center;
+  }
+  .logoHeadingEnd{
+    font-size: 2.5rem;
+  }
+   .navBar{
+   gap:50vw;
+   } 
+   .loginField{
+    border-radius: 8vw;
+   }
+   .emailText{
+    left: 4vh;
+    background-color: black;
+   }
+   html{
+    font-size: 17px;
+   }
+}
+@media (max-Width:400px)
+  {
+   html{
+    font-size: 14px;
+   }
+  }

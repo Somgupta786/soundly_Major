@@ -99,7 +99,7 @@ export default function SignUpCard() {
   };
 
   return (
-    <div className="mainContent">
+    
       <div className="signUpCard">
         <div className="signUpFrame">
           <form className="signUpFrame" onSubmit={continueHandler}>
@@ -153,6 +153,6 @@ export default function SignUpCard() {
           </form>
         </div>
       </div>
-    </div>
+    
   );
 }
