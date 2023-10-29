@@ -11,6 +11,9 @@ export default function LoginCard(){
    const [inputs, setInputs] = useState({
       username: ''
     });
+    const forgetHandler =() =>{
+      Navigation("/forget")
+    }
    const handleInputChange = (e) => {
       const { name, value } = e.target;
       setInputs({
@@ -80,7 +83,7 @@ return(
               />
             <div className="emailText">Username</div>
         </div>
-        <div className="forgetText">
+        <div className="forgetText" onClick={forgetHandler}>
         Forgot Username?
         </div>
         <div className="errorMsg">

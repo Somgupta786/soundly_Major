@@ -31,7 +31,7 @@ return(
           </div>
           
       </div>
-      <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
+      <div className="skipArtist" onClick={() => Navigation('/artist')}>Skip</div>
     </div>
   
 );

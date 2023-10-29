@@ -5,11 +5,12 @@ import { NavLink } from 'react-router-dom';
 import LanguageBox from "./languageBox";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SelectLanguage() {
   const Navigation = useNavigate();
 
   return (
-    <div className="mainContent">
+   
       <div className="languageCard">
         <div className="languageFrame">
             <div className="languageText">
@@ -26,7 +27,7 @@ export default function SelectLanguage() {
         
 
       </div>
-    </div>
+    
   );
 }
 

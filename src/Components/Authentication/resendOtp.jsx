@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { verifyApi } from "../../Api/auth";
 import axios from "axios";
 export default function Resend(props){
+    props.setShowResend(false);
     console.log("hello")
     toast("OTP SENT!");
     const response =  axios.post(verifyApi, {

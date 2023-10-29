@@ -4,13 +4,12 @@ import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export default function SignUpCard() {
+export default function ForgetOption() {
   const Navigation = useNavigate();
   const [isClicked, setClicker] = useState(false);
   const [isLoad, setLoad] = useState(false);
   const [isEmail, setEmail] = useState(true);
  const [inputs, setInputs] = useState({
-    username: '',
     email: '' ,
     phone_number:''
   });
@@ -22,11 +21,8 @@ export default function SignUpCard() {
 
   if(isEmail){
     try {
-      const response = await axios.post("https://test-mkcw.onrender.com/api/user/register/email/", {
-        username: inputs.username,
-        email: inputs.email
-        
-        // inputs
+      const response = await axios.post("https://test-mkcw.onrender.com/api/user/forgot-email/", {
+        email: inputs.email 
       });
       
   
@@ -39,7 +35,7 @@ export default function SignUpCard() {
   
       
       if (response.data.success) {
-        Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1
+        Navigation("/Otp",{state:{username:response.data.data,email:inputs.email,id:1
         }});
       } else {
         setClicker(true);
@@ -59,14 +55,13 @@ export default function SignUpCard() {
   }
   else{
     try {
-      const response = await axios.post("https://test-mkcw.onrender.com/api/user/register/phone/", {
-        username: inputs.username,
+      const response = await axios.post("https://test-mkcw.onrender.com/api/user/forgot-phone_number/", {
       phone_number: inputs.phone_number
       });
      setError(response.data);
   
  if (response.data.success) {
-        Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1
+        Navigation("/Otp",{state:{username:response.data.data,email:inputs.phone_number,id:1
         }});
       } else {
         setClicker(true);
@@ -100,17 +95,18 @@ export default function SignUpCard() {
 
   return (
     
-      <div className="signUpCard">
-        <div className="signUpFrame">
-          <form className="signUpFrame" onSubmit={continueHandler}>
+      <div className="loginCard">
+        <div className="loginFrame">
+          <form className="loginFrame" onSubmit={continueHandler}>
             <div className="welcome">
               <div className="welcomeText">Welcome to</div>
               <div className="try">
                 <Logo />
               </div>
             </div>
+            <div className="favText"> To listen your favorite music</div>
             <div className="loginText">
-              Sign Up to have an access to millions of songs
+            Enter your {isEmail?"registered Email":"registered Number"}
             </div>
             <div className="label">
               <input required
@@ -122,30 +118,10 @@ export default function SignUpCard() {
                 placeholder={isEmail?"Email":"Phone Number"}
               />
               <div className="emailText"> {isEmail?"Email":"Phone no."} </div>
-            </div>
-            <div className="label">
-              <input required
-                type="text"
-                name="username"
-                value={inputs.username}
-                onChange={handleInputChange}
-                className="loginField"
-                placeholder="  Username"
-              />
-              <div className="emailText"> Enter Username</div>
-              {isClicked && error ? <p className="errorMsg">{error.message}</p> : null}
-
-
-            </div>
-           
-            <div className="rememberMe">
-              <input type="checkbox" className="checkBox" required />
-              <span className="rememberText">
-                By creating an account, you agree to accept our Privacy Policy.
-              </span>
+              {isClicked && error ? <p className="errorMsg" >{error.message}</p> : null}
             </div>
             <div className="phoneLogin" onClick={()=>setEmail(!isEmail)}>
-            {isEmail?"Sign Up with Phone number?":"Sign Up with Email."}  
+            {isEmail?"Login via Phone number?":"Login via Email."}  
             </div>
             <div className="submitLogin">
               <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
