@@ -1,7 +1,6 @@
 import Logo from "./LogoIcon";
 import { useState } from "react";
 import axios from "axios";
-import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 export default function ForgetOption() {
@@ -27,8 +26,7 @@ export default function ForgetOption() {
       
   
       console.log(response);
-      console.log("ram");
-      console.log(response.data);
+     
   
     
       setError(response.data);

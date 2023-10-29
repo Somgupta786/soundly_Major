@@ -1,5 +1,4 @@
 import Navbar from "./Navbar"
-// import '../../index.css';
 import './language.css';
 
 

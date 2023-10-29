@@ -18,7 +18,7 @@ export default function OtpPage() {
      <ToastContainer />
       <div className="tryi">
         <Navbar title=" " />
-        {state.id==1?<Otp username={state.username} email={state.email} id={state.id} />:<Otp username={state.username} id={state.id}/>}
+        {state.id==1?<Otp username={state.username} email={state.email} id={state.id} isEmail={state.isEmail}  />:<Otp username={state.username} id={state.id}/>}
         
       </div>
     </div>

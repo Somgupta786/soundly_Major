@@ -26,20 +26,18 @@ export default function SignUpCard() {
         username: inputs.username,
         email: inputs.email
         
-        // inputs
-      });
+             });
       
   
       console.log(response);
-      console.log("ram");
-      console.log(response.data);
+     
   
     
       setError(response.data);
   
       
       if (response.data.success) {
-        Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1
+        Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1,isEmail:{isEmail}
         }});
       } else {
         setClicker(true);
@@ -66,7 +64,7 @@ export default function SignUpCard() {
      setError(response.data);
   
  if (response.data.success) {
-        Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1
+        Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1,isEmail:{isEmail}
         }});
       } else {
         setClicker(true);

@@ -5,7 +5,7 @@ import new1 from "../../assets/new1.svg"
 import img4  from "../../assets/img4.svg"
 import new2 from "../../assets/new2.svg"
 import img6 from "../../assets/img6.svg"
-import { useState } from "react";
+
 
 
 export default function SelectArtist(){

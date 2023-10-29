@@ -6,8 +6,27 @@ export default function Resend(props){
     props.setShowResend(false);
     console.log("hello")
     toast("OTP SENT!");
-    const response =  axios.post(verifyApi, {
-    username: props.username, });
+    if(props.id==1){
+        if(props.isEmail){
+            const response = axios.post("https://test-mkcw.onrender.com/api/user/register/email/", {
+        username: props.username,
+        email: props.email
+      });
+        }
+        else{
+            const response = axios.post("https://test-mkcw.onrender.com/api/user/register/phone/", {
+        username: props.username,
+      phone_number: props.email
+      });
+
+        }
+           
+    }
+    else{
+        const response =  axios.post(verifyApi, {
+            username: props.username, });
+    }
+    
     return(
         <ToastContainer />
     )    

@@ -32,8 +32,7 @@ export default function LoginCard(){
           username: inputs.username, });
         
           setLoad(false);
-        console.log(response);
-        console.log("ram");
+        
         console.log(response.data);
     
       

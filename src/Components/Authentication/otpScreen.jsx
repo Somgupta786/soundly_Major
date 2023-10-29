@@ -1,7 +1,5 @@
-import Navbar from "./Navbar";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Resend from "./resendOtp";
 
@@ -9,9 +7,9 @@ export default function Otp(props) {
   const [isLoad, setLoad] = useState(false);
   const [error, setError] = useState();
   const [isClicked, setClicker] = useState(false);
-  const [showResend, setShowResend] = useState(false); // State to control Resend component visibility
+  const [showResend, setShowResend] = useState(false);
   const Navigation = useNavigate();
-  
+
   const [code, setOTP] = useState(['', '', '', '']);
   const [countdown, setCountdown] = useState(20);
 
@@ -27,12 +25,19 @@ export default function Otp(props) {
     };
   }, [countdown]);
 
+  const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+
   const handleOTPChange = (e, index) => {
     setClicker(false);
     const value = e.target.value.replace(/\D/g, '').slice(0, 1);
     const updatedOTP = [...code];
     updatedOTP[index] = value;
     setOTP(updatedOTP);
+
+    
+    if (value && index < inputRefs.length - 1) {
+      inputRefs[index + 1].current.focus();
+    }
   };
 
   const verifyHandler = async (e) => {
@@ -69,11 +74,13 @@ export default function Otp(props) {
     setCountdown(20);
   };
 
+
+
   return (
     <div className="mainContent">
       <div className="loginCard">
         <div className="loginFrame">
-          <form onSubmit={verifyHandler}>
+          <form className="loginFrame" onSubmit={verifyHandler}>
             <div className="welcome">
               <div className="welcomeText">Enter OTP</div>
             </div>
@@ -87,6 +94,7 @@ export default function Otp(props) {
               <div className="otpSet">
                 {code.map((digit, index) => (
                   <input
+                    ref={inputRefs[index]}
                     required
                     key={index}
                     type="text"
@@ -97,21 +105,19 @@ export default function Otp(props) {
                 ))}
               </div>
               <div className="resendOtp">
-       {isClicked && error ? (
-    <p className="errorMsg">{error.message}</p>
-  ) : countdown > 0 ? (
-    <>
-      {showResend && <Resend username={props.username} setShowResend={setShowResend} />}
-      
-      <p>Resend OTP in {countdown} seconds</p>
-    </>
-  ) : (
-    <>
-      <button onClick={handleResendClick}>Resend OTP</button>
-    </>
-  )}
-</div>
-
+                {isClicked && error ? (
+                  <p className="errorMsg">{error.message}</p>
+                ) : countdown > 0 ? (
+                  <>
+                    {showResend && <Resend props={props} setShowResend={setShowResend} />}
+                    <p>Resend OTP in {countdown} seconds</p>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={handleResendClick}>Resend OTP</button>
+                  </>
+                )}
+              </div>
             </div>
             <div className="rememberMe">
               <input required type="checkbox" className="checkBox" />
@@ -121,7 +127,7 @@ export default function Otp(props) {
             </div>
             <div className="submitLogin">
               <button className="continueButton" type="submit">
-                {isLoad ? <div className="loader"></div> : "Continue"}
+                {isLoad ? <div className="loader"></div> : "Verify"}
               </button>
             </div>
           </form>
