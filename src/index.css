@@ -20,7 +20,7 @@ html,body{
 .loginContainer{
   position: relative;
   left: 13.7vw;
-  background-image: url('./src/assets/Background img.png');
+  background-image: url('./assets/Background img.png');
   width: 86.59vw;
   height: 100vh;
   
