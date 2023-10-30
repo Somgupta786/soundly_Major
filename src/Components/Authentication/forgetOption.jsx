@@ -33,6 +33,7 @@ export default function ForgetOption() {
   
       
       if (response.data.success) {
+        toast("OTP SENT!");
         Navigation("/Otp",{state:{username:response.data.data,email:inputs.email,id:1,isEmail:{isEmail}
         }});
       } else {
@@ -59,6 +60,7 @@ export default function ForgetOption() {
      setError(response.data);
   
  if (response.data.success) {
+  toast("OTP SENT!");
         Navigation("/Otp",{state:{username:response.data.data,email:inputs.phone_number,id:1,isEmail:{isEmail}
         }});
       } else {

@@ -66,6 +66,7 @@ export default function SignUpCard() {
      setError(response.data);
   
  if (response.data.success) {
+  toast("OTP SENT!");
   
         Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1,isEmail:{isEmail}
         }});

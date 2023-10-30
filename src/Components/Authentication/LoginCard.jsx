@@ -40,6 +40,7 @@ export default function LoginCard(){
     
         
         if (response.data.success) {
+          toast("OTP SENT!");
           Navigation("/Otp",{state:{username:inputs.username,id:2}});
         } else {
           setClicker(true);
