@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
 
 export default function SignUpCard() {
   const Navigation = useNavigate();
@@ -37,6 +38,7 @@ export default function SignUpCard() {
   
       
       if (response.data.success) {
+        toast("OTP SENT!");
         Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1,isEmail:{isEmail}
         }});
       } else {
@@ -64,6 +66,7 @@ export default function SignUpCard() {
      setError(response.data);
   
  if (response.data.success) {
+  
         Navigation("/Otp",{state:{username:inputs.username,email:inputs.phone_number,id:1,isEmail:{isEmail}
         }});
       } else {

@@ -4,27 +4,28 @@ import { verifyApi } from "../../Api/auth";
 import axios from "axios";
 export default function Resend(props){
     props.setShowResend(false);
-    console.log("hello")
+    console.log(props)
     toast("OTP SENT!");
-    if(props.id==1){
-        if(props.isEmail){
-            const response = axios.post("https://test-mkcw.onrender.com/api/user/register/email/", {
-        username: props.username,
-        email: props.email
+    if(props.props.id===1){
+        if(props.props.isEmail.isEmail){
+             axios.post("https://test-mkcw.onrender.com/api/user/register/email/", {
+        username:props.props.username,
+        email: props.props.email
       });
         }
         else{
-            const response = axios.post("https://test-mkcw.onrender.com/api/user/register/phone/", {
-        username: props.username,
-      phone_number: props.email
+            axios.post("https://test-mkcw.onrender.com/api/user/register/phone/", {
+        username: props.props.username,
+      phone_number:props.props.email
       });
 
         }
            
     }
     else{
+        console.log("ccc")
         const response =  axios.post(verifyApi, {
-            username: props.username, });
+            username: props.props.username, });
     }
     
     return(

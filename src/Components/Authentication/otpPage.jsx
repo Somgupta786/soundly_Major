@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function OtpPage() {
-     toast("OTP SENT!");
+     
     
     
   const {state} =useLocation();
@@ -15,7 +15,7 @@ export default function OtpPage() {
   return (
     
     <div className="loginContainer">
-     <ToastContainer />
+     
       <div className="tryi">
         <Navbar title=" " />
         {state.id==1?<Otp username={state.username} email={state.email} id={state.id} isEmail={state.isEmail}  />:<Otp username={state.username} id={state.id}/>}
