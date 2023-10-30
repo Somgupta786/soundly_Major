@@ -31,7 +31,8 @@ html, body {
 
 .navBar {
   display: flex;
-  gap: 80%;
+  justify-content:space-between;
+  /* gap: 80%; */
   width: 77.78vw;
   height: 4.8vh;
   margin-top: 2.4vh;
@@ -532,7 +533,7 @@ html, body {
   }
   
    .navBar{
-   gap:50vw;
+   /* gap:50vw; */
    } 
 }
 @media (max-Width:475px){
@@ -582,7 +583,9 @@ html, body {
     
     top: 10vh;
     
-   gap:50vw;
+      width: 90vw;
+      
+   /* gap:50vw; */
    
    } 
    .loginField{
@@ -615,4 +618,8 @@ html, body {
   .favText{
     font-size: 1.6rem;
   }
+ 
+  }
+  @media(max-width:360px){
+    
   }
