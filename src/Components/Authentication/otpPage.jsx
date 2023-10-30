@@ -12,6 +12,7 @@ export default function OtpPage() {
     
   const {state} =useLocation();
 
+
   return (
     
     <div className="loginContainer">

@@ -184,7 +184,8 @@ html, body {
   color: #FF7579;
   width: 100%;
   height: 1.94vh;
-  margin-top: 1.4vh;
+  margin-top: 1.9vh;
+  
 }
 
 .errorMsg {
@@ -319,7 +320,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 3vh;
+  margin-top: 2.5vh;
   background-color: #141416;
   gap: 1.4vh;
 }
@@ -329,18 +330,18 @@ html, body {
   height: 6.08vh;
   display: flex;
   background: none;
-  gap: 20px;
+  gap: 14px;
   justify-content: space-evenly;
 }
 
 .otpSet input {
-  height: 6.08vh;
-  width: 19%;
+  height: 6.8vh;
+  width: 15%;
   background: none;
   border-radius: 15px;
   border: 1px solid #FFF;
   color: #FFF;
-  padding-left: 8%;
+  text-align: center;
   font-size: 1.3vw;
 }
 

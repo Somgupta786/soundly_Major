@@ -33,7 +33,7 @@ export default function ForgetOption() {
   
       
       if (response.data.success) {
-        Navigation("/Otp",{state:{username:response.data.data,email:inputs.email,id:1
+        Navigation("/Otp",{state:{username:response.data.data,email:inputs.email,id:1,isEmail:{isEmail}
         }});
       } else {
         setClicker(true);
@@ -59,7 +59,7 @@ export default function ForgetOption() {
      setError(response.data);
   
  if (response.data.success) {
-        Navigation("/Otp",{state:{username:response.data.data,email:inputs.phone_number,id:1
+        Navigation("/Otp",{state:{username:response.data.data,email:inputs.phone_number,id:1,isEmail:{isEmail}
         }});
       } else {
         setClicker(true);

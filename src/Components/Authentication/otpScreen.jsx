@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Resend from "./resendOtp";
 
 export default function Otp(props) {
+  
   const [isLoad, setLoad] = useState(false);
   const [error, setError] = useState();
   const [isClicked, setClicker] = useState(false);
