@@ -195,7 +195,7 @@ export default function SignUpCard() {
             {isEmail?"Sign Up with Phone number?":"Sign Up with Email."}  
             </div>
             <div className="submitLogin">
-            <button type={isLoad ? "button" : "submit"} className="continueButton" >
+            <button type={isLoad ? "button" : "submit"} className="continueButton" disabled={error} >
                {isLoad ? <div className="loader"></div> : "Continue"}
                  </button>
             </div>

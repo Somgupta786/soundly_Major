@@ -80,6 +80,7 @@ return(
         </div>
         <div className="label">
             <input type="text" 
+            required
             className="loginField"
              placeholder="Username" 
              name="username"

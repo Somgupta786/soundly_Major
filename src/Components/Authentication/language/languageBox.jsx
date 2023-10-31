@@ -16,5 +16,6 @@ export default function LanguageBox(props) {
     <div className="languageLable" style={boxStyle} onClick={handleClick}>
       {props.title}
     </div>
+    
   );
 }

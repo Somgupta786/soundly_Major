@@ -185,6 +185,26 @@ html, body {
   font-weight: 400;
   line-height: 100%;
 }
+#login .emailText {
+  position: absolute;
+  color: #FFF;
+  left: 1.8vw;
+  bottom: 74%;
+  background-color: #141416;
+  height: 1.94vh;
+  white-space: nowrap;
+  display: inline-flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.04vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+}
+
 
 .label p {
   color: #FF7579;
@@ -296,7 +316,7 @@ html, body {
 .loader {
   margin-left: auto;
   margin-right: auto;
-  border: 5px solid #3498db;
+  border: 5px solid black;
   border-top: 5px solid #f0f0f0;
   border-radius: 50%;
   width: 4.8vh;
@@ -480,6 +500,9 @@ letter-spacing: 0.64px;
   .emailText {
     font-size: 1.2rem;
   }
+  #login .emailText {
+    font-size: 1.2rem;
+  }
   .rememberText {
     font-size: 1rem;
   }
@@ -541,6 +564,9 @@ letter-spacing: 0.64px;
     font-size: 1.2rem;
   }
   .emailText {
+    font-size: 0.9rem;
+  }
+  #login .emailText {
     font-size: 0.9rem;
   }
   .rememberText {
@@ -775,6 +801,10 @@ letter-spacing: 0.64px;
     font-size: 1.3rem;
    }
    .emailText{
+    left: 4vh;
+    background-color: black;
+   }
+   #login .emailText{
     left: 4vh;
     background-color: black;
    }
