@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ForgetOption() {
   const Navigation = useNavigate();
-  const [isClicked, setClicker] = useState(false);
+  // const [isClicked, setClicker] = useState(false);
   const [isLoad, setLoad] = useState(false);
   const [isEmail, setEmail] = useState(true);
  const [inputs, setInputs] = useState({
@@ -13,7 +13,8 @@ export default function ForgetOption() {
     phone_number:''
   });
   const [error, setError] = useState();
-
+  const email_valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mobile_valid = /^((\+91)|(91)|0?)[6-9]\d{9}$/;
   const continueHandler = async (e) => {
     setLoad(true)
     e.preventDefault();
@@ -24,7 +25,7 @@ export default function ForgetOption() {
         email: inputs.email 
       });
       
-  
+      setLoad(false);
       console.log(response);
      
   
@@ -37,13 +38,13 @@ export default function ForgetOption() {
         Navigation("/Otp",{state:{username:response.data.data,id:2
         }});
       } else {
-        setClicker(true);
+        // setClicker(true);
         setLoad(false);
       }
     } catch (error) {
       console.log(error.response)
        setLoad(false);
-       setClicker(true);
+      //  setClicker(true);
      
       if (error.response) {
        setError(error.response.data);
@@ -60,17 +61,17 @@ export default function ForgetOption() {
       phone_number: inputs.phone_number
       });
      setError(response.data);
-  
+     setLoad(false);
  if (response.data.success) {
   // toast("OTP SENT!");
         Navigation("/Otp",{state:{username:response.data.data,id:2
         }});
       } else {
-        setClicker(true);
+        // setClicker(true);
         setLoad(false);
       }
     } catch (error) {
-      
+      setLoad(false);
       if (error.response) {
         setError(error.response.data);
        } else {
@@ -88,11 +89,46 @@ export default function ForgetOption() {
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
+    if(e.target.type !=="text"){
+      
+      if(isEmail){
+        if(value.trim() === ""){
+          setError()
+        }
+        else{
+        const emailError =
+          name === "email" &&
+          (value.trim() === "" || !email_valid.test(value.trim()) || value.length > 50)
+            ? setError({
+              message :"Enter the email correctly!"
+            }) : setError() 
+          }
+            
+    
+      }
+      else {
+        if(value.trim() === ""){
+          setError()
+        }
+        else{
+        const emailError =
+          name === "phone_number" && value.trim() !== "" && !mobile_valid.test(value.trim())
+            ? setError({
+              message :"10 valid digits needed!"
+            }) : setError() 
+          }
+      }
+    }
     setInputs({
       ...inputs,
       [name]: value,
     });
-    setClicker(false)
+    // setClicker(false)
+  };
+  const boxStyle = {
+    
+    border:  error  ? '2px solid red' : null,
   };
 
   return (
@@ -118,15 +154,19 @@ export default function ForgetOption() {
                 onChange={handleInputChange}
                 className="loginField"
                 placeholder={isEmail?"Email":"Phone Number"}
+                style={boxStyle}
               />
               <div className="emailText"> {isEmail?"Email":"Phone no."} </div>
-              {isClicked && error ? <p className="errorMsg" >{error.message}</p> : null}
+              
             </div>
+            {error ? <p className="errorMsg" >{error.message}</p> : null}
             <div className="phoneLogin" onClick={()=>setEmail(!isEmail)}>
             {isEmail?"Login via Phone number?":"Login via Email."}  
             </div>
             <div className="submitLogin">
-              <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
+            <button type={isLoad ? "button" : "submit"} className="continueButton" >
+               {isLoad ? <div className="loader"></div> : "Continue"}
+                 </button>
             </div>
           </form>
         </div>

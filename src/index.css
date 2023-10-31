@@ -386,6 +386,9 @@ font-weight: 700;
 line-height: 100%; /* 16px */
 letter-spacing: 0.64px;
 }
+.resendOtp button:hover{
+  cursor: pointer;
+}
 
 .phoneLogin {
   width: 71%;

@@ -74,7 +74,10 @@ export default function Otp(props) {
     setShowResend(!showResend);
     setCountdown(20);
   };
-
+  const boxStyle = {
+    
+    border: isClicked && error  ? '1px solid red' : null,
+  };
 
 
   return (
@@ -102,6 +105,7 @@ export default function Otp(props) {
                     maxLength="1"
                     value={digit}
                     onChange={(e) => handleOTPChange(e, index)}
+                    style={boxStyle}
                   />
                 ))}
               </div>
@@ -127,9 +131,9 @@ export default function Otp(props) {
               </span>
             </div>
             <div className="submitLogin">
-              <button className="continueButton" type="submit">
-                {isLoad ? <div className="loader"></div> : "Verify"}
-              </button>
+            <button type={isLoad ? "button" : "submit"} className="continueButton" >
+               {isLoad ? <div className="loader"></div> : "Verify"}
+                 </button>
             </div>
           </form>
         </div>

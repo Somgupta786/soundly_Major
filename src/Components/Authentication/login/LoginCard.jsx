@@ -60,6 +60,10 @@ export default function LoginCard(){
         }
       }
     };
+    const boxStyle = {
+    
+      border: isClicked && error  ? '1px solid red' : null,
+    };
     
 return(
     
@@ -81,21 +85,25 @@ return(
              name="username"
              onChange={handleInputChange}
              value={inputs.username}
+             style={boxStyle}
               />
             <div className="emailText">Username</div>
             <div className="forgetText" onClick={forgetHandler}>
         Forgot Username?
         </div>
+        {isClicked && error ? <div className="errorMsg">{error.message}</div> : null}
         </div>
         
         
-  {isClicked && error ? <div className="errorMsg">{error.message}</div> : null}
+  
    
   
         
        
        <div className="submitLogin">
-              <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
+       <button type={isLoad ? "button" : "submit"} className="continueButton" >
+               {isLoad ? <div className="loader"></div> : "Continue"}
+                 </button>
             </div>
           </form>  
     </div>

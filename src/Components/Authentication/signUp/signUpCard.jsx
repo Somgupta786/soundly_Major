@@ -7,7 +7,7 @@ import { ToastContainer,toast } from "react-toastify";
 
 export default function SignUpCard() {
   const Navigation = useNavigate();
-  const [isClicked, setClicker] = useState(false);
+  // const [isClicked, setClicker] = useState(false);
   const [isLoad, setLoad] = useState(false);
   const [isEmail, setEmail] = useState(true);
  const [inputs, setInputs] = useState({
@@ -16,6 +16,8 @@ export default function SignUpCard() {
     phone_number:''
   });
   const [error, setError] = useState();
+  const email_valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mobile_valid = /^((\+91)|(91)|0?)[6-9]\d{9}$/;
 
   const continueHandler = async (e) => {
     setLoad(true)
@@ -42,17 +44,18 @@ export default function SignUpCard() {
         Navigation("/Otp",{state:{username:inputs.username,email:inputs.email,id:1,isEmail:{isEmail}
         }});
       } else {
-        setClicker(true);
+        
         setLoad(false);
       }
     } catch (error) {
-      
-      setError(error.response.data);
-      if (error.response.data.success) {
-        Navigation("/Otp");
+      console.log(error.response)
+       setLoad(false);
+       
+     
+      if (error.response) {
+       setError(error.response.data);
       } else {
         console.log(error)
-        setClicker(true);
         setLoad(false);
       }
     }
@@ -77,7 +80,7 @@ export default function SignUpCard() {
     } catch (error) {
       
       setLoad(false);
-         setClicker(true);
+        
        
         if (error.response) {
          setError(error.response.data);
@@ -91,16 +94,54 @@ export default function SignUpCard() {
   }
   };
   
-
+  const boxStyle = {
+    
+    border: error? '2px solid red' : null,
+  };
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if(e.target.type !=="text"){
+      
+  if(isEmail){
+    if(value.trim() === ""){
+      setError()
+    }
+    else{
+    const emailError =
+      name === "email" &&
+      (value.trim() === "" || !email_valid.test(value.trim()) || value.length > 50)
+        ? setError({
+          message :"Enter the email correctly!"
+        }) : setError() 
+      }
+        
+
+  }
+  else {
+    if(value.trim() === ""){
+      setError()
+    }
+    else{
+    const emailError =
+      name === "phone_number" && value.trim() !== "" && !mobile_valid.test(value.trim())
+        ? setError({
+          message :"10 valid digits needed!"
+        }) : setError() 
+      }
+  }
+}
+
     setInputs({
       ...inputs,
       [name]: value,
     });
-    setClicker(false)
+  
+    
+ 
+    
   };
+  
 
   return (
     
@@ -124,9 +165,10 @@ export default function SignUpCard() {
                 onChange={handleInputChange}
                 className="loginField"
                 placeholder={isEmail?"Email":"Phone Number"}
+                style={boxStyle}
               />
               <div className="emailText"> {isEmail?"Email":"Phone no."} </div>
-              {isClicked && error ? <p className="errorMsg">{error.message}</p> : null}
+              { error ? <p className="errorMsg">{error.message}</p> : null}
             </div>
             <div className="label">
               <input required
@@ -153,7 +195,9 @@ export default function SignUpCard() {
             {isEmail?"Sign Up with Phone number?":"Sign Up with Email."}  
             </div>
             <div className="submitLogin">
-              <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
+            <button type={isLoad ? "button" : "submit"} className="continueButton" >
+               {isLoad ? <div className="loader"></div> : "Continue"}
+                 </button>
             </div>
           </form>
         </div>
