@@ -1,6 +1,6 @@
 
 
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import { useLocation,useParams,useNavigate } from "react-router-dom";
 import Otp from "./otpScreen";
 import { ToastContainer, toast } from 'react-toastify';

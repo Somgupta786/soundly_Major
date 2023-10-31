@@ -1,5 +1,5 @@
 import LoginCard from "./LoginCard"
-import Navbar from "./Navbar"
+import Navbar from "../Navbar"
 
 
 export default function Login(){

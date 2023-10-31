@@ -1,4 +1,4 @@
-import Logo from "./LogoIcon";
+import Logo from "../LogoIcon";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Components/Authentication/Login';
-import SignUp from './Components/Authentication/SignUp';
-import OtpPage from "./Components/Authentication/otpPage";
-import Language from "./Components/Authentication/language";
-import ArtistSelection from "./Components/Authentication/ArtistSelection";
-import Forget from './Components/Authentication/forget';
+import Login from './Components/Authentication/login/Login';
+import SignUp from './Components/Authentication/signUp/SignUp';
+import OtpPage from "./Components/Authentication/otp/otpPage";
+import Language from "./Components/Authentication/language/language";
+import ArtistSelection from "./Components/Authentication/artist/ArtistSelection";
+import Forget from './Components/Authentication/forgetUsername/forget';
 function AppRouter() {
   return (
     <Routes>

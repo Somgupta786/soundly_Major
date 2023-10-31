@@ -1,5 +1,5 @@
-import Navbar from "./Navbar"
-import './language.css';
+import Navbar from "../Navbar"
+import '../language.css';
 
 
 import SelectLanguage from "./selectLanguage"

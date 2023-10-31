@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Logo from "./LogoIcon"
+import Logo from "../LogoIcon"
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import axios from "axios";
-import { verifyApi } from "../../Api/auth";
+import { verifyApi } from "../../../Api/auth";
 export default function LoginCard(){
    
    const Navigation = useNavigate();

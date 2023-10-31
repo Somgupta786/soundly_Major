@@ -1,10 +1,10 @@
 import ArtistCard from "./artistCard";
-import Ellipse3 from "../../assets/Arijit.png"
-import img2 from "../../assets/Neha.png"
-import new1 from "../../assets/darshan.png"
-import img4  from "../../assets/bhanu.png"
-import new2 from "../../assets/badshah.png"
-import img6 from "../../assets/honey.png"
+import Ellipse3 from "../../../assets/Arijit.png"
+import img2 from "../../../assets/Neha.png"
+import new1 from "../../../assets/darshan.png"
+import img4  from "../../../assets/bhanu.png"
+import new2 from "../../../assets/badshah.png"
+import img6 from "../../../assets/honey.png"
 
 
 

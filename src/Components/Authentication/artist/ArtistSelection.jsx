@@ -1,7 +1,7 @@
 import SelectArtist from "./selectArtist"
-import Navbar from "./Navbar"
+import Navbar from "../Navbar"
 
-import './language.css';
+import '../language.css';
 
 export default function ArtistSelection(){
    
