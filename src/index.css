@@ -79,6 +79,7 @@ html, body {
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
+  text-decoration: none;
 }
 
 .loginCard {

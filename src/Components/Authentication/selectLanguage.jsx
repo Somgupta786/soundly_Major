@@ -19,8 +19,9 @@ export default function SelectLanguage() {
                  <LanguageBox title="Punjabi"/>
                  <LanguageBox title="Haryanvi"/>
             </div>
-            <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
+            
         </div>
+        <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
         
 
       </div>
