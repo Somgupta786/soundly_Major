@@ -76,14 +76,16 @@ export default function SignUpCard() {
       }
     } catch (error) {
       
-      setError(error.response.data);
-      if (error.response.data.success) {
-        Navigation("/Otp");
-      } else {
-        console.log(error)
-        setClicker(true);
-        setLoad(false);
-      }
+      setLoad(false);
+         setClicker(true);
+       
+        if (error.response) {
+         setError(error.response.data);
+        } else {
+          console.log(error)
+          
+          setLoad(false);
+        }
     }
 
   }
@@ -103,8 +105,8 @@ export default function SignUpCard() {
   return (
     
       <div className="signUpCard">
-        <div className="signUpFrame">
-          <form className="signUpFrame" onSubmit={continueHandler}>
+        <div  >
+          <form className="signUpFrame" id="signUp" onSubmit={continueHandler}>
             <div className="welcome">
               <div className="welcomeText">Welcome to</div>
               <div className="try">
@@ -124,6 +126,7 @@ export default function SignUpCard() {
                 placeholder={isEmail?"Email":"Phone Number"}
               />
               <div className="emailText"> {isEmail?"Email":"Phone no."} </div>
+              {isClicked && error ? <p className="errorMsg">{error.message}</p> : null}
             </div>
             <div className="label">
               <input required
@@ -135,7 +138,7 @@ export default function SignUpCard() {
                 placeholder="  Username"
               />
               <div className="emailText"> Enter Username</div>
-              {isClicked && error ? <p className="errorMsg">{error.message}</p> : null}
+              
 
 
             </div>

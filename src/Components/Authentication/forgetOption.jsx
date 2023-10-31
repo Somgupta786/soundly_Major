@@ -33,21 +33,23 @@ export default function ForgetOption() {
   
       
       if (response.data.success) {
-        toast("OTP SENT!");
-        Navigation("/Otp",{state:{username:response.data.data,email:inputs.email,id:1,isEmail:{isEmail}
+       
+        Navigation("/Otp",{state:{username:response.data.data,id:2
         }});
       } else {
         setClicker(true);
         setLoad(false);
       }
     } catch (error) {
-      
-      setError(error.response.data);
-      if (error.response.data.success) {
-        Navigation("/Otp");
+      console.log(error.response)
+       setLoad(false);
+       setClicker(true);
+     
+      if (error.response) {
+       setError(error.response.data);
       } else {
         console.log(error)
-        setClicker(true);
+        
         setLoad(false);
       }
     }
@@ -60,8 +62,8 @@ export default function ForgetOption() {
      setError(response.data);
   
  if (response.data.success) {
-  toast("OTP SENT!");
-        Navigation("/Otp",{state:{username:response.data.data,email:inputs.phone_number,id:1,isEmail:{isEmail}
+  // toast("OTP SENT!");
+        Navigation("/Otp",{state:{username:response.data.data,id:2
         }});
       } else {
         setClicker(true);
@@ -69,17 +71,17 @@ export default function ForgetOption() {
       }
     } catch (error) {
       
-      setError(error.response.data);
-      if (error.response.data.success) {
-        Navigation("/Otp");
-      } else {
-        console.log(error)
-        setClicker(true);
-        setLoad(false);
+      if (error.response) {
+        setError(error.response.data);
+       } else {
+         console.log(error)
+         
+         setLoad(false);
+       }
+        
       }
     }
 
-  }
   };
   
 
@@ -95,9 +97,9 @@ export default function ForgetOption() {
 
   return (
     
-      <div className="loginCard">
-        <div className="loginFrame">
-          <form className="loginFrame" onSubmit={continueHandler}>
+      <div className="loginCard" id="forgetCard">
+        <div >
+          <form className="loginFrame" id="forget" onSubmit={continueHandler}>
             <div className="welcome">
               <div className="welcomeText">Welcome to</div>
               <div className="try">

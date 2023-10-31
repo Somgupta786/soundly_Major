@@ -82,7 +82,7 @@ html, body {
 }
 
 .loginCard {
-  height: 64vh;
+  height: 54vh;
   width: 30.46vw;
   display: flex;
   flex-direction: column;
@@ -93,34 +93,37 @@ html, body {
   position: relative;
   top: 14.11vh;
   left: 11.11vw;
-  padding: 3.8vw;
+  padding: 7vh 3.5vw 7vh 3.5vw;
 }
 
 .loginFrame {
   height: 100%;
   width: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   align-items: center;
 }
 
 .welcome {
   display: flex;
-  align-items: baseline;
   justify-content: center;
-  align-self: center;
+ align-items: baseline;
+ 
   height: 4.8vh;
-  width: 69%;
+  width: 100%;
   gap: 0.8vw;
   white-space: nowrap;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left:1vh;
+  padding-right: 1vh;
+  
 }
 
 .welcomeText {
+  
   color: #FFF;
   font-family: 'Prompt', sans-serif;
-  font-size: 2.08vw;
+  font-size: 2.2vw;
   font-style: normal;
   font-weight: 700;
   line-height: 100%;
@@ -135,15 +138,16 @@ html, body {
   font-weight: 500;
   line-height: 150%;
   height: 7.2vh;
-  margin-top: 3.4vh;
+ 
 }
 
 .label {
-  height: 8vh;
+  height: 8.7vh;
   width: 100%;
   position: relative;
   margin-top: 3.4vh;
   width: 100%;
+  padding-top:1.9vh;
 }
 
 .loginField {
@@ -165,7 +169,7 @@ html, body {
   position: absolute;
   color: #FFF;
   left: 1.8vw;
-  bottom: 85%;
+  bottom: 68%;
   background-color: #141416;
   height: 1.94vh;
   white-space: nowrap;
@@ -185,14 +189,14 @@ html, body {
   color: #FF7579;
   width: 100%;
   height: 1.94vh;
-  margin-top: 1.9vh;
-  
+  margin-top: 1vh;
+  padding-left: 10px;
 }
 
 .errorMsg {
   color: #FF7579;
   width: 100%;
-  text-align: center;
+  text-align: start;
   height: 1.94vh;
   margin-top: 0.8vh;
   font-family: 'Prompt', sans-serif;
@@ -204,18 +208,23 @@ html, body {
 
 .rememberMe {
   height: 5.8vh;
-  margin-top: 2.5vh;
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items:center;
+  text-align: center;
+  
 }
 
 .checkBox {
-  height: 18px;
+  height: 22px;
+  width: 22px;
+
+  background-color: white;
 }
 
 .rememberText {
-  height: vh;
+  height:100%;
+  
   color: #FFF;
   font-family: 'Prompt', sans-serif;
   font-size: 1.11vw;
@@ -277,7 +286,7 @@ html, body {
 
 .signUpFrame {
   width: 100%;
-  height: 77%;
+  height:64.7vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,7 +312,7 @@ html, body {
   width: 100%;
   height: 2.43vh;
   color: #FFF;
-  margin-top: 3.4vh;
+
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -315,42 +324,43 @@ html, body {
 }
 
 .otp-input {
-  width: 100%;
-  height: 8.08vh;
+  width:255px;
+  height:76;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 2.5vh;
+  
   background-color: #141416;
-  gap: 1.4vh;
+  gap: 1.6vh;
 }
 
 .otpSet {
   width: 100%;
-  height: 6.08vh;
+  height: 50px;
   display: flex;
   background: none;
-  gap: 14px;
-  justify-content: space-evenly;
+  gap:1.215vw;
+  justify-content: space-between;
 }
 
 .otpSet input {
-  height: 6.8vh;
-  width: 15%;
+  height:50px;
+  width:50px;
   background: none;
   border-radius: 15px;
   border: 1px solid #FFF;
   color: #FFF;
   text-align: center;
-  font-size: 1.3vw;
+  font-size: 20px;
 }
 
 .resendOtp {
+  display: flex;
   width: 100%;
   height: 1.6vh;
   color: #FFF;
-  text-align: center;
+  text-align:center;
   font-family: 'Prompt', sans-serif;
   font-size: 1rem;
   font-style: normal;
@@ -364,6 +374,16 @@ html, body {
   background: transparent;
   color: #FFF;
   border: 1px solid #141416;
+  align-self: flex-start;
+  
+  color: var(--web-tertiary, #C76B98);
+text-align: center;
+font-family: 'Prompt', sans-serif;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; /* 16px */
+letter-spacing: 0.64px;
 }
 
 .phoneLogin {
@@ -396,9 +416,57 @@ html, body {
   font-weight: 500;
   line-height: 100%;
 }
+#signUp,#login,#forget{
+  gap: 3.4vh;
+  justify-content: space-between;
+ }
+ #signUp,#login,#forget .favText,.loginText,.label,.rememberMe,.phoneLogin,.submitLogin,.errorMsg{
+  margin:0;
+   }
+  
+   #login .label{
+    height: 11.9vh;
+   }
+   #login{
+    height: 40vh;
+   }
+   .submitLogin{
+    width: 100%;
+   
+   }
+   #forgetCard{
+    height:64vh ;
+    width: 30.278vw;
+   }
+   #forget .loginText{
+    width: 18vw;
+    font-size: 1.5rem;
+   }
+   #forget .welcomeText {
+    font-size: 2rem;
+  }
+  #forget .logoHeading {
+    font-size: 2.7rem;
+  }
+   #otpCard{
+    height:64vh;
+    width:30vw ;
+   }
+   #otp{
+    height:49vh ;
+    gap: 3vh;
+  
+    
+   }
+   #otp .welcome{
+    text-align: center;
+    gap: 0;
+    /* padding: 0; */
+    
+   }
 
 @media (max-width: 1300px) {
-  .loginCard {
+  .loginCard,#forgetCard,#otpCard {
     width: 35.46vw;
     gap: 1.4vh;
   }
@@ -420,6 +488,12 @@ html, body {
   .favText {
     font-size: 1.3rem;
   }
+  #forget .favText{
+    font-size:2vw;
+      }
+      #otp .welcomeText {
+        font-size: 2rem;
+      }
 }
 
 @media (max-width: 1211px) {
@@ -429,13 +503,28 @@ html, body {
   .signUpFrame {
     gap: 1.4vh;
   }
+  #forget .loginText{
+  font-size:1.5rem;
+  }
+  
+  #forget .welcomeText {
+    font-size: 2rem;
+  }
+  #forget .logoHeading {
+    font-size: 2.7rem;
+  }
+  #forget .loginText{
+    width:80%;
+
+  }
+
 }
 
 @media (max-width: 1050px) {
   .signUpCard {
     width: 40.46vw;
   }
-  .loginCard {
+  .loginCard,#forgetCard,#otpCard {
     width: 40.46vw;
   }
   .welcomeText {
@@ -459,6 +548,14 @@ html, body {
   .continueButton {
     font-size: 1rem;
   }
+  #forget .favText{
+    font-size:1.5rem;
+      }
+     #forgetCard {
+        width: 45.46vw;
+        left: 8vw;
+        right: 8vw;
+      }
 }
 
 @media (max-width: 900px) {
@@ -470,7 +567,7 @@ html, body {
   .signUpFrame {
     gap: 1.4vh;
   }
-  .loginCard {
+  .loginCard,#otpCard {
     width: 45.46vw;
     left: 8vw;
     right: 8vw;
@@ -478,6 +575,32 @@ html, body {
   .loginFrame {
     gap: 1.4vh;
   }
+}
+@media (max-width:845px){
+  
+  #forget .phoneLogin{
+    width: 22vw;
+
+  }
+  #forgetCard {
+    width: 60.46vw;
+    left: 20vw;
+    right: 20vw;
+  }
+  #forget .loginText{
+    font-size:1.7rem;
+
+  }
+  #forget .favText{
+    font-size:3.5vw;
+
+  }
+  #forget .phoneLogin{
+    width: 100%;
+    text-align: center;
+
+  }
+ 
 }
 
 @media (max-width: 800px) {
@@ -489,10 +612,20 @@ html, body {
   .signUpFrame {
     gap: 1.4vh;
   }
-  .loginCard {
+  .loginCard,#otpCard {
     width: 60.46vw;
     left: 20vw;
     right: 20vw;
+  }
+  
+  #otp .loginText{
+  font-size: 1.5rem;
+  }
+  #otp .verifyEmail{
+    font-size: 1.8rem;
+  }
+  #otp .rememberText{
+    font-size: 1.1rem;
   }
   .loginFrame {
     gap: 0.4vh;
@@ -500,9 +633,25 @@ html, body {
   .loginContainer {
     background-image: url();
   }
-  .submitLogin {
+  #login .submitLogin {
+    margin-top: 1.5vh;
+  }
+  #signUp .submitLogin{
     margin-top: 3vh;
   }
+}
+@media (max-width: 680px) {
+  
+  #forgetCard {
+    width: 380px;
+    left: 15vw;
+  }
+  #forget .favText{
+    font-size:1.5rem;
+
+  }
+
+  
 }
 
 @media (max-width: 640px) {
@@ -510,9 +659,17 @@ html, body {
     width: 380px;
     left: 15vw;
   }
-  .loginCard {
+  .loginCard,#forgetCard{
     width: 380px;
     left: 15vw;
+  }
+  #otpCard {
+    width: 430px;
+    left: 15vw;
+   
+  
+  
+    
   }
   .navBar {
     margin-left: 4.3vw;
@@ -531,7 +688,11 @@ html, body {
     left: 10vw;
     
   }
-  
+  #otpCard{
+   
+    left: 6vw;
+    
+  }
    .navBar{
    /* gap:50vw; */
    } 
@@ -552,15 +713,32 @@ html, body {
   }
   .loginCard{
     width:100vw;
-    height: 68vh;
+    height: 50vh;
     background-color: black;
     left: 0;
     right: 0;
-    top: 11vh;
-    padding: 6.55vw;
+    top: 17vh;
+    padding:0px 6.55vw;
     border: 0px;
     
   }
+  #login{
+    width:100%;
+    height:50vh;
+    gap:2vh;
+  }
+  
+  #login .label{
+    margin-top: 2vh;
+  }
+  #login .submitLogin{
+    margin-top: 2vh;
+    height: 6.5vh;
+  }
+  #login .loginField{
+    border-radius: 6.67vw;
+  }
+
   .welcome
   {
 
@@ -581,7 +759,7 @@ html, body {
   }
    .navBar{
     
-    top: 10vh;
+   margin-top: 5.7vh;
     
       width: 90vw;
       
@@ -600,26 +778,65 @@ html, body {
    html{
     font-size: 17px;
    }
+   #forgetCard{
+    width:100vw;
+    height:60vh;
+    left: 0;
+    right: 0;
+    gap:2vh;
+    top: 12vh;
+  }
+  #forget .loginText{
+    font-size: 1.4rem;
+    padding-top: 6px;
+  }
+  #forget .submitLogin{
+    margin-top: 2vh;
+    height: 6.5vh;
+  
+  }
+  #otp .submitLogin{
+    margin-top: 2vh;
+    height: 6.5vh;
+  
+  }
+  #otpCard{
+width: 100vw;
+left: 0;
+right: 0;
+top:15vh;
+  }
+  #otp{
+    height:52vh;
+  }
+  #otp .loginText{
+    font-size:1.2rem;
+    }
+    #otp .verifyEmail{
+      font-size: 1.3rem;
+    }
+    #otp .rememberText{
+      font-size: 1rem;
+    }
+    
+
+#otpCard {
+    padding: 0px 4vw;
+}
 }
 @media (max-Width:400px)
   {
-   html{
-    font-size: 13px;
-   }
-  .logoHeading,.logoHeadingEnd{
-    font-size: 3.5rem;
-  }
-  .languageText{
-    font-size: 1.8rem;
-  }
-  .loginText{
-    font-size: 1.4rem;;
-  }
-  .favText{
-    font-size: 1.6rem;
-  }
+    #forget .loginText{
+      font-size: 1.2rem;
+      padding-top: 6px;
+    }
+    #forget .favText{
+      font-size:1.3rem;
+  
+    }
+   
  
   }
-  @media(max-width:360px){
+ 
+ 
     
-  }

@@ -40,13 +40,14 @@ export default function LoginCard(){
     
         
         if (response.data.success) {
-          toast("OTP SENT!");
+         
           Navigation("/Otp",{state:{username:inputs.username,id:2}});
         } else {
           setClicker(true);
           setLoad(false);
         }
       } catch (error) {
+        console.log(error.response)
          setLoad(false);
          setClicker(true);
        
@@ -64,8 +65,8 @@ return(
     
 <div className="mainContent"> 
  <div className="loginCard">
-    <div className="loginFrame">
-    <form className="loginFrame" onSubmit={continueHandler}>
+    <div >
+    <form className="loginFrame" id="login" onSubmit={continueHandler}>
        <div className="welcome">
        <div className="welcomeText">Welcome to</div>
        <div className="try"><Logo /></div>
@@ -82,19 +83,17 @@ return(
              value={inputs.username}
               />
             <div className="emailText">Username</div>
-        </div>
-        <div className="forgetText" onClick={forgetHandler}>
+            <div className="forgetText" onClick={forgetHandler}>
         Forgot Username?
         </div>
-        <div className="errorMsg">
-  {isClicked && error ? error.message : null}
-   </div>
+        </div>
+        
+        
+  {isClicked && error ? <div className="errorMsg">{error.message}</div> : null}
+   
   
         
-        <div className="rememberMe">
-          <input type="checkbox" className="checkBox" required />
-          <span className="rememberText">By creating an account, you agree to accept our Privacy Policy.</span>
-       </div>
+       
        <div className="submitLogin">
               <button type="submit" className="continueButton" >{isLoad ?<div className="loader"></div> :"Continue"}</button>
             </div>

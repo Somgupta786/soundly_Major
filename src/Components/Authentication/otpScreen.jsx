@@ -78,10 +78,10 @@ export default function Otp(props) {
 
 
   return (
-    <div className="mainContent">
-      <div className="loginCard">
-        <div className="loginFrame">
-          <form className="loginFrame" onSubmit={verifyHandler}>
+    <div className="mainContent" >
+      <div className="loginCard" id="otpCard">
+        <div>
+          <form className="loginFrame" id="otp" onSubmit={verifyHandler}>
             <div className="welcome">
               <div className="welcomeText">Enter OTP</div>
             </div>
