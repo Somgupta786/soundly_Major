@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Logo from "../LogoIcon"
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import axios from "axios";
 import { verifyApi } from "../../../Api/auth";
+import { loginContext } from "../../../AppRouter";
 export default function LoginCard(){
-   
+   const{islogged,setLogged}=useContext(loginContext)
    const Navigation = useNavigate();
    const [isClicked, setClicker] = useState(false);
+   
    const [isLoad, setLoad] = useState(false);
    const [inputs, setInputs] = useState({
       username: ''
     });
+   
     const forgetHandler =() =>{
       Navigation("/forget")
     }
@@ -40,7 +43,7 @@ export default function LoginCard(){
     
         
         if (response.data.success) {
-         
+         setLogged(true);
           Navigation("/Otp",{state:{username:inputs.username,id:2}});
         } else {
           setClicker(true);

@@ -5,11 +5,11 @@ import new1 from "../../../assets/darshan.png"
 import img4  from "../../../assets/bhanu.png"
 import new2 from "../../../assets/badshah.png"
 import img6 from "../../../assets/honey.png"
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function SelectArtist(){
-  
+  const Navigation = useNavigate()
 return(
    
     <div className="artistCard">
@@ -31,7 +31,7 @@ return(
           </div>
           
       </div>
-      <div className="skipArtist" onClick={() => Navigation('/artist')}>Skip</div>
+      <div className="skipArtist" onClick={() => Navigation('/home')}>Skip</div>
     </div>
   
 );

@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Resend from "./resendOtp";
+
+
+export  const Context = createContext("");
 
 export default function Otp(props) {
   
@@ -114,7 +117,7 @@ export default function Otp(props) {
                   <p className="errorMsg">{error.message}</p>
                 ) : countdown > 0 ? (
                   <>
-                    {showResend && <Resend props={props} setShowResend={setShowResend} />}
+                    {showResend && <Context.Provider value={{setShowResend}}> <Resend props={props}  /></Context.Provider> }
                     <p>Resend OTP in {countdown} seconds</p>
                   </>
                 ) : (

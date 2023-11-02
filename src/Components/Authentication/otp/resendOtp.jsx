@@ -2,8 +2,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { verifyApi } from "../../../Api/auth";
 import axios from "axios";
+import { useContext } from 'react';
+import { Context } from './otpScreen';
 export default function Resend(props){
-    props.setShowResend(false);
+   const {setShowResend} = useContext(Context)
+   setShowResend(false)
+
     console.log(props)
     toast("OTP SENT!");
     if(props.props.id===1){
