@@ -8,8 +8,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <div className='container'>
+   
       <App />
-    </div>
+   
   </BrowserRouter>
 );

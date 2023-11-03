@@ -1,12 +1,16 @@
-import "./landing.css"
+import "./landing.css";
+import Navbar from "./Navbar";
+import HeroSection from "./HeroSection";
+import Sidebar from "./Sidebar";
 
-
-export default function Landing(){
-return(
-    <h1 style={{
-        color:"red"
-    }}>
-        hello
-    </h1>
-)
+export default function Landing() {
+  return (
+    <div className="landingPage">
+    <Sidebar />
+    
+      <Navbar />
+      
+      <HeroSection />
+    </div>
+  );
 }
