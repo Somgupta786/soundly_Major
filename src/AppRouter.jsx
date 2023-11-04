@@ -8,6 +8,7 @@ import ArtistSelection from "./Components/Authentication/artist/ArtistSelection"
 import Forget from './Components/Authentication/forgetUsername/forget';
 import ProtectedRouter from './ProtectedRouter';
 import Landing from './Components/Home_Page/landing';
+import Library from './Components/Home_Page/Library/Library';
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -25,6 +26,8 @@ function AppRouter() {
       <Route path="/artist" element={<ProtectedRouter Component={ArtistSelection} />}  />
       <Route path="/forget" element={<Forget/>} />
       <Route path="/home" element={<Landing/>} />
+      <Route path="/library" element={<Library/>} />
+
     </Routes>
     </loginContext.Provider>
   );

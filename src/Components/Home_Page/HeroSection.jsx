@@ -1,4 +1,7 @@
 import Card from "./Card";
+import Footer from "./Footer";
+import Playback from "./playBack";
+
 import imge2 from "../../assets/image 2.svg";
 import ImgCard from "./ImgCard";
 import imge1 from "../../assets/Rectangle 8 (1).png";
@@ -16,11 +19,12 @@ export default function HeroSection() {
       <div className="slider" style={styleBox}>
         <Card color="Pink" title="The Solitude" img={imge2} />
       </div>
+      
+      <div className="imageCards">
       <div className="homeText">
         <div>FOR YOU </div> 
         <div> Show more</div>
       </div>
-      <div className="imageCards">
       <div className="homeFirstRow">
        <ImgCard img ={imge1} name ="Taylor Swift, Simon Louis, Harsh, Tejash.."/>
        <ImgCard img ={imge3} name ="Taylor Swift, Simon Louis, Harsh, Tejash.."/>
@@ -36,7 +40,13 @@ export default function HeroSection() {
        <ImgCard img ={imge6} name ="Taylor Swift, Simon Louis, Harsh, Tejash.."/>
       </div>
       </div>
-      <div className="footer">footer</div>
+     
+     <div className="footer"><Footer/> </div>
+     
+
+    
+     
+      
     </div>
   );
 }

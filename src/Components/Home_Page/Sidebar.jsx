@@ -1,14 +1,19 @@
 import Logo from "../Authentication/LogoIcon";
-export default function Sidebar() {
+export default function Sidebar(props) {
+    console.log(props)
   return (
     <div className="sideBar">
       <Logo />
       <div className="sideList">
+       { props.map( 
         <div className="sideMenu">
-          <div>MENU</div>
-          <div>Recently Played</div>
+          <div>{props.title}</div>
+          <div>{}</div>
           <div>For You</div>
-        </div>
+        </div>    )
+       
+       }
+       
         <div className="Genre">
           <div className="sideMenu">
             <div>GENRE</div>
@@ -19,6 +24,7 @@ export default function Sidebar() {
             <div>R&B</div>
           </div>
         </div>
+        
         <div className="favArtist">
         <div className="sideMenu">
             <div>FROM ARTIST YOU FOLLOW</div>
