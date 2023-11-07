@@ -56,6 +56,9 @@ export default function Otp(props) {
       setError(response.data);
       setLoad(false);
       if (response.data.success) {
+        
+        localStorage.setItem('authToken',JSON.stringify(response.data.data.access_token))
+        // console.log(JSON.parse(localStorage.getItem('authToken')));
         Navigation('/language');
       } else {
         setClicker(true);

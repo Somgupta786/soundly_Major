@@ -36,7 +36,16 @@ export default function Footer(){
            </div>
            <hr></hr>
            <div className="footerLower"> 
-          
+           <div className="policy">
+           <div>Legal</div>
+           <div>Privacy Policy</div>
+           <div>Privacy Centre</div>
+           <div>Cookies</div>
+           <div>Cookies</div>
+           </div>
+           <div>
+           © 2023 Soundly
+           </div>
            
            </div>
         </>

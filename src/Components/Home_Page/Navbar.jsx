@@ -27,7 +27,8 @@ export default function Navbar() {
         </div>
       </div>
       <div className="searchBox">
-        <input placeholder="Search"></input>
+        <input placeholder="     Search"></input>
+
       </div>
       <div className="profile">
         <div></div>

@@ -2,6 +2,9 @@ import Heart from "../../assets/Heart.svg";
 
 
 export default function Card(props) {
+   const styles={
+        background:props.color
+    }
   return (
     <>
       <div className="cardLeft">
@@ -14,8 +17,8 @@ export default function Card(props) {
           </div>
         </div>
         <div className="cardLeftEnd">
-          <div>Listen Now</div>
-          <div>
+          <div style={styles} >Listen Now</div>
+          <div >
             <img src={Heart} />
           </div>
         </div>
