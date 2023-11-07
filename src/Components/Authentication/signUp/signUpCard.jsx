@@ -1,10 +1,11 @@
 import Logo from "../LogoIcon";
 import { useState,useContext} from "react";
-import axios from "axios";
+// import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { loginContext } from "../../../AppRouter";
+import axios  from "../../../Api/auth";
 export default function SignUpCard() {
   const{isLogged,setLogged}=useContext(loginContext)
   const Navigation = useNavigate();
@@ -28,7 +29,7 @@ export default function SignUpCard() {
     if (isEmail) {
       try {
         const response = await axios.post(
-          "https://test-mkcw.onrender.com/api/user/register/email/",
+          "user/register/email/",
           {
             username: inputs.username,
             email: inputs.email,
@@ -67,7 +68,7 @@ export default function SignUpCard() {
     } else {
       try {
         const response = await axios.post(
-          "https://test-mkcw.onrender.com/api/user/register/phone/",
+          "user/register/phone/",
           {
             username: inputs.username,
             phone_number: inputs.phone_number,

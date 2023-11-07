@@ -73,8 +73,8 @@ export default function Landing() {
       <div className="navBarPlaceholder"></div>
       <HeroSection />
       
-      <Playback/>
-      <div className="playBackPlaceholder"></div>
+      {/* <Playback/> */}
+      {/* <div className="playBackPlaceholder"></div> */}
     </div>
       
     </div>

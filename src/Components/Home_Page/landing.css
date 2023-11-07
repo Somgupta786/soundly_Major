@@ -438,18 +438,6 @@ font-weight: 400;
 line-height: 100%; /* 14px */
     
 }
-.playBack{
-    width:86.3vw;
-    height: 12vh;
-    background: var(--web-tertiary, #C76B98);
-    position:fixed;
-    bottom: 0;
-    z-index: 2;
-    padding:1.4vh 2.2vw;
-  display: flex;
-  justify-content: space-between;
-  gap: 8.6%;
-}
 .playBackPlaceholder{
     width:86.3vw;
     height: 12vh;
@@ -462,19 +450,44 @@ line-height: 100%; /* 14px */
   justify-content: space-between;
   gap: 8.6%;
 }
-.playBack > div:first-child{
-    
+.playBack{
+    width:86.3vw;
+    height: 12vh;
+    background: var(--web-tertiary, #C76B98);
+    position:fixed;
+    bottom: 0;
+    z-index: 2;
+    padding:1.4vh 2.2vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 8.6%;
+}
+
+.playBack>div:first-child {
+  width: 13.24%;
+  height: 100%;
+  display: flex;
+  gap: 12px;
+  color: #FFF;
+  justify-content: center;
+  align-items: center;
+  font-family: "Prompt", sans-serif;
+  font-size: 1.3vw;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  /* background-color: #000; */
+}
+.playBack > div:first-child img{
+    width:70.24%;
     height:100%;
-    display: flex;
-    gap:12px;
-    color: #FFF;
-    justify-content: center;
-    align-items: center;
-font-family:"Prompt", sans-serif;
-font-size: 1.3vw;
-font-style: normal;
-font-weight: 400;
-line-height: 100%;
+    z-index:5;
+}
+.playBack > div:first-child div{
+    width:29%;
+    height:100%;
+    
+    color: green;
 }
 .playBack > div:nth-child(2){
    width:31.52%; 
@@ -485,15 +498,28 @@ align-items: center;
 justify-content:space-between;
 
 }
-/* .playBack > div:nth-child(2) >  div:nth-child(1) {
 
-} */
 .controls{
     width:53.55%;
     display: flex;
     justify-content:space-between;
     
 }
+.progress-bar {
+   
+    width: 80%;
+    height: 2px;
+    background-color:#bbb;
+    
+   
+    overflow: hidden;
+  }
+  .progress-fill {
+    width: 0; 
+    height: 100%;
+    background-color: #fff; 
+    transition: width 0.3s; 
+  }
 .Share{
     align-self:center;
     display: flex;

@@ -8,12 +8,15 @@ import Rectangle from "../../assets/Rectangle 14.svg";
 import Heart from "../../assets/HeartPlay.svg";
 import Share from "../../assets/Share.svg";
 
-export default function Playback() {
+export default function Playback(props) {
+    console.log(props.name);
+    console.log(props.thumbnail);
   return (
     <div className="playBack">
       <div>
-        <img src={Rectangle}></img>
-        <div>Lotus</div>
+        {props.thumbnail && <img src={props.thumbnail} />}
+        {/* <img src={Rectangle} /> */}
+        <div>{props.name}</div>
       </div>
       <div>
         <div className="controls">
@@ -23,10 +26,9 @@ export default function Playback() {
           <img src={Right} />
           <img src={Repeat} />
         </div>
-        <div>
-          
-          <img src={Line} />
-        </div>
+        <div class="progress-bar">
+  <div class="progress-fill"></div>
+</div>
       </div>
       <div className="Share">
         <div><img src={Heart}/></div>
