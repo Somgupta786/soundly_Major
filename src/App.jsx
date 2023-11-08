@@ -8,21 +8,21 @@ import Playback from './Components/Home_Page/playBack';
 import AppRouter from './AppRouter';
 export const playBackContext=createContext();
 function App() {
-  const[playBackData,setPlayBackData]=useState({
-    thumbnail:null,
-    url:null,
-    id:null,
-    name:null
-  })
+  const[playBackData,setPlayBackData]=useState(
+    // thumbnail:null,
+    // url:null,
+    // id:null,
+    // name:null
+  )
 
   
   return(
     <playBackContext.Provider value={{setPlayBackData}} >
     <ToastContainer/>
     <AppRouter />
-    <Playback playBackData={playBackData}/>
-    {/* <SignUp /> */}
+    {playBackData?<Playback playBackData={playBackData}/>: null}
     
+
     </playBackContext.Provider>
 
   );
