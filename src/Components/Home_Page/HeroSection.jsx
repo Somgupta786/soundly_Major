@@ -14,8 +14,11 @@ import imge3 from '../../assets/Rectangle 8 (2).png';
 import imge4 from '../../assets/Rectangle 8 (3).png';
 import imge5 from '../../assets/Rectangle 8 (4).png';
 import imge6 from '../../assets/Rectangle 8 (2).png';
+import { useContext } from 'react';
+import { playBackContext } from '../../App';
 
 export default function HeroSection() {
+  const{setPlayBackData}=useContext(playBackContext);
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -54,6 +57,12 @@ export default function HeroSection() {
 
   const handleImgCardClick = (song) => {
     setSelectedSong(song); 
+    setPlayBackData({
+      url: songData.song_url,
+      id: song.id,
+      thumbnail: song.thumbnail_url,
+      name: song.name
+    });
   };
 
   useEffect(() => {
@@ -162,15 +171,22 @@ export default function HeroSection() {
         <Footer />
       </div>
 
-      {songData ? (
+      {/* {songData ? (
+  setPlayBackData({
+    url: songData.song_url,
+    id: songData.id,
+    thumbnail: selectedSong.thumbnail_url,
+    name: selectedSong.name
+  })
+) : (
+  setPlayBackData({
+    thumbnail: null,
+    url: null,
+    id: null,
+    name: null
+  })
+)} */}
 
-        <Playback
-          url={songData.song_url}
-          id={songData.id}
-          thumbnail={selectedSong.thumbnail_url}
-          name={selectedSong.name}
-        />
-      ) :  <Playback thumbnail={null}/>}
     </div>
   );
 }

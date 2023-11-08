@@ -11,6 +11,8 @@ import Pause from "../../assets/Ellipse 9.svg";
 import React, { useEffect, useState } from "react";
 
 export default function Playback(props) {
+  console.log(props)
+  // const{props.playBackData}=props.playBackData.playBackData;
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
@@ -23,32 +25,34 @@ export default function Playback(props) {
   };
 
   useEffect(() => {
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+      setTotalDuration(audio.duration);
+    };
+
     audio.onended = () => {
       setIsPlaying(false);
     };
 
-    audio.addEventListener("timeupdate", () => {
-      setCurrentTime(audio.currentTime);
-      setTotalDuration(audio.duration);
-    });
+    audio.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      audio.removeEventListener("timeupdate");
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [audio]);
 
   useEffect(() => {
-    if (props.url) {
-      audio.pause(); // Pause the audio before changing the source.
-      audio.src = props.url; // Update the source.
-      audio.load(); // Load the new audio source.
-      audio.play(); // Play the new audio.
+    if (props.playBackData.url) {
+      audio.pause();
+      audio.src = props.playBackData.url;
+      audio.load();
+      audio.play();
     } else {
-      audio.pause(); // Pause the audio if there is no source.
+      audio.pause();
     }
 
-    setIsPlaying(true); // Set the playing state to true when starting a new song.
-  }, [props.url]);
+    setIsPlaying(true);
+  }, [props.playBackData.url]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -65,8 +69,8 @@ export default function Playback(props) {
   return (
     <div className="playBack">
       <div>
-        {props.thumbnail && <img src={props.thumbnail} />}
-        <div>{props.name}</div>
+        {props.playBackData.thumbnail && <img src={props.playBackData.thumbnail} />}
+        <div>{props.playBackData.name}</div>
       </div>
       <div>
         <div className="controls">
@@ -76,18 +80,22 @@ export default function Playback(props) {
           <img src={Right} />
           <img src={Repeat} />
         </div>
-        <div className="musicTimer">
-        <div className="time-display"> {formatTime(currentTime)}</div>
-        <div className="progress-bar">
-        
-       
-          <div className="progress-fill" style={{ width: `${(currentTime / totalDuration) * 100}%` }}></div>
+        {props.playBackData.url? <audio id="audio-element" >
+          <source src={props.playBackData.url} type="audio/mpeg" />
           
+        </audio>:null}
+       
+        <div className="musicTimer">
+          <div className="time-display"> {formatTime(currentTime)}</div>
+          <div className="progress-bar">
+
+            <div
+              className="progress-fill"
+              style={{ width: `${(currentTime / totalDuration) * 100}%` }}
+            ></div>
+          </div>
+          <div className="time-display"> {formatTime(totalDuration)}</div>
         </div>
-        <div className="time-display">  {formatTime(totalDuration)}</div>
-        </div>
-        
-      
       </div>
       <div className="Share">
         <div>

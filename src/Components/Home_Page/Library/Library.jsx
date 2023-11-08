@@ -40,7 +40,7 @@ export default function Library() {
         <Navbar />
         <div className="navBarPlaceholder"></div>
         <LibraryHeroSection />
-        <Playback />
+        
         <div className="playBackPlaceholder"></div>
       </div>
     </div>
