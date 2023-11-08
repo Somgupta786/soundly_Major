@@ -74,7 +74,7 @@ export default function Landing() {
       <HeroSection />
       
       {/* <Playback/> */}
-      {/* <div className="playBackPlaceholder"></div> */}
+      <div className="playBackPlaceholder"></div>
     </div>
       
     </div>

@@ -50,6 +50,11 @@ export default function HeroSection() {
   const [cardIndex, setCardIndex] = useState(0);
 
   const [selectedSong, setSelectedSong] = useState(null);
+  const [songData, setSongData] = useState(null);
+
+  const handleImgCardClick = (song) => {
+    setSelectedSong(song); 
+  };
 
   useEffect(() => {
     const cardInterval = setInterval(() => {
@@ -82,10 +87,29 @@ export default function HeroSection() {
 
     fetchSongs();
   }, []);
-
-  const handleImgCardClick = (song) => {
-    setSelectedSong(song); 
-  };
+  useEffect(() => {
+    const fetchSongData = async () => {
+      if (selectedSong) {
+        try {
+          const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
+          const response = await axios.get(url);
+  
+          if (response.data.success) {
+            setSongData(response.data.data);
+            console.log(songData)
+          } else {
+            console.error('Failed to fetch song data.');
+          }
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }
+    };
+  
+    fetchSongData();
+  }, [selectedSong]);
+  
+  
 
   return (
     <div className="heroSection">
@@ -114,7 +138,7 @@ export default function HeroSection() {
           {songs.slice(0, 5).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
-              url={song.song_url}
+              id={song.id}
               img={song.thumbnail_url}
               name={song.name}
               onClick={() => handleImgCardClick(song)} 
@@ -122,10 +146,10 @@ export default function HeroSection() {
           ))}
         </div>
         <div className="homeLastRow">
-          {songs.slice(5).map((song, songIndex) => (
+          {songs.slice(5,10).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
-              url={song.song_url}
+              id={song.id}
               img={song.thumbnail_url}
               name={song.name}
               onClick={() => handleImgCardClick(song)} 
@@ -138,9 +162,11 @@ export default function HeroSection() {
         <Footer />
       </div>
 
-      {selectedSong ? (
+      {songData ? (
+
         <Playback
-          url={selectedSong.song_url}
+          url={songData.song_url}
+          id={songData.id}
           thumbnail={selectedSong.thumbnail_url}
           name={selectedSong.name}
         />
