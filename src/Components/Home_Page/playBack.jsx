@@ -1,5 +1,5 @@
 import Group from "../../assets/Group.svg";
-import Left from "../../assets/Left.svg";
+import Left from "../../assets/left.svg";
 import Right from "../../assets/Right.svg";
 import Repeat from "../../assets/Repeat.svg";
 import Continue from "../../assets/Continue.svg";
