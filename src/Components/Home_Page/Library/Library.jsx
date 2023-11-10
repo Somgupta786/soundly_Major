@@ -9,19 +9,23 @@ export default function Library() {
    const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu"
+      onclick: "/menu",
+      activ:"false"
     },
     {
       title: "Liked Songs",
-      onclick: "/liked"
+      onclick: "/liked",
+      activ:"true"
     },
     {
       title: "Playlist",
-      onclick: "/playlist"
+      onclick: "/playlist",
+      activ:"false"
     },
     {
       title: "From Your Favourite Artist",
-      onclick: "/favArt"
+      onclick: "/favArt",
+      activ:"false"
     },
     // ... other menu items
   ];

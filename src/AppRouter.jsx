@@ -40,6 +40,7 @@ function AppRouter() {
       <Route path="/Rap" element={<Rap/>} />
       <Route path="/R&B" element={<R_B/>} />
       <Route path="/library" element={<Library/>} />
+      <Route path="/liked" element={<Library/>} />
       <Route path="/playlist" element={<Playlist/>} />
       <Route path="/favArt" element={<ArtistFollow/>} />
 

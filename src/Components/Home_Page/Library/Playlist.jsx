@@ -9,19 +9,24 @@ export default function Playlist() {
   const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu"
+      onclick: "/menu",
+      activ:"false"
+    
     },
     {
       title: "Liked Songs",
-      onclick: "/liked"
+      onclick: "/liked",
+      activ:"false"
     },
     {
       title: "Playlist",
-      onclick: "/playlist"
+      onclick: "/playlist",
+      activ:"true"
     },
     {
       title: "From Your Favourite Artist",
-      onclick: "/favArt"
+      onclick: "/favArt",
+      activ:"false"
     },
     // ... other menu items
   ];

@@ -11,50 +11,51 @@ import { playBackContext } from '../../../App';
 
 export default function PlaylistHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
-
-
-  
+  const { setPlayBackData, setNavData, setHome } = useContext(playBackContext);
 
   const [playlists, setPlaylist] = useState([]);
-  const [createPlaylist, setCreatePlaylist] = useState("false");
-  
+  const [createPlaylist, setCreatePlaylist] = useState(false);
 
   const [selectedplaylist, setSelectedplaylist] = useState(null);
-  const [playlistData, setplaylistData] = useState(null);
-  const handleCreatePlaylist= () =>{
-    setCreatePlaylist("true");
-  }
-  const handleImgCardClick = (playlist) => {
-    setSelectedplaylist(playlist); 
-    if(playlistData){
-    ({
-      url: playlistData.playlist_url,
-      id: playlist.id,
-      thumbnail: playlist.thumbnail_url,
-      name: playlist.name,
-      description: playlist.description
-    });
-  }
+  const [playlistData, setPlaylistData] = useState(null);
+
+  const [nameInput, setNameInput] = useState('');
+  const [descriptionInput, setDescriptionInput] = useState('');
+
+  const handleCreatePlaylist = () => {
+    setCreatePlaylist(!createPlaylist);
   };
 
- 
+  const handleImgCardClick = (playlist) => {
+    setSelectedplaylist(playlist);
+  };
 
- 
+  const handleNameInputChange = (event) => {
+    const value = event.target.value;
+    if (value.length <= 20) {
+      setNameInput(value);
+    }
+  };
+
+  const handleDescriptionInputChange = (event) => {
+    const value = event.target.value;
+    if (value.length <= 50) {
+      setDescriptionInput(value);
+    }
+  };
 
   useEffect(() => {
-    const fetchplaylists = async () => {
+    const fetchPlaylists = async () => {
       try {
-        ;
-         const response = await axios.get('playlists/', {
+        const response = await axios.get('playlists/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
         if (response.data.success) {
-          const fetchedplaylists = response.data.data;
-          setPlaylist(fetchedplaylists);
+          const fetchedPlaylists = response.data.data;
+          setPlaylist(fetchedPlaylists);
         } else {
           console.error('Failed to fetch playlists.');
         }
@@ -63,23 +64,21 @@ export default function PlaylistHeroSection() {
       }
     };
 
-    fetchplaylists();
+    fetchPlaylists();
   }, []);
+
   useEffect(() => {
-    const fetchplaylistData = async () => {
+    const fetchPlaylistData = async () => {
       if (selectedplaylist) {
         try {
-          
-          const response = await axios.get(`playlists/${selectedplaylist.id}/songs`,{
+          const response = await axios.get(`playlists/${selectedplaylist.id}/songs`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
-          }
-          );
-  
+          });
+
           if (response.data.success) {
-            setplaylistData(response.data.data);
-            console.log(playlistData)
+            setPlaylistData(response.data.data);
           } else {
             console.error('Failed to fetch playlist data.');
           }
@@ -88,16 +87,12 @@ export default function PlaylistHeroSection() {
         }
       }
     };
-  
-    fetchplaylistData();
+
+    fetchPlaylistData();
   }, [selectedplaylist]);
-  
-  
 
   return (
     <div className="heroSection">
-      
-
       <div className="imageCards">
         <div className="homeText">
           <div>Liked playlists</div>
@@ -116,26 +111,38 @@ export default function PlaylistHeroSection() {
           ))}
         </div>
         <div className="homeLastRow">
-        <ImgCard onClick={handleCreatePlaylist}  img ={Group} name ="Create Playlist"/>
+          <ImgCard onClick={handleCreatePlaylist}  img={Group} name="Create Playlist" />
         </div>
       </div>
 
       <div className="footer">
         <Footer />
       </div>
-      {createPlaylist=="true"?<div className='createPlaylist'>
-        <div>Give name to your playlist</div>
-        <div><input placeholder='Enter Name'></input></div>
-        <div><textarea placeholder='Enter Description'></textarea></div>
-        <div className='playlistButton'>
-          <div >Next</div>
-          <div>Cancel</div>
+      {createPlaylist ? (
+        <div className='createPlaylist'>
+          <div>Give name to your playlist</div>
+          <div>
+            <input 
+              placeholder='Enter Name'
+              value={nameInput}
+              onChange={handleNameInputChange}
+            />
+            <div>{nameInput.length}/20</div>
+          </div>
+          <div>
+            <textarea
+              placeholder='Enter Description'
+              value={descriptionInput}
+              onChange={handleDescriptionInputChange}
+            />
+            <div>{descriptionInput.length}/50</div>
+          </div>
+          <div className='playlistButton'>
+            <div>Next</div>
+            <div onClick={handleCreatePlaylist}>Cancel</div>
+          </div>
         </div>
-      </div>:null}
-      
-
-   
-
+      ) : null}
     </div>
   );
 }
