@@ -11,6 +11,11 @@ import Landing from './Components/Home_Page/landing';
 import Library from './Components/Home_Page/Library/Library';
 import Playlist from './Components/Home_Page/Library/Playlist';
 import ArtistFollow from './Components/Home_Page/Library/artistFollow';
+import Pop from './Components/Home_Page/Pop';
+import HipHop from './Components/Home_Page/HipHop';
+import Rock from './Components/Home_Page/Rock';
+import R_B from './Components/Home_Page/R&B';
+import Rap from './Components/Home_Page/Rap';
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -28,6 +33,12 @@ function AppRouter() {
       <Route path="/artist" element={<ProtectedRouter Component={ArtistSelection} />}  />
       <Route path="/forget" element={<Forget/>} />
       <Route path="/home" element={<Landing/>} />
+      <Route path="/forYou" element={<Landing/>} />
+      <Route path="/pop" element={<Pop/>} />
+      <Route path="/rock" element={<Rock/>} />
+      <Route path="/Hip-Hop" element={<HipHop/>} />
+      <Route path="/Rap" element={<Rap/>} />
+      <Route path="/R&B" element={<R_B/>} />
       <Route path="/library" element={<Library/>} />
       <Route path="/playlist" element={<Playlist/>} />
       <Route path="/favArt" element={<ArtistFollow/>} />

@@ -15,7 +15,7 @@ export default function Sidebar({ items }) {
         {items.map((menu, index) => (
           <div className="sideMenu" key={index}>
             {menu.map((item, itemIndex) => (
-              <div key={itemIndex} onClick={() => handleClick(item.onclick)}>
+              <div key={itemIndex} style={item.activ=="true"?{color:"var(--web-tertiary, #C76B98)"}:null} onClick={() => handleClick(item.onclick)}>
                 {item.title}
               </div>
             ))}

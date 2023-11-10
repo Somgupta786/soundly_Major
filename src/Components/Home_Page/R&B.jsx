@@ -5,10 +5,11 @@ import Sidebar from "./Sidebar";
 import Playback from "./playBack";
 import { useContext } from 'react';
 import { playBackContext } from '../../App';
+import PopHeroSection from "./PopHeroSection";
 
-export default function Landing() {
+export default function R_B() {
   const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
-  setHome(true);
+  
     const menuItems1 = [
         {
           title: "MENU",
@@ -18,7 +19,7 @@ export default function Landing() {
         {
           title: "For You",
           onclick: "/forYou",
-          activ:"true"
+          activ:"false"
         },
         {
             title: "Recently Played",
@@ -60,7 +61,7 @@ export default function Landing() {
           {
             title: "R&B",
             onclick: "/R&B",
-            activ:"false"
+            activ:"true"
             
           }];
           const menuItems3 = [
@@ -88,7 +89,7 @@ export default function Landing() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <HeroSection />
+      <PopHeroSection name="R&B" />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

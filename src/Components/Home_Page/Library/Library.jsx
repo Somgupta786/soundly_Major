@@ -37,7 +37,7 @@ export default function Library() {
     <div className="landingPage">
         <Sidebar items={[menuItems1, menuItems2]} />
       <div className="mainContent">
-        <Navbar />
+        
         <div className="navBarPlaceholder"></div>
         <LibraryHeroSection />
         

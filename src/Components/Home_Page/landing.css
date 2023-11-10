@@ -65,6 +65,7 @@
 }
 .homeNav {
     width:84.3vw;
+    left:13.7vw;
     height: 12vh;
     background: #000;
     position:fixed;
