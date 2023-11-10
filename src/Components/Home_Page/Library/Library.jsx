@@ -12,6 +12,10 @@ export default function Library() {
       onclick: "/menu"
     },
     {
+      title: "Liked Songs",
+      onclick: "/liked"
+    },
+    {
       title: "Playlist",
       onclick: "/playlist"
     },
@@ -22,20 +26,10 @@ export default function Library() {
     // ... other menu items
   ];
 
-  const menuItems2 = [
-    {
-      title: "GENRE",
-      onclick: "/menu"
-    },
-    {
-      title: "Liked Songs",
-      onclick: "/liked"
-    },
-    
-  ];
+
   return (
     <div className="landingPage">
-        <Sidebar items={[menuItems1, menuItems2]} />
+        <Sidebar items={[menuItems1]} />
       <div className="mainContent">
         
         <div className="navBarPlaceholder"></div>

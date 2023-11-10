@@ -559,8 +559,8 @@ line-height: 100%;
     display: flex;
     gap:12px;
 }
-.Share  > div:nth-child(1){
-    
+.Share  > div:nth-child(1):hover{
+    cursor: pointer;
 }
 .Share  > div:nth-child(2){
     display:flex;
@@ -573,5 +573,96 @@ font-style: normal;
 font-weight: 400;
 line-height: 100%; 
 }
+.createPlaylist{
+  height:59.3vh;
+  width:31.80vw;
+  display: flex;
+position: fixed;
+left:34.10vw;
+right:34.10vw;
+bottom:6px;
+padding: 48px;
+flex-direction: column;
+justify-content: center;
+justify-content:space-between;
+align-items: center;
+z-index:10;
+  border-radius: 24px;
+border: 1px solid #9B9B9B;
+background: var(--web-2-prim, #141416);
+}
+.createPlaylist > div:nth-child(1){
+  color: #FFF;
 
 
+font-family: "Prompt", sans-serif;
+font-size: 1.94vw;
+font-style: normal;
+font-weight: 700;
+line-height: 100%;
+white-space: nowrap;
+}
+.createPlaylist > div:nth-child(2){
+width:100%;
+}
+
+.createPlaylist > div:nth-child(3) {
+width:100%;
+}
+
+.createPlaylist > div:nth-child(2) input{
+  width:100%;
+  height:5.8vh;
+  
+padding: 16px 16px 16px 16px;
+border-radius: 24px;
+border: 1px solid #9B9B9B;
+background: var(--web-2-prim, #141416);
+color: #BFBFBF;
+
+/* web/Para/reg/03 */
+font-family: "Prompt", sans-serif;
+font-size:1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+
+}
+.createPlaylist > div:nth-child(3) textarea{
+  width:100%;
+  height:12.65vh;
+  
+  padding: 16px 16px 72px 16px;
+  border-radius: 16px;
+  border: 1px solid #727272;
+  color: #BFBFBF;
+  background: var(--web-2-prim, #141416);
+  overflow-y: hidden;
+
+/* web/Para/reg/03 */
+font-family: "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+
+}
+.playlistButton{
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+}
+.playlistButton div{
+  width:48%;
+  padding: 16px 60px;
+  border-radius: 16px;
+background: var(--web-tertiary, #C76B98);
+color: #FFF;
+
+/* web/Para/reg/02 */
+font-family: "Prompt", sans-serif;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+}

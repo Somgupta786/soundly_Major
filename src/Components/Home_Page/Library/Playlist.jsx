@@ -1,12 +1,12 @@
 
 import Playback from "../playBack";
 import Navbar from "../Navbar";
-import PlaybackHeroSection from "./PlaybackHeroSection";
+import PlaylistHeroSection from "./PlaylistHeroSection";
 import Sidebar from "../Sidebar";
 // import Playback from "../playBack";
 
 export default function Playlist() {
-   const menuItems1 = [
+  const menuItems1 = [
     {
       title: "MENU",
       onclick: "/menu"
@@ -15,29 +15,25 @@ export default function Playlist() {
       title: "Liked Songs",
       onclick: "/liked"
     },
+    {
+      title: "Playlist",
+      onclick: "/playlist"
+    },
+    {
+      title: "From Your Favourite Artist",
+      onclick: "/favArt"
+    },
     // ... other menu items
-  ];
-
-  const menuItems2 = [
-    {
-      title: "GENRE",
-      onclick: "/menu"
-    },
-    {
-      title: "Liked Songs",
-      onclick: "/liked"
-    },
-    
   ];
   return (
     <div className="landingPage">
-        <Sidebar items={[menuItems1, menuItems2]} />
+        <Sidebar items={[menuItems1]} />
       <div className="mainContent">
-        <Navbar />
-        <div className="navBarPlaceholder"></div>
-        <PlaybackHeroSection />
-        <Playback />
-        <div className="playBackPlaceholder"></div>
+        
+        <div className="navBarPlaceholder" ></div>
+        <PlaylistHeroSection />
+       
+        <div className="playBackPlaceholder" ></div>
       </div>
     </div>
   );

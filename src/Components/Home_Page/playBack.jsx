@@ -5,15 +5,20 @@ import Repeat from "../../assets/Repeat.svg";
 import Continue from "../../assets/Continue.svg";
 import Line from "../../assets/Line.svg";
 import Rectangle from "../../assets/Rectangle 14.svg";
-import Heart from "../../assets/HeartPlay.svg";
+import Heart from "../../assets/Unlike.svg";
 import Share from "../../assets/Share.svg";
-import Pause from "../../assets/Ellipse 9.svg";
+import Pause from "../../assets/pause.svg";
 import React, { useEffect, useState } from "react";
+import Heart2 from "../../assets/Like button (1).svg";
+// import axios from "axios";
+import axios  from "../../Api/auth";
 
 export default function Playback(props) {
+  const token = JSON.parse(localStorage.getItem('authTok'));
   console.log(props)
   // const{props.playBackData}=props.playBackData.playBackData;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
   const [audio, setAudio] = useState(new Audio());
@@ -23,6 +28,7 @@ export default function Playback(props) {
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
+
 
   useEffect(() => {
     const handleTimeUpdate = () => {
@@ -65,7 +71,37 @@ export default function Playback(props) {
 
     setIsPlaying(!isPlaying);
   };
-
+  const likedHandler = async () => {
+    if (!isLiked) {
+      try {
+        const response = await axios.post(`favourite/song/${props.playBackData.id}/`, null, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (response.data.success) {
+          setIsLiked(!isLiked);
+        }
+      } catch (error) {
+        console.log(error.response);
+      }
+    } else {
+      try {
+        const response = await axios.delete(`favourite/song/${props.playBackData.id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (response.data.success) {
+          setIsLiked(!isLiked);
+        }
+      } catch (error) {
+        console.log(error.response);
+      }
+      
+    }
+  };
+  
   return (
     <div className="playBack">
       <div>
@@ -99,7 +135,7 @@ export default function Playback(props) {
       </div>
       <div className="Share">
         <div>
-          <img src={Heart} />
+          <img onClick={likedHandler} src={isLiked?Heart2:Heart} />
         </div>
         <div>
           <img src={Share} />

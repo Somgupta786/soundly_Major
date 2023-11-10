@@ -1,7 +1,7 @@
 
 import Playback from "../playBack";
 import Navbar from "../Navbar";
-import PlaybackHeroSection from "./PlaybackHeroSection";
+import PlaybackHeroSection from "./PlaylistHeroSection";
 import Sidebar from "../Sidebar";
 import ArtistHeroSection from "./artistHeroSection";
 // import Playback from "../playBack";
