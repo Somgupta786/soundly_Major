@@ -16,6 +16,7 @@ import HipHop from './Components/Home_Page/HipHop';
 import Rock from './Components/Home_Page/Rock';
 import R_B from './Components/Home_Page/R&B';
 import Rap from './Components/Home_Page/Rap';
+import PlaylistAddSongs from './Components/Home_Page/Library/playlistAddSongs';
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -43,6 +44,7 @@ function AppRouter() {
       <Route path="/liked" element={<Library/>} />
       <Route path="/playlist" element={<Playlist/>} />
       <Route path="/favArt" element={<ArtistFollow/>} />
+      <Route path="/addSongs" element={<PlaylistAddSongs/>} />
 
 
     </Routes>

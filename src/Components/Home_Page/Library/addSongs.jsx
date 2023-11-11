@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Card from './Card';
-import Footer from './Footer';
-import ImgCard from './ImgCard';
-import Playback from './playBack'; 
+import axios from '../../../Api/auth';
+import Card from '../Card';
+import Footer from '../Footer';
+import ImgCard from '../ImgCard';
+import Playback from '../playBack'; 
+import Continue from "../../../assets/Continue.svg";
+import Rectangle from "../../../assets/Rectangle 8 (3).png";
+import Tick from "../../../assets/Tick.svg";
+import Add from "../../../assets/Add_Plus.svg";
 
 import { useContext } from 'react';
-import { playBackContext } from '../../App';
+import { playBackContext } from '../../../App';
 
-export default function PopHeroSection(props) {
+export default function AddSongs() {
   const token = JSON.parse(localStorage.getItem('authTok'));
   const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
-
+setHome("true")
 
   
 
@@ -22,7 +26,9 @@ export default function PopHeroSection(props) {
   const [songData, setSongData] = useState(null);
 
   const handleImgCardClick = (song) => {
+    console.log("ram")
     setSelectedSong(song); 
+  
     if(songData){
     setPlayBackData({
       url: songData.song_url,
@@ -40,12 +46,13 @@ export default function PopHeroSection(props) {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
-         const response = await axios.get(url);
+        const url = 'https://test-mkcw.onrender.com/api/allpublicsongs/';
+        const response = await axios.get(url);
 
         if (response.data.success) {
           const fetchedSongs = response.data.data;
           setSongs(fetchedSongs);
+          console.log(songs)
         } else {
           console.error('Failed to fetch songs.');
         }
@@ -61,7 +68,7 @@ export default function PopHeroSection(props) {
       if (selectedSong) {
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
-          const response = await axios.get(url, {
+          const response = await axios.get(url,{
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -82,61 +89,34 @@ export default function PopHeroSection(props) {
     fetchSongData();
   }, [selectedSong]);
   
-  
 
-  return (
-    <div className="heroSection">
-      
 
-      <div className="imageCards">
-        <div className="homeText">
-          <div>{props.name}</div>
-          <div>Show more</div>
+return (
+    <div className="addSongsSection">
+      <div className='addSongsUpper' >
+        <div className='addText'>
+          <div>Add songs to your ‘Default name’</div>
+          <div>DONE</div>
         </div>
-        <div className="homeFirstRow">
-          {songs.slice(0, 5).map((song, songIndex) => (
-            <ImgCard
-              key={songIndex}
-              id={song.id}
-              img={song.thumbnail_url}
-              name={song.name}
-              onClick={() => handleImgCardClick(song)} 
-            />
-          ))}
-        </div>
-        <div className="homeLastRow">
-          {songs.slice(5,10).map((song, songIndex) => (
-            <ImgCard
-              key={songIndex}
-              id={song.id}
-              img={song.thumbnail_url}
-              name={song.name}
-              onClick={() => handleImgCardClick(song)} 
-            />
-          ))}
-        </div>
+        {songs.map((song) => (
+          <div className='showSongs' key={song.id}>
+            <div>
+              <img src={song.thumbnail_url} alt="Thumbnail" />
+              <div className='songDetails'>
+                <div>{song.name}</div>
+                <div>{song.artist}</div>
+              </div>
+            </div>
+            <div>2:54</div>
+            <div onClick={() => handleImgCardClick(song)} ><img src={Continue} alt="Continue" /></div>
+            <div><img src={Add} alt="Add" /> Add</div>
+          </div>
+        ))}
       </div>
-
       <div className="footer">
         <Footer />
       </div>
-
-      {/* {songData ? (
-  setPlayBackData({
-    url: songData.song_url,
-    id: songData.id,
-    thumbnail: selectedSong.thumbnail_url,
-    name: selectedSong.name
-  })
-) : (
-  setPlayBackData({
-    thumbnail: null,
-    url: null,
-    id: null,
-    name: null
-  })
-)} */}
-
     </div>
   );
+  
 }

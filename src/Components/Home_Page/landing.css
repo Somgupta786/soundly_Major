@@ -11,10 +11,12 @@
 
 .mainContent {
 
-  width: 86.3vw;
+  width: 82.3vw;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding-left:2.15vw;
+  padding-right:2.15vw;
 
 }
 
@@ -72,8 +74,8 @@
 }
 
 .homeNav {
-  width: 84.3vw;
-  left: 13.7vw;
+  width: 82.3vw;
+  left: 17.7vw;
   height: 12vh;
   background: #000;
   position: fixed;
@@ -154,12 +156,12 @@
 
   width: 100%;
 
-  padding-left: 2.22vw;
-  padding-right: 2.1vw;
+  /* padding-left: 2.22vw;
+  padding-right: 2.1vw; */
   background: #000;
   display: flex;
   flex-direction: column;
-  gap: 15.8vh;
+  gap: 15.9vh;
 
 }
 
@@ -168,7 +170,7 @@
 
   width: 100%;
   height: 44.2vh;
-  border: 2px solid gray;
+ 
   border-radius: 1.11vw;
   display: flex;
   align-items: center;
@@ -296,7 +298,7 @@
   left: 50%;
   right: 50%;
   bottom: 10px;
-  z-index: 3;
+ 
   display: flex;
   width: 48px;
   justify-content: space-between;
@@ -313,18 +315,19 @@
   /* position: absolute;
     top: 56.4vh; */
   width: 100%;
-  height: 71.6vh;
+  height: 71vh;
   background: #000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap:4.86vh;
 }
 
 .homeText {
   /* position: absolute;
   top: 50vh; */
-  /* height: 4.3vh;
-  width: 100%; */
+  height: 4.3vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   justify-content: baseline;
@@ -357,9 +360,10 @@
 .homeFirstRow,
 .homeLastRow {
   width: 100%;
-  height: 29.3vh;
+  /* height: 29.3vh; */
   display: flex;
-  gap: 2.432vw;
+  
+  gap:25px;
 
 }
 
@@ -369,29 +373,31 @@
 }
 
 .imgCard {
-  width: 17.46%;
-  height: 100%;
+  width: 17.47%;
+  height: 29.4vh;
   border-radius: 0.8vw;
   background: var(--web-2-prim, #141416);
-  padding: 1.5vh 1.6%;
+  padding: 1.5vh 1.25vw;
 }
 
 .imgCard>div {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: inline-flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 8px;
 }
 
 .songImage {
   width: 100%;
-  height: 19.3vh;
-  border-radius: 0.833;
+ 
+  border-radius: 0.833vw;
 }
 
 .songImage img {
-  height: 100%;
+  border-radius: 0.833vw;
   width: 100%;
 }
 
@@ -499,7 +505,7 @@
 }
 
 .playBackPlaceholder {
-  width: 86.3vw;
+  width: 100%;
   height: 12vh;
   background: var(--web-tertiary, #C76B98);
 
@@ -512,11 +518,11 @@
 }
 
 .playBack {
-  width: 86.3vw;
+  width: 82.7vw;
   height: 12vh;
   background: var(--web-tertiary, #C76B98);
   position: fixed;
-  left: 13.7vw;
+  left: 17.3vw;
   bottom: 0;
   z-index: 2;
   padding: 1.4vh 2.2vw;
@@ -629,7 +635,7 @@
   display: flex;
   gap: 11px;
   color: var(--web-secondary, #FFF);
-
+align-items:center;
   font-family: "Prompt", sans-serif;
   font-size: 1.11vw;
   font-style: normal;
@@ -772,3 +778,130 @@
   font-weight: 400;
   line-height: 100%;
 }
+/* //add song Css */
+.addSongsSection{
+  width: 100%;
+
+  padding-left: 2.22vw;
+  padding-right: 2.1vw;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 15.8vh;
+}
+.addSongsUpper{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  gap:24px;
+}
+.addText{
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+}
+.addText > div:nth-child(1){
+  color: #FFF;
+
+/* web/Heading/bold/02 */
+font-family:"Prompt", sans-serif;
+font-size: 2.5vw;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; /* 36px */
+}
+.addText > div:nth-child(2){
+   width:8%;
+   height:4.13vh;
+   border-radius: 8px;
+   display: flex;
+background: var(--web-tertiary, #C76B98);
+justify-content: center;
+align-items: center;
+color: #FFF;
+
+/* web/Para/reg/03 */
+font-family: "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%
+
+}
+.showSongs{
+  
+  width: 100%;
+  height:8.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:15.4vw;
+}
+.showSongs > div:nth-child(1){
+  width:21.3%;
+  height:100%;
+  display: flex;
+  
+  gap:24px;
+}
+.songDetails{
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+ 
+  justify-content: center;
+  
+}
+.songDetails>div:nth-child(1){
+  color: #FFF;
+ white-space: nowrap;
+
+font-family: "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.songDetails>div:nth-child(2){
+  color: #808080;
+/* web/Para/reg/03 */
+font-family: "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.showSongs > div:nth-child(2){
+  color: #808080;
+height:22px;
+width:32px;
+font-family: "Prompt", sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 140%;
+}
+.showSongs > div:nth-child(3) img{
+  
+height:35px;
+width:35px;
+
+}
+.showSongs > div:nth-child(4){
+  width:102px;
+  height:38px;
+  color: #FFF;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+border: 1px solid #FFF;
+gap:8px;
+  color: #FFF;
+font-family:"Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; 
+  }

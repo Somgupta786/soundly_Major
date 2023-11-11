@@ -17,7 +17,7 @@ function App() {
     game:"Game"
 
   })
-  localStorage.setItem("authTok",JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAyMDY1OTkzLCJpYXQiOjE2OTk0NzM5OTMsImp0aSI6ImMyYTZiMjM2NTVkOTQ2ZGQ4MTc2ODhjODViMzQ3NGYxIiwidXNlcl9pZCI6ImFkbWluIn0.gxMehs9vpw0QONsLmtghLRLOXG3kwPfO_M40-lzN7VY"))
+  localStorage.setItem("authTok",JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODA1MTczLCJpYXQiOjE2OTkyMTMxNzMsImp0aSI6IjYwOTdkYTkxNTJmMDQ1YzY4YmE1MTBjZWQyMDM4MzAxIiwidXNlcl9pZCI6ImFkbWluIn0.zhhXZrQzl4fls2jh26tGQ6KMuKojlFV8r-rE1LEWT_w"))
   const[isHome,setHome]=useState(false)
 
   

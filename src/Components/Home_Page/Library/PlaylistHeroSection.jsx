@@ -8,8 +8,13 @@ import Group from "../../../assets/Group 9.svg";
 
 import { useContext } from 'react';
 import { playBackContext } from '../../../App';
+import { useNavigate } from 'react-router-dom';
 
 export default function PlaylistHeroSection() {
+  const Navigation=useNavigate();
+  const navigationHandler =()=>{
+    Navigation("/addSongs")
+  }
   const token = JSON.parse(localStorage.getItem('authTok'));
   const { setPlayBackData, setNavData, setHome } = useContext(playBackContext);
 
@@ -25,7 +30,29 @@ export default function PlaylistHeroSection() {
   const handleCreatePlaylist = () => {
     setCreatePlaylist(!createPlaylist);
   };
-
+  const handleCreatedPlaylist = async () => {
+    try {
+      const response = await axios.post("playlists/", {
+        name: nameInput,
+        description: descriptionInput
+      }, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (response.data.success) {
+        navigationHandler();
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
   const handleImgCardClick = (playlist) => {
     setSelectedplaylist(playlist);
   };
@@ -138,7 +165,7 @@ export default function PlaylistHeroSection() {
             <div>{descriptionInput.length}/50</div>
           </div>
           <div className='playlistButton'>
-            <div>Next</div>
+            <div onClick={handleCreatedPlaylist} >Next</div>
             <div onClick={handleCreatePlaylist}>Cancel</div>
           </div>
         </div>

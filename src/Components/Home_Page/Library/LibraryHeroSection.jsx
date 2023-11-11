@@ -65,7 +65,11 @@ export default function LibraryHeroSection() {
       if (selectedSong) {
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
-          const response = await axios.get(url);
+          const response = await axios.get(url,{
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
   
           if (response.data.success) {
             setSongData(response.data.data);
