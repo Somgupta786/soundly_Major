@@ -2,33 +2,40 @@ import Group from "../../assets/Group.svg";
 import Left from "../../assets/left.svg";
 import Right from "../../assets/Right.svg";
 import Repeat from "../../assets/Repeat.svg";
-import Continue from "../../assets/Continue.svg";
+import Pause from "../../assets/Continue.svg";
 import Line from "../../assets/Line.svg";
 import Rectangle from "../../assets/Rectangle 14.svg";
 import Heart from "../../assets/Unlike.svg";
 import Share from "../../assets/Share.svg";
-import Pause from "../../assets/pause.svg";
-import React, { useEffect, useState } from "react";
+import Continue  from "../../assets/pause.svg";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Heart2 from "../../assets/Like button (1).svg";
+import MediaPlayer from "./Library/mediaPlayer";
+
 // import axios from "axios";
 import axios  from "../../Api/auth";
+import { playBackContext } from "../../App";
 
 export default function Playback(props) {
+  const{playBackData,setPlayBackData,setNavData,setHome,isPlaying,isMedia, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
+  const Navigation=useNavigate()
   const token = JSON.parse(localStorage.getItem('authTok'));
-  console.log(props)
+ 
   // const{props.playBackData}=props.playBackData.playBackData;
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [totalDuration, setTotalDuration] = useState(0);
-  const [audio, setAudio] = useState(new Audio());
+// const [isPlaying, setIsPlaying] = useState(false);
+//   const [isLiked, setIsLiked] = useState(false);
+//   const [currentTime, setCurrentTime] = useState(0);
+//   const [totalDuration, setTotalDuration] = useState(0);
+//   const [audio, setAudio] = useState(new Audio());
+  
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
-
+  
 
   useEffect(() => {
     const handleTimeUpdate = () => {
@@ -48,23 +55,29 @@ export default function Playback(props) {
   }, [audio]);
 
   useEffect(() => {
+  if(currentTime==0){
     if (props.playBackData.url) {
       audio.pause();
       audio.src = props.playBackData.url;
       audio.load();
       audio.play();
+      setIsPlaying(true);
     } else {
       audio.pause();
     }
-
-    setIsPlaying(true);
+  }
+   
   }, [props.playBackData.url]);
 
   const handlePlayPause = () => {
+   
     if (isPlaying) {
+      
       audio.pause();
     } else {
+      
       audio.play().catch((error) => {
+       
         console.error("Failed to play audio:", error);
       });
     }
@@ -103,6 +116,7 @@ export default function Playback(props) {
   };
   
   return (
+    
     <div className="playBack">
       <div>
         {props.playBackData.thumbnail && <img src={props.playBackData.thumbnail} />}
@@ -112,7 +126,7 @@ export default function Playback(props) {
         <div className="controls">
           <img src={Group} />
           <img src={Left} />
-          <img onClick={handlePlayPause} src={isPlaying ? Pause : Continue} />
+          <img onClick={handlePlayPause} src={isPlaying ? Continue : Pause } />
           <img src={Right} />
           <img src={Repeat} />
         </div>
@@ -138,10 +152,16 @@ export default function Playback(props) {
           <img onClick={likedHandler} src={isLiked?Heart2:Heart} />
         </div>
         <div>
-          <img src={Share} />
-          <div>Share</div>
+        <img
+  onClick={() => Navigation("/media")}
+  src={Share}
+/>
+
+          <div>Share </div>
         </div>
       </div>
     </div>
+    
+ 
   );
 }

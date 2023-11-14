@@ -19,7 +19,7 @@ import { playBackContext } from '../../App';
 
 export default function HeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
+  const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -58,15 +58,30 @@ export default function HeroSection() {
 
   const handleImgCardClick = (song) => {
     setSelectedSong(song); 
+   
+   
+     
+  
+  };
+  useEffect(() => {
     if(songData){
     setPlayBackData({
       url: songData.song_url,
-      id: song.id,
-      thumbnail: song.thumbnail_url,
-      name: song.name
-    });
+      id: songData.id,
+      thumbnail: songData.thumbnail_url,
+      name: songData.name,
+      artist:selectedSong.artist
+    })
+   
+    // setMediaData({
+    //   url: songData.song_url,
+    //   id: songData.id,
+    //   thumbnail: songData.thumbnail_url,
+    //   name: songData.name
+    // })
+    
   }
-  };
+  },[songData])
 
   useEffect(() => {
     const cardInterval = setInterval(() => {
@@ -101,7 +116,9 @@ export default function HeroSection() {
   }, []);
   useEffect(() => {
     const fetchSongData = async () => {
+      
       if (selectedSong) {
+       
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
           const response = await axios.get(url, {
@@ -112,7 +129,7 @@ export default function HeroSection() {
   
           if (response.data.success) {
             setSongData(response.data.data);
-            console.log(songData)
+            console.log(response.data)
           } else {
             console.error('Failed to fetch song data.');
           }

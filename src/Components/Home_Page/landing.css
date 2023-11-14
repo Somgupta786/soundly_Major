@@ -378,6 +378,7 @@
   border-radius: 0.8vw;
   background: var(--web-2-prim, #141416);
   padding: 1.5vh 1.25vw;
+  position: relative;
 }
 
 .imgCard>div {
@@ -388,6 +389,12 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  
+}
+.imgCard>img{
+  position: absolute;
+top: 135px;
+ right:6px;
 }
 
 .songImage {
