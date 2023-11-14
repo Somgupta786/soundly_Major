@@ -12,7 +12,7 @@ import Add from "../../../assets/Add_Plus.svg";
 import { useContext } from 'react';
 import { playBackContext } from '../../../App';
 
-export default function AddSongs() {
+export default function AddSongs(props) {
   const token = JSON.parse(localStorage.getItem('authTok'));
   const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
 setHome("true")
@@ -38,7 +38,24 @@ setHome("true")
     });
   }
   };
+const AddSongHandler =async (song) => {
+    
+    // console.log("hurray")
+      try {
+        
+        const response = await axios.post(`playlists/${props.state.createdPlaylistDta.id}/songs/${song.id}/`);
 
+        if (response.data.success) {
+          
+         
+          console.log("hurray")
+        } else {
+          console.error('Failed to fetch songs.');
+        }
+      } catch (error) {
+        
+      }
+    };
  
 
  
@@ -109,7 +126,7 @@ return (
             </div>
             <div>2:54</div>
             <div onClick={() => handleImgCardClick(song)} ><img src={Continue} alt="Continue" /></div>
-            <div><img src={Add} alt="Add" /> Add</div>
+            <div onClick={() =>AddSongHandler(song)}><img src={Add} alt="Add" /> Add</div>
           </div>
         ))}
       </div>

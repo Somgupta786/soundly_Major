@@ -18,9 +18,9 @@ export default function Card(props) {
         </div>
         <div className="cardLeftEnd">
           <div style={styles} >Listen Now</div>
-          <div >
+          {/* <div >
             <img src={Heart} />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="cardRight"><img src={props.img}/></div>

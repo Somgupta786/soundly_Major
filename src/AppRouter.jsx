@@ -17,6 +17,8 @@ import Rock from './Components/Home_Page/Rock';
 import R_B from './Components/Home_Page/R&B';
 import Rap from './Components/Home_Page/Rap';
 import PlaylistAddSongs from './Components/Home_Page/Library/playlistAddSongs';
+import ShowPlaylist from './Components/Home_Page/Library/showPlaylist';
+import MediaPlayer from './Components/Home_Page/Library/mediaPlayer';
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -45,7 +47,8 @@ function AppRouter() {
       <Route path="/playlist" element={<Playlist/>} />
       <Route path="/favArt" element={<ArtistFollow/>} />
       <Route path="/addSongs" element={<PlaylistAddSongs/>} />
-
+      <Route path="/showPlaylist" element={<ShowPlaylist/>} />
+      <Route path="/media" element={<MediaPlayer/>} />
 
     </Routes>
     </loginContext.Provider>

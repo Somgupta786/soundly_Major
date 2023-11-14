@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function ImgCard(props) {
    
+  console.log("Hey..i am called")
   const handleImgCardClick = () => {
     if (props.onClick) {
       props.onClick();

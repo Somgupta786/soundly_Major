@@ -12,9 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PlaylistHeroSection() {
   const Navigation=useNavigate();
-  const navigationHandler =()=>{
-    Navigation("/addSongs")
-  }
+ 
   const token = JSON.parse(localStorage.getItem('authTok'));
   const { setPlayBackData, setNavData, setHome } = useContext(playBackContext);
 
@@ -23,6 +21,7 @@ export default function PlaylistHeroSection() {
 
   const [selectedplaylist, setSelectedplaylist] = useState(null);
   const [playlistData, setPlaylistData] = useState(null);
+  const [createdPlaylistData, setCreatedPlaylistData] = useState(null);
 
   const [nameInput, setNameInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
@@ -43,7 +42,12 @@ export default function PlaylistHeroSection() {
       });
   
       if (response.data.success) {
-        navigationHandler();
+        setCreatedPlaylistData(response.data.data)
+        Navigation("/addSongs", {
+          state: {
+            createdPlaylistData:response.data.data
+          }
+        })
       } else {
         console.log(response);
       }
@@ -105,7 +109,13 @@ export default function PlaylistHeroSection() {
           });
 
           if (response.data.success) {
+            console.log(response)
             setPlaylistData(response.data.data);
+            Navigation("/showPlaylist", {
+              state: {
+                playlistData:response.data.data
+              }
+            })
           } else {
             console.error('Failed to fetch playlist data.');
           }

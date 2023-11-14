@@ -1,12 +1,12 @@
 
 import Playback from "../playBack";
 import Navbar from "../Navbar";
-import AddSongs from "./addSongs";
+import ShowPlaylistHeroSection from "./showPlaylistHeroSection";
 import Sidebar from "../Sidebar";
 import { useLocation } from "react-router-dom";
 // import Playback from "../playBack";
 
-export default function PlaylistAddSongs() {
+export default function ShowPlaylist() {
     const {state}=useLocation();
   const menuItems1 = [
     {
@@ -38,7 +38,7 @@ export default function PlaylistAddSongs() {
       <div className="mainContent">
         
         <div className="navBarPlaceholder" ></div>
-        <AddSongs state={state} />
+        <ShowPlaylistHeroSection state={state}/>
        
         <div className="playBackPlaceholder" ></div>
       </div>
