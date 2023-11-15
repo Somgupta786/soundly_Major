@@ -55,7 +55,7 @@ export default function Playback(props) {
   }, [audio]);
 
   useEffect(() => {
-  if(currentTime==0){
+  if(currentTime==0 ){
     if (props.playBackData.url) {
       audio.pause();
       audio.src = props.playBackData.url;

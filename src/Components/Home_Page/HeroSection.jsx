@@ -65,12 +65,15 @@ export default function HeroSection() {
   };
   useEffect(() => {
     if(songData){
+      console.log(songData.is_liked)
     setPlayBackData({
+      
       url: songData.song_url,
       id: songData.id,
       thumbnail: songData.thumbnail_url,
       name: songData.name,
-      artist:selectedSong.artist
+      artist:selectedSong.artist,
+      isLiked:songData.is_liked
     })
    
     // setMediaData({
@@ -129,7 +132,7 @@ export default function HeroSection() {
   
           if (response.data.success) {
             setSongData(response.data.data);
-            console.log(response.data)
+            // console.log(response.data)
           } else {
             console.error('Failed to fetch song data.');
           }

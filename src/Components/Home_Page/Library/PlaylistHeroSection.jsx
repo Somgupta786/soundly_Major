@@ -43,10 +43,11 @@ export default function PlaylistHeroSection() {
   
       if (response.data.success) {
         setCreatedPlaylistData(response.data.data)
+        console.log(response.data.data)
         Navigation("/addSongs", {
-          state: {
-            createdPlaylistData:response.data.data
-          }
+          state:
+            response.data.data
+          
         })
       } else {
         console.log(response);

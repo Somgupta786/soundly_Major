@@ -40,10 +40,10 @@ setHome("true")
   };
 const AddSongHandler =async (song) => {
     
-    // console.log("hurray")
+    console.log(props)
       try {
         
-        const response = await axios.post(`playlists/${props.state.createdPlaylistDta.id}/songs/${song.id}/`);
+        const response = await axios.post(`{{local}}playlists/${props.state.id}/songs/${song.id}/`);
 
         if (response.data.success) {
           

@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 
 export default function PlaylistAddSongs() {
     const {state}=useLocation();
+console.log(state)
   const menuItems1 = [
     {
       title: "MENU",

@@ -5,18 +5,25 @@ import Repeat from "../../../assets/Group 14.svg";
 import Continue from "../../../assets/Continue.svg";
 import Line from "../../../assets/Line.svg";
 import Rectangle from "../../../assets/Rectangle 14.svg";
-import Heart from "../../../assets/Unlike.svg";
+import Heart from "../../../assets/Like button (1).svg";
 import Share from "../../../assets/Share.svg";
 import Pause from "../../../assets/Group 11.svg";
 import React, { useEffect, useState,useContext} from "react";
+import Heart2 from "../../../assets/Unlike.svg"
+import axios from "../../../Api/auth";
 
 import { playBackContext } from '../../../App';
 
 export default function MediaPlayer() {
     const{playBackData,setPlayBackData,setNavData,setHome,isPlaying, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
-    
+    const token = JSON.parse(localStorage.getItem('authTok'));
+    useEffect(()=>{
+        setIsLiked(playBackData.isLiked)
+    },[])
+   
+     
     setHome(false);
-    setNavData("false");
+    
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = Math.floor(seconds % 60);
@@ -42,19 +49,16 @@ export default function MediaPlayer() {
       }, [audio]);
     
       useEffect(() => {
-       
-        if (playBackData.url) {
-          audio.pause();
-          audio.src = playBackData.url;
-          audio.load();
-          audio.play();
-          setIsPlaying(true);
-        } else {
-          audio.pause();
+        if (playBackData.url && playBackData.url !== audio.src) {
+            audio.pause();
+            audio.src = playBackData.url;
+            audio.load();
+            audio.play();
+            setIsPlaying(true);
+        } else if (!playBackData.url) {
+            audio.pause();
         }
-      
-       
-      }, [playBackData.url]);
+    }, [playBackData.url, audio.src]);
     
       const handlePlayPause = () => {
        
@@ -72,6 +76,7 @@ export default function MediaPlayer() {
         setIsPlaying(!isPlaying);
       };
       const likedHandler = async () => {
+        
         if (!isLiked) {
           try {
             const response = await axios.post(`favourite/song/${playBackData.id}/`, null, {
@@ -81,11 +86,13 @@ export default function MediaPlayer() {
             });
             if (response.data.success) {
               setIsLiked(!isLiked);
+              console.log(isLiked)
             }
           } catch (error) {
-            console.log(error.response);
+            console.log(error);
           }
         } else {
+            console.log("ram")
           try {
             const response = await axios.delete(`favourite/song/${playBackData.id}/`, {
               headers: {
@@ -94,9 +101,10 @@ export default function MediaPlayer() {
             });
             if (response.data.success) {
               setIsLiked(!isLiked);
+              console.log(isLiked)
             }
           } catch (error) {
-            console.log(error.response);
+            console.log(error);
           }
           
         }
@@ -112,7 +120,7 @@ export default function MediaPlayer() {
             <div>lotus</div>
             <div>Taylor</div>
           </div>
-          <div><img onClick={likedHandler} src={Heart}/></div>
+          <div><img onClick={likedHandler} src={isLiked?Heart:Heart2}/></div>
           <div><img src={Share}/></div>
         </div>
         <div><img src={Rectangle}/></div>

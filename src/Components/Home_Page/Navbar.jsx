@@ -1,13 +1,12 @@
+import React, { useState } from "react";
 import Library from "../../assets/Library.svg";
 import Game from "../../assets/Game.svg";
 import Home from "../../assets/Home.svg";
 import { useNavigate } from "react-router-dom";
-import { useContext } from 'react';
-import { playBackContext } from '../../App';
 
 export default function Navbar(props) {
-  console.log(props.navData.home)
-  
+  console.log(props)
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
   const handleLibraryClick = () => {
@@ -31,8 +30,18 @@ export default function Navbar(props) {
         </div>
       </div>
       <div className="searchBox">
-        <input placeholder="     Search"></input>
-
+        <input
+          placeholder="     Search"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        {searchValue && (
+          <div className="searchContent">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        )}
       </div>
       <div className="profile">
         <div></div>

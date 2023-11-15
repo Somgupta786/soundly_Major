@@ -4,11 +4,11 @@ import Continue from "../../assets/pause.svg";
 import { playBackContext } from '../../App';
 export default function ImgCard(props) {
   const [hover, setHover] = useState(false);
-  const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
+  const{playBackData,setPlayBackData,setNavData,setHome,setMedia,isPlaying, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
   const handleImgCardClick = () => {
-    
+    console.log("rrr")
   
-
+    
     if (props.onClick) {
       props.onClick();
     }
@@ -16,11 +16,11 @@ export default function ImgCard(props) {
 
   return (
     <div
-      style={hover ? { background: "#2D2D31" } : null}
+      style={hover || isPlaying&&playBackData.id===props.id ? { background: "#2D2D31" } : null}
       className="imgCard"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={()=>{handleImgCardClick
+      onClick={()=>{handleImgCardClick()
         setMedia(true)
       }}
     >
@@ -30,10 +30,10 @@ export default function ImgCard(props) {
         </div>
         <div className="songName">{props.name}</div>
       </div>
-      {hover ? (
+      {hover|| isPlaying&&playBackData.id===props.id ? (
         <img
-          onClick={handleImgCardClick}
-          src={   Pause }
+         onClick={handleImgCardClick}
+          src={isPlaying&&playBackData.id===props.id?Continue:Pause }
          
         />
       ) : null}
