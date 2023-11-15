@@ -152,11 +152,106 @@ position: absolute;
 top: 4.7vh;
 height:48.9vh;
 width:100%;
-
+display:flex;
+flex-direction:column;
+gap:16px;
 border-radius: 0px 0px 12px 12px;
 background: #FFF;
+padding: 16px;
+overflow-y: scroll;
 }
+.searchMain{
+  width:100%;
+  height:8.5vh;
+  display: flex;
+  gap:8.68vw;
+  align-items: center;
+}
+.searchData{
+  display: flex;
+  width:42%;
+  height:100%;
+  gap:24px;
+  align-items: center;
+}
+.searchData>div:nth-child(1){
+  height:100%;
+  width:29.91%;
+ 
+}
+.searchData>div:nth-child(1) img{
+  height: 100%;
+  width:100%;
+  border-radius: 8px;
+}
+.searchData>div:nth-child(2){
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+ 
+}
+.searchData>div:nth-child(2)>div:nth-child(1){
+  color: #000;
+white-space: nowrap;
+/* web/Para/reg/02 */
+font-family:"Prompt", sans-serif;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.searchData>div:nth-child(2)>div:nth-child(2){
+  color: #545454;
+  white-space: nowrap;
+/* web/Para/reg/03 */
+font-family: "Prompt", sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.searchNotFound{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 53px;
+  gap:16px;
+  justify-content: center;
+  align-items: center;
+}
+.searchNotFound>div:nth-child(1){
+  width: 278px;
+height: 222px;
+}
+.searchNotFound>div:nth-child(1) img{
+  height:100% ;
+  width: 100%;
+}
+.searchNotFound>div:nth-child(2){
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+  align-items: center;
+}
+.searchNotFound>div:nth-child(2)>div:nth-child(1){
+  color: #000;
 
+/* web/Para/bold/01 */
+font-family: "Prompt", sans-serif;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; 
+}
+.searchNotFound>div:nth-child(2)>div:nth-child(2){
+  color: #000;
+white-space: nowrap;
+/* web/Para/reg/03 */
+font-family:"Prompt", sans-serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+}
 .profile {
   height: 100%;
   width: 3.5%;
@@ -646,6 +741,9 @@ top: 135px;
   background-color: #fff;
   transition: width 0.3s;
 }
+.progress-bar:hover{
+  cursor: pointer;
+}
 
 .Share {
   align-self: center;
@@ -1018,6 +1116,7 @@ top: 135px;
 }
 
 .mediaText>div:nth-child(1) {
+  white-space: nowrap;
   color: var(--web-secondary, #FFF);
   /* web/Heading/bold/01 */
   font-family: "Prompt", sans-serif;
@@ -1028,7 +1127,7 @@ top: 135px;
 }
 
 .mediaText>div:nth-child(2) {
-
+  white-space: nowrap;
   color: var(--web-secondary, #FFF);
   /* web/Heading/reg/03 */
   font-family: "Prompt", sans-serif;

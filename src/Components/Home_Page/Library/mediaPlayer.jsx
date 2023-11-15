@@ -2,7 +2,7 @@ import Group from "../../../assets/shuffles.svg";
 import Left from "../../../assets/Skip Back.svg";
 import Right from "../../../assets/Group 12.svg";
 import Repeat from "../../../assets/Group 14.svg";
-import Continue from "../../../assets/Continue.svg";
+import Continue from "../../../assets/mediaCon.svg";
 import Line from "../../../assets/Line.svg";
 import Rectangle from "../../../assets/Rectangle 14.svg";
 import Heart from "../../../assets/Like button (1).svg";
@@ -109,6 +109,14 @@ export default function MediaPlayer() {
           
         }
       };
+      const handleProgressBarClick = (e) => {
+        const progressBar = e.currentTarget;
+        const clickPosition = e.clientX - progressBar.getBoundingClientRect().left;
+        const percentageClicked = (clickPosition / progressBar.clientWidth) * 100;
+        const newCurrentTime = (percentageClicked / 100) * totalDuration;
+        setCurrentTime(newCurrentTime);
+        audio.currentTime = newCurrentTime;
+      };
     
     return(
   <div className="mediaPlayer">
@@ -117,18 +125,18 @@ export default function MediaPlayer() {
       <div>
         <div>
           <div className="mediaText">
-            <div>lotus</div>
-            <div>Taylor</div>
+            <div>{playBackData.name}</div>
+            <div>{playBackData.artist}</div>
           </div>
           <div><img onClick={likedHandler} src={isLiked?Heart:Heart2}/></div>
           <div><img src={Share}/></div>
         </div>
-        <div><img src={Rectangle}/></div>
+        <div><img src={playBackData.thumbnail}/></div>
       </div>
       <div className="mediaControls">
       <div className="musicTimer">
           <div className="time-display"> {formatTime(currentTime)}</div>
-          <div className="progress-bar">
+          <div onClick={handleProgressBarClick} className="progress-bar">
 
             <div
               className="progress-fill"

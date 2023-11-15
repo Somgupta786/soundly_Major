@@ -10,10 +10,10 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
+  const{setPlayBackData,setNavData,setHome,isLiked}=useContext(playBackContext);
 
 
-  
+  setHome(true)
 
   const [songs, setSongs] = useState([]);
   
@@ -23,15 +23,33 @@ export default function LibraryHeroSection() {
 
   const handleImgCardClick = (song) => {
     setSelectedSong(song); 
-    if(songData){
-    setPlayBackData({
-      url: songData.song_url,
-      id: song.id,
-      thumbnail: song.thumbnail_url,
-      name: song.name
-    });
-  }
+   
+   
+     
+  
   };
+  useEffect(() => {
+    if(songData){
+      console.log(songData.is_liked)
+    setPlayBackData({
+      
+      url: songData.song_url,
+      id: songData.id,
+      thumbnail: songData.thumbnail_url,
+      name: songData.name,
+      artist:selectedSong.artist,
+      isLiked:songData.is_liked
+    })
+   
+    // setMediaData({
+    //   url: songData.song_url,
+    //   id: songData.id,
+    //   thumbnail: songData.thumbnail_url,
+    //   name: songData.name
+    // })
+    
+  }
+  },[songData])
 
  
 
@@ -59,7 +77,7 @@ export default function LibraryHeroSection() {
     };
 
     fetchSongs();
-  }, []);
+  }, [isLiked]);
   useEffect(() => {
     const fetchSongData = async () => {
       if (selectedSong) {

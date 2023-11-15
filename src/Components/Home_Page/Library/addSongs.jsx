@@ -26,24 +26,44 @@ setHome("true")
   const [songData, setSongData] = useState(null);
 
   const handleImgCardClick = (song) => {
-    console.log("ram")
     setSelectedSong(song); 
+   
+   
+     
   
-    if(songData){
-    setPlayBackData({
-      url: songData.song_url,
-      id: song.id,
-      thumbnail: song.thumbnail_url,
-      name: song.name
-    });
-  }
   };
-const AddSongHandler =async (song) => {
+  useEffect(() => {
+    if(songData){
+      console.log(songData.is_liked)
+    setPlayBackData({
+      
+      url: songData.song_url,
+      id: songData.id,
+      thumbnail: songData.thumbnail_url,
+      name: songData.name,
+      artist:selectedSong.artist,
+      isLiked:songData.is_liked
+    })
+   
+    // setMediaData({
+    //   url: songData.song_url,
+    //   id: songData.id,
+    //   thumbnail: songData.thumbnail_url,
+    //   name: songData.name
+    // })
     
-    console.log(props)
+  }
+  },[songData])
+const AddSongHandler =async (song) => {
+    console.log(props.state.createdPlaylistData.id)
+    console.log(song.id)
       try {
         
-        const response = await axios.post(`{{local}}playlists/${props.state.id}/songs/${song.id}/`);
+        const response = await axios.post(`{{local}}playlists/${props.state.createdPlaylistData.id}/songs/${song.id}/`,null,{
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
 
         if (response.data.success) {
           
