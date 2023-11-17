@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../Api/auth";
 import Pause from "../../assets/Continue.svg";
 import Not from "../../assets/notFound.svg"
+import tr from "../../assets/Rectangle 14.svg"
+
 import { playBackContext } from '../../App';
 
 
@@ -19,8 +21,14 @@ export default function Navbar(props) {
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [songs, setSongs] = useState([]);
+  const [profileShow, setProfileShow] = useState(false);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
+  const profileShowHandler = () =>{
+    console.log(userData)
+    setProfileShow(!profileShow)
+  }
   const handleLibraryClick = () => {
     navigate("/library");
   };
@@ -104,6 +112,34 @@ export default function Navbar(props) {
   
     fetchSongData();
   }, [selectedSong]);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      
+     
+       
+        try {
+      
+          const response = await axios.get("user/profile/", {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+  
+          if (response.data.success) {
+            console.log(response.data)
+            setUserData(response.data.data)
+            console.log(userData)
+          } else {
+            console.error('Failed to fetch song data.');
+          }
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }
+    
+  
+    fetchUserData();
+  }, []);
 
   return (
     <div className="homeNav">
@@ -149,7 +185,7 @@ export default function Navbar(props) {
                       </div>
                     </div>
                   </div>
-                  <div className="SearchTime">2:03</div>
+                  <div className="SearchTime">{item.song_duration}</div>
                   <div className="SearchControl">
                     <img onClick={() => handleImgCardClick(item)} src={Pause} alt="Pause" />
                   </div>
@@ -169,9 +205,24 @@ export default function Navbar(props) {
           </div>
         )}
       </div>
-      <div className="profile">
-        <div></div>
-      </div>
+     {userData?<div className="profile">
+        <div onClick={profileShowHandler} ><img src={userData.profile_pic_url
+}/></div>
+       {profileShow?<div className="profileOption">
+          <div className="profileDetails">
+            <div className="profileImg"><img src={userData.profile_pic_url
+}/></div>
+            <div><div>{userData.username}</div><div>ssomvishwari786@gmail.com</div></div>
+          </div>
+          <div className="hr"></div>
+          <div className="profileRefer"><div>Listen to artists you follow</div><div>View Recently played</div><div>Become artist</div></div>
+          <div className="hr"></div>
+          <div  className="profileRefer"><div>Help</div><div>Privacy Policy</div><div>About Us</div></div>
+          <div className="hr"></div>
+          <div>Logout</div>
+         
+        </div>:null} 
+      </div>:null} 
     </div>
   );
 }

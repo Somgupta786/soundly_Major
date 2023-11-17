@@ -1,4 +1,5 @@
 import "./landing.css";
+import "./query.css"
 import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 import Sidebar from "./Sidebar";

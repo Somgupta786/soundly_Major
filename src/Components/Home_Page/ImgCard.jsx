@@ -6,7 +6,7 @@ export default function ImgCard(props) {
   const [hover, setHover] = useState(false);
   const{playBackData,setPlayBackData,setNavData,setHome,setMedia,isPlaying, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
   const handleImgCardClick = () => {
-    console.log("rrr")
+  
   
     
     if (props.onClick) {
@@ -20,7 +20,9 @@ export default function ImgCard(props) {
       className="imgCard"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={()=>{handleImgCardClick()
+      onClick={async ()=>{
+      
+      handleImgCardClick()
         setMedia(true)
       }}
     >
@@ -32,7 +34,10 @@ export default function ImgCard(props) {
       </div>
       {hover|| isPlaying&&playBackData.id===props.id ? (
         <img
-         onClick={handleImgCardClick}
+         onClick={(event)=>{
+          event.stopPropagation();
+          handleImgCardClick();
+         }}
           src={isPlaying&&playBackData.id===props.id?Continue:Pause }
          
         />

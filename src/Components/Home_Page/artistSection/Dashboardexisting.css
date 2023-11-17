@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Style+Script&display=swap');
+.artistDashboard{
+   width:100vw;
+  
+   
+}
+.inside{
+    width:100%;
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+    flex-direction: column; 
+     gap:7.7vh;
+     background: #000; 
+}
+.artistNavBar{
+    position: fixed;
+    top:0px;
+    left:0px;
+    width:100vw;
+    height:13.0vh;
+    display: flex;
+gap: 29.5vw;
+justify-content: space-between;
+   padding: 30px 30px 30px 30px;
+
+align-items: center;
+  flex-shrink: 0;
+  border-radius: 0px 0px 24px 24px;
+border: 1px solid #C0C0C0;
+background: var(--web-2-prim, #141416);
+}
+.artistNavBar>div:nth-child(1){
+    display: flex;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+color: var(--web-secondary, #FFF);
+font-family: 'Style Script', "cursive";
+font-size: 2.54vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 40px */
+}
+.artistNavBar>div:nth-child(1)> span{
+    color: #C76B98;
+font-family: 'Style Script', "cursive";
+font-size:2.54vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.artistNavBar>div:nth-child(2){
+    color: #FFF;
+
+font-family: 'Style Script', "cursive";
+font-size: 2.54vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; /* 40px */
+}
+.artistNavBar>div:nth-child(2)> span{
+
+    color:  #C76B98;
+font-family: 'Style Script', "cursive";
+font-size:2.54vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.artistNavBar>div:nth-child(3){
+    display: flex;
+padding: 12px 20px;
+justify-content: center;
+align-items: center;
+gap: 4px;
+border-radius: 8px;
+background: var(--web-tertiary, #C76B98);
+color: #FFF;
+
+/* web/Para/bold/03 */
+font-family:  "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; /* 16px */
+}
+.artistNavPlaceholder{
+    width:100vw;
+    height:13.0vh;
+  border-radius: 0px 0px 24px 24px;
+
+background: var(--web-2-prim, #000);
+}
+.yourListening{
+    
+    color: #FFF;
+
+/* web/Heading/bold/03 */
+font-family: "Prompt", sans-serif;
+font-size: 2.22vw;
+font-style: normal;
+font-weight: 700;
+line-height: 100%; 
+}
+.listeningSongs{
+    padding: 35px 35px 35px 35px;
+   
+   
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    justify-content: space-between;
+
+    border-radius: 24px;
+border: 1px solid #C0C0C0;
+background: var(--web-2-prim, #141416);
+}
+#listeningSongs{
+    
+   height:51.6vh;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    justify-content: space-between;
+
+    border-radius: 24px;
+border: 1px solid #C0C0C0;
+background: var(--web-2-prim, #141416);
+}
+.listeningSongsDetail{
+    width:100%;
+    height:6vh;
+    display: flex;
+    gap:9.3vw;
+    white-space: nowrap;
+    color: #B0B0B0;
+align-items: center;
+font-family: "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+}
+.listeningSongsDetail>div:nth-child(1){
+    font-size: 1.2vw;
+}
+.listeningSongsDetail>div:nth-child(2){
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 8px;
+
+}
+.listeningSongsDetail>div:nth-child(2) img{
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
+
+}
+.listeningSongsDetail>div:nth-child(7){
+    font-size: 1.2vw;
+    display: flex;
+padding: 12px 32px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 12px;
+background: #00A64C;
+}
+.listeningSongs hr{
+height:1px;
+color: #3E3E3E;
+background: #3E3E3E;
+border: #3E3E3E;;
+}
+.upload{
+    height:72.2vh;
+    width:41.6vw;
+    position: fixed;
+    left:29.2vw;
+    right:29.2vw;
+    top:13.9vh ;
+    bottom:13.9vh;
+    display: flex;
+    flex-direction: column;
+    padding: 102px 76px 40px 76px;
+    gap:12.2vh;
+    border-radius: 24px;
+border: 1px solid #C7C7C7;
+background: var(--web-2-prim, #141416);
+}
+.uploadUpper{
+    width:100%;
+    height:39.5vh;
+    display: flex;
+
+flex-direction: column;
+align-items: center;
+gap:4.8vh;
+}
+.uploadUpper>div:nth-child(1){
+    display: flex;
+    flex-direction:column;
+    gap:16px;
+    justify-content: space-between;
+    align-items: center;
+    color: #9A9A9A;
+
+font-family: "Prompt", sans-serif;
+font-size: 1.6vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+
+}
+.uploadUpper>div:nth-child(1) img{
+    width: 56px;
+    height: 96px;
+}
+.uploadUpper>div:nth-child(2){
+    display: flex;
+flex-direction: column;
+align-items: center;
+gap: 16px;
+}
+.uploadUpper>div:nth-child(2)>div:nth-child(1){
+    height:6.02vh;
+    width:12vw;
+    display: flex;
+    white-space: nowrap;
+padding: 16px 32px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 12px;
+background: var(--web-tertiary, #C76B98);
+color: #FFF;
+
+font-family:  "Prompt", sans-serif;
+font-size: 1.2vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.uploadUpper>div:nth-child(2)>div:nth-child(2){
+    color: #9A9A9A;
+
+text-align: center;
+font-family:  "Prompt", sans-serif;
+font-size: 1.11vw;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+}
+.uploadLower{
+    display: flex;
+
+gap: 16px;
+}
+.uploadLower div{
+    width: 6.9vw;
+height: 16px;
+border-radius: 8px;
+background: #BDBDBD;
+
+}
+.uploadLower>div:nth-child(1){
+    background: #C76B98;
+}
+.upload1{
+    height:61.2vh;
+    width:41.6vw;
+    position: fixed;
+    left:29.2vw;
+    right:29.2vw;
+    top:19.4vh ;
+    bottom:19.4vh;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 70px;
+    gap:8.4vh;
+    text-align: center;
+    border-radius: 24px;
+border: 1px solid #C7C7C7;
+background: var(--web-2-prim, #141416);
+color: #FFF;
+
+/* web/Heading/bold/04 */
+font-family: "Prompt", sans-serif;
+font-size: 1.64vw;
+font-style: normal;
+font-weight: 700;
+line-height: 100%;
+}
+.upload1>div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    gap:5.7vh;
+    
+}
+.upload1>div:nth-child(2) input{
+    width:100%;
+height: 6.2vh;
+flex-shrink: 0;
+border-radius: 16px;
+border: 1px solid #989898;
+background: none;
+padding-left: 16px;
+
+}
+.upload1>div:nth-child(2) div{
+    width:100%;
+    height:6vh;
+    display: flex;
+width: 460px;
+padding: 12px 40px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border-radius: 12px;
+background:  #C76B98;
+color: #FFF;
+
+/* web/Para/reg/02 */
+font-family: "Prompt", sans-serif;
+font-size: 1.4vw;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}

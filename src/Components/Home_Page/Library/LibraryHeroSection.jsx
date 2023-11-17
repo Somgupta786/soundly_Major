@@ -10,7 +10,7 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome,isLiked}=useContext(playBackContext);
+  const{setPlayBackData,setNavData,isMedia,setHome,isLiked}=useContext(playBackContext);
 
 
   setHome(true)
@@ -20,6 +20,7 @@ export default function LibraryHeroSection() {
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
+  const [showMore, setShowMore] = useState(false);
 
   const handleImgCardClick = (song) => {
     setSelectedSong(song); 
@@ -102,7 +103,7 @@ export default function LibraryHeroSection() {
     };
   
     fetchSongData();
-  }, [selectedSong]);
+  }, [selectedSong,isMedia]);
   
   
 
@@ -113,7 +114,7 @@ export default function LibraryHeroSection() {
       <div className="imageCards">
         <div className="homeText">
           <div>Liked Songs</div>
-          <div>Show more</div>
+          <div onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (
@@ -126,6 +127,7 @@ export default function LibraryHeroSection() {
             />
           ))}
         </div>
+
         <div className="homeLastRow">
           {songs.slice(5,10).map((song, songIndex) => (
             <ImgCard
@@ -137,6 +139,34 @@ export default function LibraryHeroSection() {
             />
           ))}
         </div>
+        {showMore?<div className="homeLastRow">
+          {songs.slice(15,20).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song)} 
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
+          {songs.slice(20,25).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song)} 
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
       </div>
 
       <div className="footer">

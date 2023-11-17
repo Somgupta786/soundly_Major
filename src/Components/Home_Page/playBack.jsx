@@ -68,20 +68,18 @@ export default function Playback(props) {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [audio]);
-
+  
   useEffect(() => {
-    if (currentTime === 0) {
-      if (props.playBackData.url) {
+    if (playBackData.url && playBackData.url !== audio.src) {
         audio.pause();
-        audio.src = props.playBackData.url;
+        audio.src = playBackData.url;
         audio.load();
         audio.play();
         setIsPlaying(true);
-      } else {
+    } else if (!playBackData.url) {
         audio.pause();
-      }
     }
-  }, [props.playBackData.url]);
+}, [playBackData.url, audio.src]);
 
   const handlePlayPause = () => {
     if (isPlaying) {

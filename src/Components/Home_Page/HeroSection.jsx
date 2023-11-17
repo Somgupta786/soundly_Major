@@ -19,7 +19,7 @@ import { playBackContext } from '../../App';
 
 export default function HeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
+  const{setPlayBackData,setNavData,setHome,setMedia,isMedia,setMediaData}=useContext(playBackContext);
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -55,15 +55,19 @@ export default function HeroSection() {
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
+  const [showMore, setShowMore] = useState(false);
 
   const handleImgCardClick = (song) => {
+  
     setSelectedSong(song); 
-   
+   console.log(isMedia)
    
      
   
   };
   useEffect(() => {
+    console.log("ggg")
+    console.log(songData)
     if(songData){
       console.log(songData.is_liked)
     setPlayBackData({
@@ -99,6 +103,7 @@ export default function HeroSection() {
   }, [cardIndex, cardInfo]);
 
   useEffect(() => {
+    
     const fetchSongs = async () => {
       try {
         const url = 'https://test-mkcw.onrender.com/api/allpublicsongs/';
@@ -118,6 +123,7 @@ export default function HeroSection() {
     fetchSongs();
   }, []);
   useEffect(() => {
+    
     const fetchSongData = async () => {
       
       if (selectedSong) {
@@ -143,7 +149,7 @@ export default function HeroSection() {
     };
   
     fetchSongData();
-  }, [selectedSong]);
+  }, [selectedSong,isMedia]);
   
   
 
@@ -168,7 +174,7 @@ export default function HeroSection() {
       <div className="imageCards">
         <div className="homeText">
           <div>FOR YOU</div>
-          <div>Show more</div>
+          <div onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (
@@ -192,6 +198,48 @@ export default function HeroSection() {
             />
           ))}
         </div>
+        {showMore?<div className="homeLastRow">
+          {songs.slice(10,15).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song)} 
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
+          {songs.slice(15,20).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song)} 
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
+          {songs.slice(20,25).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song)} 
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
       </div>
 
       <div className="footer">

@@ -41,7 +41,7 @@ export default function Footer(){
            <div>Privacy Policy</div>
            <div>Privacy Centre</div>
            <div>Cookies</div>
-           <div>Cookies</div>
+           {/* <div>Cookies</div> */}
            </div>
            <div>
            © 2023 Soundly

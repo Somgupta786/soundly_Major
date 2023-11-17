@@ -19,6 +19,9 @@ import Rap from './Components/Home_Page/Rap';
 import PlaylistAddSongs from './Components/Home_Page/Library/playlistAddSongs';
 import ShowPlaylist from './Components/Home_Page/Library/showPlaylist';
 import MediaPlayer from './Components/Home_Page/Library/mediaPlayer';
+import ArtistSection from './Components/Home_Page/artistSection/artistSection';
+import Upload from './Components/Home_Page/artistSection/upload';
+import GameSection from './Components/Home_Page/Library/game';
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -49,7 +52,9 @@ function AppRouter() {
       <Route path="/addSongs" element={<PlaylistAddSongs/>} />
       <Route path="/showPlaylist" element={<ShowPlaylist/>} />
       <Route path="/media" element={<MediaPlayer/>} />
-
+      <Route path="/beArtist" element={<ArtistSection/>} />
+      <Route path="/upload" element={<Upload/>} />
+      <Route path="/game" element={<GameSection/>} />
     </Routes>
     </loginContext.Provider>
   );

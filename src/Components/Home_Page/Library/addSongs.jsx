@@ -1,84 +1,81 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../../../Api/auth';
-import Card from '../Card';
 import Footer from '../Footer';
-import ImgCard from '../ImgCard';
-import Playback from '../playBack'; 
-import Continue from "../../../assets/Continue.svg";
-import Rectangle from "../../../assets/Rectangle 8 (3).png";
-import Tick from "../../../assets/Tick.svg";
+import Pause from "../../../assets/Continue.svg";
+import Continue from "../../../assets/pause.svg";
 import Add from "../../../assets/Add_Plus.svg";
-
 import { useContext } from 'react';
 import { playBackContext } from '../../../App';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddSongs(props) {
+    const Navigation=useNavigate()
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
-setHome("true")
-
-  
+  const { setPlayBackData, playBackData, isPlaying, setNavData, setHome, setMedia } = useContext(playBackContext);
+  setHome("true");
 
   const [songs, setSongs] = useState([]);
-  
+  const [addedSong, setAddedSong] = useState([]);
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
 
   const handleImgCardClick = (song) => {
-    setSelectedSong(song); 
-   
-   
-     
-  
+    setSelectedSong(song);
+    setMedia(true);
   };
-  useEffect(() => {
-    if(songData){
-      console.log(songData.is_liked)
-    setPlayBackData({
-      
-      url: songData.song_url,
-      id: songData.id,
-      thumbnail: songData.thumbnail_url,
-      name: songData.name,
-      artist:selectedSong.artist,
-      isLiked:songData.is_liked
-    })
-   
-    // setMediaData({
-    //   url: songData.song_url,
-    //   id: songData.id,
-    //   thumbnail: songData.thumbnail_url,
-    //   name: songData.name
-    // })
-    
-  }
-  },[songData])
-const AddSongHandler =async (song) => {
-    console.log(props.state.createdPlaylistData.id)
-    console.log(song.id)
-      try {
-        
-        const response = await axios.post(`{{local}}playlists/${props.state.createdPlaylistData.id}/songs/${song.id}/`,null,{
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
 
+  useEffect(() => {
+    if (songData) {
+      setPlayBackData({
+        url: songData.song_url,
+        id: songData.id,
+        thumbnail: songData.thumbnail_url,
+        name: songData.name,
+        artist: selectedSong.artist,
+        isLiked: songData.is_liked
+      });
+    }
+  }, [songData, selectedSong]);
+
+  const AddSongHandler = async (song) => {
+
+    if(!addedSong.includes(song.id)){
+     try {
+      const response = await axios.post(`playlists/${props.state.id}/songs/${song.id}/`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (response.data.success) {
+        setAddedSong((prevArray) => [...prevArray, song.id]);
+      } else {
+        console.error('Failed to add songs to the playlist.');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  }
+  else{
+    try {
+        const response = await axios.delete(`playlists/${props.state.id}/songs/${song.id}/`, null, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
         if (response.data.success) {
-          
-         
-          console.log("hurray")
+            setAddedSong((prevArray) => prevArray.filter(id => id !== song.id));
         } else {
-          console.error('Failed to fetch songs.');
+          console.error('Failed to add songs to the playlist.');
         }
       } catch (error) {
-        
+        console.error('An error occurred:', error);
       }
-    };
- 
-
- 
+    }
+  }
+  
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -89,7 +86,6 @@ const AddSongHandler =async (song) => {
         if (response.data.success) {
           const fetchedSongs = response.data.data;
           setSongs(fetchedSongs);
-          console.log(songs)
         } else {
           console.error('Failed to fetch songs.');
         }
@@ -100,20 +96,20 @@ const AddSongHandler =async (song) => {
 
     fetchSongs();
   }, []);
+
   useEffect(() => {
     const fetchSongData = async () => {
       if (selectedSong) {
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
-          const response = await axios.get(url,{
+          const response = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-  
+
           if (response.data.success) {
             setSongData(response.data.data);
-            console.log(songData)
           } else {
             console.error('Failed to fetch song data.');
           }
@@ -122,18 +118,16 @@ const AddSongHandler =async (song) => {
         }
       }
     };
-  
+
     fetchSongData();
   }, [selectedSong]);
-  
 
-
-return (
+  return (
     <div className="addSongsSection">
       <div className='addSongsUpper' >
         <div className='addText'>
           <div>Add songs to your ‘Default name’</div>
-          <div>DONE</div>
+          <div onClick={()=>Navigation("/playlist")}>DONE</div>
         </div>
         {songs.map((song) => (
           <div className='showSongs' key={song.id}>
@@ -144,9 +138,16 @@ return (
                 <div>{song.artist}</div>
               </div>
             </div>
-            <div>2:54</div>
-            <div onClick={() => handleImgCardClick(song)} ><img src={Continue} alt="Continue" /></div>
-            <div onClick={() =>AddSongHandler(song)}><img src={Add} alt="Add" /> Add</div>
+            <div>{song.song_duration}</div>
+            <div onClick={() => handleImgCardClick(song)} >
+              <img src={isPlaying && playBackData.id === song.id ? Continue : Pause} />
+            </div>
+            <div
+              style={addedSong.includes(song.id) ? { background: "#2C9A3E" } : null}
+              onClick={() => AddSongHandler(song)}
+            >
+              <img src={Add} alt="Add" />{addedSong.includes(song.id)?"Added":"Add"}
+            </div>
           </div>
         ))}
       </div>
@@ -155,5 +156,4 @@ return (
       </div>
     </div>
   );
-  
 }

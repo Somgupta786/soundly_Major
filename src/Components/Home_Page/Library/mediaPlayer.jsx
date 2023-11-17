@@ -8,14 +8,16 @@ import Rectangle from "../../../assets/Rectangle 14.svg";
 import Heart from "../../../assets/Like button (1).svg";
 import Share from "../../../assets/Share.svg";
 import Pause from "../../../assets/Group 11.svg";
-import React, { useEffect, useState,useContext} from "react";
+import React, { useEffect, useState,useContext,useRef} from "react";
 import Heart2 from "../../../assets/Unlike.svg"
 import axios from "../../../Api/auth";
 
 import { playBackContext } from '../../../App';
 
 export default function MediaPlayer() {
+   
     const{playBackData,setPlayBackData,setNavData,setHome,isPlaying, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
+    // console.log(playBackData)
     const token = JSON.parse(localStorage.getItem('authTok'));
     useEffect(()=>{
         setIsLiked(playBackData.isLiked)
@@ -117,7 +119,7 @@ export default function MediaPlayer() {
         setCurrentTime(newCurrentTime);
         audio.currentTime = newCurrentTime;
       };
-    
+ 
     return(
   <div className="mediaPlayer">
   <div className="mediaImage"></div>

@@ -149,6 +149,18 @@ export default function PlaylistHeroSection() {
           ))}
         </div>
         <div className="homeLastRow">
+          {playlists.slice(5,10).map((playlist, playlistIndex) => (
+            <ImgCard
+              key={playlistIndex}
+              id={playlist.id}
+              img={playlist.thumbnail_url}
+              name={playlist.name}
+              description={playlist.description}
+              onClick={() => handleImgCardClick(playlist)} 
+            />
+          ))}
+        </div>
+        <div className="homeLastRow">
           <ImgCard onClick={handleCreatePlaylist}  img={Group} name="Create Playlist" />
         </div>
       </div>
