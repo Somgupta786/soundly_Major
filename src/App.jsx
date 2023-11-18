@@ -20,6 +20,8 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
   const [audio, setAudio] = useState(new Audio());
+  const [favArt,setFavArt]=useState([])
+  const [favLanguage,setFavLanguage]=useState([])
  
   const[playBackData,setPlayBackData]=useState({})
   // const[mediaData,setMediaData]=useState({})
@@ -30,6 +32,7 @@ function App() {
     game:"Game"
 
   })
+  useEffect(()=>console.log(favLanguage),[favLanguage])
   localStorage.setItem("authTok",JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODA1MTczLCJpYXQiOjE2OTkyMTMxNzMsImp0aSI6IjYwOTdkYTkxNTJmMDQ1YzY4YmE1MTBjZWQyMDM4MzAxIiwidXNlcl9pZCI6ImFkbWluIn0.zhhXZrQzl4fls2jh26tGQ6KMuKojlFV8r-rE1LEWT_w"))
   const[isHome,setHome]=useState(false)
   useEffect(() => {
@@ -44,7 +47,7 @@ function App() {
   }, [playBackData, Navigation]);
   
   return(
-    <playBackContext.Provider value={{playBackData,setPlayBackData,setNavData,setHome,isPlaying,setMedia,isMedia, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}} >
+    <playBackContext.Provider value={{playBackData,setPlayBackData,setNavData,setHome,isPlaying,setMedia,isMedia, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio,favLanguage,setFavLanguage,favArt,setFavArt}} >
     <ToastContainer/>
     <AppRouter />
     {isHome?<Playback playBackData={playBackData}/>: null}

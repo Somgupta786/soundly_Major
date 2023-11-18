@@ -1,11 +1,21 @@
 import { useState } from "react";
-
+import { playBackContext } from "../../../App";
+import { useContext } from "react";
 export default function ArtistCard(prop) {
+  const{setFavArt}=useContext(playBackContext)
     const [isClicked, setIsClicked] = useState(false);
+    
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
+    const handleClick = () => {
+      if (!isClicked) {
+        setFavArt((prevArray) => [...prevArray, prop.name]);
+      } else {
+        setFavArt((prevArray) => prevArray.filter((name) => name !== prop.name));
+      }
+      setIsClicked(!isClicked);
+    };
+  
+    
 
   const boxStyle = {
     // borderRadius: isClicked ? '5.1vw' : null,
