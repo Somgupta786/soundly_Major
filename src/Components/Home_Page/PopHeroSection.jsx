@@ -10,9 +10,10 @@ import { playBackContext } from '../../App';
 
 export default function PopHeroSection(props) {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
 
+  const{setPlayBackData,setNavData,setHome,isMedia}=useContext(playBackContext);
 
+setHome(true)
   
 
   const [songs, setSongs] = useState([]);
@@ -22,16 +23,36 @@ export default function PopHeroSection(props) {
   const [songData, setSongData] = useState(null);
 
   const handleImgCardClick = (song) => {
+  
     setSelectedSong(song); 
-    if(songData){
-    setPlayBackData({
-      url: songData.song_url,
-      id: song.id,
-      thumbnail: song.thumbnail_url,
-      name: song.name
-    });
-  }
+   
+   
+     
+  
   };
+  useEffect(() => {
+    
+    if(songData){
+     
+    setPlayBackData({
+      
+      url: songData.song_url,
+      id: songData.id,
+      thumbnail: songData.thumbnail_url,
+      name: songData.name,
+      artist:selectedSong.artist,
+      isLiked:songData.is_liked
+    })
+   
+    // setMediaData({
+    //   url: songData.song_url,
+    //   id: songData.id,
+    //   thumbnail: songData.thumbnail_url,
+    //   name: songData.name
+    // })
+    
+  }
+  },[songData])
 
  
 
@@ -39,7 +60,28 @@ export default function PopHeroSection(props) {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      try {
+      if(props.name=="Recently Played"){
+        try {
+          const url = "https://test-mkcw.onrender.com/api/recentlyplayed/";
+           const response = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+  
+          if (response.data.success) {
+            const fetchedSongs = response.data.data;
+            setSongs(fetchedSongs);
+          } else {
+            console.error('Failed to fetch songs.');
+          }
+        } catch (error) {
+          console.error('An error occurred:', error);
+        }
+      }
+      else
+      {
+        try {
         const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
          const response = await axios.get(url);
 
@@ -52,6 +94,8 @@ export default function PopHeroSection(props) {
       } catch (error) {
         console.error('An error occurred:', error);
       }
+    }
+      
     };
 
     fetchSongs();
@@ -80,7 +124,7 @@ export default function PopHeroSection(props) {
     };
   
     fetchSongData();
-  }, [selectedSong]);
+  }, [selectedSong,isMedia]);
   
   
 

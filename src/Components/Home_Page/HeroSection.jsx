@@ -18,8 +18,9 @@ import { useContext } from 'react';
 import { playBackContext } from '../../App';
 
 export default function HeroSection() {
+  
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setHome,setMedia,isMedia,setMediaData}=useContext(playBackContext);
+  const{setPlayBackData,setNavData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -56,11 +57,15 @@ export default function HeroSection() {
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [showMore, setShowMore] = useState(false);
+ 
 
-  const handleImgCardClick = (song) => {
-  
+  const handleImgCardClick = (song,songIndex) => {
+    console.log(songIndex)
+    setCurrentSongIndex(songIndex)
+    setCurrentSongSection("For You")
     setSelectedSong(song); 
-   console.log(isMedia)
+  
+ 
    
      
   
@@ -68,16 +73,17 @@ export default function HeroSection() {
   useEffect(() => {
     console.log("ggg")
     console.log(songData)
-    if(songData){
+    if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
-      
+      index:currentSongIndex,
       url: songData.song_url,
       id: songData.id,
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
       isLiked:songData.is_liked
+      
     })
    
     // setMediaData({
@@ -180,32 +186,39 @@ export default function HeroSection() {
           {songs.slice(0, 5).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
+              index={songIndex}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex)} 
+              section="For You"
             />
           ))}
         </div>
         <div className="homeLastRow">
-          {songs.slice(5,10).map((song, songIndex) => (
-            <ImgCard
-              key={songIndex}
-              id={song.id}
-              img={song.thumbnail_url}
-              name={song.name}
-              onClick={() => handleImgCardClick(song)} 
-            />
-          ))}
-        </div>
+  {songs.slice(5, 10).map((song, songIndex) => (
+    <ImgCard
+      key={songIndex + 5}
+      index={songIndex + 5}
+      id={song.id}
+      img={song.thumbnail_url}
+      name={song.name}
+      onClick={() => handleImgCardClick(song, songIndex + 5)}
+      section="For You"
+    />
+  ))}
+</div>
+
         {showMore?<div className="homeLastRow">
           {songs.slice(10,15).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+              key={songIndex + 10}
+              index={songIndex + 10}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 10)} 
+              section="For You" 
             />
           ))}
         </div> 
@@ -215,11 +228,13 @@ export default function HeroSection() {
        {showMore?<div className="homeLastRow">
           {songs.slice(15,20).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+             key={songIndex + 15}
+            index={songIndex + 15}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 15)} 
+              section="For You"
             />
           ))}
         </div> 
@@ -229,11 +244,13 @@ export default function HeroSection() {
        {showMore?<div className="homeLastRow">
           {songs.slice(20,25).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+              key={songIndex + 20}
+              index={songIndex + 20}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 20)} 
+              section="For You"
             />
           ))}
         </div> 

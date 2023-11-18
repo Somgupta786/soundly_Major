@@ -6,7 +6,7 @@ import Playback from './Components/Home_Page/playBack';
 import Navbar from "./Components/Home_Page/Navbar";
 import MediaPlayer from './Components/Home_Page/Library/mediaPlayer';
 
-
+import HeroSection from './Components/Home_Page/HeroSection';
 import AppRouter from './AppRouter';
 import { useNavigate } from 'react-router-dom';
 export const playBackContext=createContext();
@@ -22,6 +22,12 @@ function App() {
   const [audio, setAudio] = useState(new Audio());
   const [favArt,setFavArt]=useState([])
   const [favLanguage,setFavLanguage]=useState([])
+  const [currentSongIndex,setCurrentSongIndex]=useState(null)
+  const [currentSongSection,setCurrentSongSection]=useState(null)
+  const [isRightClicked,setIsRightClicked]=useState(false)
+  const [isLeftClicked,setIsLeftClicked]=useState(false)
+
+
  
   const[playBackData,setPlayBackData]=useState({})
   // const[mediaData,setMediaData]=useState({})
@@ -32,9 +38,10 @@ function App() {
     game:"Game"
 
   })
-  useEffect(()=>console.log(favLanguage),[favLanguage])
+  
   localStorage.setItem("authTok",JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODA1MTczLCJpYXQiOjE2OTkyMTMxNzMsImp0aSI6IjYwOTdkYTkxNTJmMDQ1YzY4YmE1MTBjZWQyMDM4MzAxIiwidXNlcl9pZCI6ImFkbWluIn0.zhhXZrQzl4fls2jh26tGQ6KMuKojlFV8r-rE1LEWT_w"))
   const[isHome,setHome]=useState(false)
+  
   useEffect(() => {
    
     if(isMedia){
@@ -46,13 +53,14 @@ function App() {
   }
   }, [playBackData, Navigation]);
   
+  
   return(
-    <playBackContext.Provider value={{playBackData,setPlayBackData,setNavData,setHome,isPlaying,setMedia,isMedia, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio,favLanguage,setFavLanguage,favArt,setFavArt}} >
+    <playBackContext.Provider value={{playBackData,isLeftClicked,setIsLeftClicked,isRightClicked,setIsRightClicked,setPlayBackData,setNavData,setHome,isPlaying,setMedia,isMedia, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio,favLanguage,setFavLanguage,favArt,setFavArt,currentSongIndex,setCurrentSongIndex,currentSongSection,setCurrentSongSection}} >
     <ToastContainer/>
     <AppRouter />
     {isHome?<Playback playBackData={playBackData}/>: null}
     {isHome?<Navbar navData={navData}/>: null}
-    {/* {isMedia&&playBackData!==null?Navigation("/media"): null} */}
+   
     
 
     </playBackContext.Provider>

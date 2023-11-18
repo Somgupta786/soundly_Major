@@ -22,6 +22,9 @@ import MediaPlayer from './Components/Home_Page/Library/mediaPlayer';
 import ArtistSection from './Components/Home_Page/artistSection/artistSection';
 import Upload from './Components/Home_Page/artistSection/upload';
 import GameSection from './Components/Home_Page/Library/game';
+import FavArtSongs from './Components/Home_Page/favArtSongs';
+import Recent from './Components/Home_Page/recentlyPlayed';
+
 export const loginContext=createContext("");
 function AppRouter() {
   const[isLogged,setLogged]=useState(false)
@@ -55,6 +58,8 @@ function AppRouter() {
       <Route path="/beArtist" element={<ArtistSection/>} />
       <Route path="/upload" element={<Upload/>} />
       <Route path="/game" element={<GameSection/>} />
+      <Route path="/favouriteArtistSongs" element={<FavArtSongs/>} />
+      <Route path="/recent" element={<Recent/>} />
     </Routes>
     </loginContext.Provider>
   );

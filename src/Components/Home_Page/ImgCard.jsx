@@ -3,12 +3,13 @@ import Pause from "../../assets/imgPause.svg";
 import Continue from "../../assets/pause.svg";
 import { playBackContext } from '../../App';
 export default function ImgCard(props) {
+ 
   const [hover, setHover] = useState(false);
-  const{playBackData,setPlayBackData,setNavData,setHome,setMedia,isPlaying, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
+  const{playBackData,currentSongIndex,isLeftClicked,setIsLeftClicked,currentSongSection,setHome,setMedia,isPlaying,isRightClicked,setIsRightClicked, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
   const handleImgCardClick = () => {
-  
-  
-    
+  console.log(currentSongSection)
+     setIsLeftClicked(false)
+    setIsRightClicked(false)
     if (props.onClick) {
       props.onClick();
     }
@@ -23,11 +24,13 @@ export default function ImgCard(props) {
       onClick={async ()=>{
       
       handleImgCardClick()
+      
         setMedia(true)
       }}
     >
       <div>
-        <div className="songImage">
+        <div className="songImage" >
+        {((isRightClicked||isLeftClicked)&&currentSongIndex==props.index&&props.section==currentSongSection)?handleImgCardClick():null}
           <img src={props.img} alt={props.name} />
         </div>
         <div className="songName">{props.name}</div>

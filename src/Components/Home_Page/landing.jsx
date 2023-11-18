@@ -9,6 +9,7 @@ import { playBackContext } from '../../App';
 
 export default function Landing() {
   const { setPlayBackData, setNavData, setHome, favArt } = useContext(playBackContext);
+  console.log(favArt)
   setHome(true);
 
   const menuItems1 = [
@@ -70,7 +71,7 @@ export default function Landing() {
     },
     ...favArt.map((name) => ({
       title: name,
-      onclick: `/${name}`,
+      onclick: "/favouriteArtistSongs",
       activ: "false"
     }))
   ];

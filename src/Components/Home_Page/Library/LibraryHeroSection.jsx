@@ -10,7 +10,7 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,isMedia,setHome,isLiked}=useContext(playBackContext);
+  const{setPlayBackData,isLiked,setNavData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
 
 
   setHome(true)
@@ -22,7 +22,10 @@ export default function LibraryHeroSection() {
   const [songData, setSongData] = useState(null);
   const [showMore, setShowMore] = useState(false);
 
-  const handleImgCardClick = (song) => {
+  const handleImgCardClick = (song,songIndex) => {
+    console.log(songIndex)
+    setCurrentSongIndex(songIndex)
+    setCurrentSongSection("Liked Songs")
     setSelectedSong(song); 
    
    
@@ -30,16 +33,19 @@ export default function LibraryHeroSection() {
   
   };
   useEffect(() => {
-    if(songData){
+    console.log("ggg")
+    console.log(songData)
+    if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
-      
+      index:currentSongIndex,
       url: songData.song_url,
       id: songData.id,
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
       isLiked:songData.is_liked
+      
     })
    
     // setMediaData({
@@ -120,33 +126,55 @@ export default function LibraryHeroSection() {
           {songs.slice(0, 5).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
+              index={songIndex}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex)} 
+              section="Liked Songs"
             />
           ))}
         </div>
-
         <div className="homeLastRow">
-          {songs.slice(5,10).map((song, songIndex) => (
+  {songs.slice(5, 10).map((song, songIndex) => (
+    <ImgCard
+      key={songIndex + 5}
+      index={songIndex + 5}
+      id={song.id}
+      img={song.thumbnail_url}
+      name={song.name}
+      onClick={() => handleImgCardClick(song, songIndex + 5)}
+      section="Liked Songs"
+    />
+  ))}
+</div>
+
+        {showMore?<div className="homeLastRow">
+          {songs.slice(10,15).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+              key={songIndex + 10}
+              index={songIndex + 10}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 10)} 
+              section="Liked Songs" 
             />
           ))}
-        </div>
-        {showMore?<div className="homeLastRow">
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
           {songs.slice(15,20).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+             key={songIndex + 15}
+            index={songIndex + 15}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 15)} 
+              section="Liked Songs"
             />
           ))}
         </div> 
@@ -156,11 +184,13 @@ export default function LibraryHeroSection() {
        {showMore?<div className="homeLastRow">
           {songs.slice(20,25).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
+              key={songIndex + 20}
+              index={songIndex + 20}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex + 20)} 
+              section="Liked Songs"
             />
           ))}
         </div> 
