@@ -19,7 +19,7 @@ export default function ShowPlaylistHeroSection(props) {
 
   setHome(true);
 
-  const [songs, setSongs] = useState(props.state.playlistData);
+  const [songs, setSongs] = useState(props.state.playlistData.songs);
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);

@@ -9,7 +9,7 @@ import { playBackContext } from '../../App';
 
 export default function Landing() {
   const { setPlayBackData, setNavData, setHome, favArt } = useContext(playBackContext);
-  console.log(favArt)
+  
   setHome(true);
 
   const menuItems1 = [

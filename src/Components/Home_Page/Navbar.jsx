@@ -12,6 +12,7 @@ import { playBackContext } from '../../App';
 
 
 export default function Navbar(props) {
+  const Navigation = useNavigate()
   const token = JSON.parse(localStorage.getItem("authTok"));
   const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
   const [searchValue, setSearchValue] = useState("");
@@ -152,7 +153,7 @@ export default function Navbar(props) {
           <img src={Library} />
           <div onClick={handleLibraryClick}>{props.navData.library}</div>
         </div>
-        <div>
+        <div onClick={()=>navigate("/game")}>
           <img src={Game} />
           <div>{props.navData.game}</div>
         </div>
@@ -215,7 +216,7 @@ export default function Navbar(props) {
             <div><div>{userData.username}</div><div>ssomvishwari786@gmail.com</div></div>
           </div>
           <div className="hr"></div>
-          <div className="profileRefer"><div>Listen to artists you follow</div><div>View Recently played</div><div>Become artist</div></div>
+          <div className="profileRefer"><div>Listen to artists you follow</div><div>View Recently played</div><div onClick={()=>Navigation("/beArtist")}>Become artist</div></div>
           <div className="hr"></div>
           <div  className="profileRefer"><div>Help</div><div>Privacy Policy</div><div>About Us</div></div>
           <div className="hr"></div>

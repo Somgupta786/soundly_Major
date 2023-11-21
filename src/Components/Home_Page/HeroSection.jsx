@@ -20,7 +20,7 @@ import { playBackContext } from '../../App';
 export default function HeroSection() {
   
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,setNavData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
+  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -61,8 +61,13 @@ export default function HeroSection() {
 
   const handleImgCardClick = (song,songIndex) => {
     console.log(songIndex)
-    setCurrentSongIndex(songIndex)
-    setCurrentSongSection("For You")
+    
+      setCurrentSongIndex(songIndex)
+      setCurrentSongSection("For You")
+      setfutureSongData(songs)
+      
+    
+   
     setSelectedSong(song); 
   
  
@@ -71,8 +76,7 @@ export default function HeroSection() {
   
   };
   useEffect(() => {
-    console.log("ggg")
-    console.log(songData)
+    
     if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
@@ -86,12 +90,7 @@ export default function HeroSection() {
       
     })
    
-    // setMediaData({
-    //   url: songData.song_url,
-    //   id: songData.id,
-    //   thumbnail: songData.thumbnail_url,
-    //   name: songData.name
-    // })
+   
     
   }
   },[songData])

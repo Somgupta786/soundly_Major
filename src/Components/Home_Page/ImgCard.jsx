@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import Pause from "../../assets/imgPause.svg";
 import Continue from "../../assets/pause.svg";
 import { playBackContext } from '../../App';
@@ -7,14 +7,13 @@ export default function ImgCard(props) {
   const [hover, setHover] = useState(false);
   const{playBackData,currentSongIndex,isLeftClicked,setIsLeftClicked,currentSongSection,setHome,setMedia,isPlaying,isRightClicked,setIsRightClicked, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
   const handleImgCardClick = () => {
-  console.log(currentSongSection)
-     setIsLeftClicked(false)
-    setIsRightClicked(false)
+
+    
     if (props.onClick) {
       props.onClick();
     }
   };
-
+  
   return (
     <div
       style={hover || isPlaying&&playBackData.id===props.id ? { background: "#2D2D31" } : null}
@@ -30,7 +29,7 @@ export default function ImgCard(props) {
     >
       <div>
         <div className="songImage" >
-        {((isRightClicked||isLeftClicked)&&currentSongIndex==props.index&&props.section==currentSongSection)?handleImgCardClick():null}
+        {/* {((isRightClicked||isLeftClicked)&&currentSongIndex==props.index&&props.section==currentSongSection)?handleImgCardClick():null} */}
           <img src={props.img} alt={props.name} />
         </div>
         <div className="songName">{props.name}</div>

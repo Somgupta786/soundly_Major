@@ -40,7 +40,8 @@ export default function Playback(props) {
     audio,
     setAudio,
   } = useContext(playBackContext);
-  
+ 
+
   const Navigation = useNavigate();
   const token = JSON.parse(localStorage.getItem("authTok"));
 
@@ -75,18 +76,20 @@ export default function Playback(props) {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [audio]);
-  
+
   useEffect(() => {
+    
     if (playBackData.url && playBackData.url !== audio.src) {
-        audio.pause();
-        audio.src = playBackData.url;
-        audio.load();
-        audio.play();
-        setIsPlaying(true);
+      
+      audio.pause();
+      audio.src = playBackData.url;
+      audio.load();
+      audio.play();
+      setIsPlaying(true);
     } else if (!playBackData.url) {
-        audio.pause();
+      audio.pause();
     }
-}, [playBackData.url, audio.src]);
+  }, [playBackData.url, audio.src,playBackData]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -99,45 +102,50 @@ export default function Playback(props) {
 
     setIsPlaying(!isPlaying);
   };
-  useEffect(()=>{
-    console.log(isLiked)
-    setIsLiked(playBackData.isLiked)
-},[setIsLiked,playBackData])
+  useEffect(() => {
+    console.log(playBackData.isLiked)
+    setIsLiked(playBackData.isLiked);
+  }, [playBackData]);
 
-const likedHandler = async () => {
-        
-  if (!isLiked) {
-    try {
-      const response = await axios.post(`favourite/song/${playBackData.id}/`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`
+  const likedHandler = async () => {
+    if (!isLiked) {
+      try {
+        const response = await axios.post(
+          `favourite/song/${playBackData.id}/`,
+          null,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.success) {
+          setIsLiked(!isLiked);
+          console.log(isLiked);
         }
-      });
-      if (response.data.success) {
-        setIsLiked(!isLiked);
-        console.log(isLiked)
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  } else {
-      console.log("ram")
-    try {
-      const response = await axios.delete(`favourite/song/${playBackData.id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+    } else {
+      console.log("ram");
+      try {
+        const response = await axios.delete(
+          `favourite/song/${playBackData.id}/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.data.success) {
+          setIsLiked(!isLiked);
+          console.log(isLiked);
         }
-      });
-      if (response.data.success) {
-        setIsLiked(!isLiked);
-        console.log(isLiked)
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
-    
-  }
-};
+  };
   // const leftClickHandler=async ()=>{
   //   try {
   //     const url = "https://test-mkcw.onrender.com/api/recentlyplayed/";
@@ -158,34 +166,40 @@ const likedHandler = async () => {
   //   }
   // }
   // useEffect(() => {
-    
+
   //   if(songs.length>0){
-      
-    
-  
 
   return (
-    <div className="playBack">
+    <div className={`playBack ${props.className ? props.className : ''}`}>
       <div>
-        {props.playBackData.thumbnail && <img src={props.playBackData.thumbnail} />}
+        {props.playBackData.thumbnail && (
+          <img src={props.playBackData.thumbnail} />
+        )}
         <div>{props.playBackData.name}</div>
       </div>
       <div>
         <div className="controls">
           <img src={Group} />
-          <img onClick={()=>{
-             setIsLeftClicked(true)
-            setCurrentSongIndex(playBackData.index - 1)}}  src={Left} />
+          <img
+            onClick={() => {
+              setIsLeftClicked(true);
+            }}
+            src={Left}
+          />
           <img onClick={handlePlayPause} src={isPlaying ? Continue : Pause} />
-          <img onClick={()=>{
-             setIsRightClicked(true)
-            setCurrentSongIndex(playBackData.index + 1)}} src={Right} />
+          <img
+            onClick={() => {
+              setIsRightClicked(true);
+            }}
+            src={Right}
+          />
           <img src={Repeat} />
         </div>
-        {props.playBackData.url ? <audio id="audio-element">
-          <source src={props.playBackData.url} type="audio/mpeg" />
-
-        </audio> : null}
+        {props.playBackData.url ? (
+          <audio id="audio-element">
+            <source src={props.playBackData.url} type="audio/mpeg" />
+          </audio>
+        ) : null}
         <div className="musicTimer">
           <div className="time-display">{formatTime(currentTime)}</div>
           <div className="progress-bar" onClick={handleProgressBarClick}>
@@ -202,10 +216,7 @@ const likedHandler = async () => {
           <img onClick={likedHandler} src={isLiked ? Heart2 : Heart} />
         </div>
         <div>
-          <img
-            onClick={() => Navigation("/media")}
-            src={Share}
-          />
+          <img onClick={() => Navigation("/media")} src={Share} />
 
           <div>Share </div>
         </div>

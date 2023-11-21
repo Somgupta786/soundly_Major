@@ -10,7 +10,7 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,isLiked,setNavData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
+  const{setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
 
 
   setHome(true)
@@ -25,7 +25,9 @@ export default function LibraryHeroSection() {
   const handleImgCardClick = (song,songIndex) => {
     console.log(songIndex)
     setCurrentSongIndex(songIndex)
-    setCurrentSongSection("Liked Songs")
+      
+      setfutureSongData(songs)
+      
     setSelectedSong(song); 
    
    
@@ -33,8 +35,7 @@ export default function LibraryHeroSection() {
   
   };
   useEffect(() => {
-    console.log("ggg")
-    console.log(songData)
+   
     if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
