@@ -76,11 +76,13 @@ setHome(true)
             console.error('Failed to fetch songs.');
           }
         } catch (error) {
+          setSongs([])
           console.error('An error occurred:', error);
         }
       }
       else
       {
+        console.log("hh")
         try {
         const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
          const response = await axios.get(url);
@@ -92,6 +94,7 @@ setHome(true)
           console.error('Failed to fetch songs.');
         }
       } catch (error) {
+        setSongs([])
         console.error('An error occurred:', error);
       }
     }
@@ -99,7 +102,7 @@ setHome(true)
     };
 
     fetchSongs();
-  }, []);
+  }, [props]);
   useEffect(() => {
     const fetchSongData = async () => {
       if (selectedSong) {

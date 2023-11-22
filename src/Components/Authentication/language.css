@@ -124,7 +124,7 @@ user-select: none;
     width: 89.7%;
     height: 5.8vh;
     color: #FFF;
-
+white-space: nowrap;
 font-family: 'Prompt', sans-serif;
 font-size: 2.22vw;
 font-style: normal;

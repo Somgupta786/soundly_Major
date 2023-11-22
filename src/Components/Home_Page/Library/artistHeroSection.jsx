@@ -10,9 +10,32 @@ import imge6 from "../../../assets/Rectangle 8 (2).png";
 import { playBackContext } from "../../../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "../../../Api/auth";
 export default function ArtistHeroSection() {
+  const token = JSON.parse(localStorage.getItem('authTok'));
+  const { setPlayBackData, setNavData, setHome, favArt,setFavArt } = useContext(playBackContext);
   const Navigation=useNavigate()
-  const{favArt}=useContext(playBackContext)
+  useEffect(()=>{
+    const menuHandler = async()=>{
+        try{
+         const response = await axios.get("favourite/artist/",{
+   
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+         })
+         if(response.data.success){
+           setFavArt(response.data.data)
+           console.log(response.data.data)
+         }
+        }
+        catch(error){
+   console.log(error)
+        }
+    }
+    menuHandler()
+   },[])
   return (
     <div className="heroSection">
      
@@ -43,7 +66,7 @@ export default function ArtistHeroSection() {
         <div> Show more</div>
       </div>
       <div className="homeFirstRow">
-      {favArt.map((name)=> <ImgCard  onClick={() => Navigation("/favouriteArtistSongs",{state:name})}   img ={imge1} name ={name}/>)}
+      {favArt.map((name)=> <ImgCard  onClick={() => Navigation("/favouriteArtistSongs",{state:name.name})}   img ={name.thumbnail_url} name ={name.name}/>)}
       
        {/* <ImgCard img ={imge3} name ="Taylor Swift, Simon Louis, Harsh, Tejash.."/>
        <ImgCard img ={imge4} name ="Taylor Swift, Simon Louis, Harsh, Tejash.."/>

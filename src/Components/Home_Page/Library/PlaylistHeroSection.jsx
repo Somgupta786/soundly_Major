@@ -27,6 +27,8 @@ export default function PlaylistHeroSection() {
   const [descriptionInput, setDescriptionInput] = useState('');
 
   const handleCreatePlaylist = () => {
+    setNameInput("")
+    setDescriptionInput("")
     setCreatePlaylist(!createPlaylist);
   };
   const handleCreatedPlaylist = async () => {

@@ -6,10 +6,36 @@ import img4  from "../../../assets/bhanu.png"
 import new2 from "../../../assets/badshah.png"
 import img6 from "../../../assets/honey.png"
 import { useNavigate } from "react-router-dom";
-
+import { playBackContext } from "../../../App";
+import axios from "../../../Api/auth"
+import { useContext } from "react";
 
 export default function SelectArtist(){
+  const token = JSON.parse(localStorage.getItem('authTok'));
+  const{setFavArt,favArt}=useContext(playBackContext)
+  console.log(favArt)
   const Navigation = useNavigate()
+  const clickHandler = async () => {
+    
+    try {
+      const response = await axios.post("favourite/artist/", {
+        artist_names: favArt,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    if(response.data.success){
+      Navigation("/home")
+    }
+     
+    
+    } catch (error) {
+      
+      console.error("Error:", error);
+    }
+  };
+  
 return(
    
     <div className="artistCard">
@@ -31,7 +57,7 @@ return(
           </div>
           
       </div>
-      <div className="skipArtist" onClick={() => Navigation('/home')}>Skip</div>
+      <div className="skipArtist" onClick={clickHandler}>{favArt.length==0? "Skip":"Next"}</div>
     </div>
   
 );

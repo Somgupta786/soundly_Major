@@ -4,12 +4,33 @@ import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 import Sidebar from "./Sidebar";
 import Playback from "./playBack";
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { playBackContext } from '../../App';
-
+import axios from "../../Api/auth"
 export default function Landing() {
-  const { setPlayBackData, setNavData, setHome, favArt } = useContext(playBackContext);
-  
+  const token = JSON.parse(localStorage.getItem('authTok'));
+  const { setPlayBackData, setNavData, setHome, favArt,setFavArt } = useContext(playBackContext);
+   
+useEffect(()=>{
+ const menuHandler = async()=>{
+     try{
+      const response = await axios.get("favourite/artist/",{
+
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      if(response.data.success){
+        setFavArt(response.data.data)
+      }
+     }
+     catch(error){
+console.log(error)
+     }
+ }
+ menuHandler()
+},[])
+
   setHome(true);
 
   const menuItems1 = [
@@ -70,7 +91,7 @@ export default function Landing() {
       activ: "false"
     },
     ...favArt.map((name) => ({
-      title: name,
+      title: name.name,
       onclick: "/favouriteArtistSongs",
       activ: "false"
     }))

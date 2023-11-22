@@ -12,14 +12,25 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Heart2 from "../../assets/Like button (1).svg";
 import MediaPlayer from "./Library/mediaPlayer";
-
+import Inst from "../../assets/Instagram.svg";
+import Whats from "../../assets/whatsa.svg";
+import Snake from "../../assets/snake.svg";
+import close from "../../assets/Close_LG.svg";
+import add from "../../assets/Add_Plus_Circle.svg";
 import axios from "../../Api/auth";
 import { playBackContext } from "../../App";
+import ShowPlaylist from "./Library/showPlaylist";
 
 export default function Playback(props) {
+  
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [songs, setSongs] = useState([]);
+  const [shareWindow, setShareWindow] = useState(false);
+  const [playlistWindow, setPlaylistWindow] = useState(false);
+  const [playListData, setPlayListData] = useState([]);
+  const [style, setStyle] = useState(false);
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const {
     setIsLeftClicked,
     setIsRightClicked,
@@ -40,7 +51,6 @@ export default function Playback(props) {
     audio,
     setAudio,
   } = useContext(playBackContext);
- 
 
   const Navigation = useNavigate();
   const token = JSON.parse(localStorage.getItem("authTok"));
@@ -78,9 +88,7 @@ export default function Playback(props) {
   }, [audio]);
 
   useEffect(() => {
-    
     if (playBackData.url && playBackData.url !== audio.src) {
-      
       audio.pause();
       audio.src = playBackData.url;
       audio.load();
@@ -89,7 +97,7 @@ export default function Playback(props) {
     } else if (!playBackData.url) {
       audio.pause();
     }
-  }, [playBackData.url, audio.src,playBackData]);
+  }, [playBackData.url, audio.src, playBackData]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -103,7 +111,7 @@ export default function Playback(props) {
     setIsPlaying(!isPlaying);
   };
   useEffect(() => {
-    console.log(playBackData.isLiked)
+    console.log(playBackData.isLiked);
     setIsLiked(playBackData.isLiked);
   }, [playBackData]);
 
@@ -146,31 +154,46 @@ export default function Playback(props) {
       }
     }
   };
-  // const leftClickHandler=async ()=>{
-  //   try {
-  //     const url = "https://test-mkcw.onrender.com/api/recentlyplayed/";
-  //      const response = await axios.get(url, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     });
-
-  //     if (response.data.success) {
-  //       const fetchedSongs = response.data.data;
-  //       setSongs(fetchedSongs);
-  //     } else {
-  //       console.error('Failed to fetch songs.');
-  //     }
-  //   } catch (error) {
-  //     console.error('An error occurred:', error);
-  //   }
-  // }
-  // useEffect(() => {
-
-  //   if(songs.length>0){
+     useEffect(()=>{
+    if(playlistWindow){
+      const playListData = async ()=>{
+        try{
+        const response = await axios.get("playlists/", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        if(response.data.success){
+           setPlayListData(response.data.data)
+           console.log(response.data.data)
+        }
+        }catch(error){
+          console.log(error)
+        }
+      }
+      playListData()
+    }
+     
+     },[playlistWindow])
+     const addSongHandler = async()=>{
+      console.log(currentPlaylist)
+      if(currentPlaylist!==null){
+        try{
+         const response = await  axios.post(`playlists/${currentPlaylist}/songs/${playBackData.id}/`,null,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        }
+        catch(error){
+   
+        }
+      }
+     
+     }
 
   return (
-    <div className={`playBack ${props.className ? props.className : ''}`}>
+    <div className={`playBack ${props.className ? props.className : ""}`}>
       <div>
         {props.playBackData.thumbnail && (
           <img src={props.playBackData.thumbnail} />
@@ -215,12 +238,65 @@ export default function Playback(props) {
         <div>
           <img onClick={likedHandler} src={isLiked ? Heart2 : Heart} />
         </div>
-        <div>
+        <div
+          onClick={() => {
+            setShareWindow(!shareWindow);
+          }}
+        >
           <img onClick={() => Navigation("/media")} src={Share} />
 
           <div>Share </div>
         </div>
       </div>
+     {shareWindow&&!playlistWindow?<div className="shareWindow">
+        <div>Share this song</div>
+        <div>
+          <div className="shareOption">
+            <div className="shareSame">
+              <img src={Whats}></img>
+    <a href={`whatsapp://send?text=${encodeURIComponent('http://localhost:5177/home')}`} title="Share on WhatsApp">
+      WhatsApp
+    </a>
+            </div>
+            <div className="shareSame">
+              <img src={Inst}></img>
+              <span>Instagram</span>
+            </div>
+          </div>
+          <div onClick={()=>{
+            setPlaylistWindow(true)
+
+          }} className="addOption">
+            <img src={add}></img>
+            <div >Add to playList</div>
+          </div>
+        </div>
+        <div className="linkShare">
+          https://soundly.com/thehavanna....<div>Copy</div>
+        </div>
+      </div>:null} 
+     {playlistWindow? <div style={{gap:"15px"}} className="shareWindow">
+        <div>Add to playlist <img onClick={()=>{
+          setPlaylistWindow(false)
+          setShareWindow(false)
+        }} src={close}/></div>
+        <div className="playlistContain">
+        {playListData.map((playlist) => (
+  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName" onClick={()=>{setStyle(true)
+      setCurrentPlaylist(playlist.id)}} key={playlist.id}>
+    <img src={playlist.thumbnail_url} alt={`Thumbnail for ${playlist.name}`} />
+    <div>
+      <div>{playlist.name}</div>
+      <div>{playlist.description}</div>
+    </div>
+  </div>
+))}
+         
+       
+        </div>
+
+        <div className="done" onClick={addSongHandler}>Done</div>
+      </div>:null}
     </div>
   );
 }

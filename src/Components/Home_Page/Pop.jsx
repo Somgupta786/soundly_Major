@@ -3,13 +3,35 @@ import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 import Sidebar from "./Sidebar";
 import Playback from "./playBack";
-import { useContext } from 'react';
+import { useContext,useEffect } from 'react';
 import { playBackContext } from '../../App';
 import PopHeroSection from "./PopHeroSection";
+import axios from "../../Api/auth";
+
 
 export default function Pop() {
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
-  
+  const token = JSON.parse(localStorage.getItem('authTok'));
+  const { setPlayBackData, setNavData, setHome, favArt,setFavArt } = useContext(playBackContext);
+    
+useEffect(()=>{
+  const menuHandler = async()=>{
+      try{
+       const response = await axios.get("favourite/artist/",{
+ 
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+       })
+       if(response.data.success){
+         setFavArt(response.data.data)
+       }
+      }
+      catch(error){
+ console.log(error)
+      }
+  }
+  menuHandler()
+ },[])
     const menuItems1 = [
         {
           title: "MENU",
@@ -66,21 +88,15 @@ export default function Pop() {
           }];
           const menuItems3 = [
             {
-              title: "From Artist You Follow",
+              title: "From Artists You Follow",
               onclick: "/#",
-              activ:"false"
+              activ: "false"
             },
-            {
-              title: "Neha Kakkar",
-              onclick: "/neha",
-              activ:"false"
-            },
-            {
-                title: "Badshah",
-                onclick: "/badshah",
-                activ:"false"
-              },
-           
+            ...favArt.map((name) => ({
+              title: name.name,
+              onclick: "/favouriteArtistSongs",
+              activ: "false"
+            }))
           ];
 
   return (

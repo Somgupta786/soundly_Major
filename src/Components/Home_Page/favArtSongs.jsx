@@ -3,15 +3,37 @@ import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 import Sidebar from "./Sidebar";
 import Playback from "./playBack";
-import { useContext } from 'react';
+import { useContext,useEffect } from 'react';
 import { playBackContext } from '../../App';
 import PopHeroSection from "./PopHeroSection";
 import { useLocation } from "react-router-dom";
+import axios from "../../Api/auth";
 
 export default function FavArtSongs() {
     const{state}=useLocation()
+   console.log(state)
+    const token = JSON.parse(localStorage.getItem('authTok'));
+    const { setPlayBackData, setNavData, setHome, favArt,setFavArt } = useContext(playBackContext);
+      
+  useEffect(()=>{
+    const menuHandler = async()=>{
+        try{
+         const response = await axios.get("favourite/artist/",{
    
-  const{setPlayBackData,setNavData,setHome}=useContext(playBackContext);
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+         })
+         if(response.data.success){
+           setFavArt(response.data.data)
+         }
+        }
+        catch(error){
+   console.log(error)
+        }
+    }
+    menuHandler()
+   },[])
   
     const menuItems1 = [
         {
@@ -41,7 +63,7 @@ export default function FavArtSongs() {
         {
           title: "Pop",
           onclick: "/pop",
-          activ:"true"
+          activ:"false"
         },
         {
             title: "Rock",
@@ -69,21 +91,15 @@ export default function FavArtSongs() {
           }];
           const menuItems3 = [
             {
-              title: "From Artist You Follow",
+              title: "From Artists You Follow",
               onclick: "/#",
-              activ:"false"
+              activ: "false"
             },
-            {
-              title: "Neha Kakkar",
-              onclick: "/neha",
-              activ:"false"
-            },
-            {
-                title: "Badshah",
-                onclick: "/badshah",
-                activ:"false"
-              },
-           
+            ...favArt.map((name) => ({
+              title: name.name,
+              onclick: "/favouriteArtistSongs",
+              activ:state==name.name?"true":"false"
+            }))
           ];
 
   return (

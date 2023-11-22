@@ -111,8 +111,12 @@ export default function HeroSection() {
     
     const fetchSongs = async () => {
       try {
-        const url = 'https://test-mkcw.onrender.com/api/allpublicsongs/';
-        const response = await axios.get(url);
+        const url = 'https://test-mkcw.onrender.com/api/foryou/';
+        const response = await axios.get(url,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
 
         if (response.data.success) {
           const fetchedSongs = response.data.data;
