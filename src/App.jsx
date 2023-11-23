@@ -156,6 +156,10 @@ if(isHome && location.pathname=="/game"&& gamePlayBackData){
   })
 }
 },[gamePlayBackData])
+useEffect(()=>{
+  localStorage.setItem('isLogged',JSON.stringify(false))
+  localStorage.setItem('authTok',JSON.stringify(""))
+ },[])   
   return (
     <playBackContext.Provider
       value={{

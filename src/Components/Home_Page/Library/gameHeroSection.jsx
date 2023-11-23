@@ -19,7 +19,11 @@ export default function GameSection() {
     const gameData = async () => {
       try {
         const response = await axios.get(
-          "https://test-mkcw.onrender.com/game/music-clips/"
+          "https://test-mkcw.onrender.com/game/music-clips/",{
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
         );
         if (response.data.success) {
           setSongData(response.data.data);
