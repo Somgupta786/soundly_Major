@@ -31,7 +31,7 @@ function AppRouter() {
 
     
   return (
-    <loginContext.Provider >
+  
     <Routes>
       <Route path="/" element={<SignUp/>} />
       <Route path="/login" element={<Login />} />
@@ -60,7 +60,7 @@ function AppRouter() {
       <Route path="/recent" element={<ProtectedRouter Component={Recent}  />} />
       <Route path="/likedPlaylists" element={<ProtectedRouter Component={LikedPlay}  />} />
     </Routes>
-    </loginContext.Provider>
+   
   );
 }
 
