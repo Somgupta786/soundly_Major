@@ -38,18 +38,18 @@ function App() {
     game: "Game",
   });
   
-  useEffect(() => {
-    const storedIsLogged = JSON.parse(localStorage.getItem("isLogged"));
-    const storedAuthTok = JSON.parse(localStorage.getItem("authTok"));
+  // useEffect(() => {
+  //   const storedIsLogged = JSON.parse(localStorage.getItem("isLogged"));
+  //   const storedAuthTok = JSON.parse(localStorage.getItem("authTok"));
 
-    if (storedIsLogged === null) {
-      localStorage.setItem("isLogged", JSON.stringify(false));
-    }
+  //   if (storedIsLogged === null) {
+  //     localStorage.setItem("isLogged", JSON.stringify(false));
+  //   }
 
-    if (storedAuthTok === null) {
-      localStorage.setItem("authTok", JSON.stringify(""));
-    }
-  }, []);
+  //   if (storedAuthTok === null) {
+  //     localStorage.setItem("authTok", JSON.stringify(""));
+  //   }
+  // }, []);
   
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [isHome, setHome] = useState(false);
