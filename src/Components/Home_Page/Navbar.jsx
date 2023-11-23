@@ -218,7 +218,13 @@ export default function Navbar(props) {
             <div><div>{userData.username}</div><div>{userData.email}</div></div>
           </div>
           <div className="hr"></div>
-          <div className="profileRefer"><div>Listen to artists you follow</div><div>View Recently played</div><div onClick={()=>Navigation("/beArtist")}>Become artist</div></div>
+          <div className="profileRefer"><div onClick={()=>{
+                   
+           Navigation("/favArt")
+          }} >Listen to artists you follow</div><div onClick={()=>{
+                   
+                   Navigation("/recent")
+                  }} >View Recently played</div><div onClick={()=>Navigation("/beArtist")}>Become artist</div></div>
           <div className="hr"></div>
           <div  className="profileRefer"><div>Help</div><div>Privacy Policy</div><div>About Us</div></div>
           <div className="hr"></div>
