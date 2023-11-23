@@ -463,7 +463,9 @@ line-height: 100%;
   font-weight: 400;
   line-height: 100%;
 }
-
+.cardLeftEnd>div:first-child{
+  cursor: pointer;
+}
 .cardLeftEnd>div:nth-child(2) {
   height: 40px;
   width: 40px;
