@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { loginContext } from "../../../AppRouter";
 export default function ForgetOption() {
-  const{islogged,setLogged}=useContext(loginContext) 
+ 
   const Navigation = useNavigate();
   // const [isClicked, setClicker] = useState(false);
   const [isLoad, setLoad] = useState(false);
@@ -35,7 +35,7 @@ export default function ForgetOption() {
   
       
       if (response.data.success) {
-       setLogged(true)
+      
         Navigation("/Otp",{state:{username:response.data.data,id:2
         }});
       } else {

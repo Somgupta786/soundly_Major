@@ -37,13 +37,20 @@ function App() {
     library: "Library",
     game: "Game",
   });
+  
+  useEffect(() => {
+    const storedIsLogged = JSON.parse(localStorage.getItem("isLogged"));
+    const storedAuthTok = JSON.parse(localStorage.getItem("authTok"));
 
-  localStorage.setItem(
-    "authTok",
-    JSON.stringify(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODA1MTczLCJpYXQiOjE2OTkyMTMxNzMsImp0aSI6IjYwOTdkYTkxNTJmMDQ1YzY4YmE1MTBjZWQyMDM4MzAxIiwidXNlcl9pZCI6ImFkbWluIn0.zhhXZrQzl4fls2jh26tGQ6KMuKojlFV8r-rE1LEWT_w"
-    )
-  );
+    if (storedIsLogged === null) {
+      localStorage.setItem("isLogged", JSON.stringify(false));
+    }
+
+    if (storedAuthTok === null) {
+      localStorage.setItem("authTok", JSON.stringify(""));
+    }
+  }, []);
+  
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [isHome, setHome] = useState(false);
 

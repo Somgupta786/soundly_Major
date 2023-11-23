@@ -5,7 +5,7 @@ import axios from "axios";
 import { verifyApi } from "../../../Api/auth";
 import { loginContext } from "../../../AppRouter";
 export default function LoginCard(){
-   const{islogged,setLogged}=useContext(loginContext)
+   
    const Navigation = useNavigate();
    const [isClicked, setClicker] = useState(false);
    
@@ -43,7 +43,7 @@ export default function LoginCard(){
     
         
         if (response.data.success) {
-         setLogged(true);
+       
           Navigation("/Otp",{state:{username:inputs.username,id:2}});
         } else {
           setClicker(true);

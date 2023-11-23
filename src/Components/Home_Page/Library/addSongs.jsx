@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function AddSongs(props) {
     const Navigation=useNavigate()
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const { setPlayBackData, playBackData, isPlaying, setNavData, setHome, setMedia } = useContext(playBackContext);
+  const { setPlayBackData,setCurrentSongSection,setfutureSongData, playBackData, isPlaying, setNavData, setHome, setMedia,currentSongIndex,currentSongSection,setCurrentSongIndex } = useContext(playBackContext);
   setHome("true");
 
   const [songs, setSongs] = useState([]);
@@ -20,23 +20,42 @@ export default function AddSongs(props) {
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
 
-  const handleImgCardClick = (song) => {
-    setSelectedSong(song);
-    setMedia(true);
+const handleImgCardClick = (song,songIndex) => {
+    console.log(songIndex)
+    
+      setCurrentSongIndex(songIndex)
+      setCurrentSongSection("For You")
+      setfutureSongData(songs)
+      
+    
+   
+    setSelectedSong(song); 
+  
+ 
+   
+     
+  
   };
-
   useEffect(() => {
-    if (songData) {
-      setPlayBackData({
-        url: songData.song_url,
-        id: songData.id,
-        thumbnail: songData.thumbnail_url,
-        name: songData.name,
-        artist: selectedSong.artist,
-        isLiked: songData.is_liked
-      });
-    }
-  }, [songData, selectedSong]);
+    console.log(songData)
+    if(songData&&currentSongIndex!=null){
+      console.log(songData.is_liked)
+    setPlayBackData({
+      index:currentSongIndex,
+      url: songData.song_url,
+      id: songData.id,
+      thumbnail: songData.thumbnail_url,
+      name: songData.name,
+      artist:selectedSong.artist,
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_url
+      
+    })
+   
+   
+    
+  }
+  },[songData])
 
   const AddSongHandler = async (song) => {
 
@@ -129,7 +148,7 @@ export default function AddSongs(props) {
           <div>Add songs to your ‘Default name’</div>
           <div onClick={()=>Navigation("/playlist")}>DONE</div>
         </div>
-        {songs.map((song) => (
+        {songs.map((song,songIndex) => (
           <div className='showSongs' key={song.id}>
             <div>
               <img src={song.thumbnail_url} alt="Thumbnail" />
@@ -139,7 +158,7 @@ export default function AddSongs(props) {
               </div>
             </div>
             <div>{song.song_duration}</div>
-            <div onClick={() => handleImgCardClick(song)} >
+            <div onClick={() => handleImgCardClick(song,songIndex)} >
               <img src={isPlaying && playBackData.id === song.id ? Continue : Pause} />
             </div>
             <div

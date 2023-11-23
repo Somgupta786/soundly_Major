@@ -11,7 +11,7 @@ import { playBackContext } from '../../App';
 export default function PopHeroSection(props) {
   const token = JSON.parse(localStorage.getItem('authTok'));
 
-  const{setPlayBackData,setNavData,setHome,isMedia}=useContext(playBackContext);
+  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
 
 setHome(true)
   
@@ -22,34 +22,40 @@ setHome(true)
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
 
-  const handleImgCardClick = (song) => {
   
-    setSelectedSong(song); 
+  const handleImgCardClick = (song,songIndex) => {
+    console.log(songIndex)
+    
+      setCurrentSongIndex(songIndex)
+      setCurrentSongSection("Query")
+      setfutureSongData(songs)
+      
+    
    
+    setSelectedSong(song); 
+  
+ 
    
      
   
   };
   useEffect(() => {
-    
-    if(songData){
-     
+    console.log(songData)
+    if(songData&&currentSongIndex!=null){
+      console.log(songData.is_liked)
     setPlayBackData({
-      
+      index:currentSongIndex,
       url: songData.song_url,
       id: songData.id,
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_url
+      
     })
    
-    // setMediaData({
-    //   url: songData.song_url,
-    //   id: songData.id,
-    //   thumbnail: songData.thumbnail_url,
-    //   name: songData.name
-    // })
+   
     
   }
   },[songData])
@@ -82,7 +88,7 @@ setHome(true)
       }
       else
       {
-        console.log("hh")
+        
         try {
         const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
          const response = await axios.get(url);
@@ -144,10 +150,12 @@ setHome(true)
           {songs.slice(0, 5).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
+              index={songIndex}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex)} 
+              section="Query"
             />
           ))}
         </div>
@@ -155,10 +163,12 @@ setHome(true)
           {songs.slice(5,10).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
+              index={songIndex}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song)} 
+              onClick={() => handleImgCardClick(song,songIndex)} 
+              section="Query"
             />
           ))}
         </div>

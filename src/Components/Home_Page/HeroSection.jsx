@@ -35,18 +35,20 @@ export default function HeroSection() {
   };
 
   const [cardInfo, setCardInfo] = useState([
-    { color: '#C76B98', title: 'The Havanna', img: imge2, style: styleBox },
+    { color: '#C76B98', title: 'The Havanna', img: imge2, style: styleBox,index:"51"},
     {
       color: '#4E6CB9',
       title: 'The Soltitude',
       img: Property,
       style: styleBox2,
+      index:"52"
     },
     {
       color: '#518C3D',
       title: 'The Wanderlust',
       img: Soltitude,
       style: styleBox3,
+      index:"53"
     },
   ]);
 
@@ -76,7 +78,7 @@ export default function HeroSection() {
   
   };
   useEffect(() => {
-    
+    console.log(songData)
     if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
@@ -86,7 +88,8 @@ export default function HeroSection() {
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_url
       
     })
    
@@ -165,7 +168,7 @@ export default function HeroSection() {
   return (
     <div className="heroSection">
       <div className="slider" style={showCard.style}>
-        <Card color={showCard.color} title={showCard.title} img={showCard.img} />
+        <Card color={showCard.color} title={showCard.title} img={showCard.img} index={showCard.index} />
         <div className="dots">
           {cardInfo.map((card, index) => (
             <div

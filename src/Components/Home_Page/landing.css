@@ -132,7 +132,11 @@
   align-items: center;
   position: relative;
 }
-
+.searchBox>img:nth-child(2)
+{
+ position: absolute;
+ left: 16px;
+}
 .searchBox input {
   width: 100%;
   height: 5.3vh;
@@ -140,7 +144,7 @@
   background: none;
   border: 2px solid whitesmoke;
   color: #FFF;
-padding-left: 16px;
+padding-left: 48px;
 /* web/Para/reg/03 */
 font-family: "Prompt", sans-serif;
 font-size: 16px;
@@ -550,7 +554,9 @@ align-self: center;
   line-height: 100%;
   /* 16px */
 }
-
+.homeText div:last-child :hover{
+  cursor: pointer;
+}
 
 .homeFirstRow,
 .homeLastRow {
@@ -1366,7 +1372,8 @@ line-height: 100%;
 
 .musicData>div:nth-child(1) {
   display: flex;
-  gap: 16.4vw;
+  /* gap: 16.4vw; */
+  justify-content: space-between;
   align-items: end;
   width: 59.4vw;
   height: 38.9vh;
@@ -1384,13 +1391,15 @@ line-height: 100%;
 .musicData>div:nth-child(1)>div:nth-child(2) img {
   height: 100%;
   width: 100%;
+  border-radius: 24px;
 }
 
 .musicData>div:nth-child(1)>div:nth-child(1) {
   display: flex;
-  width: 34.93%;
+  /* width: 34.93%; */
   height: 10.7vh;
-  justify-content: space-between;
+  gap:25px;
+  /* justify-content: space-between; */
   align-items: center;
 }
 
@@ -1474,7 +1483,7 @@ overflow-y: auto;
 }
 .playlistInfo{
   width:100%;
-  height:88.44vh;
+height: 31.3vh;
   display: flex;
   gap: 24px;
   justify-content: flex-start;

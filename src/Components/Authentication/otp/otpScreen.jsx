@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, createContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Resend from "./resendOtp";
-
-
+import { loginContext } from "../../../AppRouter";
+import { useContext } from "react";
 export  const Context = createContext("");
 
 export default function Otp(props) {
-  
+  // const{isLogged,setLogged,setAuthTok}=useContext(loginContext)
   const [isLoad, setLoad] = useState(false);
   const [error, setError] = useState();
   const [isClicked, setClicker] = useState(false);
@@ -56,9 +56,15 @@ export default function Otp(props) {
       setError(response.data);
       setLoad(false);
       if (response.data.success) {
-        
-        localStorage.setItem('authToken',JSON.stringify(response.data.data.access_token))
-        // console.log(JSON.parse(localStorage.getItem('authToken')));
+        console.log(response.data.data.access_token)
+       
+        localStorage.setItem('isLogged',JSON.stringify(true))
+        localStorage.setItem('authTok',JSON.stringify(response.data.data.access_token))
+        const isLogged = JSON.parse(localStorage.getItem('isLogged'));
+        const authTok = JSON.parse(localStorage.getItem('authTok'));
+        console.log(isLogged)
+        console.log(authTok)
+
         Navigation('/language');
       } else {
         setClicker(true);

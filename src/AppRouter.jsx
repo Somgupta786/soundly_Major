@@ -24,42 +24,41 @@ import Upload from './Components/Home_Page/artistSection/upload';
 import GameSection from './Components/Home_Page/Library/game';
 import FavArtSongs from './Components/Home_Page/favArtSongs';
 import Recent from './Components/Home_Page/recentlyPlayed';
+import LikedPlay from './Components/Home_Page/likedPlaylist';
 
 export const loginContext=createContext("");
 function AppRouter() {
-  const[isLogged,setLogged]=useState(false)
-  useEffect(
-    ()=>{
-      localStorage.setItem('isLogged',JSON.stringify(isLogged))
-    },[isLogged])
+
+    
   return (
-    <loginContext.Provider value={{isLogged,setLogged}}>
+    <loginContext.Provider >
     <Routes>
       <Route path="/" element={<SignUp/>} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Otp" element={<ProtectedRouter Component={OtpPage } />}  />
+      <Route path="/Otp" element={<OtpPage />}  />
       <Route path="/language" element={<ProtectedRouter Component={Language} />} />
       <Route path="/artist" element={<ProtectedRouter Component={ArtistSelection} />}  />
-      <Route path="/forget" element={<Forget/>} />
-      <Route path="/home" element={<Landing/>} />
-      <Route path="/forYou" element={<Landing/>} />
-      <Route path="/pop" element={<Pop/>} />
-      <Route path="/rock" element={<Rock/>} />
-      <Route path="/Hip-Hop" element={<HipHop/>} />
-      <Route path="/Rap" element={<Rap/>} />
-      <Route path="/R&B" element={<R_B/>} />
-      <Route path="/library" element={<Library/>} />
-      <Route path="/liked" element={<Library/>} />
-      <Route path="/playlist" element={<Playlist/>} />
-      <Route path="/favArt" element={<ArtistFollow/>} />
-      <Route path="/addSongs" element={<PlaylistAddSongs/>} />
-      <Route path="/showPlaylist" element={<ShowPlaylist/>} />
-      <Route path="/media" element={<MediaPlayer/>} />
-      <Route path="/beArtist" element={<ArtistSection/>} />
-      <Route path="/upload" element={<Upload/>} />
-      <Route path="/game" element={<GameSection/>} />
-      <Route path="/favouriteArtistSongs" element={<FavArtSongs/>} />
-      <Route path="/recent" element={<Recent/>} />
+      <Route path="/forget" element={<Forget />} />
+      <Route path="/home" element={<ProtectedRouter Component={Landing} />} />
+      <Route path="/forYou" element={<ProtectedRouter Component={Landing} />} />
+      <Route path="/pop" element={<ProtectedRouter Component={Pop} />} />
+      <Route path="/rock" element={<ProtectedRouter Component={Rock} />} />
+      <Route path="/Hip-Hop" element={<ProtectedRouter Component={HipHop} />} />
+      <Route path="/Rap" element={<ProtectedRouter Component={Rap} />} />
+      <Route path="/R&B" element={<ProtectedRouter Component={R_B} />} />
+      <Route path="/library" element={<ProtectedRouter Component={Library} />} />
+      <Route path="/liked" element={<ProtectedRouter Component={Library} />} />
+      <Route path="/playlist" element={<ProtectedRouter Component={Playlist} />} />
+      <Route path="/favArt" element={<ProtectedRouter Component={ArtistFollow} />} />
+      <Route path="/addSongs" element={<ProtectedRouter Component={PlaylistAddSongs} />} />
+      <Route path="/showPlaylist" element={<ProtectedRouter Component={ShowPlaylist} />} />
+      <Route path="/media" element={<ProtectedRouter Component={MediaPlayer}  />} />
+      <Route path="/beArtist" element={<ProtectedRouter Component={ArtistSection}  />} />
+      <Route path="/upload" element={<ProtectedRouter Component={Upload}  />} />
+      <Route path="/game" element={<ProtectedRouter Component={GameSection}  />} />
+      <Route path="/favouriteArtistSongs" element={<ProtectedRouter Component={FavArtSongs}  />} />
+      <Route path="/recent" element={<ProtectedRouter Component={Recent}  />} />
+      <Route path="/likedPlaylists" element={<ProtectedRouter Component={LikedPlay}  />} />
     </Routes>
     </loginContext.Provider>
   );

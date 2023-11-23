@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "../../../Api/auth";
-import Card from "../Card";
-import Footer from "../Footer";
-import ImgCard from "../ImgCard";
-import Playback from "../playBack";
-import Lion from "../../../assets/Lion.svg"
-import Dot from "../../../assets/dot.svg"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Card from './Card';
+import Footer from './Footer';
+import ImgCard from './ImgCard';
+import Playback from './playBack'; 
 
-import { useContext } from "react";
-import { playBackContext } from "../../../App";
+import { useContext } from 'react';
+import { playBackContext } from '../../App';
 
-export default function ShowPlaylistHeroSection(props) {
-  console.log(props.state);
+export default function likedPlaylist(props) {
+    console.log(props.state)
+  const token = JSON.parse(localStorage.getItem('authTok'));
 
-  const token = JSON.parse(localStorage.getItem("authTok"));
   const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
 
-  setHome(true);
+setHome(true)
+  
 
-  const [songs, setSongs] = useState(props.state.playlistData.songs);
+  const [songs, setSongs] = useState([]);
+  
 
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
@@ -28,7 +28,7 @@ export default function ShowPlaylistHeroSection(props) {
     console.log(songIndex)
     
       setCurrentSongIndex(songIndex)
-      setCurrentSongSection("PlayList")
+      setCurrentSongSection("Query")
       setfutureSongData(songs)
       
     
@@ -41,7 +41,7 @@ export default function ShowPlaylistHeroSection(props) {
   
   };
   useEffect(() => {
-    
+    console.log(songData)
     if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
@@ -51,7 +51,8 @@ export default function ShowPlaylistHeroSection(props) {
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_url
       
     })
    
@@ -61,6 +62,39 @@ export default function ShowPlaylistHeroSection(props) {
   },[songData])
 
  
+
+ 
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+     
+        try {
+          const url = `https://test-mkcw.onrender.com/api/allpublicplaylists/${props.state.index}`;
+           const response = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+  
+          if (response.data.success) {
+            const fetchedSongs = response.data.data.songs;
+            setSongs(fetchedSongs);
+          } else {
+            console.error('Failed to fetch songs.');
+          }
+        } catch (error) {
+          setSongs([])
+          console.error('An error occurred:', error);
+        }
+      
+     
+        
+       
+      
+    };
+
+    fetchSongs();
+  }, [props]);
   useEffect(() => {
     const fetchSongData = async () => {
       if (selectedSong) {
@@ -68,54 +102,36 @@ export default function ShowPlaylistHeroSection(props) {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
           const response = await axios.get(url, {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           });
-
+  
           if (response.data.success) {
             setSongData(response.data.data);
-            console.log(songData);
+            console.log(songData)
           } else {
-            console.error("Failed to fetch song data.");
+            console.error('Failed to fetch song data.');
           }
         } catch (error) {
-          console.error("An error occurred:", error);
+          console.error('An error occurred:', error);
         }
       }
     };
-
+  
     fetchSongData();
-  }, [selectedSong, isMedia]);
+  }, [selectedSong,isMedia]);
+  
+  
 
   return (
     <div className="heroSection">
+      
+
       <div className="imageCards">
-        <div className="playlistInfo">
-          <div>
-            <img src={Lion}></img>
-          </div>
-          <div>
-            <div>Listen to ‘{props.state.playlistData.playlist.name}’</div>
-            <div>
-            {props.state.playlistData.playlist.description}.
-            </div>
-             <div>
-            <div className="songDetail">
-              <div>
-                <img src={Dot}  />
-              </div>
-              <div>{props.state.playlistData.songs.length} songs</div>
-            </div>
-            <div className="songDetail">
-              <div >
-                <img src={Dot} />
-              </div>
-              <div>10 min</div>
-            </div>
-            </div>
-          </div>
+        <div className="homeText">
+          <div>Listen to ‘{props.state.title}’</div>
+          <div></div>
         </div>
-        
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (
             <ImgCard
@@ -125,12 +141,12 @@ export default function ShowPlaylistHeroSection(props) {
               img={song.thumbnail_url}
               name={song.name}
               onClick={() => handleImgCardClick(song,songIndex)} 
-              section={props.state.playlistData.playlist.name}
+              section="Query"
             />
           ))}
         </div>
         <div className="homeLastRow">
-          {songs.slice(5, 10).map((song, songIndex) => (
+          {songs.slice(5,10).map((song, songIndex) => (
             <ImgCard
               key={songIndex}
               index={songIndex}
@@ -138,7 +154,7 @@ export default function ShowPlaylistHeroSection(props) {
               img={song.thumbnail_url}
               name={song.name}
               onClick={() => handleImgCardClick(song,songIndex)} 
-              section={props.state.playlistData.playlist.name}
+              section="Query"
             />
           ))}
         </div>
@@ -163,6 +179,7 @@ export default function ShowPlaylistHeroSection(props) {
     name: null
   })
 )} */}
+
     </div>
   );
 }

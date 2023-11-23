@@ -10,7 +10,7 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);
+  const{setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
 
 
   setHome(true)

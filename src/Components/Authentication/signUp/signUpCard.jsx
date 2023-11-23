@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { loginContext } from "../../../AppRouter";
 import axios  from "../../../Api/auth";
 export default function SignUpCard() {
-  const{isLogged,setLogged}=useContext(loginContext)
+ 
   const Navigation = useNavigate();
   // const [isClicked, setClicker] = useState(false);
   const [isLoad, setLoad] = useState(false);
@@ -41,7 +41,7 @@ export default function SignUpCard() {
         setError(response.data);
 
         if (response.data.success) {
-        setLogged(true)
+       
           toast("OTP SENT!");
           Navigation("/Otp", {
             state: {

@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../Api/auth";
 import Pause from "../../assets/Continue.svg";
 import Not from "../../assets/notFound.svg"
-import tr from "../../assets/Rectangle 14.svg"
-
+import tr from "../../assets/Vector (5).svg"
+import { loginContext } from "../../AppRouter";
 import { playBackContext } from '../../App';
 
 
 export default function Navbar(props) {
+  const{isLogged,setLogged,setAuthTok}=useContext(loginContext)
   const Navigation = useNavigate()
   const token = JSON.parse(localStorage.getItem("authTok"));
   const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
@@ -145,7 +146,7 @@ export default function Navbar(props) {
   return (
     <div className="homeNav">
       <div className="menu">
-        <div>
+        <div onClick={()=>navigate("/home")} >
           <img src={Home} />
           <div>{props.navData.home}</div>
         </div>
@@ -160,10 +161,11 @@ export default function Navbar(props) {
       </div>
       <div className="searchBox">
         <input
-          placeholder="     Search"
+          placeholder="Search"
           value={searchValue}
           onChange={searchHandler}
         />
+        <img src={tr}></img>
         {searchValue && (
           <div className="searchContent">
             {songs.length!==0 ? (
@@ -213,14 +215,18 @@ export default function Navbar(props) {
           <div className="profileDetails">
             <div className="profileImg"><img src={userData.profile_pic_url
 }/></div>
-            <div><div>{userData.username}</div><div>ssomvishwari786@gmail.com</div></div>
+            <div><div>{userData.username}</div><div>{userData.email}</div></div>
           </div>
           <div className="hr"></div>
           <div className="profileRefer"><div>Listen to artists you follow</div><div>View Recently played</div><div onClick={()=>Navigation("/beArtist")}>Become artist</div></div>
           <div className="hr"></div>
           <div  className="profileRefer"><div>Help</div><div>Privacy Policy</div><div>About Us</div></div>
           <div className="hr"></div>
-          <div>Logout</div>
+          <div onClick={()=>{
+                   localStorage.setItem('isLogged',JSON.stringify(false))
+localStorage.setItem('authTok',JSON.stringify(""))
+           Navigation("/login")
+          }}>Logout</div>
          
         </div>:null} 
       </div>:null} 

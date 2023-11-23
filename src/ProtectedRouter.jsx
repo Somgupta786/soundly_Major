@@ -3,24 +3,27 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProtectedRouter(props) {
   const Navigation = useNavigate();
-  console.log("shyam")
+  
  
   const isLogged = JSON.parse(localStorage.getItem('isLogged'));
-    console.log(isLogged)
+        const authTok = JSON.parse(localStorage.getItem('authTok'));
+        
+  
   const { Component } = props;
   useEffect(()=>{
     const isLogged = JSON.parse(localStorage.getItem('isLogged'));
-    console.log(isLogged)
-    // if(!isLogged){
-    //   Navigation("/login"); 
-    // }
+    const authTok = JSON.parse(localStorage.getItem('authTok'));
+   
+    if(!isLogged&&authTok==""){
+      Navigation("/login"); 
+    }
   });
   
  
 
   return (
     <>
-       <Component /> 
+     {isLogged&&authTok!=="" ? <Component /> :null}
     </>
   );
 }

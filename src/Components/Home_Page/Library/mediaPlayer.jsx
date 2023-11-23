@@ -2,7 +2,7 @@ import Group from "../../../assets/shuffles.svg";
 import Left from "../../../assets/Skip Back.svg";
 import Right from "../../../assets/Group 12.svg";
 import Repeat from "../../../assets/Group 14.svg";
-import Continue from "../../../assets/mediaCon.svg";
+import Continue from "../../../assets/medC.png";
 import Line from "../../../assets/Line.svg";
 import Rectangle from "../../../assets/Rectangle 14.svg";
 import Heart from "../../../assets/Like button (1).svg";
@@ -12,9 +12,24 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import Heart2 from "../../../assets/Unlike.svg";
 import axios from "../../../Api/auth";
 
+import Inst from "../../../assets/Instagram.svg";
+import Whats from "../../../assets/whatsa.svg";
+import Snake from "../../../assets/snake.svg";
+import close from "../../../assets/Close_LG.svg";
+import add from "../../../assets/Add_Plus_Circle.svg";
+import audioSync from 'audio-sync-with-text';
+
+
+
 import { playBackContext } from "../../../App";
 
 export default function MediaPlayer() {
+  const [shareWindow, setShareWindow] = useState(false);
+  const [playlistWindow, setPlaylistWindow] = useState(false);
+  const [playListData, setPlayListData] = useState([]);
+  const [style, setStyle] = useState(false);
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+
   const {
     setIsLeftClicked,
     setIsRightClicked,
@@ -34,6 +49,38 @@ export default function MediaPlayer() {
     audio,
     setAudio,
   } = useContext(playBackContext);
+  let sync;
+  // console.log(playBackData)
+  
+   
+  useEffect(() => {
+    const audio_sync = async () => {
+      try {
+        if (playBackData.lyrics_url) {
+          console.log("Lyrics URL:", playBackData.lyrics_url);
+  
+          const response = await fetch(playBackData.lyrics_url);
+          const srtContent = await response.text();
+  
+          const webVTTContent = `WEBVTT\n\n${srtContent.replace(/\d+\:\d+/g, match => match.replace(':', '.'))}`;
+  
+          console.log(webVTTContent )
+          sync = new audioSync({
+            audioPlayer: 'audio-element',
+            subtitlesContainer: 'lyricData',
+            subtitlesFile: new Blob([webVTTContent], { type: 'text/vtt' }),
+          });
+        }
+      } catch (error) {
+        console.error("Error during sync:", error);
+      }
+    };
+  
+    audio_sync();
+  }, [playBackData.lyrics_url]);
+  
+  
+ 
  
   const token = JSON.parse(localStorage.getItem("authTok"));
   useEffect(() => {
@@ -52,6 +99,10 @@ export default function MediaPlayer() {
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
       setTotalDuration(audio.duration);
+     if (sync) {
+        sync.updateCurrentTime(audio.currentTime);
+      }
+    
     };
 
     audio.onended = () => {
@@ -135,6 +186,43 @@ export default function MediaPlayer() {
     setCurrentTime(newCurrentTime);
     audio.currentTime = newCurrentTime;
   };
+  useEffect(()=>{
+    if(playlistWindow){
+      const playListData = async ()=>{
+        try{
+        const response = await axios.get("playlists/", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        if(response.data.success){
+           setPlayListData(response.data.data)
+           console.log(response.data.data)
+        }
+        }catch(error){
+          console.log(error)
+        }
+      }
+      playListData()
+    }
+     
+     },[playlistWindow])
+     const addSongHandler = async()=>{
+      console.log(currentPlaylist)
+      if(currentPlaylist!==null){
+        try{
+         const response = await  axios.post(`playlists/${currentPlaylist}/songs/${playBackData.id}/`,null,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        }
+        catch(error){
+   
+        }
+      }
+     
+     }
 
   return (
     <div className="mediaPlayer">
@@ -143,13 +231,15 @@ export default function MediaPlayer() {
         <div>
           <div>
             <div className="mediaText">
-              <div>{playBackData.name}</div>
+            <div>{playBackData.name.length > 14 ? playBackData.name.slice(0, 14) + '...' : playBackData.name}</div>
               <div>{playBackData.artist}</div>
             </div>
             <div>
               <img onClick={likedHandler} src={isLiked ? Heart : Heart2} />
             </div>
-            <div>
+            <div onClick={() => {
+            setShareWindow(!shareWindow);
+          }}>
               <img src={Share} />
             </div>
           </div>
@@ -210,26 +300,60 @@ export default function MediaPlayer() {
           ) : null}
         </div>
       </div>
-      <div className="lyricData">
-        We could leave the Christmas lights up 'til JanuaryThis is our place, we
-        make the rulesAnd there's a dazzling haze, a mysterious way about you,
-        dearHave I known you twenty seconds or twenty years?Can I go where you
-        go?Can we always be this close forever and ever?And ah, take me out and
-        take me homeYou're my, my, my, myLoverWe could let our friends crash in
-        the living roomThis is our place, we make the callAnd I'm highly
-        suspicious that everyone who sees you wants youI've loved you three
-        summers now, honey, but I want 'em allCan I go where you go?Can we
-        always be this close forever and ever?And ah, take me out and take me
-        home (Forever and ever)You're my, my, my, myLoverLadies and gentlemen,
-        will you please stand?With every guitar string scar on my handI take
-        this magnetic force of a man to be myLoverMy heart's been borrowed and
-        yours has been blueAll's well that ends well to end up with youSwear to
-        be over-dramatic and true to myLoverAnd you'll save all your dirtiest
-        jokes for meAnd at every table, I'll save you a seatLoverCan I go where
-        you go?Can we always be this close forever and ever?And ah, take me out
-        and take me home (Forever and ever)You're my, my, my, myOh, you're my,
-        my, my, myDarling, you're my, my, my, myLover
+      <div className="lyricData" id="lyricData">
+      
       </div>
+      {shareWindow&&!playlistWindow?<div className="shareWindow">
+        <div>Share this song</div>
+        <div>
+          <div className="shareOption">
+            <div className="shareSame">
+              <img src={Whats}></img>
+    <a href={`whatsapp://send?text=${encodeURIComponent('http://localhost:5177/home')}`} title="Share on WhatsApp">
+      WhatsApp
+    </a>
+            </div>
+            <div className="shareSame">
+              <img src={Inst}></img>
+              <span>Instagram</span>
+            </div>
+          </div>
+          <div onClick={()=>{
+            setPlaylistWindow(true)
+
+          }} className="addOption">
+            <img src={add}></img>
+            <div >Add to playList</div>
+          </div>
+        </div>
+        <div className="linkShare">
+          https://soundly.com/thehavanna....<div>Copy</div>
+        </div>
+      </div>:null} 
+     {playlistWindow? <div style={{gap:"15px"}} className="shareWindow">
+        <div>Add to playlist <img onClick={()=>{
+          setPlaylistWindow(false)
+          setShareWindow(false)
+        }} src={close}/></div>
+        <div className="playlistContain">
+        {playListData.map((playlist) => (
+  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName" onClick={()=>{
+    console.log(playlist.id)
+    setStyle(true)
+      setCurrentPlaylist(playlist.id)}} key={playlist.id}>
+    <img src={playlist.thumbnail_url} alt={`Thumbnail for ${playlist.name}`} />
+    <div>
+      <div>{playlist.name}</div>
+      <div>{playlist.description}</div>
+    </div>
+  </div>
+))}
+         
+       
+        </div>
+
+        <div className="done" onClick={addSongHandler}>Done</div>
+      </div>:null}
     </div>
   );
 }

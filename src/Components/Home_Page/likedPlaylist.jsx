@@ -5,30 +5,35 @@ import Sidebar from "./Sidebar";
 import Playback from "./playBack";
 import { useContext,useEffect } from 'react';
 import { playBackContext } from '../../App';
-import PopHeroSection from "./PopHeroSection";
+import LikedPlaylist from "./likedPLaylistSection";
 import axios from "../../Api/auth";
+import { useLocation } from "react-router-dom";
 
-export default function HipHop() {
+
+export default function likedPlay() {
+    const{state}=useLocation()
+  const token = JSON.parse(localStorage.getItem('authTok'));
   const { setPlayBackData, setNavData, setHome, favArt,setFavArt } = useContext(playBackContext);
-  useEffect(()=>{
-    const menuHandler = async()=>{
-        try{
-         const response = await axios.get("favourite/artist/",{
-   
-           headers: {
-             Authorization: `Bearer ${token}`
-           }
-         })
-         if(response.data.success){
-           setFavArt(response.data.data)
+    
+useEffect(()=>{
+  const menuHandler = async()=>{
+      try{
+       const response = await axios.get("favourite/artist/",{
+ 
+         headers: {
+           Authorization: `Bearer ${token}`
          }
-        }
-        catch(error){
-   console.log(error)
-        }
-    }
-    menuHandler()
-   },[])
+       })
+       if(response.data.success){
+         setFavArt(response.data.data)
+       }
+      }
+      catch(error){
+ console.log(error)
+      }
+  }
+  menuHandler()
+ },[])
     const menuItems1 = [
         {
           title: "MENU",
@@ -68,7 +73,7 @@ export default function HipHop() {
           {
             title: "Hip-Hop",
             onclick: "/Hip-Hop",
-            activ:"true"
+            activ:"false"
           },
         
           {
@@ -102,7 +107,7 @@ export default function HipHop() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="Hip-Hop" />
+      <LikedPlaylist state={state} />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

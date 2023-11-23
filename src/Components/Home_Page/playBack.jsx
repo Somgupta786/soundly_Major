@@ -22,7 +22,6 @@ import { playBackContext } from "../../App";
 import ShowPlaylist from "./Library/showPlaylist";
 
 export default function Playback(props) {
-  
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [songs, setSongs] = useState([]);
@@ -89,8 +88,10 @@ export default function Playback(props) {
 
   useEffect(() => {
     if (playBackData.url && playBackData.url !== audio.src) {
+      console.log(audio);
       audio.pause();
       audio.src = playBackData.url;
+      console.log(audio);
       audio.load();
       audio.play();
       setIsPlaying(true);
@@ -154,43 +155,46 @@ export default function Playback(props) {
       }
     }
   };
-     useEffect(()=>{
-    if(playlistWindow){
-      const playListData = async ()=>{
-        try{
-        const response = await axios.get("playlists/", {
-          headers: {
-            Authorization: `Bearer ${token}`
+  useEffect(() => {
+    if (playlistWindow) {
+      const playListData = async () => {
+        try {
+          const response = await axios.get("playlists/", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data.success) {
+            setPlayListData(response.data.data);
+            console.log(response.data.data);
           }
-        })
-        if(response.data.success){
-           setPlayListData(response.data.data)
-           console.log(response.data.data)
+        } catch (error) {
+          console.log(error);
         }
-        }catch(error){
-          console.log(error)
-        }
-      }
-      playListData()
+      };
+      playListData();
     }
-     
-     },[playlistWindow])
-     const addSongHandler = async()=>{
-      console.log(currentPlaylist)
-      if(currentPlaylist!==null){
-        try{
-         const response = await  axios.post(`playlists/${currentPlaylist}/songs/${playBackData.id}/`,null,{
-          headers: {
-            Authorization: `Bearer ${token}`
+  }, [playlistWindow]);
+  const addSongHandler = async () => {
+    console.log(currentPlaylist);
+    if (currentPlaylist !== null) {
+      try {
+        const response = await axios.post(
+          `playlists/${currentPlaylist}/songs/${playBackData.id}/`,
+          null,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        })
+        );
+        if(response.data.success){
+          setShareWindow(false)
+          setPlaylistWindow(false)
         }
-        catch(error){
-   
-        }
-      }
-     
-     }
+      } catch (error) {}
+    }
+  };
 
   return (
     <div className={`playBack ${props.className ? props.className : ""}`}>
@@ -243,60 +247,91 @@ export default function Playback(props) {
             setShareWindow(!shareWindow);
           }}
         >
-          <img onClick={() => Navigation("/media")} src={Share} />
+          <img src={Share} />
 
           <div>Share </div>
         </div>
       </div>
-     {shareWindow&&!playlistWindow?<div className="shareWindow">
-        <div>Share this song</div>
-        <div>
-          <div className="shareOption">
-            <div className="shareSame">
-              <img src={Whats}></img>
-    <a href={`whatsapp://send?text=${encodeURIComponent('http://localhost:5177/home')}`} title="Share on WhatsApp">
-      WhatsApp
-    </a>
+      {shareWindow && !playlistWindow ? (
+        <div className="shareWindow">
+          <div>Share this song</div>
+          <div>
+            <div className="shareOption">
+              <div className="shareSame">
+                <img src={Whats}></img>
+                <a
+                  href={`whatsapp://send?text=${encodeURIComponent(
+                    "http://localhost:5177/home"
+                  )}`}
+                  title="Share on WhatsApp"
+                >
+                  WhatsApp
+                </a>
+              </div>
+              <div className="shareSame">
+                <img src={Inst}></img>
+                <span>Instagram</span>
+              </div>
             </div>
-            <div className="shareSame">
-              <img src={Inst}></img>
-              <span>Instagram</span>
+            <div
+              onClick={() => {
+                setPlaylistWindow(true);
+              }}
+              className="addOption"
+            >
+              <img src={add}></img>
+              <div>Add to playList</div>
             </div>
           </div>
-          <div onClick={()=>{
-            setPlaylistWindow(true)
-
-          }} className="addOption">
-            <img src={add}></img>
-            <div >Add to playList</div>
+          <div className="linkShare">
+            https://soundly.com/thehavanna....<div>Copy</div>
           </div>
         </div>
-        <div className="linkShare">
-          https://soundly.com/thehavanna....<div>Copy</div>
-        </div>
-      </div>:null} 
-     {playlistWindow? <div style={{gap:"15px"}} className="shareWindow">
-        <div>Add to playlist <img onClick={()=>{
-          setPlaylistWindow(false)
-          setShareWindow(false)
-        }} src={close}/></div>
-        <div className="playlistContain">
-        {playListData.map((playlist) => (
-  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName" onClick={()=>{setStyle(true)
-      setCurrentPlaylist(playlist.id)}} key={playlist.id}>
-    <img src={playlist.thumbnail_url} alt={`Thumbnail for ${playlist.name}`} />
-    <div>
-      <div>{playlist.name}</div>
-      <div>{playlist.description}</div>
-    </div>
-  </div>
-))}
-         
-       
-        </div>
+      ) : null}
+      {playlistWindow ? (
+        <div style={{ gap: "15px" }} className="shareWindow">
+          <div>
+            Add to playlist{" "}
+            <img
+              onClick={() => {
+                setPlaylistWindow(false);
+                setShareWindow(false);
+              }}
+              src={close}
+            />
+          </div>
+          <div className="playlistContain">
+            {playListData.map((playlist) => (
+              <div
+                style={
+                  style && currentPlaylist == playlist.id
+                    ? { borderRadius: 8, border: "1px solid #B2ACAC" }
+                    : {}
+                }
+                className="playlistName"
+                onClick={() => {
+                  setStyle(true);
+                  setCurrentPlaylist(playlist.id);
+                }}
+                key={playlist.id}
+              >
+                <img
+                  src={playlist.thumbnail_url}
+                  alt={`Thumbnail for ${playlist.name}`}
+                />
+                <div>
+                  <div>{playlist.name}</div>
+                  <div>{playlist.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-        <div className="done" onClick={addSongHandler}>Done</div>
-      </div>:null}
+          <div className="done" onClick={addSongHandler}>
+            Done
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

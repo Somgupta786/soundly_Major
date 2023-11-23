@@ -1,9 +1,19 @@
 import Heart from "../../assets/Heart.svg";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Card(props) {
+  const Navigation = useNavigate()
    const styles={
         background:props.color
+    }
+    const cardClick=(title,index)=>{
+       Navigation("/likedPlaylists",{
+        state:{
+          title:title,
+          index:index
+        }
+       })
+
     }
   return (
     <>
@@ -17,7 +27,7 @@ export default function Card(props) {
           </div>
         </div>
         <div className="cardLeftEnd">
-          <div style={styles} >Listen Now</div>
+          <div onClick={()=>cardClick(props.title,props.index)} style={styles} >Listen Now</div>
           {/* <div >
             <img src={Heart} />
           </div> */}
