@@ -95,14 +95,19 @@ export default function GameSection() {
         {songData ? (
           <>
           
-            <div className="songSame">Heeriye</div>
-            <div className="songSame">Ranjha</div>
+          
             <div onClick={()=>resultHandler(songData.option1,songData)}  style={
                 selectedOption === songData.option1 ? optionStyle : null
               } className="songSame">{songData.option1}</div>
             <div onClick={()=>resultHandler(songData.option2,songData)}  style={
                 selectedOption === songData.option2 ? optionStyle : null
               } className="songSame">{songData.option2}</div>
+              <div onClick={()=>resultHandler(songData.option3,songData)}  style={
+                selectedOption === songData.option3 ? optionStyle : null
+              } className="songSame">{songData.option4}</div>
+              <div onClick={()=>resultHandler(songData.option4,songData)}  style={
+                selectedOption === songData.option4 ? optionStyle : null
+              } className="songSame">{songData.option4}</div>
           </>
         ) : null}
       </div>
