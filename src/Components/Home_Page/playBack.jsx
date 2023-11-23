@@ -20,6 +20,8 @@ import add from "../../assets/Add_Plus_Circle.svg";
 import axios from "../../Api/auth";
 import { playBackContext } from "../../App";
 import ShowPlaylist from "./Library/showPlaylist";
+import repeat1 from "../../assets/repeat2.svg";
+import shuf from "../../assets/Shuffle.svg";
 
 export default function Playback(props) {
   const [selectedSong, setSelectedSong] = useState(null);
@@ -31,6 +33,11 @@ export default function Playback(props) {
   const [style, setStyle] = useState(false);
   const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const {
+    currentSongSection,
+    setShuffle,
+    isShuffle,
+    isPlaylistLoop,
+    setPlaylistLoop,
     setIsLeftClicked,
     setIsRightClicked,
     setCurrentSongIndex,
@@ -188,9 +195,9 @@ export default function Playback(props) {
             },
           }
         );
-        if(response.data.success){
-          setShareWindow(false)
-          setPlaylistWindow(false)
+        if (response.data.success) {
+          setShareWindow(false);
+          setPlaylistWindow(false);
         }
       } catch (error) {}
     }
@@ -206,7 +213,13 @@ export default function Playback(props) {
       </div>
       <div>
         <div className="controls">
-          <img src={Group} />
+          <img
+            onClick={() =>{
+              Object.keys(playBackData).length === 0 ? null :
+              setShuffle(!isShuffle)
+              } }
+            src={isShuffle?shuf: Group}
+          />
           <img
             onClick={() => {
               setIsLeftClicked(true);
@@ -220,7 +233,13 @@ export default function Playback(props) {
             }}
             src={Right}
           />
-          <img src={Repeat} />
+          <img
+            onClick={() => {
+             
+              Object.keys(playBackData).length === 0 ? null :setPlaylistLoop(!isPlaylistLoop) ;
+            }}
+            src={isPlaylistLoop ? repeat1 : Repeat}
+          />
         </div>
         {props.playBackData.url ? (
           <audio id="audio-element">

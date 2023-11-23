@@ -1597,3 +1597,21 @@ width:35.3vw;
 .wrong{
   background-color: greenyellow;
 }
+.btn:hover{
+  cursor: pointer;
+}
+.load {
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid black;
+  border-top: 5px solid #f0f0f0;
+  border-radius: 50%;
+  width: 3.8vh;
+  height: 3.8vh;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

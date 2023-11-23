@@ -53,6 +53,31 @@ function App() {
   
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [isHome, setHome] = useState(false);
+  const [isPlaylistLoop,setPlaylistLoop] = useState(false)
+  const [isShuffle,setShuffle] = useState(false)
+  useEffect(()=>{
+    console.log(currentSongSection)
+    if(isPlaylistLoop){
+   if(currentTime==totalDuration){
+       
+          if(currentSongIndex==futureSongData.length-1){
+                setCurrentSongIndex(-1)
+          }
+          setIsRightClicked(true)
+   }
+    }
+  },[isPlaylistLoop,currentTime,totalDuration])
+  useEffect(()=>{
+    console.log("ram")
+    console.log(isShuffle)
+    if(isShuffle){
+   if(currentTime==totalDuration){
+       
+  setCurrentSongIndex(Math.floor(Math.random() * ((futureSongData.length-2) - (-1) + 1)) + (-1)) ;
+          setIsRightClicked(true)
+   }
+    }
+  },[isShuffle,currentTime,totalDuration])
 
   useEffect(() => {
     if (isMedia) {
@@ -156,13 +181,13 @@ if(isHome && location.pathname=="/game"&& gamePlayBackData){
   })
 }
 },[gamePlayBackData])
-useEffect(()=>{
-  localStorage.setItem('isLogged',JSON.stringify(false))
-  localStorage.setItem('authTok',JSON.stringify(""))
- },[])   
+ 
   return (
     <playBackContext.Provider
       value={{
+        isShuffle,setShuffle,
+        isPlaylistLoop,
+        setPlaylistLoop,
         gamePlayBackData,
          setGamePlayBackData,
         futureSongData,

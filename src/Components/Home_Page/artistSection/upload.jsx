@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Path from "../../../assets/Path.svg";
 import { useRef } from "react";
 import axios from "../../../Api/auth"
+import close from "../../../assets/Close_LG.svg"
+
 export default function Upload() {
+  const Navigation = useNavigate()
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [audioUploaded, setAudioUploaded] = useState(false);
   const [posterUploaded, setPosterUploaded] = useState(false);
@@ -14,6 +17,7 @@ export default function Upload() {
   const [songTitle,setSongTitle]=useState("")
   const [songName,setSongName]=useState("")
   const [finalUpload,setFinalUpload]=useState(false)
+  const [currentRunStatus, setCurrentRunStatus] = useState(false);
   const[fullSongDetails,setFullSongDetails]=useState({
     name: '',
     is_private: false,
@@ -25,10 +29,11 @@ export default function Upload() {
     artist_name: ''
 
   })
+  const [isLoad, setLoad] = useState(false);
   const [songGenre,setSongGenre]=useState("")
   const [songMood,setSongMood]=useState("")
   const [songLanguage,setSongLanguage]=useState("")
-
+  const [isPublic, setIsPublic] = useState(false);
   const fileInputRef = useRef(null);
   const maxSize = 7 * 1024 * 1024; 
 
@@ -142,6 +147,10 @@ export default function Upload() {
     }
   };
   const artistDataHandler = async (isPrivate) => {
+   if(!currentRunStatus){
+    setCurrentRunStatus(true)
+    setIsPublic(!isPrivate)
+    setLoad(true)
     try {
       const formData = new FormData();
       formData.append('name', fullSongDetails.name);
@@ -166,11 +175,29 @@ export default function Upload() {
           "Content-Type": "multipart/form-data",
         },
       });
-  
-      console.log("Upload success:", response.data);
+            if(response.data.success){
+              console.log("Upload success:", response.data);
+           
+              setLoad(false)
+             setIsPublic(false)
+             setCurrentRunStatus(false)
+             Navigation("/beArtist")
+            }
+            else{
+              setLoad(false)
+              setIsPublic(false)
+              setCurrentRunStatus(false)
+            }
+     
+
     } catch (error) {
+      setIsPublic(false)
+      setLoad(false)
+      setCurrentRunStatus(false)
       console.error("Upload failed:", error);
     }
+   }
+    
   };
   
   return (
@@ -184,7 +211,7 @@ export default function Upload() {
           <div>
             Your Thoughts <span>Cleaner</span>
           </div>
-          <div onClick={() => Navigation("/upload")}>
+          <div className="btn" onClick={() => Navigation("/upload")}>
             <img></img>Upload
           </div>
         </div>
@@ -201,7 +228,7 @@ export default function Upload() {
                 <img src={Path}></img>
                 <div>Upload your music file here</div>
               </div>
-              <div>
+              <div className="btn">
                 <div onClick={openFileDialog} >
                   <input
                     type="file"
@@ -222,12 +249,13 @@ export default function Upload() {
                 </div>
               </div>
             </div>
-            <div className="uploadLower">
+            <div className="uploadLower btn">
               <div></div>
               <div></div>
               <div></div>
               <div></div>
             </div>
+            <img className="btn" onClick={()=>Navigation("/beArtist")} src={close}/>
           </div>
         ) : null}
         {audioUploaded && !posterUploaded ? (
@@ -236,10 +264,13 @@ export default function Upload() {
             <div>
               <input placeholder="Enter song’s title" value={songTitle} onChange={songDataHandler} name="songTitle"></input>
               <input placeholder="Enter artist’s name" value={songName} onChange={songDataHandler} name="songName"></input>
-              <div onClick={songDetailsUpdated}>Next</div>
+              <div className="btn" onClick={songDetailsUpdated}>Next</div>
             </div>
-            <div className="uploadLower">
-              <div></div>
+            <div  className="uploadLower btn">
+              <div  onClick={()=>{
+                setAudioUploaded(false)
+                
+              }}></div>
               <div style={{ background: "#C76B98" }}></div>
               <div></div>
               <div></div>
@@ -257,7 +288,7 @@ export default function Upload() {
                 <div>Upload your music’s poster here</div>
               </div>
               <div>
-              <div onClick={openFileDialog} >
+              <div className="btn" onClick={openFileDialog} >
                   <input
                     type="file"
                     placeholder="Choose file"
@@ -277,9 +308,15 @@ export default function Upload() {
                 </div>
               </div>
             </div>
-            <div className="uploadLower">
-              <div></div>
-              <div style={{ background: "#C76B98" }}></div>
+            <div  className="uploadLower btn">
+              <div onClick={()=>{
+                setAudioUploaded(false)
+                setPosterUploaded(false)
+              }}></div>
+              <div onClick={()=>{
+                setPosterUploaded(false)
+                
+              }} style={{ background: "#C76B98" }}></div>
               <div style={{ background: "#C76B98" }}></div>
               <div></div>
             </div>
@@ -297,12 +334,21 @@ export default function Upload() {
               <input placeholder="Enter Genre" value={songGenre} onChange={songDataHandler} name="songGenre"></input>
               <input placeholder="Enter Language" value={songLanguage} onChange={songDataHandler} name="songLanguage"></input>
               <input placeholder="Enter Mood" value={songMood} onChange={songDataHandler} name="songMood"></input>
-              <div onClick={songDetailsUpdated2}>Next</div>
+              <div className="btn" onClick={songDetailsUpdated2}>Next</div>
             </div>
-            <div className="uploadLower">
-              <div></div>
-              <div style={{ background: "#C76B98" }}></div>
-              <div style={{ background: "#C76B98" }}></div>
+            <div  className="uploadLower btn">
+              <div onClick={()=>{
+                setAudioUploaded(false)
+                setSongUploaded(false)
+              }}></div>
+              <div  onClick={()=>{
+                setPosterUploaded(false)
+                setSongUploaded(false)
+              }}  style={{ background: "#C76B98" }}></div>
+              <div  onClick={()=>{
+                setSongUploaded(false)
+                
+              }}  style={{ background: "#C76B98" }}></div>
               <div style={{ background: "#C76B98" }}></div>
             </div>
           </div>
@@ -316,9 +362,9 @@ export default function Upload() {
             className="upload2"
           >
             <div>A step ahead to reach millions</div>
-            <div>
-             <div onClick={()=>artistDataHandler(false)} className="same"><div>Public Now</div><div>Public</div></div>
-             <div onClick={()=>artistDataHandler(false)} className="same"><div>Private Now</div><div style={{background: "#CF2121"}}>Private</div></div>
+            <div className="btn">
+             <div  onClick={()=>artistDataHandler(false)} className="same"><div>Public Now</div><div> {isLoad && isPublic ? <div className="loader"></div> : "Public"}</div></div>
+             <div onClick={()=>artistDataHandler(true)} className="same"><div>Private Now</div><div style={{background: "#CF2121"}}>{isLoad && !isPublic ? <div className="loader"></div> : "Private"}</div></div>
             </div>
             
           </div>

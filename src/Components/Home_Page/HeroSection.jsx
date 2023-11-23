@@ -20,6 +20,7 @@ import { playBackContext } from '../../App';
 export default function HeroSection() {
   
   const token = JSON.parse(localStorage.getItem('authTok'));
+  console.log(token)
   const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
   const styleBox = {
     background:

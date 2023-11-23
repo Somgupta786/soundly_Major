@@ -13,9 +13,13 @@ export default function artistSection() {
   setHome(false)
   const token = JSON.parse(localStorage.getItem("authTok"));
   const Navigation = useNavigate();
+  const [isLoad, setLoad] = useState(false);
   const [publicSongs, setPublicSongs] = useState([]);
   const [privateSongs, setPrivateSongs] = useState([]);
   const [privateChanges, setPrivateChanges] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState();
+  const [currentRunStatus, setCurrentRunStatus] = useState(false);
+
   useEffect(() => {
     console.log("hello");
     const fetchSongs = async () => {
@@ -30,6 +34,7 @@ export default function artistSection() {
           const fetchedSongs = response.data.data;
           setPublicSongs(fetchedSongs["public songs"]);
           setPrivateSongs(fetchedSongs["private songs"]);
+          setLoad(false)
           console.log(fetchedSongs["public songs"]);
         } else {
           console.error("Failed to fetch songs.");
@@ -42,27 +47,38 @@ export default function artistSection() {
     fetchSongs();
   }, [privateChanges]);
 
-  const clickHandler = async (song) => {
-    try {
-      const response = await axios.patch(
-        `songs/${song.id}/`,
-        {
-          is_private: !song.is_private,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+  const clickHandler = async (song,index) => {
+    if(!currentRunStatus){
+      setCurrentRunStatus(true)
+      setLoad(true)
+      setCurrentIndex(index)
+      try {
+        const response = await axios.patch(
+          `songs/${song.id}/`,
+          {
+            is_private: !song.is_private,
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        if (response.data.success) {
+          
+          console.log("complete");
+          setCurrentRunStatus(false)
+          setPrivateChanges(!privateChanges);
+        } else {
+          setCurrentRunStatus(false)
+          console.error("Failed to fetch songs.");
         }
-      );
-      if (response.data.success) {
-        console.log("complete");
-        setPrivateChanges(!privateChanges);
-      } else {
-        console.error("Failed to fetch songs.");
-      }
-    } catch (error) {}
+      } catch (error) {
+        setCurrentRunStatus(false)
+        setLoad(false)
+      }}
+    
   };
   return (
     <div className="artistDashboard">
@@ -75,7 +91,7 @@ export default function artistSection() {
           <div>
             Your Thoughts <span>Cleaner</span>
           </div>
-          <div onClick={() => Navigation("/upload")}>
+          <div className="btn" onClick={() => Navigation("/upload")}>
             <img ></img>Upload
           </div>
         </div>
@@ -123,7 +139,7 @@ export default function artistSection() {
                         : song.language}
                     </div>
                     <div>{song.song_duration}</div>
-                    <div onClick={() => clickHandler(song)}>Public</div>
+                    <div className="btn" onClick={() => clickHandler(song,songIndex+1)}> {isLoad && currentIndex==songIndex+1? <div className="load"></div> : "Public"}</div>
                   </div>
                   <hr></hr>
                 </>
@@ -131,7 +147,7 @@ export default function artistSection() {
               {privateSongs.map((song, songIndex) => (
                 <>
                   <div className="listeningSongsDetail">
-                    <div>{songIndex + 1}</div>
+                    <div>{(publicSongs.length)+songIndex+1 }</div>
                     <div>
                       <img src={song.thumbnail_url}></img>
                     </div>
@@ -151,11 +167,11 @@ export default function artistSection() {
                         : song.language}
                     </div>
                     <div>{song.song_duration}</div>
-                    <div
-                      onClick={() => clickHandler(song)}
+                    <div className="btn"
+                      onClick={() => clickHandler(song,(publicSongs.length)+songIndex+1 )}
                       style={{ background: "#CF2121" }}
                     >
-                      Private
+                      {isLoad&&currentIndex==(publicSongs.length)+songIndex+1 ? <div  className="load"></div> : "Private"}
                     </div>
                   </div>
                   <hr></hr>

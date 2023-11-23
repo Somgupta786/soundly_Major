@@ -14,7 +14,7 @@ import { playBackContext } from '../../App';
 export default function Navbar(props) {
   const{isLogged,setLogged,setAuthTok}=useContext(loginContext)
   const Navigation = useNavigate()
-  const token = JSON.parse(localStorage.getItem("authTok"));
+  const token = JSON.parse(localStorage.getItem('authTok'));
   const{setPlayBackData,setNavData,setHome,setMedia,setMediaData}=useContext(playBackContext);
   const [searchValue, setSearchValue] = useState("");
   
@@ -35,15 +35,14 @@ export default function Navbar(props) {
     navigate("/library");
   };
   const searchHandler = async (e) => {
+    
     setSearchValue(e.target.value);
     try {
       const response = await axios.get(
-        `songsearch/?query=${e.target.value}`,
-        null,
-        {
+        `songsearch/?query=${e.target.value}`,{
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         }
       );
       if (response.data.success) {

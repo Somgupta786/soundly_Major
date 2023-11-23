@@ -91,7 +91,11 @@ setHome(true)
         
         try {
         const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
-         const response = await axios.get(url);
+         const response = await axios.get(url,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
 
         if (response.data.success) {
           const fetchedSongs = response.data.data;

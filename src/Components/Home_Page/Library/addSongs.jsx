@@ -61,7 +61,7 @@ const handleImgCardClick = (song,songIndex) => {
 
     if(!addedSong.includes(song.id)){
      try {
-      const response = await axios.post(`playlists/${props.state.id}/songs/${song.id}/`, null, {
+      const response = await axios.post(`playlists/${props.state.id}/songs/${song.id}/`, null,{
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -78,7 +78,7 @@ const handleImgCardClick = (song,songIndex) => {
   }
   else{
     try {
-        const response = await axios.delete(`playlists/${props.state.id}/songs/${song.id}/`, null, {
+        const response = await axios.delete(`playlists/${props.state.id}/songs/${song.id}/`,  {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -87,7 +87,8 @@ const handleImgCardClick = (song,songIndex) => {
         if (response.data.success) {
             setAddedSong((prevArray) => prevArray.filter(id => id !== song.id));
         } else {
-          console.error('Failed to add songs to the playlist.');
+          console.error(response);
+          setAddedSong((prevArray) => prevArray.filter(id => id !== song.id));
         }
       } catch (error) {
         console.error('An error occurred:', error);
@@ -100,7 +101,11 @@ const handleImgCardClick = (song,songIndex) => {
     const fetchSongs = async () => {
       try {
         const url = 'https://test-mkcw.onrender.com/api/allpublicsongs/';
-        const response = await axios.get(url);
+        const response = await axios.get(url,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
 
         if (response.data.success) {
           const fetchedSongs = response.data.data;
@@ -146,7 +151,7 @@ const handleImgCardClick = (song,songIndex) => {
       <div className='addSongsUpper' >
         <div className='addText'>
           <div>Add songs to your ‘Default name’</div>
-          <div onClick={()=>Navigation("/playlist")}>DONE</div>
+          <div className='btn' onClick={()=>Navigation("/playlist")}>DONE</div>
         </div>
         {songs.map((song,songIndex) => (
           <div className='showSongs' key={song.id}>
@@ -158,10 +163,10 @@ const handleImgCardClick = (song,songIndex) => {
               </div>
             </div>
             <div>{song.song_duration}</div>
-            <div onClick={() => handleImgCardClick(song,songIndex)} >
+            <div className='btn' onClick={() => handleImgCardClick(song,songIndex)} >
               <img src={isPlaying && playBackData.id === song.id ? Continue : Pause} />
             </div>
-            <div
+            <div className='btn'
               style={addedSong.includes(song.id) ? { background: "#2C9A3E" } : null}
               onClick={() => AddSongHandler(song)}
             >

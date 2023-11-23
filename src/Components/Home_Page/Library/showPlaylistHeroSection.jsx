@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { playBackContext } from "../../../App";
 
 export default function ShowPlaylistHeroSection(props) {
-  console.log(props.state);
+
 
   const token = JSON.parse(localStorage.getItem("authTok"));
   const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
