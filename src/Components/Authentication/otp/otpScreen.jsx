@@ -59,7 +59,7 @@ export default function Otp(props) {
         console.log(response.data.data.access_token)
        
         localStorage.setItem('isLogged',JSON.stringify(true))
-        localStorage.setItem('authTok',JSON.stringify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODA1MTczLCJpYXQiOjE2OTkyMTMxNzMsImp0aSI6IjYwOTdkYTkxNTJmMDQ1YzY4YmE1MTBjZWQyMDM4MzAxIiwidXNlcl9pZCI6ImFkbWluIn0.zhhXZrQzl4fls2jh26tGQ6KMuKojlFV8r-rE1LEWT_w"))
+        localStorage.setItem('authTok',JSON.stringify(response.data.data.access_token))
         const isLogged = JSON.parse(localStorage.getItem('isLogged'));
         const authTok = JSON.parse(localStorage.getItem('authTok'));
        

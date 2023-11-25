@@ -56,7 +56,7 @@ function App() {
   const [isPlaylistLoop,setPlaylistLoop] = useState(false)
   const [isShuffle,setShuffle] = useState(false)
   useEffect(()=>{
-    console.log(currentSongSection)
+   
     if(isPlaylistLoop){
    if(currentTime==totalDuration){
        
@@ -68,8 +68,7 @@ function App() {
     }
   },[isPlaylistLoop,currentTime,totalDuration])
   useEffect(()=>{
-    console.log("ram")
-    console.log(isShuffle)
+    
     if(isShuffle){
    if(currentTime==totalDuration){
        
