@@ -18,7 +18,9 @@ import Snake from "../../../assets/snake.svg";
 import close from "../../../assets/Close_LG.svg";
 import add from "../../../assets/Add_Plus_Circle.svg";
 import audioSync from 'audio-sync-with-text';
-
+import Repeat1 from "../../../assets/Repeat (1)med.svg"
+import Shuf from "../../../assets/medShuf.svg"
+import loop from "../../../assets/mloop.svg"
 
 
 import { playBackContext } from "../../../App";
@@ -32,6 +34,13 @@ export default function MediaPlayer() {
   const [currentLyricIndex, setCurrentLyricIndex] = useState(0);
 
   const {
+    isSongLoop,setSongLoop,
+    clickCount,
+   setClickCount,
+    setShuffle,
+    isShuffle,
+    isPlaylistLoop,
+    setPlaylistLoop,
     setIsLeftClicked,
     setIsRightClicked,
     setCurrentSongIndex,
@@ -53,326 +62,8 @@ export default function MediaPlayer() {
   let sync;
   // console.log(playBackData)
  const [matchingLyrics,setMatchingLyrics]= useState([])
-  const lyricsData = [
-    {
-      "index": 1,
-      "end": "00:00:00,000",
-      "start": "00:00:00,000",
-      "text": "by RentAnAdviser.com"
-    },
-    {
-      "index": 2,
-      "end": "00:00:00,000",
-      "start": "00:00:00,000",
-      "text": ""
-    },
-    {
-      "index": 3,
-      "end": "00:00:00,000",
-      "start": "00:00:00,000",
-      "text": "1"
-    },
-    {
-      "index": 4,
-      "end": "00:00:16,050",
-      "start": "00:00:12,000",
-      "text": "All smiles, I know what it"
-    },
-    {
-      "index": 5,
-      "end": "00:00:16,050",
-      "start": "00:00:12,000",
-      "text": "takes to fool this town"
-    },
-    {
-      "index": 6,
-      "end": "00:00:16,050",
-      "start": "00:00:12,000",
-      "text": ""
-    },
-    {
-      "index": 7,
-      "end": "00:00:16,050",
-      "start": "00:00:12,000",
-      "text": "2"
-    },
-    {
-      "index": 8,
-      "end": "00:00:21,600",
-      "start": "00:00:16,100",
-      "text": "I'll do it 'til the sun goes down"
-    },
-    {
-      "index": 9,
-      "end": "00:00:21,600",
-      "start": "00:00:16,100",
-      "text": "and all through the night time"
-    },
-    {
-      "index": 10,
-      "end": "00:00:21,600",
-      "start": "00:00:16,100",
-      "text": ""
-    },
-    {
-      "index": 11,
-      "end": "00:00:21,600",
-      "start": "00:00:16,100",
-      "text": "3"
-    },
-    {
-      "index": 12,
-      "end": "00:00:26,700",
-      "start": "00:00:21,700",
-      "text": "Oh yeah, oh yeah, I'll tell"
-    },
-    {
-      "index": 13,
-      "end": "00:00:26,700",
-      "start": "00:00:21,700",
-      "text": "you what you wanna hear"
-    },
-    {
-      "index": 14,
-      "end": "00:00:26,700",
-      "start": "00:00:21,700",
-      "text": ""
-    },
-    {
-      "index": 15,
-      "end": "00:00:26,700",
-      "start": "00:00:21,700",
-      "text": "4"
-    },
-    {
-      "index": 16,
-      "end": "00:00:29,400",
-      "start": "00:00:26,800",
-      "text": "Leave my sunglasses on"
-    },
-    {
-      "index": 17,
-      "end": "00:00:29,400",
-      "start": "00:00:26,800",
-      "text": "while I shed a tear"
-    },
-    {
-      "index": 18,
-      "end": "00:00:29,400",
-      "start": "00:00:26,800",
-      "text": ""
-    },
-    {
-      "index": 19,
-      "end": "00:00:29,400",
-      "start": "00:00:26,800",
-      "text": "5"
-    },
-    {
-      "index": 20,
-      "end": "00:00:34,100",
-      "start": "00:00:29,500",
-      "text": "It's never the right time, yeah, yeah"
-    },
-    {
-      "index": 21,
-      "end": "00:00:34,100",
-      "start": "00:00:29,500",
-      "text": ""
-    },
-    {
-      "index": 22,
-      "end": "00:00:34,100",
-      "start": "00:00:29,500",
-      "text": "6"
-    },
-    {
-      "index": 23,
-      "end": "00:00:39,500",
-      "start": "00:00:34,200",
-      "text": "I put my armor on, show you"
-    },
-    {
-      "index": 24,
-      "end": "00:00:39,500",
-      "start": "00:00:34,200",
-      "text": "how strong how I am"
-    },
-    {
-      "index": 25,
-      "end": "00:00:39,500",
-      "start": "00:00:34,200",
-      "text": ""
-    },
-    {
-      "index": 26,
-      "end": "00:00:39,500",
-      "start": "00:00:34,200",
-      "text": "7"
-    },
-    {
-      "index": 27,
-      "end": "00:00:45,400",
-      "start": "00:00:39,600",
-      "text": "I put my armor on, I'll"
-    },
-    {
-      "index": 28,
-      "end": "00:00:45,400",
-      "start": "00:00:39,600",
-      "text": "show you that I am"
-    },
-    {
-      "index": 29,
-      "end": "00:00:45,400",
-      "start": "00:00:39,600",
-      "text": ""
-    },
-    {
-      "index": 30,
-      "end": "00:00:45,400",
-      "start": "00:00:39,600",
-      "text": "8"
-    },
-    {
-      "index": 31,
-      "end": "00:00:48,100",
-      "start": "00:00:45,500",
-      "text": "I'm unstoppable"
-    },
-    {
-      "index": 32,
-      "end": "00:00:48,100",
-      "start": "00:00:45,500",
-      "text": ""
-    },
-    {
-      "index": 33,
-      "end": "00:00:48,100",
-      "start": "00:00:45,500",
-      "text": "9"
-    },
-    {
-      "index": 34,
-      "end": "00:00:51,200",
-      "start": "00:00:48,200",
-      "text": "I'm a Porsche with no brakes"
-    },{
-      "index": 35,
-      "end": "00:00:51,200",
-      "start": "00:00:48,200",
-      "text": ""
-    },
-    {
-      "index": 36,
-      "end": "00:00:51,200",
-      "start": "00:00:48,200",
-      "text": "10"
-    },
-    {
-      "index": 37,
-      "end": "00:00:53,500",
-      "start": "00:00:51,300",
-      "text": "I'm invincible"
-    },
-    {
-      "index": 38,
-      "end": "00:00:53,500",
-      "start": "00:00:51,300",
-      "text": ""
-    },
-    {
-      "index": 39,
-      "end": "00:00:53,500",
-      "start": "00:00:51,300",
-      "text": "11"
-    },
-    {
-      "index": 40,
-      "end": "00:00:56,800",
-      "start": "00:00:53,600",
-      "text": "Yeah, I win every single game"
-    },
-    {
-      "index": 41,
-      "end": "00:00:56,800",
-      "start": "00:00:53,600",
-      "text": ""
-    },
-    {
-      "index": 42,
-      "end": "00:00:56,800",
-      "start": "00:00:53,600",
-      "text": "12"
-    },
-    {
-      "index": 43,
-      "end": "00:00:59,200",
-      "start": "00:00:56,900",
-      "text": "I'm so powerful"
-    },
-    {
-      "index": 44,
-      "end": "00:00:59,200",
-      "start": "00:00:56,900",
-      "text": ""
-    },
-    {
-      "index": 45,
-      "end": "00:00:59,200",
-      "start": "00:00:56,900",
-      "text": "13"
-    },
-    {
-      "index": 46,
-      "end": "00:01:02,200",
-      "start": "00:00:59,300",
-      "text": "I don't need batteries to play"
-    },
-    {
-      "index": 47,
-      "end": "00:01:02,200",
-      "start": "00:00:59,300",
-      "text": ""
-    },
-    {
-      "index": 48,
-      "end": "00:01:02,200",
-      "start": "00:00:59,300",
-      "text": "14"
-    },
-    {
-      "index": 49,
-      "end": "00:01:07,700",
-      "start": "00:01:02,300",
-      "text": "I'm so confident, yeah,"
-    },
-    {
-      "index": 50,
-      "end": "00:01:07,700",
-      "start": "00:01:02,300",
-      "text": "I'm unstoppable today"
-    },
-    {
-      "index": 51,
-      "end": "00:01:07,700",
-      "start": "00:01:02,300",
-      "text": ""
-    },
-    {
-      "index": 52,
-      "end": "00:01:07,700",
-      "start": "00:01:02,300",
-      "text": "15"
-    },
-    {
-      "index": 53,
-      "end": "00:01:13,400",
-      "start": "00:01:07,800",
-      "text": "Unstoppable today, unstoppable today"
-    },
-   
-  ]
+ 
+  const lyricsData = playBackData.lyrics_url
    
   // useEffect(() => {
   //   const audio_sync = async () => {
@@ -424,9 +115,9 @@ export default function MediaPlayer() {
       if (lyricElement) {
         lyricElement.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-      console.log(lyricElement)
+    
     }
-    console.log(matchingLyrics);
+   
   
     // You can decide how to handle the matching lyrics array here.
     // For example, you can highlight all of them or do any other specific action.
@@ -471,16 +162,18 @@ export default function MediaPlayer() {
   }, [audio]);
 
   useEffect(() => {
-    if (playBackData.url && playBackData.url !== audio.src) {
+    if (playBackData.url && playBackData.url !== audio.src||isSongLoop) {
+      console.log(audio);
       audio.pause();
       audio.src = playBackData.url;
+      console.log(audio);
       audio.load();
       audio.play();
       setIsPlaying(true);
     } else if (!playBackData.url) {
       audio.pause();
     }
-  }, [playBackData.url, audio.src]);
+  }, [playBackData.url, audio.src, playBackData]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -507,7 +200,8 @@ export default function MediaPlayer() {
         );
         if (response.data.success) {
           setIsLiked(!isLiked);
-          console.log(isLiked);
+             playBackData.isLiked=!isLiked
+          console.log(!isLiked);
         }
       } catch (error) {
         console.log(error);
@@ -524,8 +218,9 @@ export default function MediaPlayer() {
           }
         );
         if (response.data.success) {
+          playBackData.isLiked=!isLiked
           setIsLiked(!isLiked);
-          console.log(isLiked);
+          console.log(!isLiked);
         }
       } catch (error) {
         console.log(error);
@@ -577,6 +272,40 @@ export default function MediaPlayer() {
       }
      
      }
+     const handleLyricClick = () => {
+      console.log(clickCount)
+      if (clickCount === 0) {
+      
+        Object.keys(playBackData).length === 0 ? null :
+        (setPlaylistLoop(!isPlaylistLoop),
+        setShuffle(false) ,
+        setClickCount((prevClickCount) => prevClickCount + 1));
+                
+      }
+       else if (clickCount === 1) {
+        Object.keys(playBackData).length === 0 ? null :
+        (setSongLoop(true),
+        setPlaylistLoop(false),
+          setShuffle(false) ,
+          setClickCount((prevClickCount) => prevClickCount + 1));
+        
+      }
+      else if (clickCount === 2) {
+        Object.keys(playBackData).length === 0 ? null :
+        ( setSongLoop(false),
+         setPlaylistLoop(false),
+          setShuffle(false) ,
+          setClickCount((prevClickCount) => prevClickCount - 2));
+         
+        
+        
+      }
+      
+  
+      // Increment the click count
+      
+    };
+  
 
   return (
     <div className="mediaPlayer">
@@ -614,7 +343,12 @@ export default function MediaPlayer() {
           </div>
           <div>
             <div>
-              <img src={Group} />
+              <img  onClick={() =>{
+              Object.keys(playBackData).length === 0 ? null :
+              setShuffle(!isShuffle)
+              setPlaylistLoop(false) 
+              } }
+            src={isShuffle? Shuf: Group} />
             </div>
             <div className="mainControl">
               <div>
@@ -644,7 +378,8 @@ export default function MediaPlayer() {
               </div>
             </div>
             <div>
-              <img src={Repeat} />
+              <img onClick={handleLyricClick}
+           src={!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? Repeat1: Repeat} />
             </div>
           </div>
           {playBackData.url ? (

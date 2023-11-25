@@ -51,7 +51,7 @@ setHome(true)
       name: songData.name,
       artist:selectedSong.artist,
       isLiked:songData.is_liked,
-      lyrics_url:songData.lyrics_url
+      lyrics_url:songData.lyrics_lyrics_json
       
     })
    

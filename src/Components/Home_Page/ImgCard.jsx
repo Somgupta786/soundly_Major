@@ -2,8 +2,10 @@ import React, { useState,useContext, useEffect } from 'react';
 import Pause from "../../assets/imgPause.svg";
 import Continue from "../../assets/pause.svg";
 import { playBackContext } from '../../App';
+import { useLocation } from 'react-router-dom';
+
 export default function ImgCard(props) {
- 
+  const location = useLocation();
   const [hover, setHover] = useState(false);
   const{playBackData,currentSongIndex,isLeftClicked,setIsLeftClicked,currentSongSection,setHome,setMedia,isPlaying,isRightClicked,setIsRightClicked, setIsPlaying,isLiked, setIsLiked,currentTime, setCurrentTime,totalDuration, setTotalDuration,audio, setAudio}=useContext(playBackContext)
   const handleImgCardClick = () => {
@@ -16,7 +18,7 @@ export default function ImgCard(props) {
   
   return (
     <div
-      style={hover || isPlaying&&playBackData.id===props.id ? { background: "#2D2D31" } : null}
+      style={hover || isPlaying&&playBackData.id===props.id&&!props.refer ? { background: "#2D2D31" } : null}
       className="imgCard"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -24,7 +26,7 @@ export default function ImgCard(props) {
       
       handleImgCardClick()
       
-        setMedia(true)
+      !props.refer?setMedia(true):null
       }}
     >
       <div>
@@ -34,7 +36,7 @@ export default function ImgCard(props) {
         </div>
         <div className="songName">{props.name}</div>
       </div>
-      {hover|| isPlaying&&playBackData.id===props.id ? (
+      {(hover&&!props.refer)||(isPlaying&&playBackData.id===props.id&&!props.refer)  ? (
         <img
          onClick={(event)=>{
           event.stopPropagation();

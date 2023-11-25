@@ -27,6 +27,8 @@ function App() {
   const [isRightClicked, setIsRightClicked] = useState(false);
   const [isLeftClicked, setIsLeftClicked] = useState(false);
   const [songData, setSongData] = useState(null);
+ 
+  const [clickCount, setClickCount] = useState(0);
 
   const [playBackData, setPlayBackData] = useState({});
   const [gamePlayBackData, setGamePlayBackData] = useState({});
@@ -38,23 +40,13 @@ function App() {
     game: "Game",
   });
   
-  // useEffect(() => {
-  //   const storedIsLogged = JSON.parse(localStorage.getItem("isLogged"));
-  //   const storedAuthTok = JSON.parse(localStorage.getItem("authTok"));
-
-  //   if (storedIsLogged === null) {
-  //     localStorage.setItem("isLogged", JSON.stringify(false));
-  //   }
-
-  //   if (storedAuthTok === null) {
-  //     localStorage.setItem("authTok", JSON.stringify(""));
-  //   }
-  // }, []);
+  
   
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [isHome, setHome] = useState(false);
   const [isPlaylistLoop,setPlaylistLoop] = useState(false)
   const [isShuffle,setShuffle] = useState(false)
+  const [isSongLoop,setSongLoop] = useState(false)
   useEffect(()=>{
    
     if(isPlaylistLoop){
@@ -77,6 +69,17 @@ function App() {
    }
     }
   },[isShuffle,currentTime,totalDuration])
+  useEffect(()=>{
+    
+    if(isSongLoop){
+   if(currentTime==totalDuration){
+       console.log("kk")
+       console.log(currentSongIndex-1)
+  setCurrentSongIndex(currentSongIndex-1) ;
+          setIsRightClicked(true)
+   }
+    }
+  },[isSongLoop,currentTime,totalDuration])
 
   useEffect(() => {
     if (isMedia) {
@@ -88,9 +91,9 @@ function App() {
     }
   }, [playBackData, Navigation]);
   useEffect(() => {
-    console.log("in app")
+    
     if (isRightClicked) {
-      
+      console.log(currentSongIndex)
       const apiCaller = async () => {
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${
@@ -104,6 +107,7 @@ function App() {
 
           if (response.data.success) {
             setSongData(response.data.data);
+           
           } else {
             console.error("Failed to fetch song data.");
           }
@@ -141,8 +145,11 @@ function App() {
     }
   }, [isRightClicked, isLeftClicked]);
 useEffect(()=>{
-  if(songData&&isRightClicked){setPlayBackData({
-         
+  console.log("in app");
+  if(songData&&isRightClicked){
+   
+    setPlayBackData({
+    
     url:songData.song_url,
     id:futureSongData[currentSongIndex+1].id,
     thumbnail: futureSongData[currentSongIndex+1].thumbnail_url,
@@ -184,6 +191,8 @@ if(isHome && location.pathname=="/game"&& gamePlayBackData){
   return (
     <playBackContext.Provider
       value={{
+        isSongLoop,setSongLoop,
+        clickCount, setClickCount,
         isShuffle,setShuffle,
         isPlaylistLoop,
         setPlaylistLoop,

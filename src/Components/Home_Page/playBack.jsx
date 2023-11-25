@@ -22,6 +22,7 @@ import { playBackContext } from "../../App";
 import ShowPlaylist from "./Library/showPlaylist";
 import repeat1 from "../../assets/repeat2.svg";
 import shuf from "../../assets/Shuffle.svg";
+import loop from "../../assets/songloop.svg"
 
 export default function Playback(props) {
   const [selectedSong, setSelectedSong] = useState(null);
@@ -33,6 +34,9 @@ export default function Playback(props) {
   const [style, setStyle] = useState(false);
   const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const {
+    isSongLoop,setSongLoop,
+    clickCount,
+   setClickCount,
     currentSongSection,
     setShuffle,
     isShuffle,
@@ -57,6 +61,7 @@ export default function Playback(props) {
     audio,
     setAudio,
   } = useContext(playBackContext);
+  console.log(isLiked)
 
   const Navigation = useNavigate();
   const token = JSON.parse(localStorage.getItem("authTok"));
@@ -94,8 +99,9 @@ export default function Playback(props) {
   }, [audio]);
 
   useEffect(() => {
-    if (playBackData.url && playBackData.url !== audio.src) {
-      console.log(audio);
+    if (playBackData.url && playBackData.url !== audio.src||isSongLoop) {
+      console.log(audio.src);
+      console.log(playBackData.url)
       audio.pause();
       audio.src = playBackData.url;
       console.log(audio);
@@ -119,7 +125,8 @@ export default function Playback(props) {
     setIsPlaying(!isPlaying);
   };
   useEffect(() => {
-    console.log(playBackData.isLiked);
+    
+    
     setIsLiked(playBackData.isLiked);
   }, [playBackData]);
 
@@ -202,6 +209,39 @@ export default function Playback(props) {
       } catch (error) {}
     }
   };
+  const handleLyricClick = () => {
+    console.log(clickCount)
+    if (clickCount === 0) {
+    
+      Object.keys(playBackData).length === 0 ? null :
+      (setPlaylistLoop(!isPlaylistLoop),
+      setShuffle(false) ,
+      setClickCount((prevClickCount) => prevClickCount + 1));
+              
+    }
+     else if (clickCount === 1) {
+      Object.keys(playBackData).length === 0 ? null :
+      (setSongLoop(true),
+      setPlaylistLoop(false),
+        setShuffle(false) ,
+        setClickCount((prevClickCount) => prevClickCount + 1));
+      
+    }
+    else if (clickCount === 2) {
+      Object.keys(playBackData).length === 0 ? null :
+      ( setSongLoop(false),
+       setPlaylistLoop(false),
+        setShuffle(false) ,
+        setClickCount((prevClickCount) => prevClickCount - 2));
+       
+      
+      
+    }
+    
+
+    // Increment the click count
+    
+  };
 
   return (
     <div className={`playBack ${props.className ? props.className : ""}`}>
@@ -216,7 +256,9 @@ export default function Playback(props) {
           <img
             onClick={() =>{
               Object.keys(playBackData).length === 0 ? null :
-              setShuffle(!isShuffle)
+              setShuffle(!isShuffle),
+              setPlaylistLoop(false) ,
+              setSongLoop(false)
               } }
             src={isShuffle?shuf: Group}
           />
@@ -234,11 +276,9 @@ export default function Playback(props) {
             src={Right}
           />
           <img
-            onClick={() => {
-             
-              Object.keys(playBackData).length === 0 ? null :setPlaylistLoop(!isPlaylistLoop) ;
-            }}
-            src={isPlaylistLoop ? repeat1 : Repeat}
+            onClick={handleLyricClick}
+            src={!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? repeat1 : Repeat}
+            
           />
         </div>
         {props.playBackData.url ? (

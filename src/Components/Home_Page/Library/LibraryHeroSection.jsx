@@ -45,7 +45,8 @@ export default function LibraryHeroSection() {
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_json
       
     })
    

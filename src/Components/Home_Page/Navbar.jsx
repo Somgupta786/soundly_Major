@@ -253,7 +253,13 @@ export default function Navbar(props) {
                 >
                   View Recently played
                 </div>
-                <div onClick={() => setBeUploader(!beUploader)}>
+                <div onClick={() =>{
+                  userData.is_uploader?Navigation('/beArtist'): setBeUploader(!beUploader)
+                  
+                   
+                }
+                 
+                 }>
                   Become artist
                 </div>
               </div>

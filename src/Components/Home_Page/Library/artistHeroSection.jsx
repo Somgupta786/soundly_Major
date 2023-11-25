@@ -160,7 +160,7 @@ export default function ArtistHeroSection() {
         <div> Show more</div>
       </div>
       <div className="homeFirstRow">
-      {favArt.map((name)=> <ImgCard  onClick={() => Navigation("/favouriteArtistSongs",{state:name.name})}   img ={name.thumbnail_url} name ={name.name}/>)}
+      {favArt.map((name)=> <ImgCard  onClick={() => Navigation("/favouriteArtistSongs",{state:name.name})}   img ={name.thumbnail_url} name ={name.name} refer="false"/>)}
       
    
       </div>

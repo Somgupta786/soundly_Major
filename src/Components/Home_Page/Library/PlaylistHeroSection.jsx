@@ -147,6 +147,7 @@ export default function PlaylistHeroSection() {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
+              refer="false"
             />
           ))}
         </div>
@@ -159,11 +160,12 @@ export default function PlaylistHeroSection() {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
+              refer="false"
             />
           ))}
         </div>
         <div className="homeLastRow">
-          <ImgCard onClick={handleCreatePlaylist}  img={Group} name="Create Playlist" />
+          <ImgCard onClick={handleCreatePlaylist}  img={Group} name="Create Playlist" refer="false" />
         </div>
       </div>
 
