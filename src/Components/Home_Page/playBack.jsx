@@ -216,6 +216,7 @@ export default function Playback(props) {
       Object.keys(playBackData).length === 0 ? null :
       (setPlaylistLoop(!isPlaylistLoop),
       setShuffle(false) ,
+      setSongLoop(false),
       setClickCount((prevClickCount) => prevClickCount + 1));
               
     }

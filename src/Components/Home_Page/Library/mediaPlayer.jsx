@@ -17,11 +17,11 @@ import Whats from "../../../assets/whatsa.svg";
 import Snake from "../../../assets/snake.svg";
 import close from "../../../assets/Close_LG.svg";
 import add from "../../../assets/Add_Plus_Circle.svg";
-import audioSync from 'audio-sync-with-text';
-import Repeat1 from "../../../assets/Repeat (1)med.svg"
-import Shuf from "../../../assets/medShuf.svg"
-import loop from "../../../assets/mloop.svg"
-
+import audioSync from "audio-sync-with-text";
+import Repeat1 from "../../../assets/Repeat (1)med.svg";
+import Shuf from "../../../assets/medShuf.svg";
+import loop from "../../../assets/mloop.svg";
+import { useNavigate } from "react-router-dom";
 
 import { playBackContext } from "../../../App";
 
@@ -34,9 +34,10 @@ export default function MediaPlayer() {
   const [currentLyricIndex, setCurrentLyricIndex] = useState(0);
 
   const {
-    isSongLoop,setSongLoop,
+    isSongLoop,
+    setSongLoop,
     clickCount,
-   setClickCount,
+    setClickCount,
     setShuffle,
     isShuffle,
     isPlaylistLoop,
@@ -60,22 +61,35 @@ export default function MediaPlayer() {
     setAudio,
   } = useContext(playBackContext);
 
- const [matchingLyrics,setMatchingLyrics]= useState([])
- console.log(playBackData.lyrics_url)
+  const [matchingLyrics, setMatchingLyrics] = useState([]);
+  const [lyricsData, setLyricsData] = useState([]);
+  console.log(playBackData.lyrics_url);
  
-  const lyricsData = playBackData.lyrics_url==!null?playBackData.lyrics_url:[]
+  useEffect(()=>{
+    console.log("k")
+    if(playBackData.lyrics_url!==null){
+      console.log("j")
+      setLyricsData(playBackData.lyrics_url)
+    }
+    else{
+      console.log("l")
+      setLyricsData([])
+    }
    
+  },[playBackData])
+  
+
   // useEffect(() => {
   //   const audio_sync = async () => {
   //     try {
   //       if (playBackData.lyrics_url) {
   //         console.log("Lyrics URL:", playBackData.lyrics_url);
-  
+
   //         const response = await fetch(playBackData.lyrics_url);
   //         const srtContent = await response.text();
-  
+
   //         const webVTTContent = `WEBVTT\n\n${srtContent.replace(/\d+\:\d+/g, match => match.replace(':', '.'))}`;
-  
+
   //         console.log(webVTTContent )
   //         sync = new audioSync({
   //           audioPlayer: 'audio-element',
@@ -87,46 +101,56 @@ export default function MediaPlayer() {
   //       console.error("Error during sync:", error);
   //     }
   //   };
-  
+
   //   audio_sync();
   // }, [playBackData.lyrics_url]);
   useEffect(() => {
-    setMatchingLyrics(
-      lyricsData
-        .filter(
-          (entry) => entry.text.trim() !== "" && !/^\d+$/.test(entry.text)
-        )
-        .filter((entry) => {
-          const [startHours, startMinutes, startSeconds] = entry.start.split(":").map(parseFloat);
-          const startMilliseconds = parseFloat(entry.start.split(",")[1]);
-          const [endHours, endMinutes, endSeconds] = entry.end.split(":").map(parseFloat);
-          const endMilliseconds = parseFloat(entry.end.split(",")[1]);
-    
-          const start = startHours * 3600 + startMinutes * 60 + startSeconds + startMilliseconds / 1000;
-          const end = endHours * 3600 + endMinutes * 60 + endSeconds + endMilliseconds / 1000;
-    
-          return currentTime >= start && currentTime <= end;
-        })
-    );
-    if (matchingLyrics.length > 0) {
-      const highlightedIndex = matchingLyrics[matchingLyrics.length - 1].index;
-      const lyricElement = document.getElementById(`lyric-${highlightedIndex}`);
+    if(lyricsData){
+      setMatchingLyrics(
+        lyricsData
+          .filter(
+            (entry) => entry.text.trim() !== "" && !/^\d+$/.test(entry.text)
+          )
+          .filter((entry) => {
+            const [startHours, startMinutes, startSeconds] = entry.start
+              .split(":")
+              .map(parseFloat);
+            const startMilliseconds = parseFloat(entry.start.split(",")[1]);
+            const [endHours, endMinutes, endSeconds] = entry.end
+              .split(":")
+              .map(parseFloat);
+            const endMilliseconds = parseFloat(entry.end.split(",")[1]);
   
-      if (lyricElement) {
-        lyricElement.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    
+            const start =
+              startHours * 3600 +
+              startMinutes * 60 +
+              startSeconds +
+              startMilliseconds / 1000;
+            const end =
+              endHours * 3600 +
+              endMinutes * 60 +
+              endSeconds +
+              endMilliseconds / 1000;
+  
+            return currentTime >= start && currentTime <= end;
+          })
+      );
+      if (matchingLyrics.length > 0) {
+        const highlightedIndex = matchingLyrics[matchingLyrics.length - 1].index;
+        const lyricElement = document.getElementById(`lyric-${highlightedIndex}`);
+  if(!isPhone){
+    if (lyricElement) {
+      lyricElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-   
-  
-    // You can decide how to handle the matching lyrics array here.
-    // For example, you can highlight all of them or do any other specific action.
-    // setCurrentLyricIndex(matchingLyrics.map((entry) => entry.index));
+  }
+        
+      }
+    }
+    
+
   
   }, [currentTime]);
-  
- 
- 
+
   const token = JSON.parse(localStorage.getItem("authTok"));
   useEffect(() => {
     setIsLiked(playBackData.isLiked);
@@ -144,10 +168,9 @@ export default function MediaPlayer() {
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
       setTotalDuration(audio.duration);
-    //  if (sync) {
-    //     sync.updateCurrentTime(audio.currentTime);
-    //   }
-    
+      //  if (sync) {
+      //     sync.updateCurrentTime(audio.currentTime);
+      //   }
     };
 
     audio.onended = () => {
@@ -162,7 +185,7 @@ export default function MediaPlayer() {
   }, [audio]);
 
   useEffect(() => {
-    if (playBackData.url && playBackData.url !== audio.src||isSongLoop) {
+    if ((playBackData.url && playBackData.url !== audio.src) || isSongLoop) {
       console.log(audio);
       audio.pause();
       audio.src = playBackData.url;
@@ -200,7 +223,7 @@ export default function MediaPlayer() {
         );
         if (response.data.success) {
           setIsLiked(!isLiked);
-             playBackData.isLiked=!isLiked
+          playBackData.isLiked = !isLiked;
           console.log(!isLiked);
         }
       } catch (error) {
@@ -218,7 +241,7 @@ export default function MediaPlayer() {
           }
         );
         if (response.data.success) {
-          playBackData.isLiked=!isLiked
+          playBackData.isLiked = !isLiked;
           setIsLiked(!isLiked);
           console.log(!isLiked);
         }
@@ -235,94 +258,114 @@ export default function MediaPlayer() {
     setCurrentTime(newCurrentTime);
     audio.currentTime = newCurrentTime;
   };
-  useEffect(()=>{
-    if(playlistWindow){
-      const playListData = async ()=>{
-        try{
-        const response = await axios.get("playlists/", {
-          headers: {
-            Authorization: `Bearer ${token}`
+  useEffect(() => {
+    if (playlistWindow) {
+      const playListData = async () => {
+        try {
+          const response = await axios.get("playlists/", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data.success) {
+            setPlayListData(response.data.data);
+            console.log(response.data.data);
           }
-        })
-        if(response.data.success){
-           setPlayListData(response.data.data)
-           console.log(response.data.data)
+        } catch (error) {
+          console.log(error);
         }
-        }catch(error){
-          console.log(error)
-        }
-      }
-      playListData()
+      };
+      playListData();
     }
-     
-     },[playlistWindow])
-     const addSongHandler = async()=>{
-      console.log(currentPlaylist)
-      if(currentPlaylist!==null){
-        try{
-         const response = await  axios.post(`playlists/${currentPlaylist}/songs/${playBackData.id}/`,null,{
-          headers: {
-            Authorization: `Bearer ${token}`
+  }, [playlistWindow]);
+  const addSongHandler = async () => {
+    console.log(currentPlaylist);
+    if (currentPlaylist !== null) {
+      try {
+        const response = await axios.post(
+          `playlists/${currentPlaylist}/songs/${playBackData.id}/`,
+          null,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        })
-        }
-        catch(error){
-   
-        }
-      }
-     
-     }
-     const handleLyricClick = () => {
-      console.log(clickCount)
-      if (clickCount === 0) {
-      
-        Object.keys(playBackData).length === 0 ? null :
-        (setPlaylistLoop(!isPlaylistLoop),
-        setShuffle(false) ,
-        setClickCount((prevClickCount) => prevClickCount + 1));
-                
-      }
-       else if (clickCount === 1) {
-        Object.keys(playBackData).length === 0 ? null :
-        (setSongLoop(true),
-        setPlaylistLoop(false),
-          setShuffle(false) ,
+        );
+      } catch (error) {}
+    }
+  };
+  const handleLyricClick = () => {
+    console.log(clickCount);
+    if (clickCount === 0) {
+      Object.keys(playBackData).length === 0
+        ? null
+        : (setPlaylistLoop(!isPlaylistLoop),
+        setSongLoop(false),
+          setShuffle(false),
           setClickCount((prevClickCount) => prevClickCount + 1));
-        
-      }
-      else if (clickCount === 2) {
-        Object.keys(playBackData).length === 0 ? null :
-        ( setSongLoop(false),
-         setPlaylistLoop(false),
-          setShuffle(false) ,
+    } else if (clickCount === 1) {
+      Object.keys(playBackData).length === 0
+        ? null
+        : (setSongLoop(true),
+          setPlaylistLoop(false),
+          setShuffle(false),
+          setClickCount((prevClickCount) => prevClickCount + 1));
+    } else if (clickCount === 2) {
+      Object.keys(playBackData).length === 0
+        ? null
+        : (setSongLoop(false),
+          setPlaylistLoop(false),
+          setShuffle(false),
           setClickCount((prevClickCount) => prevClickCount - 2));
-         
-        
-        
-      }
-      
-  
-      // Increment the click count
-      
-    };
-  
+    }
 
-  return (
+    // Increment the click count
+  };
+  const navigate = useNavigate();
+  const [isPhone, setIsPhone] = useState(false);
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); 
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+
+  return !isPhone ? (
     <div className="mediaPlayer">
       <div className="mediaImage"></div>
       <div className="musicData">
         <div>
           <div>
             <div className="mediaText">
-            <div>{playBackData.name.length > 14 ? playBackData.name.slice(0, 14) + '...' : playBackData.name}</div>
+              <div>
+                {playBackData.name.length > 14
+                  ? playBackData.name.slice(0, 14) + "..."
+                  : playBackData.name}
+              </div>
               <div>{playBackData.artist}</div>
             </div>
             <div>
-              <img className="btn" onClick={likedHandler} src={isLiked ? Heart : Heart2} />
+              <img
+                className="btn"
+                onClick={likedHandler}
+                src={isLiked ? Heart : Heart2}
+              />
             </div>
-            <div className="btn" onClick={() => {
-            setShareWindow(!shareWindow);
-          }}>
+            <div
+              className="btn"
+              onClick={() => {
+                setShareWindow(!shareWindow);
+              }}
+            >
               <img src={Share} />
             </div>
           </div>
@@ -343,19 +386,21 @@ export default function MediaPlayer() {
           </div>
           <div className="btn">
             <div>
-              <img  onClick={() =>{
-              Object.keys(playBackData).length === 0 ? null :
-              setShuffle(!isShuffle)
-              setPlaylistLoop(false) 
-              } }
-            src={isShuffle? Shuf: Group} />
+              <img
+                onClick={() => {
+                  Object.keys(playBackData).length === 0
+                    ? null
+                    : setShuffle(!isShuffle);
+                  setPlaylistLoop(false);
+                }}
+                src={isShuffle ? Shuf : Group}
+              />
             </div>
             <div className="mainControl">
               <div>
                 <img
                   onClick={() => {
                     setIsLeftClicked(true);
-                    
                   }}
                   src={Left}
                 />
@@ -369,17 +414,23 @@ export default function MediaPlayer() {
               <div>
                 <img
                   onClick={() => {
-                   
                     setIsRightClicked(true);
-                  
                   }}
                   src={Right}
                 />
               </div>
             </div>
             <div>
-              <img onClick={handleLyricClick}
-           src={!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? Repeat1: Repeat} />
+              <img
+                onClick={handleLyricClick}
+                src={
+                  !isPlaylistLoop && !isShuffle && isSongLoop
+                    ? loop
+                    : isPlaylistLoop
+                    ? Repeat1
+                    : Repeat
+                }
+              />
             </div>
           </div>
           {playBackData.url ? (
@@ -389,74 +440,234 @@ export default function MediaPlayer() {
           ) : null}
         </div>
       </div>
-      <div className="lyricData" >
-  {lyricsData.map((entry, index) => (
-  index!==0 && !/^\d+$/.test(entry.text) ?   <p
-  
-  id={`lyric-${entry.index}`} 
-  key={index}
-  style={{
-    
-  display:"block",
-    color: matchingLyrics.some(match => match.index === entry.index) ? '#fff' : '#898989',
-  }}
->
-    {entry.text}
-</p>:null
-   
-  ))}
-</div>
-      {shareWindow&&!playlistWindow?<div className="shareWindow">
-        <div>Share this song</div>
-        <div>
-          <div className="shareOption">
-            <div className="shareSame">
-              <img src={Whats}></img>
-    <a href={`whatsapp://send?text=${encodeURIComponent('http://localhost:5177/home')}`} title="Share on WhatsApp">
-      WhatsApp
-    </a>
+      <div className="lyricData">
+       {lyricsData?<>{lyricsData.map((entry, index) =>
+          index !== 0 && !/^\d+$/.test(entry.text) ? (
+            <p
+              id={`lyric-${entry.index}`}
+              key={index}
+              style={{
+                display: "block",
+                color: matchingLyrics.some(
+                  (match) => match.index === entry.index
+                )
+                  ? "#fff"
+                  : "#898989",
+              }}
+            >
+              {entry.text}
+            </p>
+          ) : null
+        )}</>:null} 
+      </div>
+      {shareWindow && !playlistWindow ? (
+        <div className="shareWindow">
+          <div>Share this song</div>
+          <div>
+            <div className="shareOption">
+              <div className="shareSame">
+                <img src={Whats}></img>
+                <a
+                  href={`whatsapp://send?text=${encodeURIComponent(
+                    "http://localhost:5177/home"
+                  )}`}
+                  title="Share on WhatsApp"
+                >
+                  WhatsApp
+                </a>
+              </div>
+              <div className="shareSame">
+                <img src={Inst}></img>
+                <span>Instagram</span>
+              </div>
             </div>
-            <div className="shareSame">
-              <img src={Inst}></img>
-              <span>Instagram</span>
+            <div
+              onClick={() => {
+                setPlaylistWindow(true);
+              }}
+              className="addOption"
+            >
+              <img src={add}></img>
+              <div>Add to playList</div>
             </div>
           </div>
-          <div onClick={()=>{
-            setPlaylistWindow(true)
+          <div className="linkShare">
+            https://soundly.com/thehavanna....<div>Copy</div>
+          </div>
+        </div>
+      ) : null}
+      {playlistWindow ? (
+        <div style={{ gap: "15px" }} className="shareWindow">
+          <div className="btn">
+            Add to playlist{" "}
+            <img
+              onClick={() => {
+                setPlaylistWindow(false);
+                setShareWindow(false);
+              }}
+              src={close}
+            />
+          </div>
+          <div className="playlistContain">
+            {playListData.map((playlist) => (
+              <div
+                style={
+                  style && currentPlaylist == playlist.id
+                    ? { borderRadius: 8, border: "1px solid #B2ACAC" }
+                    : {}
+                }
+                className="playlistName btn"
+                onClick={() => {
+                  console.log(playlist.id);
+                  setStyle(true);
+                  setCurrentPlaylist(playlist.id);
+                }}
+                key={playlist.id}
+              >
+                <img
+                  src={playlist.thumbnail_url}
+                  alt={`Thumbnail for ${playlist.name}`}
+                />
+                <div>
+                  <div>{playlist.name}</div>
+                  <div>{playlist.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-          }} className="addOption">
-            <img src={add}></img>
-            <div >Add to playList</div>
+          <div className="done btn" onClick={addSongHandler}>
+            Done
           </div>
         </div>
-        <div className="linkShare">
-          https://soundly.com/thehavanna....<div>Copy</div>
-        </div>
-      </div>:null} 
-     {playlistWindow? <div style={{gap:"15px"}} className="shareWindow">
-        <div className="btn">Add to playlist <img onClick={()=>{
-          setPlaylistWindow(false)
-          setShareWindow(false)
-        }} src={close}/></div>
-        <div className="playlistContain">
-        {playListData.map((playlist) => (
-  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName btn" onClick={()=>{
-    console.log(playlist.id)
-    setStyle(true)
-      setCurrentPlaylist(playlist.id)}} key={playlist.id}>
-    <img src={playlist.thumbnail_url} alt={`Thumbnail for ${playlist.name}`} />
-    <div>
-      <div>{playlist.name}</div>
-      <div>{playlist.description}</div>
+      ) : null}
     </div>
-  </div>
-))}
-         
-       
+  ) : (
+    <div className="mediaPlayer">
+    <div className="mediaData">
+    <div className="phoneRef">
+        <img></img>
+        <div>Playing {playBackData.name}</div>
+        <div
+              className="btn"
+              onClick={() => {
+                setShareWindow(!shareWindow);
+              }}
+            >
+              <img src={Share} />
+            </div>
+      </div>
+      <div className="phoneLyr">
+        <img src={playBackData.thumbnail} />
+        <div className="lyricsData">
+         {lyricsData?<> {lyricsData.map((entry, index) =>
+            index !== 0 && !/^\d+$/.test(entry.text) ? (
+              <p
+                id={`lyric-${entry.index}`}
+                key={index}
+                style={{
+                  display: "block",
+                  color: matchingLyrics.some(
+                    (match) => match.index === entry.index
+                  )
+                    ? "#000"
+                    : "#6A6A6A",
+                }}
+              >
+                {entry.text}
+              </p>
+            ) : null
+          )}</>:null}
         </div>
+      </div>
+      <div className="mediaFooter">
+        <div className="mediaText">
+        <div><div>
+            {playBackData.name.length > 14
+              ? playBackData.name.slice(0, 14) + "..."
+              : playBackData.name}
+          </div>
+          <div>{playBackData.artist}</div></div>
+          
+          <div>
+              <img
+                className="btn"
+                onClick={likedHandler}
+                src={isLiked ? Heart : Heart2}
+              />
+            </div>
+        </div>
+        <div className="mediaControls">
+          <div className="musicTimer">
+            <div style={{display:"flex"}} className="time-display"> {formatTime(currentTime)}</div>
+            <div style={{position:"static"}} onClick={handleProgressBarClick} className="progress-bar">
+              <div
+                className="progress-fill"
+                style={{ width: `${(currentTime / totalDuration) * 100}%` }}
+              ></div>
+            </div>
+            <div style={{display:"flex"}}  className="time-display"> {formatTime(totalDuration)}</div>
+          </div>
+          <div className="btn">
+            
+              <img
+                onClick={() => {
+                  Object.keys(playBackData).length === 0
+                    ? null
+                    : setShuffle(!isShuffle);
+                  setPlaylistLoop(false);
+                }}
+                src={isShuffle ? Shuf : Group}
+              />
+            
+           
+              
+                <img
+                  onClick={() => {
+                    setIsLeftClicked(true);
+                  }}
+                  src={Left}
+                />
+             
+              
+                <img
+                  onClick={handlePlayPause}
+                  src={isPlaying ? Continue : Pause}
+                />
+             
+              
+                <img
+                  onClick={() => {
+                    setIsRightClicked(true);
+                  }}
+                  src={Right}
+                />
+              
+           
+            
+              <img
+                onClick={handleLyricClick}
+                src={
+                  !isPlaylistLoop && !isShuffle && isSongLoop
+                    ? loop
+                    : isPlaylistLoop
+                    ? Repeat1
+                    : Repeat
+                }
+              />
+          
+          </div>
+          {playBackData.url ? (
+            <audio id="audio-element">
+              <source src={playBackData.url} type="audio/mpeg" />
+            </audio>
+          ) : null}
+        </div>
+      </div>
+    </div>
+      
 
-        <div className="done btn" onClick={addSongHandler}>Done</div>
-      </div>:null}
+     
     </div>
   );
 }

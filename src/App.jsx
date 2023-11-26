@@ -157,7 +157,8 @@ useEffect(()=>{
     thumbnail: futureSongData[currentSongIndex+1].thumbnail_url,
     name: futureSongData[currentSongIndex+1].name,
     artist:futureSongData[currentSongIndex+1].artist,
-    isLiked:songData.is_liked
+    isLiked:songData.is_liked,
+    lyrics_url:songData.lyrics_json
     
   })
   setCurrentSongIndex(currentSongIndex+1)
@@ -170,7 +171,8 @@ if(songData&&isLeftClicked){setPlayBackData({
   thumbnail: futureSongData[currentSongIndex-1].thumbnail_url,
   name: futureSongData[currentSongIndex-1].name,
   artist:futureSongData[currentSongIndex-1].artist,
-  isLiked:songData.is_liked
+  isLiked:songData.is_liked,
+  lyrics_url:songData.lyrics_json
   
 })
 setCurrentSongIndex(currentSongIndex-1)
