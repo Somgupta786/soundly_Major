@@ -78,6 +78,7 @@ export default function Navbar(props) {
         name: songData.name,
         artist: selectedSong.artist,
         isLiked: songData.is_liked,
+        lyrics_url:songData.lyrics_json
       });
 
       // setMediaData({
