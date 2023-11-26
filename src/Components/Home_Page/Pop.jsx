@@ -105,7 +105,7 @@ useEffect(()=>{
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="Pop" />
+      <PopHeroSection name="Pop" items={[menuItems1, menuItems2,menuItems3]}  />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

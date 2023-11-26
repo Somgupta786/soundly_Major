@@ -59,11 +59,11 @@ export default function MediaPlayer() {
     audio,
     setAudio,
   } = useContext(playBackContext);
-  let sync;
-  // console.log(playBackData)
+
  const [matchingLyrics,setMatchingLyrics]= useState([])
  console.log(playBackData.lyrics_url)
-  const lyricsData = playBackData.lyrics_url?playBackData.lyrics_url:[]
+ 
+  const lyricsData = playBackData.lyrics_url==!null?playBackData.lyrics_url:[]
    
   // useEffect(() => {
   //   const audio_sync = async () => {

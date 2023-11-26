@@ -36,7 +36,7 @@ export default function Playlist() {
       <div className="mainContent">
         
         <div className="navBarPlaceholder" ></div>
-        <PlaylistHeroSection />
+        <PlaylistHeroSection items={[menuItems1]} />
        
         <div className="playBackPlaceholder" ></div>
       </div>

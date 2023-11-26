@@ -101,7 +101,7 @@ export default function Rock() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="Rock" />
+      <PopHeroSection name="Rock" items={[menuItems1, menuItems2,menuItems3]} />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

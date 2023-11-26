@@ -40,7 +40,7 @@ export default function ArtistFollow() {
   <div className="mainContent">
     
     <div className="navBarPlaceholder" ></div>
-    <ArtistHeroSection />
+    <ArtistHeroSection items={[menuItems1]} />
    
     <div className="playBackPlaceholder" ></div>
   </div>

@@ -6,12 +6,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "../../Api/auth";
 import Pause from "../../assets/Continue.svg";
 import Not from "../../assets/notFound.svg";
+import Not2 from "../../assets/newI.svg";
 import tr from "../../assets/Vector (5).svg";
+import nn from "../../assets/nn.svg";
 import { loginContext } from "../../AppRouter";
 import { playBackContext } from "../../App";
 import { useLocation } from "react-router-dom";
 import close from "../../assets/Close_LG.svg"
-
+import Logo from "../Authentication/LogoIcon";
+import ham from "../../assets/hamb.svg"
+import search from "../../assets/searchPh.svg"
+import cross from "../../assets/croH.svg"
 export default function Navbar(props) {
   const { isLogged, setLogged, setAuthTok } = useContext(loginContext);
   const navigate = useNavigate();
@@ -21,12 +26,14 @@ export default function Navbar(props) {
     useContext(playBackContext);
   const [searchValue, setSearchValue] = useState("");
   const [beUploader, setBeUploader] = useState(false);
-
+  const [isHamb, setHamb] = useState(false);
+  const[isPhone,setIsPhone]=useState(false)
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [songs, setSongs] = useState([]);
   const [profileShow, setProfileShow] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [isSearch, setIsSearch] = useState(false);
   const Location = useLocation();
 
   const profileShowHandler = () => {
@@ -34,6 +41,7 @@ export default function Navbar(props) {
     setProfileShow(!profileShow);
   };
   const handleLibraryClick = () => {
+    setHamb(false)
     navigate("/library");
   };
   const searchHandler = async (e) => {
@@ -153,8 +161,24 @@ export default function Navbar(props) {
       console.log(error)
     }
   };
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   return (
+    !isPhone?
     <div className="homeNav">
+   
       <div className="menu">
         <div onClick={() => navigate("/home")}>
           <img src={Home} />
@@ -366,6 +390,97 @@ export default function Navbar(props) {
           </div>
         </form>
       ) : null}
+    </div>:<div className="homeNav"><Logo/>
+    <div className="phoneNav btn">
+      <img onClick={()=>setIsSearch(!isSearch)}  src={search}/>
+      <img onClick={()=>setHamb(!isHamb)} src={isHamb?cross:ham}/>
+    </div>
+    {isHamb?<div  className="hamBurger btn">
+    <div className="menu">
+        <div onClick={() => {
+           navigate("/home"),
+        setHamb(false)
+        }
+       
+        }>
+          
+          <div style={homeIcon?{color:"#C76B98"}:null} >{props.navData.home}</div>
+        </div>
+        <div>
+          
+          <div style={libraryIcon?{color:"#C76B98"}:null} onClick={handleLibraryClick}>{props.navData.library}</div>
+        </div>
+        <div onClick={() => {
+           navigate("/game"),
+        setHamb(false)
+        }
+       
+        }>
+      
+          <div style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >{props.navData.game}</div>
+        </div>
+        <div >
+      
+          <div style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >Profile</div>
+        </div>
+      </div>
+    </div>:null}
+   {isSearch?   <div className="searchBox">
+        <input
+          placeholder="Search"
+          value={searchValue}
+          onChange={searchHandler}
+        />
+        <img src={nn}></img>
+       {searchValue!==""?<img className="btn" onClick={()=>setSearchValue("")} src={close}/>:null} 
+         (
+          <div className="searchContent">
+            {songs.length !== 0 ? (
+              songs.map((item, index) => (
+                <div key={index} className="searchMain">
+                  <div className="searchData">
+                    <div>
+                      <img src={item.thumbnail_url} alt={item.name} />
+                    </div>
+                    <div>
+                      <div>
+                        {item.name.length > 12
+                          ? `${item.name.substring(0, 12)}...`
+                          : item.name}
+                      </div>
+                      <div>
+                        {item.artist.length > 12
+                          ? `${item.artist.substring(0, 12)}...`
+                          : item.artist}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="SearchTime">{item.song_duration}</div>
+                  <div className="SearchControl">
+                    <img
+                      onClick={() => handleImgCardClick(item)}
+                      src={Pause}
+                      alt="Pause"
+                    />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="searchNotFound">
+                <div>
+                  <img src={Not2}></img>
+                </div>
+                <div>
+                  <div>{searchValue?`Couldn’t find ’${searchValue}’`:null}</div>
+                  <div>
+                    Try searching again using a different spelling or keyword.
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      </div>:null}
     </div>
   );
 }

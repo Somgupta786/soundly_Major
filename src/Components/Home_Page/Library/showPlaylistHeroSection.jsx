@@ -61,7 +61,7 @@ export default function ShowPlaylistHeroSection(props) {
     
   }
   },[songData])
-
+console.log(props.state.playlistData.playlist.name)
  
   useEffect(() => {
     const fetchSongData = async () => {
@@ -88,11 +88,26 @@ export default function ShowPlaylistHeroSection(props) {
 
     fetchSongData();
   }, [selectedSong, isMedia]);
+  const[isPhone,setIsPhone]=useState(false)
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
 
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   return (
     <div className="heroSection">
       <div className="imageCards">
         <div className="playlistInfo">
+        {!isPhone?<>
           <div>
             <img src={Lion}></img>
           </div>
@@ -116,6 +131,34 @@ export default function ShowPlaylistHeroSection(props) {
             </div>
             </div>
           </div>
+        </>:<>
+          <div>
+            <img src={Lion}></img>
+            <div>
+            <div className="songDetail">
+              <div>
+                <img src={Dot}  />
+              </div>
+              <div>{props.state.playlistData.songs.length} songs</div>
+            </div>
+            <div className="songDetail">
+              <div >
+                <img src={Dot} />
+              </div>
+              <div>10 min</div>
+            </div>
+            </div>
+          </div>
+          <div>
+            
+            <div>
+            {props.state.playlistData.playlist.description}.
+            </div>
+            <div>Listen to ‘{props.state.playlistData.playlist.name}’</div>
+             
+          </div>
+        </>}
+          
         </div>
         
         <div className="homeFirstRow">

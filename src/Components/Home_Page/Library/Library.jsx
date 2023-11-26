@@ -37,7 +37,7 @@ export default function Library() {
       <div className="mainContent">
         
         <div className="navBarPlaceholder"></div>
-        <LibraryHeroSection />
+        <LibraryHeroSection items={[menuItems1]} />
         
         <div className="playBackPlaceholder"></div>
       </div>

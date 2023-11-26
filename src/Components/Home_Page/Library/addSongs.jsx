@@ -4,6 +4,8 @@ import Footer from '../Footer';
 import Pause from "../../../assets/Continue.svg";
 import Continue from "../../../assets/pause.svg";
 import Add from "../../../assets/Add_Plus.svg";
+import Add1 from "../../../assets/addd2.svg"
+import Add2 from "../../../assets/addd1.svg"
 import { useContext } from 'react';
 import { playBackContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
@@ -146,12 +148,30 @@ const handleImgCardClick = (song,songIndex) => {
 
     fetchSongData();
   }, [selectedSong]);
+  const navigate = useNavigate();
+  const[isPhone,setIsPhone]=useState(false)
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
 
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+  
+ 
+  
   return (
     <div className="addSongsSection">
       <div className='addSongsUpper' >
         <div className='addText'>
-          <div>Add songs to your ‘Default name’</div>
+          <div>Add songs {!isPhone?" to your ‘Default name’":null}</div>
           <div className='btn' onClick={()=>Navigation("/playlist")}>DONE</div>
         </div>
         {songs.map((song,songIndex) => (
@@ -167,12 +187,13 @@ const handleImgCardClick = (song,songIndex) => {
             <div className='btn' onClick={() => handleImgCardClick(song,songIndex)} >
               <img src={isPlaying && playBackData.id === song.id ? Continue : Pause} />
             </div>
-            <div className='btn'
+            {!isPhone?<div className='btn'
               style={addedSong.includes(song.id) ? { background: "#2C9A3E" } : null}
               onClick={() => AddSongHandler(song)}
             >
               <img className='btn' src={Add} alt="Add" />{addedSong.includes(song.id)?"Added":"Add"}
-            </div>
+            </div>:<img  onClick={() => AddSongHandler(song)} src={addedSong.includes(song.id)?Add2:Add1}/>
+            }
           </div>
         ))}
       </div>

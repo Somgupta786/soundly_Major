@@ -250,10 +250,12 @@ export default function Playback(props) {
           <img src={props.playBackData.thumbnail} />
         )}
         <div>{props.playBackData.name}</div>
+       
       </div>
       <div>
         <div className="controls">
           <img
+          className="s"
             onClick={() =>{
               Object.keys(playBackData).length === 0 ? null :
               setShuffle(!isShuffle),
@@ -276,6 +278,7 @@ export default function Playback(props) {
             src={Right}
           />
           <img
+          className="s"
             onClick={handleLyricClick}
             src={!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? repeat1 : Repeat}
             

@@ -86,7 +86,7 @@ console.log(error)
 
   const menuItems3 = [
     {
-      title: "From Artists You Follow",
+      title: " Artists You Follow",
       onclick: "/#",
       activ: "false"
     },
@@ -102,7 +102,7 @@ console.log(error)
       <Sidebar items={[menuItems1, menuItems2, menuItems3]} />
       <div className="mainContent">
         <div className="navBarPlaceholder"></div>
-        <HeroSection />
+        <HeroSection  items={[menuItems1, menuItems2, menuItems3]} />
         {/* <Playback/> */}
         <div className="playBackPlaceholder"></div>
       </div>

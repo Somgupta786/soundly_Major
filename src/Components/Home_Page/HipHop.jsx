@@ -102,7 +102,7 @@ export default function HipHop() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="Hip-Hop" />
+      <PopHeroSection name="Hip-Hop" items={[menuItems1, menuItems2,menuItems3]} />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import { playBackContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
 
-export default function PlaylistHeroSection() {
+export default function PlaylistHeroSection({ items }) {
   const Navigation=useNavigate();
  
   const token = JSON.parse(localStorage.getItem('authTok'));
@@ -26,6 +26,7 @@ export default function PlaylistHeroSection() {
   const [nameInput, setNameInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
   setHomeIcon(false)
+  setHome(true)
   setLibraryIcon(true)
   const handleCreatePlaylist = () => {
     setNameInput("")
@@ -106,7 +107,7 @@ export default function PlaylistHeroSection() {
     const fetchPlaylistData = async () => {
       if (selectedplaylist) {
         try {
-          const response = await axios.get(`playlists/${selectedplaylist.id}/songs`, {
+          const response = await axios.get(`playlists/${selectedplaylist.id}/songs/`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -131,15 +132,49 @@ export default function PlaylistHeroSection() {
 
     fetchPlaylistData();
   }, [selectedplaylist]);
+  const navigate = useNavigate();
+  const[isPhone,setIsPhone]=useState(false)
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
 
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+  
+ 
+  const handleClick = (item) => {
+    console.log(item)
+    navigate(item.onclick,{
+      state:item.title
+    });
+  };
   return (
     <div className="heroSection">
+ {isPhone?<div style={{height:"50px"}} className="sideList">
+      {items.map((menu, index) => (
+        <div className="sideMenu" key={index}>
+          {menu.map((item, itemIndex) => (
+            <div key={itemIndex} style={item.activ=="true"?{color:"var(--web-tertiary, #C76B98)"}:null} onClick={() => handleClick(item)}>
+              {item.title}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>:null}
       <div className="imageCards">
         <div className="homeText">
           <div>Liked playlists</div>
           <div>Show more</div>
         </div>
-        <div className="homeFirstRow">
+        {playlists.length>0?<><div className="homeFirstRow">
           {playlists.slice(0, 5).map((playlist, playlistIndex) => (
             <ImgCard
               key={playlistIndex}
@@ -148,7 +183,7 @@ export default function PlaylistHeroSection() {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
-              refer="false"
+             
             />
           ))}
         </div>
@@ -161,10 +196,11 @@ export default function PlaylistHeroSection() {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
-              refer="false"
+             
             />
           ))}
-        </div>
+        </div></>:null}
+        
         <div className="homeLastRow">
           <ImgCard onClick={handleCreatePlaylist}  img={Group} name="Create Playlist" refer="false" />
         </div>

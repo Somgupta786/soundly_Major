@@ -7,18 +7,19 @@ import Playback from '../playBack';
 
 import { useContext } from 'react';
 import { playBackContext } from '../../../App';
+import { useNavigate } from 'react-router-dom';
 
-export default function LibraryHeroSection() {
+export default function LibraryHeroSection({ items }) {
   const token = JSON.parse(localStorage.getItem('authTok'));
   const{ setHomeIcon,setLibraryIcon,setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
   setHomeIcon(false)
   setLibraryIcon(true)
-
+  const navigate = useNavigate();
   setHome(true)
 
   const [songs, setSongs] = useState([]);
   
-
+  const[isPhone,setIsPhone]=useState(false)
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
   const [showMore, setShowMore] = useState(false);
@@ -114,11 +115,42 @@ export default function LibraryHeroSection() {
     fetchSongData();
   }, [selectedSong,isMedia]);
   
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   
+ 
+  const handleClick = (item) => {
+    console.log(item)
+    navigate(item.onclick,{
+      state:item.title
+    });
+  };
 
   return (
     <div className="heroSection">
-      
+      {isPhone?<div style={{height:"50px"}} className="sideList">
+      {items.map((menu, index) => (
+        <div className="sideMenu" key={index}>
+          {menu.map((item, itemIndex) => (
+            <div key={itemIndex} style={item.activ=="true"?{color:"var(--web-tertiary, #C76B98)"}:null} onClick={() => handleClick(item)}>
+              {item.title}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>:null}
 
       <div className="imageCards">
         <div className="homeText">

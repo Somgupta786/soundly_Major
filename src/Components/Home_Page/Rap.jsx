@@ -101,7 +101,7 @@ export default function Rap() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="Rap" />
+      <PopHeroSection name="Rap" items={[menuItems1, menuItems2,menuItems3]}  />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

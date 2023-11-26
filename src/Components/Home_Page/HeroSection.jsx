@@ -5,7 +5,7 @@ import Footer from './Footer';
 import ImgCard from './ImgCard';
 import Playback from './playBack'; 
 
-import imge2 from '../../assets/image 2.svg';
+import imge2 from '../../assets/slidenew.svg';
 import Soltitude from '../../assets/green-colors-green-art 1.png';
 import Property from '../../assets/image 28.png';
 
@@ -16,8 +16,9 @@ import imge5 from '../../assets/Rectangle 8 (4).png';
 import imge6 from '../../assets/Rectangle 8 (2).png';
 import { useContext } from 'react';
 import { playBackContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
-export default function HeroSection() {
+export default function HeroSection({ items }) {
   
   const token = JSON.parse(localStorage.getItem('authTok'));
 
@@ -54,7 +55,8 @@ export default function HeroSection() {
       index:"53"
     },
   ]);
-
+  const navigate = useNavigate();
+  const[isPhone,setIsPhone]=useState(false)
   const [songs, setSongs] = useState([]);
   const [showCard, setShowCard] = useState(cardInfo[0]);
   const [cardIndex, setCardIndex] = useState(0);
@@ -166,7 +168,28 @@ export default function HeroSection() {
     fetchSongData();
   }, [selectedSong,isMedia]);
   
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   
+ 
+  const handleClick = (item) => {
+    console.log(item)
+    navigate(item.onclick,{
+      state:item.title
+    });
+  };
 
   return (
     <div className="heroSection">
@@ -185,6 +208,18 @@ export default function HeroSection() {
           ))}
         </div>
       </div>
+      {isPhone?<div className="sideList">
+      {items.map((menu, index) => (
+        <div className="sideMenu" key={index}>
+          {menu.map((item, itemIndex) => (
+            <div key={itemIndex} style={item.activ=="true"?{color:"var(--web-tertiary, #C76B98)"}:null} onClick={() => handleClick(item)}>
+              {item.title}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>:null}
+     
 
       <div className="imageCards">
         <div className="homeText">
@@ -199,6 +234,7 @@ export default function HeroSection() {
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
+              artist={song.artist}
               onClick={() => handleImgCardClick(song,songIndex)} 
               section="For You"
             />
@@ -212,6 +248,7 @@ export default function HeroSection() {
       id={song.id}
       img={song.thumbnail_url}
       name={song.name}
+      artist={song.artist}
       onClick={() => handleImgCardClick(song, songIndex + 5)}
       section="For You"
     />
@@ -226,6 +263,7 @@ export default function HeroSection() {
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
+              artist={song.artist}
               onClick={() => handleImgCardClick(song,songIndex + 10)} 
               section="For You" 
             />
@@ -242,6 +280,7 @@ export default function HeroSection() {
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
+              artist={song.artist}
               onClick={() => handleImgCardClick(song,songIndex + 15)} 
               section="For You"
             />
@@ -258,6 +297,7 @@ export default function HeroSection() {
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
+              artist={song.artist}
               onClick={() => handleImgCardClick(song,songIndex + 20)} 
               section="For You"
             />

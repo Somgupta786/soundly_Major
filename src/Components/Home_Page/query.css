@@ -1,5 +1,470 @@
-@media (max-width:1450px){
-    #root{
+@media (max-width:1200px){
+    .menu{
+        width: 32%;
+    }
+  .menu div , .sideMenu,.company{
+    font-size: 1rem;
+  }
+  .cardInfo{
+    font-size: 1.3rem;
+  }
+  .cardLeftEnd>div:first-child{
+    width: 80%;
+    font-size: 1rem;
+  }
+  .homeText div:last-child,.cardText,.company div:first-child{
+    font-size: 1.2rem;
+  }
+  .homeText div:first-child{
+    font-size: 2.3rem;
+  }
+  .sideMenu div:first-child,.footerLower>div{
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+  }
+  .songName{
+    font-size: 0.9rem;
+    height: 4.8vh;
+    
+    overflow-y: scroll;
+  }
+.footerLeft{
+    width: 60%;
+}
+.footerRight{
+    width: 15%;
+}
+.sideBar{
+    width: 19vw;
+    
+}
+.mainContent{
+    width: 81vw;
+}
+.homeNav,.playBack{
+    width: 81vw;
+    left: 19vw;
+}
+}
+@media (max-width:1000px){
+    
+    .homeFirstRow, .homeLastRow{
+        display: flex;
+       flex-wrap: nowrap;
+       overflow: scroll;
+       flex-shrink: 0;
       
+    }
+    .imgCard{
+        width:22.6%;
+        flex-shrink: 0;
+    }
+    .songName{
+        font-size: 0.95rem;
+        height: 4.8vh;
+      
+      }
+      .menu{
+        width: 40%;
+      }
+      .footerLower>div{
+        white-space: nowrap;
+        gap: 15px;
+      }
+      .footerLeft{
+        width: 70%;
+      }
+      .slider{
+        padding-left:2.1vw;
+        padding-right: 3.4vw;
+      }
+}
+@media (max-width:850px){
+    .cardLeftEnd>div:first-child{
+        width: 100%;
+    }
+    .footerRight{
+        width: 20%;
+    }
+    .menu{
+        width: 50%;
+    }
+}
+@media (max-width:800px){
+    .sideBar{
+        display: none;
+    }
+    .mainContent{
+        width: 100%;
+    }
+    .playBack{
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    
+}
+@media (max-width:800px ){
+  
+    .footer{
+        height: 83.9vh;
+    }
+    .footerLeft{
+        flex-direction: column;
+        gap: 4.3vh;
+    }
+    .footerUpper{
+        flex-direction: column;
+        height:56vh;
+        gap: 32px;
+    }
+    .footerRight{
+      width: 40%;
+    }
+    .footerLower{
+     
+      flex-direction: column;
+    }
+    .footerLower{
+    gap: 10px;
+    }
+    .homeText div:first-child{
+      font-size:1.7rem;
+    }
+    .homeText div:last-child, .cardText, .company div:first-child {
+      font-size: 1rem;
+    }
+    .imgCard{
+      width: 197px;
+      padding: 1.2vh 1rem;
+      border-radius: 12px;
+      
+  
+    }.mainContent{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .slider{
+      height:38.5vh;
+      width:100%;
+      padding-left: 15px;
+      padding-right: 0px;
+      border-radius: 16px;
+      position: relative;
+    }
+    .cardText{
+      display: none;
+    }
+    .cardTitle{
+      font-size:2rem;
+    }
+    .cardInfo div:last-child{
+      display: none;
+    }
+    .cardLeft{
+     
+      height: 30vh;
+      justify-content: space-between;
+    }
+    
+      .cardLeftEnd{
+      height: 40px;
+      width: 120px;
+      }
+      .cardRight{
+        position: absolute;
+        bottom: 0px;
+        right: -10px;
+        height:30.5vh;
+        width: 57.2222vw;
+
+      }
+      .dots{
+        left: 45%;
+        right: 45%;
+      }
+      .sideMenu div:first-child{
+        display: none;
+      }
+      .sideList{
+        width: 100%;
+        height:150px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        
+      }
+      .sideMenu{
+        width: 100%;
+        height:36px;
+
+        flex-direction: row;
+        justify-content:flex-start;
+        gap: 16px;
+        
+        
+      }
+      .sideMenu div{
+       height: 36px;
+       display: flex;
+padding: 10px 16px;
+justify-content: center;
+align-items: center;
+border-radius: 24px;
+border: 1px solid #FFF;
+      }
+      
+    .heroSection{
+      gap:48px;
+    }
+    .homeNav{
+      width: 100%;
+      height: 9vh;
+      left: 0;
+      right: 0;
+      justify-content: space-between;
+    }
+    .navBarPlaceholder{
+      height: 12vh;
+
+    }
+    .phoneNav{
+      display: flex;
+      gap: 24px;
+    }
+    .homeText div:first-child{
+      white-space: nowrap;
+    }
+    .menu{
+      flex-direction: column;
+      align-items: start;
+     
+    }
+    .menu div{
+      align-self: flex-start;
+    }
+    .songName{
+      font-size: 1.2rem;
+    }
+    .createPlaylist{
+      width: 88%;
+      left: 6%;
+      right: 6%;
+      height: 49vh;
+      top: 25.6vh;
+      bottom:25.5vh;
+      padding: 32px 16px;
+    }
+    .createPlaylist>div:nth-child(1){
+      font-size: 1.3rem;
+     
+    }
+    .createPlaylist>div:nth-child(2) input{
+      font-size: 1.1rem;
+    }
+    .createPlaylist>div:nth-child(3) textarea{
+      font-size: 1.1rem;
+    }
+    .playlistButton div{
+      padding: 0;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .showSongs>div:nth-child(2){
+      display: none;
+    }
+    .addSongsSection{
+      padding: 0;
+    }
+    .showSongs>div:nth-child(1){
+      gap: 8px;
+    }
+    .showSongs>div:nth-child(1) img{
+      width: 46.08px;
+height: 46.08px;
+border-radius: 2.88px;
+    }
+    .songDetails>div:nth-child(1){
+      font-size: 1rem;
+
+    }
+    .songDetails>div:nth-child(2){
+      font-size: 0.8rem;
+    }
+    .showSongs>div:nth-child(3) img{
+      height: 24px;
+      width: 24px;
+    }
+    .showSongs>div:nth-child(1){
+      width: 52.7vw;
+      overflow: scroll;
+    }
+    .addText>div:nth-child(1){
+      font-size: 1.5rem;
+      
+    }
+    .addText>div:nth-child(2){
+      width: 25%;
+      font-size: 0.8rem;
+    }
+    .playlistInfo{
+      height:35.5vh;
+      flex-direction: column ;
+    }
+    .playlistInfo>div:nth-child(1){
+      width: 100%;
+      height: 160px;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+
+    }
+    .playlistInfo>div:nth-child(1)>img{
+      width: 160px;
+height: 160px;
+border-radius: 12px;
+    }
+    .playlistInfo>div:nth-child(1)>div:nth-child(2){
+      display: flex;
+      height: 160px;
+      flex-direction: column;
+     align-items: flex-start;
+      justify-content: center;
+      gap: 12px;
+    }
+    .songDetail{
+      font-size: 1.3rem;
+      flex-direction: row;
+      gap:8px ;
+      white-space: nowrap;
+    }
+    .playlistInfo>div:nth-child(2){
+      align-self: flex-start;
+      gap: 32px;
+    }
+    .playlistInfo>div:nth-child(2)>div:nth-child(1){
+      color: #A7A7A7;
+
+font-family: "Prompt";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 140%;
+    }
+    .playlistInfo>div:nth-child(2)>div:nth-child(2){
+      color: #FFF;
+
+/* web/Heading/bold/04 */
+font-family :"Prompt", sans-serif;
+font-size: 1.5rem;
+font-style: normal;
+font-weight: 700;
+line-height: 100%;
+    }
+    .searchBox{
+      width: 100%;
+      position: absolute;
+      top: 9vh;
+      left: 5px;
+      right: 5px;
+     
+      border-radius: 8px;
+    }
+    .searchBox input{
+      height: 5.5vh;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--app-secondary, #000);
+background: #FFF;
+color: #000;
+font-size: 1.2rem;
+    }
+    .searchContent{
+      height: 74.5vh;
+     
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      
+      gap: 16px;
+      
+      top: 5.405vh;
+      background: var(--web-primary, #000)
+      
+      
+      
+    }
+    .searchNotFound>div:nth-child(2)>div:nth-child(1){
+      color: #C6C6C6;
+      font-size: 20px;
+    }
+    .searchNotFound>div:nth-child(2)>div:nth-child(2){
+      color: #A5A5A5;
+      font-size: 12px
+    }
+    .searchData>div:nth-child(1){
+      height: 46px;
+      width: 46px;
+    }
+    .searchData>div:nth-child(1) img{
+      height: 46px;
+      width: 46px;
+    }
+    .searchData>div:nth-child(2)>div:nth-child(1){
+      color: #FFF;
+      font-size: 1rem;
+    }
+    .searchData{
+      gap: 14px;
+    }
+    .SearchTime{
+      color :#999;
+    }
+    .searchMain{
+      justify-content: space-between;
+    }
+    .Share{
+      display: none;
+    }
+    .playBack{
+      height: 8vh;
+      padding: 9px 19px;
+     justify-content: space-between;
+    }
+    .playBack>div:first-child img{
+      width: 46.08px;
+height: 46.08px;
+border-radius:2.8px ;
+    }
+    .playBack>div:first-child>div{
+      font-size: 0.8rem;
+    }
+    .musicTimer{
+      position: relative;
+    }
+    .time-display{
+      display: none;
+    }
+    .progress-bar{
+      position: fixed;
+      height: 5px;
+      width:100vw;
+      bottom: 0px;
+    left: 0px;
+      color: #000;
+    }
+    .playBack>div:nth-child(2){
+      width: 40%;
+      height: 35px;
+    }
+    .s{
+      display: none;
+    }
+    .controls{
+      width: 100%;
     }
 }
