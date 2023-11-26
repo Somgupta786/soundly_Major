@@ -77,7 +77,7 @@ export default function SignUpCard() {
         setError(response.data);
 
         if (response.data.success) {
-          setLogged(true)
+          
           toast("OTP SENT!");
 
           Navigation("/Otp", {

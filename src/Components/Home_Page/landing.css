@@ -114,10 +114,11 @@
 }
 
 .menu div {
-  color: red;
+ 
   display: flex;
+  align-self: center;
   gap: 8px;
-  color: var(--web-tertiary, #c76b98);
+  color: #fff;
   font-family: "Prompt", sans-serif;
   font-size: 1.11vw;
   font-style: normal;
@@ -136,6 +137,12 @@
 {
  position: absolute;
  left: 16px;
+}
+.searchBox>img:nth-child(3){
+  position: absolute;
+  height:15px;
+  width:15px;
+ right: 16px;
 }
 .searchBox input {
   width: 100%;

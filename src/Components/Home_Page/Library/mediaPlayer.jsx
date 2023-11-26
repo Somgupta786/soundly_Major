@@ -62,8 +62,8 @@ export default function MediaPlayer() {
   let sync;
   // console.log(playBackData)
  const [matchingLyrics,setMatchingLyrics]= useState([])
- 
-  const lyricsData = playBackData.lyrics_url
+ console.log(playBackData.lyrics_url)
+  const lyricsData = playBackData.lyrics_url?playBackData.lyrics_url:[]
    
   // useEffect(() => {
   //   const audio_sync = async () => {
@@ -318,9 +318,9 @@ export default function MediaPlayer() {
               <div>{playBackData.artist}</div>
             </div>
             <div>
-              <img onClick={likedHandler} src={isLiked ? Heart : Heart2} />
+              <img className="btn" onClick={likedHandler} src={isLiked ? Heart : Heart2} />
             </div>
-            <div onClick={() => {
+            <div className="btn" onClick={() => {
             setShareWindow(!shareWindow);
           }}>
               <img src={Share} />
@@ -341,7 +341,7 @@ export default function MediaPlayer() {
             </div>
             <div className="time-display"> {formatTime(totalDuration)}</div>
           </div>
-          <div>
+          <div className="btn">
             <div>
               <img  onClick={() =>{
               Object.keys(playBackData).length === 0 ? null :
@@ -434,13 +434,13 @@ export default function MediaPlayer() {
         </div>
       </div>:null} 
      {playlistWindow? <div style={{gap:"15px"}} className="shareWindow">
-        <div>Add to playlist <img onClick={()=>{
+        <div className="btn">Add to playlist <img onClick={()=>{
           setPlaylistWindow(false)
           setShareWindow(false)
         }} src={close}/></div>
         <div className="playlistContain">
         {playListData.map((playlist) => (
-  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName" onClick={()=>{
+  <div style={style&&currentPlaylist==playlist.id?{ borderRadius: 8, border: '1px solid #B2ACAC' } : {}} className="playlistName btn" onClick={()=>{
     console.log(playlist.id)
     setStyle(true)
       setCurrentPlaylist(playlist.id)}} key={playlist.id}>
@@ -455,7 +455,7 @@ export default function MediaPlayer() {
        
         </div>
 
-        <div className="done" onClick={addSongHandler}>Done</div>
+        <div className="done btn" onClick={addSongHandler}>Done</div>
       </div>:null}
     </div>
   );

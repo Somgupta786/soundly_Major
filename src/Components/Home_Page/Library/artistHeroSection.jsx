@@ -10,9 +10,10 @@ import { useEffect,useState } from "react";
 import axios from "../../../Api/auth";
 export default function ArtistHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,isLiked,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
+  const{setLibraryIcon, setHomeIcon,setPlayBackData,isLiked,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
   setHome(true)
-  
+  setHomeIcon(false)
+  setLibraryIcon(true)
   const [songs, setSongs] = useState([]);
   
 
@@ -42,7 +43,8 @@ export default function ArtistHeroSection() {
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_json
       
     })
    
@@ -157,7 +159,7 @@ export default function ArtistHeroSection() {
       <div className="imageCards">
       <div className="homeText">
         <div>Listen to your favorite artist </div> 
-        <div> Show more</div>
+        <div className="btn"> Show more</div>
       </div>
       <div className="homeFirstRow">
       {favArt.map((name)=> <ImgCard  onClick={() => Navigation("/favouriteArtistSongs",{state:name.name})}   img ={name.thumbnail_url} name ={name.name} refer="false"/>)}

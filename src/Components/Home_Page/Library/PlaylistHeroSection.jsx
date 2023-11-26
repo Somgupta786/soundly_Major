@@ -14,7 +14,7 @@ export default function PlaylistHeroSection() {
   const Navigation=useNavigate();
  
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const { setPlayBackData, setNavData, setHome } = useContext(playBackContext);
+  const {setHomeIcon, setLibraryIcon, setPlayBackData, setNavData, setHome } = useContext(playBackContext);
 
   const [playlists, setPlaylist] = useState([]);
   const [createPlaylist, setCreatePlaylist] = useState(false);
@@ -25,7 +25,8 @@ export default function PlaylistHeroSection() {
 
   const [nameInput, setNameInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
-
+  setHomeIcon(false)
+  setLibraryIcon(true)
   const handleCreatePlaylist = () => {
     setNameInput("")
     setDescriptionInput("")
@@ -191,9 +192,9 @@ export default function PlaylistHeroSection() {
             />
             <div>{descriptionInput.length}/50</div>
           </div>
-          <div className='playlistButton'>
-            <div onClick={handleCreatedPlaylist} >Next</div>
-            <div onClick={handleCreatePlaylist}>Cancel</div>
+          <div className='playlistButton '>
+            <div className='btn'  onClick={handleCreatedPlaylist} >Next</div>
+            <div className='btn' onClick={handleCreatePlaylist}>Cancel</div>
           </div>
         </div>
       ) : null}

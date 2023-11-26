@@ -10,8 +10,9 @@ import { playBackContext } from '../../../App';
 
 export default function LibraryHeroSection() {
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const{setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
-
+  const{ setHomeIcon,setLibraryIcon,setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
+  setHomeIcon(false)
+  setLibraryIcon(true)
 
   setHome(true)
 
@@ -122,7 +123,7 @@ export default function LibraryHeroSection() {
       <div className="imageCards">
         <div className="homeText">
           <div>Liked Songs</div>
-          <div onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
+          <div className='btn' onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (

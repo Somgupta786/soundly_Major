@@ -12,8 +12,9 @@ export default function likedPlaylist(props) {
     console.log(props.state)
   const token = JSON.parse(localStorage.getItem('authTok'));
 
-  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
-
+  const{setHomeIcon, setLibraryIcon,setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
+  setHomeIcon(false)
+  setLibraryIcon(true)
 setHome(true)
   
 

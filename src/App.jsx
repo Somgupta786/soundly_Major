@@ -40,7 +40,9 @@ function App() {
     game: "Game",
   });
   
-  
+  const [homeIcon, setHomeIcon] = useState(false);
+  const [libraryIcon, setLibraryIcon] = useState(false);
+ 
   
   const token = JSON.parse(localStorage.getItem("authTok"));
   const [isHome, setHome] = useState(false);
@@ -191,6 +193,8 @@ if(isHome && location.pathname=="/game"&& gamePlayBackData){
   return (
     <playBackContext.Provider
       value={{
+        homeIcon, setHomeIcon,
+        libraryIcon, setLibraryIcon,
         isSongLoop,setSongLoop,
         clickCount, setClickCount,
         isShuffle,setShuffle,

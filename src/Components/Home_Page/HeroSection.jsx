@@ -21,7 +21,9 @@ export default function HeroSection() {
   
   const token = JSON.parse(localStorage.getItem('authTok'));
 
-  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
+  const{setHomeIcon,setLibraryIcon,setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
+  setHomeIcon(true)
+  setLibraryIcon(false)
   const styleBox = {
     background:
       'linear-gradient(180deg, rgba(255, 243, 249, 0.97) 0%, #F39AC6 137.12%)',
@@ -187,7 +189,7 @@ export default function HeroSection() {
       <div className="imageCards">
         <div className="homeText">
           <div>FOR YOU</div>
-          <div onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
+          <div className='btn' onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (

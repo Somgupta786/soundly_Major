@@ -7,11 +7,12 @@ import { playBackContext } from "../../../App";
 export default function GameSection() {
     const token = JSON.parse(localStorage.getItem('authTok'));
   const [songData, setSongData] = useState(null);
-  const { setGamePlayBackData } = useContext(playBackContext);
+  const {  setHomeIcon, setLibraryIcon, setGamePlayBackData } = useContext(playBackContext);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(false);
   const [questionEnded,setQuestionEnded]=useState(false);
-
+  setHomeIcon(false)
+  setLibraryIcon(false)
   useEffect(() => {
     setIsCorrect(false)
     setSelectedOption(null)
@@ -98,16 +99,16 @@ export default function GameSection() {
           
             <div onClick={()=>resultHandler(songData.option1,songData)}  style={
                 selectedOption === songData.option1 ? optionStyle : null
-              } className="songSame">{songData.option1}</div>
+              } className="songSame btn">{songData.option1}</div>
             <div onClick={()=>resultHandler(songData.option2,songData)}  style={
                 selectedOption === songData.option2 ? optionStyle : null
-              } className="songSame">{songData.option2}</div>
+              } className="songSame btn">{songData.option2}</div>
               <div onClick={()=>resultHandler(songData.option3,songData)}  style={
                 selectedOption === songData.option3 ? optionStyle : null
-              } className="songSame">{songData.option3}</div>
+              } className="songSame btn">{songData.option3}</div>
               <div onClick={()=>resultHandler(songData.option4,songData)}  style={
                 selectedOption === songData.option4 ? optionStyle : null
-              } className="songSame">{songData.option4}</div>
+              } className="songSame btn">{songData.option4}</div>
           </>
         ) : null}
       </div>

@@ -11,8 +11,9 @@ import { playBackContext } from '../../App';
 export default function PopHeroSection(props) {
   const token = JSON.parse(localStorage.getItem('authTok'));
 
-  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
-
+  const{setHomeIcon,  setLibraryIcon,setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
+  setHomeIcon(true)
+  setLibraryIcon(false)
 setHome(true)
   
 

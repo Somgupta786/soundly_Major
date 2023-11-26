@@ -9,12 +9,15 @@ import Not from "../../assets/notFound.svg";
 import tr from "../../assets/Vector (5).svg";
 import { loginContext } from "../../AppRouter";
 import { playBackContext } from "../../App";
+import { useLocation } from "react-router-dom";
+import close from "../../assets/Close_LG.svg"
 
 export default function Navbar(props) {
   const { isLogged, setLogged, setAuthTok } = useContext(loginContext);
-  const Navigation = useNavigate();
+  const navigate = useNavigate();
+  const Navigation=useNavigate();
   const token = JSON.parse(localStorage.getItem("authTok"));
-  const { setPlayBackData, setNavData, setHome, setMedia, setMediaData } =
+  const {homeIcon,libraryIcon, setPlayBackData, setNavData, setHome, setMedia, setMediaData } =
     useContext(playBackContext);
   const [searchValue, setSearchValue] = useState("");
   const [beUploader, setBeUploader] = useState(false);
@@ -24,7 +27,7 @@ export default function Navbar(props) {
   const [songs, setSongs] = useState([]);
   const [profileShow, setProfileShow] = useState(false);
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate();
+  const Location = useLocation();
 
   const profileShowHandler = () => {
     console.log(userData);
@@ -46,11 +49,11 @@ export default function Navbar(props) {
         setSongs(response.data.data);
       } else {
         setSongs([]);
-        console.log("nhi");
+       
       }
     } catch (error) {
       setSongs([]);
-      console.log("n");
+      
     }
   };
   const handleImgCardClick = (song) => {
@@ -155,15 +158,15 @@ export default function Navbar(props) {
       <div className="menu">
         <div onClick={() => navigate("/home")}>
           <img src={Home} />
-          <div>{props.navData.home}</div>
+          <div style={homeIcon?{color:"#C76B98"}:null} >{props.navData.home}</div>
         </div>
         <div>
           <img src={Library} />
-          <div onClick={handleLibraryClick}>{props.navData.library}</div>
+          <div style={libraryIcon?{color:"#C76B98"}:null} onClick={handleLibraryClick}>{props.navData.library}</div>
         </div>
         <div onClick={() => navigate("/game")}>
           <img src={Game} />
-          <div>{props.navData.game}</div>
+          <div style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >{props.navData.game}</div>
         </div>
       </div>
       <div className="searchBox">
@@ -173,6 +176,7 @@ export default function Navbar(props) {
           onChange={searchHandler}
         />
         <img src={tr}></img>
+       {searchValue!==""?<img className="btn" onClick={()=>setSearchValue("")} src={close}/>:null} 
         {searchValue && (
           <div className="searchContent">
             {songs.length !== 0 ? (

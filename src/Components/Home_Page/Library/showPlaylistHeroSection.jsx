@@ -14,8 +14,9 @@ export default function ShowPlaylistHeroSection(props) {
 
 
   const token = JSON.parse(localStorage.getItem("authTok"));
-  const{setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
-
+  const{  setHomeIcon,  setLibraryIcon,setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
+  setHomeIcon(false)
+  setLibraryIcon(true)
   setHome(true);
 
   const [songs, setSongs] = useState(props.state.playlistData.songs);
@@ -51,7 +52,8 @@ export default function ShowPlaylistHeroSection(props) {
       thumbnail: songData.thumbnail_url,
       name: songData.name,
       artist:selectedSong.artist,
-      isLiked:songData.is_liked
+      isLiked:songData.is_liked,
+      lyrics_url:songData.lyrics_json
       
     })
    

@@ -11,9 +11,10 @@ import { useNavigate } from 'react-router-dom';
 export default function AddSongs(props) {
     const Navigation=useNavigate()
   const token = JSON.parse(localStorage.getItem('authTok'));
-  const { setPlayBackData,setCurrentSongSection,setfutureSongData, playBackData, isPlaying, setNavData, setHome, setMedia,currentSongIndex,currentSongSection,setCurrentSongIndex } = useContext(playBackContext);
+  const {setHomeIcon, setLibraryIcon, setPlayBackData,setCurrentSongSection,setfutureSongData, playBackData, isPlaying, setNavData, setHome, setMedia,currentSongIndex,currentSongSection,setCurrentSongIndex } = useContext(playBackContext);
   setHome("true");
-
+  setHomeIcon(false)
+  setLibraryIcon(true)
   const [songs, setSongs] = useState([]);
   const [addedSong, setAddedSong] = useState([]);
 
@@ -48,7 +49,7 @@ const handleImgCardClick = (song,songIndex) => {
       name: songData.name,
       artist:selectedSong.artist,
       isLiked:songData.is_liked,
-      lyrics_url:songData.lyrics_url
+      lyrics_url:songData.lyrics_json
       
     })
    
@@ -170,7 +171,7 @@ const handleImgCardClick = (song,songIndex) => {
               style={addedSong.includes(song.id) ? { background: "#2C9A3E" } : null}
               onClick={() => AddSongHandler(song)}
             >
-              <img src={Add} alt="Add" />{addedSong.includes(song.id)?"Added":"Add"}
+              <img className='btn' src={Add} alt="Add" />{addedSong.includes(song.id)?"Added":"Add"}
             </div>
           </div>
         ))}
