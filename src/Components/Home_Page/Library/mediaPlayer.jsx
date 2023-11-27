@@ -589,7 +589,7 @@ export default function MediaPlayer() {
       <div className="mediaFooter">
         <div className="mediaText">
         <div><div>
-            {playBackData.name.length > 14
+            {playBackData.name&&playBackData.name.length > 14
               ? playBackData.name.slice(0, 14) + "..."
               : playBackData.name}
           </div>
