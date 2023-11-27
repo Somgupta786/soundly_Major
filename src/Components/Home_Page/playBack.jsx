@@ -24,6 +24,13 @@ import repeat1 from "../../assets/repeat2.svg";
 import shuf from "../../assets/Shuffle.svg";
 import loop from "../../assets/songloop.svg"
 import { WhatsappShareButton } from 'react-share';
+import disShuf from "../../assets/disShuf.svg"
+import disPause from "../../assets/disPause.svg"
+import disBack from "../../assets/disFor.svg"
+import disFor from "../../assets/disBack.svg"
+import disRep from "../../assets/disRepeat.svg"
+import disLike from "../../assets/disLike.svg"
+import disShare from "../../assets/disShare.svg"
 
 
 
@@ -269,25 +276,25 @@ const text = 'Check out this link';
               setPlaylistLoop(false) ,
               setSongLoop(false)
               } }
-            src={isShuffle?shuf: Group}
+            src={ Object.keys(playBackData).length === 0?disShuf:isShuffle?shuf: Group}
           />
           <img
             onClick={() => {
               setIsLeftClicked(true);
             }}
-            src={Left}
+            src={Object.keys(playBackData).length === 0?disBack:Left}
           />
-          <img onClick={handlePlayPause} src={isPlaying ? Continue : Pause} />
+          <img onClick={handlePlayPause} src={Object.keys(playBackData).length === 0?disPause:isPlaying ? Continue : Pause} />
           <img
             onClick={() => {
               setIsRightClicked(true);
             }}
-            src={Right}
+            src={Object.keys(playBackData).length === 0?disFor:Right}
           />
           <img
           className="s"
             onClick={handleLyricClick}
-            src={!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? repeat1 : Repeat}
+            src={Object.keys(playBackData).length === 0?disRep:!isPlaylistLoop&&!isShuffle&&isSongLoop?loop:isPlaylistLoop ? repeat1 : Repeat}
             
           />
         </div>
@@ -309,16 +316,16 @@ const text = 'Check out this link';
       </div>
       <div className="Share btn">
         <div>
-          <img onClick={likedHandler} src={isLiked ? Heart2 : Heart} />
+          <img onClick={likedHandler} src={Object.keys(playBackData).length === 0?disLike:isLiked ? Heart2 : Heart} />
         </div>
         <div
           onClick={() => {
             setShareWindow(!shareWindow);
           }}
         >
-          <img className="btn" src={Share} />
+          <img className="btn" src={Object.keys(playBackData).length === 0?disShare:Share} />
 
-          <div  className="btn">Share </div>
+          <div style={Object.keys(playBackData).length === 0?{color:"#804361"}:null}  className="btn">Share </div>
         </div>
       </div>
       {shareWindow && !playlistWindow ? (

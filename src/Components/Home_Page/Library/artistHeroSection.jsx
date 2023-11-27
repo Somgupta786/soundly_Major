@@ -160,7 +160,7 @@ export default function ArtistHeroSection({items}) {
       
       <div className="imageCards">
       <div className="homeText">
-        <div>From artist you follow </div> 
+        <div>{!isPhone?"From Artist you follow":"From Your Artist"} </div> 
         <div> Show more</div>
       </div>
       <div className="homeFirstRow">
@@ -192,7 +192,7 @@ export default function ArtistHeroSection({items}) {
       </div>
       <div className="imageCards">
       <div className="homeText">
-        <div>Listen to your favorite artist </div> 
+        <div>{!isPhone?"Listen to your Favorite artist":"Favourite Artist"}</div> 
         <div className="btn"> Show more</div>
       </div>
       <div className="homeFirstRow">
