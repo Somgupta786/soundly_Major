@@ -172,7 +172,7 @@ export default function PlaylistHeroSection({ items }) {
       <div className="imageCards">
         <div className="homeText">
           <div>Liked playlists</div>
-          <div>Show more</div>
+          <div className='btn'>Show more</div>
         </div>
         {playlists.length>0?<><div className="homeFirstRow">
           {playlists.slice(0, 5).map((playlist, playlistIndex) => (
@@ -183,6 +183,7 @@ export default function PlaylistHeroSection({ items }) {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
+              refer="false"
              
             />
           ))}
@@ -196,7 +197,7 @@ export default function PlaylistHeroSection({ items }) {
               name={playlist.name}
               description={playlist.description}
               onClick={() => handleImgCardClick(playlist)} 
-             
+              refer="false"
             />
           ))}
         </div></>:null}

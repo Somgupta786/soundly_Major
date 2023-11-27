@@ -178,7 +178,7 @@ console.log(props)
       <div className="imageCards">
         <div className="homeText">
           <div>{props.name}</div>
-          <div>Show more</div>
+          <div className='btn'>Show more</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (
