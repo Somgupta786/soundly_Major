@@ -500,3 +500,135 @@ line-height: 100%;
     height:25px;
     width:25px;
 }
+@media(max-width:800px){
+   .artistNavBar>div:nth-child(1),.artistNavBar>div:nth-child(1)> span{
+     font-size: 40px; 
+    }
+    .artistNavBar>div:nth-child(3){
+        width: 125px;
+        height: 48px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+    .inside{
+        gap: 33px;
+        padding: 0px;
+    }
+    .yourListening{
+        font-size: 1.5rem;
+        margin-left: 20px;
+    }
+    .listeningSongs{
+        background: #000;
+        border: 0px;
+        padding: 0 20px 0 20px;
+    }
+    
+    .noListeningSong>div:nth-child(1)>div:nth-child(1)>div{
+        font-size:1.5rem;
+        align-self: center;
+    }
+    .uploadText{
+        font-size: 1rem;
+        white-space: wrap;
+        text-align: center;
+    }
+    
+    .noListeningSong>div:nth-child(1)>div:nth-child(2){
+        display: flex;
+        
+        flex-direction: column;
+        width: 182px;
+        height: 52px;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+    .upload{
+        height: 64vh;
+        width:93%;
+        left: 3.5%;
+        right:3.5%;
+        padding: 42px 15px 40px 15px;
+        
+    }
+    .uploadUpper{
+        justify-content: space-between;
+    }
+    .uploadUpper>div:nth-child(1){
+        font-size:1.3rem;
+        white-space: nowrap;
+    }
+    .uploadUpper>div:nth-child(2)>div:nth-child(1){
+        width:147px;
+        font-size: 1rem;
+    }
+    .uploadUpper>div:nth-child(2)>div:nth-child(2){
+        gap: 16px;
+        font-size: 14px;
+        white-space: nowrap;
+        line-height: 32px;
+    }
+    .uploadUpper>div:nth-child(2)>div:nth-child(2)>div:nth-child(1){
+        white-space: wrap;
+        line-height: normal;
+    }
+    .uploadLower{
+     gap: 12px;
+     justify-content: center;
+    }
+    .uploadLower div{
+        width: 48px;
+height: 16px;
+    }
+    .upload>img:nth-child(3){
+         right:6vw;
+         top: 3vh;
+    }
+    .upload1{
+        height: 64vh;
+        width:93%;
+        left: 3.5%;
+        right:3.5%;
+        padding: 42px 15px 40px 15px;
+text-align: center;
+        font-size: 1.5rem;
+        gap: 40px;
+    }
+    .upload1>div:nth-child(2) input{
+        font-size: 1rem;
+    }
+    .upload1>div:nth-child(2) div{
+        font-size: 1.2rem;
+    }
+    .upload2{
+        width:93%;
+        left: 3.5%;
+        right:3.5%;
+        height: 43.8vh;
+        top: 17vh;
+        padding: 40px 22px;
+        font-size: 25px;
+        white-space: wrap;
+        text-align: center;
+    }
+    .same,.same>div:nth-child(2){
+        font-size: 1rem;
+    }
+    .listeningSongsDetail>div:nth-child(1),  .listeningSongsDetail>div:nth-child(4), .listeningSongsDetail>div:nth-child(5){
+        display: none;
+    }
+    .listeningSongsDetail{
+        font-size: 1rem;
+    }
+    .listeningSongsDetail>div:nth-child(7){
+        font-size: 1rem;
+        width: 10vw;
+    }
+}

@@ -536,11 +536,11 @@ line-height: 100%;
     }
 .progress-bar{
   background-color: #fff;
-  height: 2px;
+  height: 3px;
 }
 .progress-fill{
   background-color: #C76B98;
-  height: 2px;
+  height: 3px;
 }
 .time-display{
   font-size: 12px;
@@ -561,4 +561,97 @@ font-style: normal;
 font-weight: 400;
 line-height: 150%;
 }
+.mediaData>div:nth-child(1){
+  display: flex;
+  justify-content: space-between;
+ 
+}
+.phoneRef>div:nth-child(2){
+  color: var(--web-secondary, #FFF);
+font-family: "Prompt", sans-serif;
+font-size: 1.2rem;
+font-style: normal;
+font-weight: 400;
+line-height: 100%;
+}
+.profileOption{
+  width: 100%;
+  top:0px;
+  left: 0px;
+  right: 0px;
+  background: #000;
+  height:83vh;
+  border-radius: 0px;
+  padding-top:40px;
+  gap: 32px;
+  color:#D2D2D2;
+}
+.profileDetails>div:nth-child(2){
+  font-size: 1.3rem;
+}
+.profileDetails>div:nth-child(2)>div:nth-child(2){
+  font-size: 18px;
+}
+.hr{
+  height: 1px;
+}
+.uploader{
+  width: 93%;
+  left:3.5%;
+  right: 3.5%;
+
+}
+.uploader>div:nth-child(1){
+  font-size:1.5rem;
+  text-align: center;
+}
+.uploader>div:nth-child(2){
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: normal;
+}
+.uploader>div:nth-child(3){
+  
+  font-size: 1rem;
+  text-align: center;
+  line-height: normal;
+}
+.uploader>div:nth-child(4) button{
+  font-size: 1.2rem;
+}
+.artistNavBar>div:nth-child(2){
+  display: none;
+  padding: 20px 20px 20px 20px;
+}
+.gameBox{
+  width: 100%;
+  margin: 0;
+  height: 90vh;
+  gap: 24px;
+}
+.gamePoster
+{
+  position: static;
+  width: 100%;
+ 
+}
+.gameText{
+  color: #FFF;
+text-align: center;
+/* web/Para/reg/01 */
+font-family:"Prompt", sans-serif;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 100%; 
+}
+.songSame{
+  height: 56px;
+  font-size: 1rem;
+}
+
+
 }

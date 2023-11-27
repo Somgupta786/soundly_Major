@@ -101,7 +101,7 @@ export default function R_B() {
     <div className="mainContent">
       
       <div className="navBarPlaceholder"></div>
-      <PopHeroSection name="R&B"  items={[menuItems1, menuItems2,menuItems3]} />
+      <PopHeroSection name="RB"  items={[menuItems1, menuItems2,menuItems3]} />
       
       {/* <Playback/> */}
       <div className="playBackPlaceholder"></div>

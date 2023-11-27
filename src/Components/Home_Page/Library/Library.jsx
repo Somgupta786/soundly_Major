@@ -27,17 +27,29 @@ export default function Library() {
       onclick: "/favArt",
       activ:"false"
     },
-    // ... other menu items
+  
+  ];
+  const menuItems2 = [
+    {
+      title: " Suggested",
+      onclick: "/#",
+      activ: "false"
+    },
+    {
+      title: "Listen to more artists",
+      onclick: "/moreArtist",
+      activ:"false"
+    },
   ];
 
 
   return (
     <div className="landingPage">
-        <Sidebar items={[menuItems1]} />
+        <Sidebar items={[menuItems1,menuItems2]} />
       <div className="mainContent">
         
         <div className="navBarPlaceholder"></div>
-        <LibraryHeroSection items={[menuItems1]} />
+        <LibraryHeroSection items={[menuItems1,menuItems2]} />
         
         <div className="playBackPlaceholder"></div>
       </div>

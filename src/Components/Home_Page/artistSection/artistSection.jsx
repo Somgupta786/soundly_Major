@@ -7,6 +7,7 @@ import Path from "../../../assets/Path.svg";
 import axios from "../../../Api/auth";
 import { playBackContext } from '../../../App';
 import { useContext } from "react";
+import "../query.css"
 
 export default function artistSection() {
   const{setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex}=useContext(playBackContext);

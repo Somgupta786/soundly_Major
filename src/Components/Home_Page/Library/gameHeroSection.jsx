@@ -1,5 +1,6 @@
 import Footer from "../Footer";
 import girl from "../../../assets/pexels-pavel-danilyuk-8001055 1 (1).svg";
+import girl2 from "../../../assets/Music - Celebrate.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
@@ -88,7 +89,23 @@ export default function GameSection() {
      
     }
   }, [selectedOption, isCorrect]);
+  const[isPhone,setIsPhone]=useState(false)
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   return (
+    !isPhone ?
     <div style={{ position: "relative" }} className="heroSection">
       <div className="gameText">Remember this song?</div>
 
@@ -116,6 +133,37 @@ export default function GameSection() {
       <div className="gamePoster">
         <img src={girl} />
       </div>
+      <div className="footer">
+        <Footer />
+      </div>
+    </div>:<div style={{ gap:"20px" }} className="heroSection">
+      <div className="gameText">Remember this song?</div>
+
+      <div className="gameBox">
+      <div className="gamePoster">
+        <img src={girl2} />
+      </div>
+        {songData ? (
+          <>
+          
+          
+            <div onClick={()=>resultHandler(songData.option1,songData)}  style={
+                selectedOption === songData.option1 ? optionStyle : null
+              } className="songSame btn">{songData.option1}</div>
+            <div onClick={()=>resultHandler(songData.option2,songData)}  style={
+                selectedOption === songData.option2 ? optionStyle : null
+              } className="songSame btn">{songData.option2}</div>
+              <div onClick={()=>resultHandler(songData.option3,songData)}  style={
+                selectedOption === songData.option3 ? optionStyle : null
+              } className="songSame btn">{songData.option3}</div>
+              <div onClick={()=>resultHandler(songData.option4,songData)}  style={
+                selectedOption === songData.option4 ? optionStyle : null
+              } className="songSame btn">{songData.option4}</div>
+          </>
+        ) : null}
+      </div>
+
+      
       <div className="footer">
         <Footer />
       </div>

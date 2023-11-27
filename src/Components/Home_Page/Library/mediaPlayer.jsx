@@ -21,6 +21,7 @@ import audioSync from "audio-sync-with-text";
 import Repeat1 from "../../../assets/Repeat (1)med.svg";
 import Shuf from "../../../assets/medShuf.svg";
 import loop from "../../../assets/mloop.svg";
+import down from "../../../assets/Down arrow.svg";
 import { useNavigate } from "react-router-dom";
 
 import { playBackContext } from "../../../App";
@@ -105,7 +106,7 @@ export default function MediaPlayer() {
   //   audio_sync();
   // }, [playBackData.lyrics_url]);
   useEffect(() => {
-    if(lyricsData){
+    if(lyricsData&&lyricsData.length>0){
       setMatchingLyrics(
         lyricsData
           .filter(
@@ -545,8 +546,8 @@ export default function MediaPlayer() {
   ) : (
     <div className="mediaPlayer">
     <div className="mediaData">
-    <div className="phoneRef">
-        <img></img>
+    <div className="phoneRef btn">
+        <img onClick={()=>navigate("/home")} src={down}></img>
         <div>Playing {playBackData.name}</div>
         <div
               className="btn"
@@ -560,7 +561,7 @@ export default function MediaPlayer() {
       <div className="phoneLyr">
         <img src={playBackData.thumbnail} />
         <div className="lyricsData">
-         {lyricsData?<> {lyricsData.map((entry, index) =>
+         {lyricsData&&lyricsData.length>0?<> {lyricsData.map((entry, index) =>
             index !== 0 && !/^\d+$/.test(entry.text) ? (
               <p
                 id={`lyric-${entry.index}`}

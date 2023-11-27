@@ -25,6 +25,9 @@ import GameSection from './Components/Home_Page/Library/game';
 import FavArtSongs from './Components/Home_Page/favArtSongs';
 import Recent from './Components/Home_Page/recentlyPlayed';
 import LikedPlay from './Components/Home_Page/likedPlaylist';
+import "./Components/Home_Page/query.css"
+import MoreArtist from './Components/Home_Page/Library/moreArt';
+import UploaderArtist from './Components/Home_Page/Library/uploaderArtist';
 
 export const loginContext=createContext("");
 function AppRouter() {
@@ -59,6 +62,8 @@ function AppRouter() {
       <Route path="/favouriteArtistSongs" element={<ProtectedRouter Component={FavArtSongs}  />} />
       <Route path="/recent" element={<ProtectedRouter Component={Recent}  />} />
       <Route path="/likedPlaylists" element={<ProtectedRouter Component={LikedPlay}  />} />
+      <Route path="/moreArtist" element={<ProtectedRouter Component={MoreArtist}  />} />
+      <Route path="/uploaderArtist" element={<ProtectedRouter Component={UploaderArtist}  />} />
     </Routes>
    
   );

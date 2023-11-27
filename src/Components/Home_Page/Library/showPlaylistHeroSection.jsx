@@ -24,7 +24,7 @@ export default function ShowPlaylistHeroSection(props) {
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
 
-  
+  const [hours, minutes, seconds] = props.state.playlistData.playlist.totalduration.split(":").map(Number);
   const handleImgCardClick = (song,songIndex) => {
     console.log(songIndex)
     
@@ -127,7 +127,7 @@ console.log(props.state.playlistData.playlist.name)
               <div >
                 <img src={Dot} />
               </div>
-              <div>10 min</div>
+              <div>{minutes} min</div>
             </div>
             </div>
           </div>

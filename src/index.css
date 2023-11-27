@@ -752,9 +752,12 @@ letter-spacing: 0.64px;
     left: 0;
     right: 0;
     top: 17vh;
-    padding:0px 6.55vw;
+    padding:0px 6.55vw 0 0;
     border: 0px;
     
+  }
+  .mainContent{
+   padding:14px;
   }
   #login{
     width:100%;
@@ -872,9 +875,12 @@ top:15vh;
       font-size:1.3rem;
   
     }
+
    
  
   }
  
+
+
  
     

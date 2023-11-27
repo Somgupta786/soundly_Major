@@ -1,48 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Card from './Card';
-import Footer from './Footer';
-import ImgCard from './ImgCard';
-import Playback from './playBack'; 
+import axios from '../../../Api/auth';
+import Card from '../Card';
+import Footer from '../Footer';
+import ImgCard from '../ImgCard';
+import Playback from '../playBack'; 
 
 import { useContext } from 'react';
-import { playBackContext } from '../../App';
+import { playBackContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
 
-export default function PopHeroSection(props) {
+export default function UploaderArtistSection(props) {
+    console.log(props)
   const token = JSON.parse(localStorage.getItem('authTok'));
-const navigate = useNavigate();
-  const{setHomeIcon,  setLibraryIcon,setPlayBackData,setfutureSongData,setCurrentSongSection,setHome,setMedia,isMedia,setMediaData,currentSongIndex,currentSongSection,setCurrentSongIndex}=useContext(playBackContext);
-  setHomeIcon(true)
-  setLibraryIcon(false)
-setHome(true)
-  
-console.log(props)
+  const{ setHomeIcon,setLibraryIcon,setPlayBackData,isLiked,setNavData,setfutureSongData,setHome,setMedia,isMedia,setMediaData,currentSongIndex,setCurrentSongIndex,favArt,setFavArt}=useContext(playBackContext);
+  setHomeIcon(false)
+  setLibraryIcon(true)
+  const navigate = useNavigate();
+  setHome(true)
+
   const [songs, setSongs] = useState([]);
   
   const[isPhone,setIsPhone]=useState(false)
   const [selectedSong, setSelectedSong] = useState(null);
   const [songData, setSongData] = useState(null);
+  const [showMore, setShowMore] = useState(false);
 
-  
   const handleImgCardClick = (song,songIndex) => {
     console.log(songIndex)
-    
-      setCurrentSongIndex(songIndex)
-      setCurrentSongSection("Query")
+    setCurrentSongIndex(songIndex)
+      
       setfutureSongData(songs)
       
-    
-   
     setSelectedSong(song); 
-  
- 
+   
    
      
   
   };
   useEffect(() => {
-    console.log(songData)
+   
     if(songData&&currentSongIndex!=null){
       console.log(songData.is_liked)
     setPlayBackData({
@@ -57,7 +53,12 @@ console.log(props)
       
     })
    
-   
+    // setMediaData({
+    //   url: songData.song_url,
+    //   id: songData.id,
+    //   thumbnail: songData.thumbnail_url,
+    //   name: songData.name
+    // })
     
   }
   },[songData])
@@ -68,49 +69,23 @@ console.log(props)
 
   useEffect(() => {
     const fetchSongs = async () => {
-      if(props.name=="Recently Played"){
-        try {
-          const url = "https://test-mkcw.onrender.com/api/recentlyplayed/";
-           const response = await axios.get(url, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-  
-          if (response.data.success) {
-            const fetchedSongs = response.data.data;
-            setSongs(fetchedSongs);
-          } else {
-            console.error('Failed to fetch songs.');
-          }
-        } catch (error) {
-          setSongs([])
-          console.error('An error occurred:', error);
-        }
-      }
-      else
-      {
-        
-        try {
-        const url = `https://test-mkcw.onrender.com/api/songsearch/?query=${props.name}`;
-         const response = await axios.get(url,{
+      try {
+        ;
+         const response = await axios.get(`artist/${props.song.id}/`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
         if (response.data.success) {
-          const fetchedSongs = response.data.data;
+          const fetchedSongs = response.data.data.songs;
           setSongs(fetchedSongs);
         } else {
           console.error('Failed to fetch songs.');
         }
       } catch (error) {
-        setSongs([])
         console.error('An error occurred:', error);
       }
-    }
-      
     };
 
     fetchSongs();
@@ -120,7 +95,7 @@ console.log(props)
       if (selectedSong) {
         try {
           const url = `https://test-mkcw.onrender.com/api/getsong/${selectedSong.id}/`;
-          const response = await axios.get(url, {
+          const response = await axios.get(url,{
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -155,15 +130,18 @@ console.log(props)
       mediaQueryList.removeEventListener("change", handleViewportChange);
     };
   }, []);
+  
+ 
   const handleClick = (item) => {
     console.log(item)
     navigate(item.onclick,{
       state:item.title
     });
   };
+
   return (
     <div className="heroSection">
-       {isPhone?<div className="sideList">
+      {isPhone?<div style={{height:"50px"}} className="sideList">
       {props.items.map((menu, index) => (
         <div className="sideMenu" key={index}>
           {menu.map((item, itemIndex) => (
@@ -177,8 +155,8 @@ console.log(props)
 
       <div className="imageCards">
         <div className="homeText">
-          <div>{props.name}</div>
-          <div>Show more</div>
+          <div>{props.song.name}</div>
+          <div className='btn' onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">
           {songs.slice(0, 5).map((song, songIndex) => (
@@ -189,23 +167,72 @@ console.log(props)
               img={song.thumbnail_url}
               name={song.name}
               onClick={() => handleImgCardClick(song,songIndex)} 
-              section="Query"
+              section="Artist section"
             />
           ))}
         </div>
         <div className="homeLastRow">
-          {songs.slice(5,10).map((song, songIndex) => (
+  {songs.slice(5, 10).map((song, songIndex) => (
+    <ImgCard
+      key={songIndex + 5}
+      index={songIndex + 5}
+      id={song.id}
+      img={song.thumbnail_url}
+      name={song.name}
+      onClick={() => handleImgCardClick(song, songIndex + 5)}
+      section="Artist section"
+    />
+  ))}
+</div>
+
+        {showMore?<div className="homeLastRow">
+          {songs.slice(10,15).map((song, songIndex) => (
             <ImgCard
-              key={songIndex}
-              index={songIndex}
+              key={songIndex + 10}
+              index={songIndex + 10}
               id={song.id}
               img={song.thumbnail_url}
               name={song.name}
-              onClick={() => handleImgCardClick(song,songIndex)} 
-              section="Query"
+              onClick={() => handleImgCardClick(song,songIndex + 10)} 
+              section="Artist section"
             />
           ))}
-        </div>
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
+          {songs.slice(15,20).map((song, songIndex) => (
+            <ImgCard
+             key={songIndex + 15}
+            index={songIndex + 15}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song,songIndex + 15)} 
+              section="Artist section"
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
+       {showMore?<div className="homeLastRow">
+          {songs.slice(20,25).map((song, songIndex) => (
+            <ImgCard
+              key={songIndex + 20}
+              index={songIndex + 20}
+              id={song.id}
+              img={song.thumbnail_url}
+              name={song.name}
+              onClick={() => handleImgCardClick(song,songIndex + 20)} 
+              section="Liked Songs"
+            />
+          ))}
+        </div> 
+        
+        
+       :null}
       </div>
 
       <div className="footer">

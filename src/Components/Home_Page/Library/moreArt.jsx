@@ -1,26 +1,22 @@
 
 import Playback from "../playBack";
 import Navbar from "../Navbar";
-import PlaybackHeroSection from "./PlaylistHeroSection";
+import LibraryHeroSection from "./LibraryHeroSection";
 import Sidebar from "../Sidebar";
-import ArtistHeroSection from "./artistHeroSection";
+import MoreArtistSection from "./moreArtSection";
 // import Playback from "../playBack";
-import { playBackContext } from "../../../App";
-import { useContext } from "react";
-export default function ArtistFollow() {
-  const{setHome,isHome}=useContext(playBackContext)
-  setHome(!isHome)
-  const menuItems1 = [
+
+export default function MoreArtist() {
+   const menuItems1 = [
     {
       title: "MENU",
       onclick: "/menu",
       activ:"false"
-    
     },
     {
       title: "Liked Songs",
       onclick: "/liked",
-      activ:"false"
+      activ:"true"
     },
     {
       title: "Playlist",
@@ -30,9 +26,9 @@ export default function ArtistFollow() {
     {
       title: "From Your Favourite Artist",
       onclick: "/favArt",
-      activ:"true"
+      activ:"false"
     },
-
+  
   ];
   const menuItems2 = [
     {
@@ -43,19 +39,21 @@ export default function ArtistFollow() {
     {
       title: "Listen to more artists",
       onclick: "/moreArtist",
-      activ:"false"
+      activ:"true"
     },
   ];
+
+
   return (
     <div className="landingPage">
-    <Sidebar items={[menuItems1,menuItems2]} />
-  <div className="mainContent">
-    
-    <div className="navBarPlaceholder" ></div>
-    <ArtistHeroSection items={[menuItems1,menuItems2]} />
-   
-    <div className="playBackPlaceholder" ></div>
-  </div>
-</div>
+        <Sidebar items={[menuItems1,menuItems2]} />
+      <div className="mainContent">
+        
+        <div className="navBarPlaceholder"></div>
+        <MoreArtistSection  items={[menuItems1,menuItems2]} />
+        
+        <div className="playBackPlaceholder"></div>
+      </div>
+    </div>
   );
 }

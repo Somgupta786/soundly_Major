@@ -23,6 +23,9 @@ import ShowPlaylist from "./Library/showPlaylist";
 import repeat1 from "../../assets/repeat2.svg";
 import shuf from "../../assets/Shuffle.svg";
 import loop from "../../assets/songloop.svg"
+import { WhatsappShareButton } from 'react-share';
+
+
 
 export default function Playback(props) {
   const [selectedSong, setSelectedSong] = useState(null);
@@ -71,6 +74,8 @@ export default function Playback(props) {
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
+  const shareUrl = 'http://localhost:5177/home';
+const text = 'Check out this link';
 
   const handleProgressBarClick = (e) => {
     const progressBar = e.currentTarget;
@@ -242,6 +247,7 @@ export default function Playback(props) {
 
     // Increment the click count
     
+    
   };
 
   return (
@@ -301,7 +307,7 @@ export default function Playback(props) {
           <div className="time-display">{formatTime(totalDuration)}</div>
         </div>
       </div>
-      <div className="Share">
+      <div className="Share btn">
         <div>
           <img onClick={likedHandler} src={isLiked ? Heart2 : Heart} />
         </div>
@@ -310,9 +316,9 @@ export default function Playback(props) {
             setShareWindow(!shareWindow);
           }}
         >
-          <img src={Share} />
+          <img className="btn" src={Share} />
 
-          <div>Share </div>
+          <div  className="btn">Share </div>
         </div>
       </div>
       {shareWindow && !playlistWindow ? (
@@ -320,18 +326,21 @@ export default function Playback(props) {
           <div>Share this song</div>
           <div>
             <div className="shareOption">
-              <div className="shareSame">
+              <div className="shareSame btn">
                 <img src={Whats}></img>
-                <a
+                {/* <a
                   href={`whatsapp://send?text=${encodeURIComponent(
                     "http://localhost:5177/home"
                   )}`}
                   title="Share on WhatsApp"
                 >
                   WhatsApp
-                </a>
+                </a> */}
+                <WhatsappShareButton url={shareUrl} title={text}>
+              WhatsApp
+  </WhatsappShareButton>
               </div>
-              <div className="shareSame">
+              <div className="shareSame btn">
                 <img src={Inst}></img>
                 <span>Instagram</span>
               </div>
@@ -340,7 +349,7 @@ export default function Playback(props) {
               onClick={() => {
                 setPlaylistWindow(true);
               }}
-              className="addOption"
+              className="addOption btn"
             >
               <img src={add}></img>
               <div>Add to playList</div>
@@ -352,7 +361,7 @@ export default function Playback(props) {
         </div>
       ) : null}
       {playlistWindow ? (
-        <div style={{ gap: "15px" }} className="shareWindow">
+        <div style={{ gap: "15px" }} className="shareWindow btn">
           <div>
             Add to playlist{" "}
             <img
@@ -363,7 +372,7 @@ export default function Playback(props) {
               src={close}
             />
           </div>
-          <div className="playlistContain">
+          <div className="playlistContain btn">
             {playListData.map((playlist) => (
               <div
                 style={
@@ -390,7 +399,7 @@ export default function Playback(props) {
             ))}
           </div>
 
-          <div className="done" onClick={addSongHandler}>
+          <div className="done btn" onClick={addSongHandler}>
             Done
           </div>
         </div>

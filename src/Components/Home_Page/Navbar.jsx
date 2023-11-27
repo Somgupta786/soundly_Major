@@ -17,6 +17,11 @@ import Logo from "../Authentication/LogoIcon";
 import ham from "../../assets/hamb.svg"
 import search from "../../assets/searchPh.svg"
 import cross from "../../assets/croH.svg"
+import Library2 from "../../assets/libIcon.svg"
+import Game2 from "../../assets/gameIcon.svg"
+import Home2 from "../../assets/homeI.svg"
+
+
 export default function Navbar(props) {
   const { isLogged, setLogged, setAuthTok } = useContext(loginContext);
   const navigate = useNavigate();
@@ -139,7 +144,7 @@ export default function Navbar(props) {
   }, []);
   const authorizeHandler = async (e) => {
     e.preventDefault();
- 
+ console.log("k")
     try {
       const response = await axios.patch(
         "user/profile/update/",
@@ -182,15 +187,15 @@ export default function Navbar(props) {
    
       <div className="menu">
         <div onClick={() => navigate("/home")}>
-          <img src={Home} />
+          <img src={homeIcon?Home:Home2} />
           <div style={homeIcon?{color:"#C76B98"}:null} >{props.navData.home}</div>
         </div>
         <div>
-          <img src={Library} />
+       <img src={libraryIcon?Library2:Library} />
           <div style={libraryIcon?{color:"#C76B98"}:null} onClick={handleLibraryClick}>{props.navData.library}</div>
         </div>
         <div onClick={() => navigate("/game")}>
-          <img src={Game} />
+          <img src={!libraryIcon&&!homeIcon?Game2:Game} />
           <div style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >{props.navData.game}</div>
         </div>
       </div>
@@ -263,7 +268,7 @@ export default function Navbar(props) {
                 </div>
                 <div>
                   <div>{userData.username}</div>
-                  <div>{userData.email}</div>
+                  <div>{userData.email?userData.email.substring(0, 19) + "...":userData.phone_number}</div>
                 </div>
               </div>
               <div className="hr"></div>
@@ -394,7 +399,7 @@ export default function Navbar(props) {
     </div>:<div className="homeNav"><Logo/>
     <div className="phoneNav btn">
       <img onClick={()=>setIsSearch(!isSearch)}  src={search}/>
-      <img onClick={()=>setHamb(!isHamb)} src={isHamb?cross:ham}/>
+      <img onClick={()=>{setHamb(!isHamb),setProfileShow(false),setBeUploader(false)}} src={isHamb?cross:ham}/>
     </div>
     {isHamb?<div  className="hamBurger btn">
     <div className="menu">
@@ -422,9 +427,145 @@ export default function Navbar(props) {
         </div>
         <div >
       
-          <div style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >Profile</div>
+          <div onClick={()=>{
+           
+            profileShowHandler()}} style={!libraryIcon&&!homeIcon?{color:"#C76B98"}:null}  >Profile</div>
         </div>
       </div>
+      {profileShow ? (
+            <div className="profileOption">
+              <div className="profileDetails">
+                <div className="profileImg">
+                  <img src={userData.profile_pic_url} />
+                </div>
+                <div>
+                  <div>{userData.username}</div>
+                  <div>{userData.email}</div>
+                </div>
+              </div>
+              <div className="hr"></div>
+              <div className="profileRefer">
+                <div
+                  onClick={() => {
+                    Navigation("/favArt");
+                  }}
+                >
+                  Listen to artists you follow
+                </div>
+                <div
+                  onClick={() => {
+                    Navigation("/recent");
+                  }}
+                >
+                  View Recently played
+                </div>
+                <div onClick={() =>{
+                  userData.is_uploader?Navigation('/beArtist'): setBeUploader(!beUploader)
+                  
+                   
+                }
+                 
+                 }>
+                  Become artist
+                </div>
+              </div>
+              <div className="hr"></div>
+              <div className="profileRefer">
+                <div>Help</div>
+                <div>Privacy Policy</div>
+                <div>About Us</div>
+              </div>
+              <div className="hr"></div>
+              <div
+                onClick={() => {
+                  localStorage.setItem("isLogged", JSON.stringify(false));
+                  localStorage.setItem("authTok", JSON.stringify(""));
+                  Navigation("/login");
+                }}
+              >
+                Logout
+              </div>
+            </div>
+          ) : null}
+          {beUploader ? (
+        <form className="uploader" onSubmit={authorizeHandler}>
+          <div>Terms & Conditions</div>
+          <div>
+            These Terms and Conditions ("Agreement") govern the relationship
+            between Soundly, an Indian company ("we," "us," or "our"), and the
+            individual or entity ("you" or "artist") registering as an artist on
+            the Soundly platform.
+            <p>
+              By registering as an artist on Soundly, you agree to be bound by
+              these Terms and Conditions. If you do not agree to these terms,
+              please do not proceed with the registration process.
+            </p>
+            <p>
+              1. Eligibility: a. To register as an artist, you must be at least
+              18 years old or have obtained the consent of a parent or legal
+              guardian. b. You must have the legal right and authority to upload
+              and distribute the music you submit to the Soundly platform.
+            </p>
+            <p>
+              2. Artist Account: a. You agree to provide accurate, current, and
+              complete information during the registration process. b. You are
+              responsible for maintaining the confidentiality of your account
+              credentials and for all activities that occur under your account.
+            </p>
+            <p>
+              3. Music Submission: a. By submitting music to Soundly, you grant
+              us a non-exclusive, worldwide, royalty-free license to use,
+              reproduce, distribute, and publicly display your music on the
+              Soundly platform. b. You retain all rights to your music, and this
+              license is limited to the purposes of operating and promoting the
+              Soundly platform.
+            </p>
+            <p>
+              4. Content Guidelines: a. You agree not to submit any content that
+              infringes on the intellectual property rights of others. b. Your
+              music and associated content must comply with our community
+              guidelines, which prohibit the distribution of offensive,
+              inappropriate, or harmful content.
+            </p>
+            <p>
+              5. Revenue and Payments: a. Soundly will pay you a share of the
+              revenue generated from the distribution of your music on the
+              Soundly platform. The specific revenue share will be outlined in a
+              separate agreement. b. Payments will be made in accordance with
+              the payment terms specified in the separate agreement.
+            </p>
+            <p>
+              6. Termination: a. We reserve the right to terminate your artist
+              account at our discretion, for reasons including but not limited
+              to violation of these Terms and Conditions or our community
+              guidelines. b. You may terminate your artist account at any time
+              by providing written notice to Soundly.
+            </p>
+            <p>
+              7. Changes to Terms: We reserve the right to modify these Terms
+              and Conditions at any time. We will notify you of any changes, and
+              continued use of the Soundly platform after such modifications
+              constitutes your acceptance of the revised terms.
+            </p>
+            <p>
+              8. Governing Law: This Agreement shall be governed by and
+              construed in accordance with the laws of India.
+            </p>
+            By registering as an artist on Soundly, you acknowledge that you
+            have read, understood, and agree to be bound by these Terms and
+            Conditions.
+          </div>
+          <div>
+            <input type="checkbox" required /> By becoming artist you are
+            accepting your terms & conditions.
+          </div>
+          <div>
+            <button className="btn " type="submit">
+              Proceed
+            </button>
+          </div>
+        </form>
+      ) : null}
     </div>:null}
    {isSearch?   <div className="searchBox">
         <input

@@ -7,6 +7,8 @@ import Path from "../../../assets/Path.svg";
 import { useRef } from "react";
 import axios from "../../../Api/auth"
 import close from "../../../assets/Close_LG.svg"
+import "../query.css"
+import { useEffect } from "react";
 
 export default function Upload() {
   const Navigation = useNavigate()
@@ -199,10 +201,30 @@ export default function Upload() {
    }
     
   };
+  const[isPhone,setIsPhone]=useState(false)
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      setIsPhone(viewportWidth <= 800);
+    };
+
+    const mediaQueryList = window.matchMedia("(max-width: 800px)");
+    handleViewportChange(); // Initial check
+    mediaQueryList.addEventListener("change", handleViewportChange);
+
+    return () => {
+      mediaQueryList.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
   
   return (
-    <div className="artistDashboard">
-      <div className="inside" style={{ background: "rgba(0, 0, 0, 0.70)" }}>
+    <div className="artistDashboard" >
+      <div className="inside" style={
+       
+        { background: "rgba(0, 0, 0, 0.70)" }
+
+        
+        }>
         <div className="artistNavPlaceholder"></div>
         <div className="artistNavBar">
           <div>
@@ -355,10 +377,11 @@ export default function Upload() {
         ) : null}
         {finalUpload ? (
           <div
-            style={{
+            style={!isPhone?{
+              
               height: "49.6386vh",
               width:"37.2vw"
-            }}
+            }:null}
             className="upload2"
           >
             <div>A step ahead to reach millions</div>

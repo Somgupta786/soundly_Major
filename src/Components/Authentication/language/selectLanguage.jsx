@@ -1,9 +1,11 @@
 
 import LanguageBox from "./languageBox";
 import { useNavigate } from "react-router-dom";
-
+import { playBackContext } from "../../../App";
+import { useContext } from "react";
 
 export default function SelectLanguage() {
+  const{favLanguage}=useContext(playBackContext)
   const Navigation = useNavigate();
 
   return (
@@ -21,7 +23,7 @@ export default function SelectLanguage() {
             </div>
             
         </div>
-        <div className="skipButton" onClick={() => Navigation('/artist')}>Skip</div>
+        <div className="skipButton" onClick={() => Navigation('/artist')}>{favLanguage.length==0? "Skip":"Next"}</div>
         
 
       </div>

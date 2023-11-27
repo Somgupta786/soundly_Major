@@ -628,7 +628,7 @@ asynckit@^0.4.0:
 
 audio-sync-with-text@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/audio-sync-with-text/-/audio-sync-with-text-1.0.0.tgz#4f68c5a2d9b59b5bda7f5ad9477ad2f01d0cf850"
+  resolved "https://registry.npmjs.org/audio-sync-with-text/-/audio-sync-with-text-1.0.0.tgz"
   integrity sha512-YyV6R22b1i/0GEShqbfc2CM66gL9bk+N+eLGEmPzqfYGL6WkJhEy7mRA/GhwKMUwxUkhC5v1w1TZZ+51r89ytg==
   dependencies:
     vtt-json "^1.0.1"
@@ -706,6 +706,11 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+classnames@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 clsx@^1.1.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
@@ -765,6 +770,13 @@ csstype@^3.0.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
+
+debug@^2.1.3:
+  version "2.6.9"
+  resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
+  integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
+  dependencies:
+    ms "2.0.0"
 
 debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
   version "4.3.4"
@@ -1553,6 +1565,13 @@ json5@^2.2.3:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
+jsonp@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npmjs.org/jsonp/-/jsonp-0.2.1.tgz"
+  integrity sha512-pfog5gdDxPdV4eP7Kg87M8/bHgshlZ5pybl+yKxAnCZ5O7lCIn7Ixydj03wOlnDQesky2BPyA91SQ+5Y/mNwzw==
+  dependencies:
+    debug "^2.1.3"
+
 "jsx-ast-utils@^2.4.1 || ^3.0.0":
   version "3.3.5"
   resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-3.3.5.tgz"
@@ -1622,6 +1641,11 @@ minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+ms@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
+  integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
 
 ms@2.1.2:
   version "2.1.2"
@@ -1838,6 +1862,14 @@ react-router@6.17.0:
   integrity sha512-YJR3OTJzi3zhqeJYADHANCGPUu9J+6fT5GLv82UWRGSxu6oJYCKVmxUcaBQuGm9udpWmPsvpme/CdHumqgsoaA==
   dependencies:
     "@remix-run/router" "1.10.0"
+
+react-share@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-share/-/react-share-5.0.2.tgz#acc3780129424e2bf4d8d2efbad78dccd19b2881"
+  integrity sha512-4v6SqM2CfUqtOjBhV0iVELTR55zgCmfZ7qDHtpuT+Cb1boUBIh6D1WWUrLdb00v3f/52O6QppcVYt5ZGFkB/KQ==
+  dependencies:
+    classnames "^2.3.2"
+    jsonp "^0.2.1"
 
 react-toastify@^9.1.3:
   version "9.1.3"
@@ -2167,7 +2199,7 @@ vite@^4.4.5:
 
 vtt-json@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vtt-json/-/vtt-json-1.0.1.tgz#5111c9f3a35e4c240ff9f5491a32a59964e8a4e3"
+  resolved "https://registry.npmjs.org/vtt-json/-/vtt-json-1.0.1.tgz"
   integrity sha512-jqbXO7/Zg5DEizvxeMIBbr0nFEBqgoX/XLjIaObLwwejMyr7jJ/6NhQeX3SOK8SqzUmhKAEW+2kVY/L9zzE/bQ==
 
 which-boxed-primitive@^1.0.2:
