@@ -397,6 +397,7 @@ export default function MediaPlayer() {
                     ? null
                     : setShuffle(!isShuffle);
                   setPlaylistLoop(false);
+                  setSongLoop(false)
                 }}
                 src={isShuffle ? Shuf : Group}
               />
