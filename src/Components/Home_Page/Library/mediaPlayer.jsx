@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { playBackContext } from "../../../App";
 
 export default function MediaPlayer() {
+ 
   const [shareWindow, setShareWindow] = useState(false);
   const [playlistWindow, setPlaylistWindow] = useState(false);
   const [playListData, setPlayListData] = useState([]);
@@ -340,6 +341,9 @@ export default function MediaPlayer() {
     };
   }, []);
 
+
+
+
   return !isPhone ? (
     <div className="mediaPlayer">
       <div className="mediaImage"></div>
@@ -348,7 +352,7 @@ export default function MediaPlayer() {
           <div>
             <div className="mediaText">
               <div>
-                {playBackData.name.length > 14
+                {playBackData.name&&playBackData.name.length > 14
                   ? playBackData.name.slice(0, 14) + "..."
                   : playBackData.name}
               </div>
