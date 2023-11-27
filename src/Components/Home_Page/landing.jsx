@@ -36,7 +36,7 @@ console.log(error)
   const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu",
+      onclick: "",
       activ: "false"
     },
     {
@@ -54,7 +54,7 @@ console.log(error)
   const menuItems2 = [
     {
       title: "GENRE",
-      onclick: "/genre",
+      onclick: "",
       activ: "false"
     },
     {
@@ -86,8 +86,8 @@ console.log(error)
 
   const menuItems3 = [
     {
-      title: " Artists You Follow",
-      onclick: "/#",
+      title: " ARTISTS YOU FOLLOW",
+      onclick: "",
       activ: "false"
     },
     ...favArt.map((name) => ({

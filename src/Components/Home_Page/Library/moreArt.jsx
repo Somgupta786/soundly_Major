@@ -10,7 +10,7 @@ export default function MoreArtist() {
    const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu",
+      onclick: "",
       activ:"false"
     },
     {
@@ -33,7 +33,7 @@ export default function MoreArtist() {
   const menuItems2 = [
     {
       title: " Suggested",
-      onclick: "/#",
+      onclick: "",
       activ: "false"
     },
     {

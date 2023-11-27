@@ -33,7 +33,7 @@ export default function Playlist() {
   const menuItems2 = [
     {
       title: " Suggested",
-      onclick: "/#",
+      onclick: "",
       activ: "false"
     },
     {

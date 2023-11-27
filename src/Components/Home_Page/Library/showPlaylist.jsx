@@ -11,7 +11,7 @@ export default function ShowPlaylist() {
   const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu",
+      onclick: "",
       activ:"false"
     
     },
@@ -35,7 +35,7 @@ export default function ShowPlaylist() {
   const menuItems2 = [
     {
       title: " Suggested",
-      onclick: "/#",
+      onclick: "",
       activ: "false"
     },
     {

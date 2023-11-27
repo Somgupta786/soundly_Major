@@ -31,7 +31,7 @@ export default function R_B() {
     const menuItems1 = [
         {
           title: "MENU",
-          onclick: "/menu",
+          onclick: "",
           activ:"false"
         },
         {
@@ -50,7 +50,7 @@ export default function R_B() {
       const menuItems2 = [
         {
           title: "GENRE",
-          onclick: "/genre",
+          onclick: "",
           activ:"false"
         },
         {
@@ -84,8 +84,8 @@ export default function R_B() {
           }];
           const menuItems3 = [
             {
-              title: "From Artists You Follow",
-              onclick: "/#",
+              title: "ARTISTS YOU FOLLOW",
+              onclick: "",
               activ: "false"
             },
             ...favArt.map((name) => ({

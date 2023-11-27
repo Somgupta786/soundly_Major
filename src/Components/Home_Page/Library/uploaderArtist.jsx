@@ -11,7 +11,7 @@ export default function UploaderArtist() {
    const menuItems1 = [
     {
       title: "MENU",
-      onclick: "/menu",
+      onclick: "",
       activ:"false"
     },
     {
@@ -25,7 +25,7 @@ export default function UploaderArtist() {
       activ:"false"
     },
     {
-      title: "From Your Favourite Artist",
+      title: "ARTISTS YOU FOLLOW",
       onclick: "/favArt",
       activ:"false"
     },
@@ -34,7 +34,7 @@ export default function UploaderArtist() {
   const menuItems2 = [
     {
       title: " Suggested",
-      onclick: "/#",
+      onclick: "",
       activ: "false"
     },
     {

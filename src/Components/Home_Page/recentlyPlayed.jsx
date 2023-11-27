@@ -36,7 +36,7 @@ useEffect(()=>{
     const menuItems1 = [
         {
           title: "MENU",
-          onclick: "/menu",
+          onclick: "",
           activ:"false"
         },
         {
@@ -55,7 +55,7 @@ useEffect(()=>{
       const menuItems2 = [
         {
           title: "GENRE",
-          onclick: "/genre",
+          onclick: "",
           activ:"false"
         },
         {
@@ -90,7 +90,7 @@ useEffect(()=>{
           const menuItems3 = [
             {
               title: "From Artists You Follow",
-              onclick: "/#",
+              onclick: "",
               activ: "false"
             },
             ...favArt.map((name) => ({

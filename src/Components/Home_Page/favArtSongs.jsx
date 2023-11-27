@@ -38,7 +38,7 @@ export default function FavArtSongs() {
     const menuItems1 = [
         {
           title: "MENU",
-          onclick: "/menu",
+          onclick: "",
           activ:"false"
         },
         {
@@ -57,7 +57,7 @@ export default function FavArtSongs() {
       const menuItems2 = [
         {
           title: "GENRE",
-          onclick: "/genre",
+          onclick: "",
           activ:"false"
         },
         {
@@ -91,8 +91,8 @@ export default function FavArtSongs() {
           }];
           const menuItems3 = [
             {
-              title: "From Artists You Follow",
-              onclick: "/#",
+              title: "ARTISTS YOU FOLLOW",
+              onclick: "",
               activ: "false"
             },
             ...favArt.map((name) => ({
