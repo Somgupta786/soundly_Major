@@ -223,7 +223,7 @@ export default function HeroSection({ items }) {
 
       <div className="imageCards">
         <div className="homeText">
-          <div>FOR YOU</div>
+          <div>For You</div>
           <div className='btn' onClick={()=>setShowMore(!showMore)}>{showMore?"Show less":"Show more"}</div>
         </div>
         <div className="homeFirstRow">

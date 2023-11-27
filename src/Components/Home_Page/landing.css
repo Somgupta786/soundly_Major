@@ -323,7 +323,7 @@ line-height: 100%;
   
 }
 .profileRefer>div:hover{
-  color: #FFF;
+  color:rgb(231, 131, 148);
 }
 .profileDetails{
   display: flex;
