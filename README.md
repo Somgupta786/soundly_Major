@@ -122,9 +122,9 @@ It enables users to listen to their favorite songs, create playlists, and explor
 
 ---
 ### Images
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-1.png">
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-2.png">
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-3.png">
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-4.png">
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-5.png">
-<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="https://github.com/Somgupta786/soundly_Major/tree/main/src/assets/pic-6.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-1.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-2.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-3.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-4.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-5.png">
+<img width="1440" alt="Screenshot 2023-08-22 at 11 40 25 AM" src="../soundly_Major/src/assets/pic-6.png">
