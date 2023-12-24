@@ -480,11 +480,14 @@ export default function Navbar(props) {
               </div>
               <div className="hr"></div>
               <div
-                onClick={() => {
-                  localStorage.setItem("isLogged", JSON.stringify(false));
-                  localStorage.setItem("authTok", JSON.stringify(""));
-                  Navigation("/login");
-                }}
+               onClick={() => {
+    const shouldLogout = window.confirm("Are you sure you want to logout?");
+    if (shouldLogout) {
+      localStorage.setItem("isLogged", JSON.stringify(false));
+      localStorage.setItem("authTok", JSON.stringify(""));
+      Navigation("/login");
+    }
+  }}
               >
                 Logout
               </div>

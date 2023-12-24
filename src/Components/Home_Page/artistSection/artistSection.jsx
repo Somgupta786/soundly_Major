@@ -86,7 +86,7 @@ export default function artistSection() {
       <div className="inside">
         <div className="artistNavPlaceholder"></div>
         <div className="artistNavBar">
-          <div>
+          <div onClick={()=>Navigation("/home")}>
             Sound<span>ly</span>
           </div>
           <div>
